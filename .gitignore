@@ -1,0 +1,27 @@
+# Generated output: rebuild it, don't commit it
+print/out/
+slides/out/
+playbook/
+kit/
+tools/review/ocr
+**/__pycache__/
+*.pyc
+.DS_Store
+
+node_modules/
+
+# Event data: photos, transcriptions and anything with names stays on your machine
+runs/
+data/session.json
+inbox/
+
+# Test material made or fetched on demand
+tests/hw/fonts/
+tests/hw/inbox/
+tests/hw/truth.json
+tests/hw/round3/
+tests/fixtures/inbox/
+tests/fixtures/fonts/
+
+# Your own brand files (examples/can/brand holds only a README)
+examples/can/brand/*.svg

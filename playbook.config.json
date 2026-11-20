@@ -1,0 +1,23 @@
+{
+  "org": {
+    "short": "",
+    "name": "",
+    "forum": "community forum",
+    "team": "the organisers",
+    "about": "",
+    "join": null
+  },
+  "playbook": {
+    "name": "Community Playbook",
+    "url": "",
+    "searchable": false
+  },
+  "brand": {
+    "accent": "#24508c",
+    "highlight": "#ffd166",
+    "logo": {}
+  },
+  "kit": {
+    "licence": "Free to use and adapt under CC BY 4.0: please credit the sheets-to-playbook kit by Chris Keene."
+  }
+}

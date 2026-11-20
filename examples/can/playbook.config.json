@@ -1,0 +1,84 @@
+{
+  "org": {
+    "short": "CAN",
+    "name": "Champions of Accessibility Network",
+    "forum": "CAN Community Forum",
+    "team": "the CAN team",
+    "about": "The Champions of Accessibility Network (CAN) brings people interested in accessibility together to make the digital world a more accessible place.",
+    "join": {
+      "label": "Join CAN on LinkedIn",
+      "url": "https://www.linkedin.com/groups/12499821/"
+    }
+  },
+  "playbook": {
+    "name": "CAN Community Playbook",
+    "url": "https://example.org/can-playbook"
+  },
+  "brand": {
+    "accent": "#57258c",
+    "highlight": "#ffd35d",
+    "logo": {
+      "primary": "brand/primary.svg",
+      "secondary": "brand/secondary.svg",
+      "mark": "brand/logomark.svg"
+    },
+    "palette": {
+      "light": {
+        "--bg": "#fbf9fe",
+        "--surface": "#ffffff",
+        "--tint": "#f4effa",
+        "--ink": "#1d1326",
+        "--muted": "#5b5168",
+        "--accent": "#57258c",
+        "--on-accent": "#ffffff",
+        "--logo": "#57258c",
+        "--yellow": "#ffd35d",
+        "--on-yellow": "#1d1326",
+        "--band": "#57258c",
+        "--on-band": "#ffffff",
+        "--band-accent": "#ffd35d",
+        "--line": "#e2d9ee",
+        "--ring-on": "#57258c",
+        "--ring-off": "#d9cfe6",
+        "--focus": "#57258c",
+        "--dash": "#7b6b91"
+      },
+      "dark": {
+        "--bg": "#150e1d",
+        "--surface": "#221830",
+        "--tint": "#2a1e3a",
+        "--ink": "#f1ecf7",
+        "--muted": "#b5abc2",
+        "--accent": "#c4a6ee",
+        "--on-accent": "#150e1d",
+        "--logo": "#f1ecf7",
+        "--band": "#3b1863",
+        "--line": "#3d2a52",
+        "--ring-on": "#c4a6ee",
+        "--ring-off": "#3d2a52",
+        "--focus": "#ffd35d",
+        "--dash": "#9a86b8"
+      }
+    },
+    "cmyk": {
+      "accent": [
+        0.82,
+        0.93,
+        0,
+        0.01
+      ],
+      "highlight": [
+        0.01,
+        0.15,
+        0.7,
+        0.01
+      ]
+    }
+  },
+  "kit": {
+    "licence": "Free to use and adapt. Please credit the Champions of Accessibility Network (CAN)."
+  },
+  "slides": {
+    "title": "Growing and sustaining support for accessibility"
+  }
+}

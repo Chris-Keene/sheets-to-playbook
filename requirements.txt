@@ -1,0 +1,10 @@
+# Tested with Python 3.9, Pillow 11.3, numpy 2.0, segno 1.6, fontTools and pikepdf 9.11, on macOS.
+Pillow          # photos, contact sheets, tiles, close-ups
+numpy           # sharpness scores
+segno           # QR codes on the commitment card, slides and sheets
+fonttools       # print: subsetting Poppins into the PDFs; measuring wordmarks
+brotli          # lets fonttools read the woff2 font files
+pikepdf         # print: tagging the PDFs
+# optional:
+# pillow-heif   # iPhone HEIC photos on Linux and Windows (macOS converts them with sips)
+# openai-whisper  # only if you record voice notes: gives the `whisper` command (also needs ffmpeg)

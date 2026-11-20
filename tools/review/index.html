@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Uncertainty review</title>
+<!-- v1.0.0 · review tool for one ingest run. Copied into <run>/review/ by make_review.py, with its data in items.js and img/. -->
+<style>
+:root{
+  --bg:#f6f4fa; --panel:#ffffff; --ink:#1d1326; --muted:#544a5e; --line:#d8d1e3; --brand:#552c8c; --brand-ink:#ffffff;
+  --mark:#fff1b8; --mark-line:#8a6a00; --ok:#1d6b3a; --keep:#8a4b00; --skip:#5b5466; --focus:#0b57d0; --warn-bg:#fff4e5; --warn:#7a3e00;
+}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#17121d; --panel:#221b2b; --ink:#f3eff8; --muted:#bfb4cc; --line:#3d3349; --brand:#b48cf0; --brand-ink:#17121d;
+        --mark:#4a3d00; --mark-line:#f0cf5a; --ok:#7ad69a; --keep:#f2b35e; --skip:#bfb4cc; --focus:#8ab4ff; --warn-bg:#3a2a12; --warn:#f6c27a}
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+a{color:var(--brand)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding:12px 20px;background:var(--panel);border-bottom:1px solid var(--line)}
+header h1{font-size:1.05rem;margin:0;font-weight:700}
+.prog{flex:1;min-width:220px}
+.prog-bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:4px}
+.prog-bar span{display:block;height:100%;background:var(--brand);width:0}
+.counts{font-size:.875rem;color:var(--muted)}
+header select{max-width:22rem;font:inherit;font-size:.875rem;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink)}
+button{font:inherit;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:8px 14px;cursor:pointer}
+button.primary{background:var(--brand);border-color:var(--brand);color:var(--brand-ink);font-weight:600}
+button kbd{font:inherit;font-size:.75rem;opacity:.85;margin-left:6px;padding:1px 6px;border:1px solid currentColor;border-radius:6px}
+main{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(320px,1fr);gap:20px;padding:20px;max-width:1500px;margin:0 auto}
+@media (max-width:900px){main{grid-template-columns:1fr}}
+.photo{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;min-width:0}
+.photo .frame{overflow:auto;max-height:calc(100vh - 210px);border-radius:8px;background:#000;cursor:zoom-in}
+.photo .frame.zoomed{cursor:zoom-out}
+.photo img{display:block;width:100%;height:auto}
+.photo .frame.zoomed img{width:auto;max-width:none}
+.photo .cap{font-size:.875rem;color:var(--muted);margin:8px 2px 0;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center}
+.photo .cap button{padding:4px 10px;font-size:.875rem}
+.side{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;min-width:0}
+.where{font-size:.875rem;color:var(--muted);margin:0 0 4px}
+.side h2{font-size:1.15rem;margin:0 0 12px}
+.warn{background:var(--warn-bg);color:var(--warn);border-radius:10px;padding:8px 12px;font-size:.9rem;margin:0 0 12px}
+.field{margin:0 0 14px}
+.field .lab{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:4px}
+.line{font-size:1.2rem;line-height:2.1}
+.line input{font:inherit;font-size:1.1rem;background:var(--mark);color:var(--ink);border:2px solid var(--mark-line);border-radius:6px;padding:0 6px;margin:0 2px;min-width:3ch}
+.line input.illeg::placeholder{color:var(--muted);font-style:italic}
+.notes{margin:0 0 14px;padding-left:1.1rem;font-size:.95rem}
+.notes li{margin:0 0 4px}
+details{font-size:.875rem;color:var(--muted);margin:0 0 14px}
+details pre{white-space:pre-wrap;font:inherit;margin:6px 0 0}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+textarea{width:100%;font:inherit;font-size:1rem;border:2px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--panel);color:var(--ink);min-height:4.5em}
+.opts{border:0;margin:0 0 12px;padding:0}
+.opts label{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:10px;margin-bottom:6px;cursor:pointer}
+.status{font-size:.875rem;margin:10px 0 0;min-height:1.5em}
+.st-confirmed,.st-ok,.st-chosen,.st-edited{color:var(--ok)} .st-keep,.st-change{color:var(--keep)} .st-skipped{color:var(--skip)}
+.done{max-width:760px;margin:30px auto;padding:24px;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+.done ul{padding-left:1.2rem}
+.hint{font-size:.85rem;color:var(--muted);margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Uncertainty review</h1>
+  <div class="prog">
+    <div class="counts" id="counts" aria-live="polite"></div>
+    <div class="prog-bar" aria-hidden="true"><span id="bar"></span></div>
+  </div>
+  <label class="visually-hidden" for="jump">Go to screen</label>
+  <select id="jump"></select>
+  <button id="save" class="primary" type="button">Save decisions file</button>
+</header>
+<div id="live" class="visually-hidden" aria-live="polite"></div>
+<main id="app"></main>
+<script src="items.js"></script>
+<script>
+(function(){
+  var R = window.REVIEW, ITEMS = R.items, KEY = "sheets-review-" + R.run;
+  var MK = /\[\?([^\]]*)\]|\[illegible\]/gi;
+  var D = {};
+  try { D = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch(e) { D = {}; }
+  var cur = 0, whole = false, app = document.getElementById("app"), live = document.getElementById("live");
+  var FIELD_NAMES = {text: "On the page", title: "Title", what: "What to try", needs: "What you need", sticks: "How it sticks", name: "Name (published)", org: "Organisation (published)"};
+  var STATUS = {confirmed: "Confirmed", keep: "Kept flagged", edited: "Line edited", skipped: "Skipped", ok: "Looks right", change: "Needs a change", chosen: "Decided"};
+
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+  function persist(){ try { localStorage.setItem(KEY, JSON.stringify(D)); } catch(e) {} }
+  function firstOpen(from){
+    for (var i = from; i < ITEMS.length; i++) if (!D[ITEMS[i].key] || D[ITEMS[i].key].status === "skipped") return i;
+    for (i = 0; i < from; i++) if (!D[ITEMS[i].key] || D[ITEMS[i].key].status === "skipped") return i;
+    return -1;
+  }
+
+  function counts(){
+    var n = 0, tally = {};
+    ITEMS.forEach(function(it){ var d = D[it.key]; if (d && d.status !== "skipped") n++; if (d) tally[d.status] = (tally[d.status] || 0) + 1; });
+    var parts = Object.keys(tally).map(function(k){ return tally[k] + " " + STATUS[k].toLowerCase(); });
+    document.getElementById("counts").textContent = "Screen " + (cur + 1) + " of " + ITEMS.length + " · " + n + " decided" + (parts.length ? " (" + parts.join(", ") + ")" : "");
+    document.getElementById("bar").style.width = (100 * n / ITEMS.length) + "%";
+    var sel = document.getElementById("jump");
+    sel.innerHTML = ITEMS.map(function(it, i){
+      var d = D[it.key];
+      return '<option value="' + i + '"' + (i === cur ? " selected" : "") + ">" + (i + 1) + ". " + esc(it.where) + (d ? " · " + STATUS[d.status] : "") + "</option>";
+    }).join("") + '<option value="done"' + (cur === ITEMS.length ? " selected" : "") + ">Summary and save</option>";
+  }
+
+  // a field's text as segments, with an input for each uncertain word
+  function lineHtml(fieldKey, text, saved){
+    var out = "", last = 0, n = 0, m;
+    MK.lastIndex = 0;
+    while ((m = MK.exec(text))){
+      out += esc(text.slice(last, m.index));
+      var best = m[1] != null ? m[1] : "", ill = m[1] == null;
+      var val = saved && saved[n] != null ? saved[n] : best;
+      out += '<input type="text" data-field="' + fieldKey + '" data-n="' + n + '" data-marker="' + esc(m[0]) + '" value="' + esc(val) + '"' +
+             (ill ? ' class="illeg" placeholder="illegible"' : "") + ' size="' + Math.max(3, (val || "illegible").length + 1) + '"' +
+             ' aria-label="Unsure word ' + (n + 1) + (ill ? ", couldn’t be read" : ", best reading " + esc(best)) + '" autocomplete="off" spellcheck="false">';
+      last = m.index + m[0].length; n++;
+    }
+    return out + esc(text.slice(last));
+  }
+
+  function picture(it){
+    if (!it.photos || !it.photos.length) return '<section class="photo" aria-label="Photo"><p>No photo for this one.</p></section>';
+    var src = whole || !it.crop ? it.whole : it.crop;
+    var alt = (whole || !it.crop ? "Whole photo " : "Close-up of photo ") + it.photo + ", " + (it.sheet || "") + ", where this was written";
+    return '<section class="photo" aria-label="Photo">' +
+      '<div class="frame" id="frame" tabindex="0" role="button" aria-pressed="false" aria-label="Zoom the photo (Option Z)"><img src="' + esc(src) + '" alt="' + esc(alt) + '"></div>' +
+      '<p class="cap"><span>' + esc(it.sheet || "") + " · photo " + esc(it.photo) + (it.photos.length > 1 ? " (also " + esc(it.photos.filter(function(p){ return p !== it.photo; }).join(", ")) + ")" : "") + "</span>" +
+      (it.crop ? '<button type="button" id="wholeBtn" aria-keyshortcuts="Alt+W">' + (whole ? "Show close-up" : "Show whole photo") + "<kbd>⌥W</kbd></button>" : "") + "</p></section>";
+  }
+
+  function render(){
+    whole = false;
+    if (cur >= ITEMS.length) return renderDone();
+    var it = ITEMS[cur], d = D[it.key] || {}, html = "";
+    var weak = it.photos && it.photos.length && (!it.crop || it.sure < 0.3);
+    // no close-up at all (no text recognition on this computer, or no match): say so plainly rather than "wrong place"
+    var warn = !weak ? "" : it.crop ? "The close-up may be in the wrong place. Option W shows the whole photo." : "No close-up for this one, so the whole photo is shown: find the line on it.";
+    html += picture(it);
+    html += '<section class="side" aria-labelledby="h">';
+    html += '<p class="where">' + esc(it.where) + "</p>";
+    if (it.kind === "reading"){
+      html += '<h2 id="h">Is this what it says?</h2>';
+      if (weak) html += '<p class="warn">' + warn + "</p>";
+      if (it.published_name) html += '<p class="warn">This card’s name or organisation goes on the public page: get it exactly right.</p>';
+      Object.keys(it.fields).forEach(function(f){
+        var saved = d.fields && d.fields[f] ? d.fields[f].values : null;
+        html += '<div class="field"><div class="lab">' + esc(FIELD_NAMES[f] || f) + '</div><div class="line">' + lineHtml(f, it.fields[f], saved) + "</div></div>";
+      });
+      if (it.notes && it.notes.length) html += '<div class="lab">Reader’s notes</div><ul class="notes">' + it.notes.map(function(n){ return "<li>" + esc(n) + "</li>"; }).join("") + "</ul>";
+      html += "<details><summary>As transcribed</summary><pre>" + esc((it.raw || []).join("\n")) + "</pre></details>";
+      html += '<div id="lineEdit" hidden><label class="lab" for="lineText">Whole line, as it should read</label><textarea id="lineText"></textarea></div>';
+      html += '<div class="actions">' +
+        '<button type="button" class="primary" id="ok" aria-keyshortcuts="Enter">Confirm<kbd>Enter</kbd></button>' +
+        '<button type="button" id="keep" aria-keyshortcuts="Shift+Enter">Can’t tell, keep flagged<kbd>⇧Enter</kbd></button>' +
+        '<button type="button" id="edit" aria-keyshortcuts="Alt+L">Edit whole line<kbd>⌥L</kbd></button>' +
+        '<button type="button" id="skip" aria-keyshortcuts="Alt+ArrowRight">Skip<kbd>⌥→</kbd></button></div>';
+    } else if (it.kind === "check"){
+      html += '<h2 id="h">Check against the photo</h2>';
+      if (weak) html += '<p class="warn">' + warn + "</p>";
+      html += '<ul class="notes">' + it.notes.map(function(n){ return "<li>" + esc(n) + "</li>"; }).join("") + "</ul>";
+      html += "<details><summary>As transcribed</summary><pre>" + esc((it.raw || []).join("\n")) + "</pre></details>";
+      html += '<div id="noteBox"' + (d.status === "change" ? "" : " hidden") + '><label class="lab" for="noteText">What needs to change?</label><textarea id="noteText">' + esc(d.note || "") + "</textarea></div>";
+      html += '<div class="actions"><button type="button" class="primary" id="ok" aria-keyshortcuts="Enter">Looks right<kbd>Enter</kbd></button>' +
+        '<button type="button" id="change" aria-keyshortcuts="Shift+Enter">Needs a change<kbd>⇧Enter</kbd></button>' +
+        '<button type="button" id="skip" aria-keyshortcuts="Alt+ArrowRight">Skip<kbd>⌥→</kbd></button></div>';
+    } else {
+      html += '<h2 id="h">Your call</h2><p>' + esc(it.notes[0]) + "</p>";
+      html += '<fieldset class="opts"><legend class="visually-hidden">Choose one</legend>' + it.options.map(function(o, i){
+        return '<label><input type="radio" name="opt" value="' + i + '"' + (d.choice === i ? " checked" : "") + "> <span>" + (i + 1) + ". " + esc(o) + "</span></label>";
+      }).join("") + "</fieldset>";
+      html += '<label class="lab" for="noteText">Note (optional)</label><textarea id="noteText">' + esc(d.note || "") + "</textarea>";
+      html += '<div class="actions"><button type="button" class="primary" id="ok" aria-keyshortcuts="Enter">Decide<kbd>Enter</kbd></button>' +
+        '<button type="button" id="skip" aria-keyshortcuts="Alt+ArrowRight">Skip<kbd>⌥→</kbd></button></div>';
+    }
+    html += '<p class="status" id="st">' + (d.status ? '<span class="st-' + d.status + '">Earlier: ' + STATUS[d.status] + "</span>" : "") + "</p>";
+    html += '<p class="hint">Enter confirms. Type over a highlighted word to correct it, Tab for the next one. Option ← and → move without deciding. Click the photo, or Option Z, to zoom.</p>';
+    html += "</section>";
+    app.innerHTML = html;
+    wire();
+    counts();
+    live.textContent = "Screen " + (cur + 1) + " of " + ITEMS.length + ": " + it.where;
+    var first = app.querySelector(".line input") || app.querySelector('input[name="opt"]:checked') || app.querySelector('input[name="opt"]') || document.getElementById("ok");
+    if (first){ first.focus(); if (first.select) first.select(); }
+  }
+
+  function wirePhoto(){
+    var frame = document.getElementById("frame");
+    if (frame){
+      var zoom = function(ev){
+        var on = !frame.classList.contains("zoomed");
+        frame.classList.toggle("zoomed", on); frame.setAttribute("aria-pressed", on);
+        if (on && ev && ev.offsetX != null){
+          var img = frame.querySelector("img"), r = img.getBoundingClientRect();
+          var fx = (ev.clientX - r.left) / r.width, fy = (ev.clientY - r.top) / r.height;
+          requestAnimationFrame(function(){ frame.scrollLeft = fx * img.width - frame.clientWidth / 2; frame.scrollTop = fy * img.height - frame.clientHeight / 2; });
+        }
+      };
+      frame.addEventListener("click", zoom);
+      frame.addEventListener("keydown", function(e){ if (e.key === " "){ e.preventDefault(); zoom(); } });
+      frame._zoom = zoom;
+    }
+    var wb = document.getElementById("wholeBtn");
+    if (wb) wb.addEventListener("click", toggleWhole);
+  }
+  function wire(){
+    wirePhoto();
+    app.querySelectorAll(".line input").forEach(function(inp){
+      inp.addEventListener("input", function(){ inp.size = Math.max(3, inp.value.length + 1); });
+    });
+    on("ok", confirm); on("keep", keep); on("skip", skip); on("edit", editLine); on("change", change);
+  }
+  function on(id, fn){ var b = document.getElementById(id); if (b) b.addEventListener("click", fn); }
+
+  function toggleWhole(){
+    var it = ITEMS[cur]; if (!it.crop) return;
+    whole = !whole;
+    var keepFocus = document.activeElement;
+    var sec = app.querySelector(".photo"); var tmp = document.createElement("div"); tmp.innerHTML = picture(it);
+    sec.replaceWith(tmp.firstChild);
+    wirePhoto();
+    if (keepFocus && document.body.contains(keepFocus)) keepFocus.focus();
+    live.textContent = whole ? "Showing the whole photo" : "Showing the close-up";
+  }
+
+  function readFields(){
+    var f = {};
+    app.querySelectorAll(".line input").forEach(function(inp){
+      var k = inp.dataset.field; f[k] = f[k] || {markers: [], values: []};
+      f[k].markers.push(inp.dataset.marker); f[k].values.push(inp.value.trim());
+    });
+    return f;
+  }
+  function record(status, extra){
+    var it = ITEMS[cur];
+    D[it.key] = Object.assign({kind: it.kind, src: it.src, where: it.where, status: status, at: new Date().toISOString()}, extra || {});
+    persist();
+  }
+  function next(){
+    var n = firstOpen(cur + 1);
+    cur = n === -1 ? ITEMS.length : n;
+    render();
+  }
+
+  function confirm(){
+    var it = ITEMS[cur];
+    if (it.kind === "reading"){
+      var le = document.getElementById("lineEdit");
+      if (le && !le.hidden) record("edited", {fields: readFields(), line: document.getElementById("lineText").value.trim()});
+      else record("confirmed", {fields: readFields()});
+    } else if (it.kind === "check"){
+      var nb = document.getElementById("noteBox");
+      if (nb && !nb.hidden && document.getElementById("noteText").value.trim()) record("change", {note: document.getElementById("noteText").value.trim()});
+      else record("ok");
+    } else {
+      var c = app.querySelector('input[name="opt"]:checked');
+      if (!c){ document.getElementById("st").textContent = "Pick an option first (1 or 2)."; app.querySelector('input[name="opt"]').focus(); return; }
+      record("chosen", {choice: +c.value, option: it.options[+c.value], note: document.getElementById("noteText").value.trim()});
+    }
+    next();
+  }
+  function keep(){ record("keep", {fields: readFields()}); next(); }
+  function change(){
+    var nb = document.getElementById("noteBox"); nb.hidden = false;
+    var t = document.getElementById("noteText"); t.focus();
+    document.getElementById("st").textContent = "Type what needs to change, then Enter.";
+  }
+  function editLine(){
+    var it = ITEMS[cur], le = document.getElementById("lineEdit"), t = document.getElementById("lineText");
+    var vals = readFields();
+    var k = Object.keys(it.fields)[0], i = 0;
+    t.value = it.fields[k].replace(MK, function(){ var v = vals[k].values[i++]; return v || "[illegible]"; });
+    le.hidden = false; t.focus();
+    document.getElementById("st").textContent = "Edit the line, then Enter to save it.";
+  }
+  function skip(){ if (cur < ITEMS.length && !D[ITEMS[cur].key]) record("skipped"); cur = Math.min(ITEMS.length, cur + 1); render(); }
+  function back(){ cur = Math.max(0, cur - 1); render(); }
+
+  function renderDone(){
+    counts();
+    var skipped = ITEMS.filter(function(it){ return !D[it.key] || D[it.key].status === "skipped"; });
+    var kept = ITEMS.filter(function(it){ return D[it.key] && (D[it.key].status === "keep" || D[it.key].status === "change"); });
+    app.innerHTML = '<section class="done" aria-labelledby="dh"><h2 id="dh" tabindex="-1">' + (skipped.length ? "Nearly there" : "All done") + "</h2>" +
+      "<p>" + (ITEMS.length - skipped.length) + " of " + ITEMS.length + " screens decided. Save the decisions file and tell Claude: it applies them to the playbook and rebuilds the draft.</p>" +
+      '<p><button type="button" class="primary" id="save2">Save decisions file</button> <button type="button" id="copy">Copy as text</button></p>' +
+      (skipped.length ? "<h3>Not decided yet</h3><ul>" + skipped.map(function(it){ return '<li><a href="#" data-i="' + ITEMS.indexOf(it) + '">' + esc(it.where) + "</a></li>"; }).join("") + "</ul>" : "") +
+      (kept.length ? "<h3>Kept flagged or needing a change</h3><ul>" + kept.map(function(it){ return '<li><a href="#" data-i="' + ITEMS.indexOf(it) + '">' + esc(it.where) + "</a>" + (D[it.key].note ? ": " + esc(D[it.key].note) : "") + "</li>"; }).join("") + "</ul>" : "") +
+      "</section>";
+    document.getElementById("save2").addEventListener("click", save);
+    document.getElementById("copy").addEventListener("click", function(){
+      var t = JSON.stringify(payload(), null, 1);
+      (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function(){ live.textContent = "Copied"; }, function(){ live.textContent = "Couldn’t copy: use Save instead"; });
+    });
+    app.querySelectorAll("a[data-i]").forEach(function(a){ a.addEventListener("click", function(e){ e.preventDefault(); cur = +a.dataset.i; render(); }); });
+    document.getElementById("dh").focus();
+  }
+
+  function payload(){ return {run: R.run, saved: new Date().toISOString(), items: D}; }
+  function save(){
+    var blob = new Blob([JSON.stringify(payload(), null, 1)], {type: "application/json"});
+    var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "review-decisions-" + R.run + ".json";
+    document.body.appendChild(a); a.click(); a.remove();
+    live.textContent = "Decisions file saved to your downloads";
+  }
+  document.getElementById("save").addEventListener("click", save);
+  document.getElementById("jump").addEventListener("change", function(e){ cur = e.target.value === "done" ? ITEMS.length : +e.target.value; render(); });
+
+  document.addEventListener("keydown", function(e){
+    var t = e.target, inText = t.tagName === "TEXTAREA";
+    if (e.altKey && (e.code === "ArrowRight" || e.code === "ArrowLeft")){ e.preventDefault(); return e.code === "ArrowRight" ? skip() : back(); }
+    if (e.key === "PageDown"){ e.preventDefault(); return skip(); }
+    if (e.key === "PageUp"){ e.preventDefault(); return back(); }
+    if (e.altKey && e.code === "KeyW"){ e.preventDefault(); return toggleWhole(); }
+    if (e.altKey && e.code === "KeyZ"){ e.preventDefault(); var f = document.getElementById("frame"); return f && f._zoom && f._zoom(); }
+    if (e.altKey && e.code === "KeyL" && cur < ITEMS.length && ITEMS[cur].kind === "reading"){ e.preventDefault(); return editLine(); }
+    if (e.key === "Escape"){
+      var fr = document.getElementById("frame"); if (fr && fr.classList.contains("zoomed")){ fr._zoom(); return; }
+      var le = document.getElementById("lineEdit"); if (le && !le.hidden){ le.hidden = true; var i = app.querySelector(".line input"); if (i) i.focus(); }
+      return;
+    }
+    if (cur >= ITEMS.length) return;
+    if (e.key === "Enter" && !e.metaKey && !e.ctrlKey && !e.altKey){
+      var it = ITEMS[cur];
+      if (e.shiftKey){
+        if (inText) return;   // a new line inside a note
+        // Shift+Enter means "keep flagged" or "needs a change" wherever focus is, even on a button
+        if (it.kind === "check" || it.kind === "reading"){ e.preventDefault(); return it.kind === "check" ? change() : keep(); }
+        return;
+      }
+      if (t.tagName === "BUTTON" || t.tagName === "SELECT" || t.tagName === "A" || t.id === "frame") return;   // buttons and links act on their own
+      e.preventDefault();
+      return confirm();
+    }
+    if (!inText && t.tagName !== "INPUT" && ITEMS[cur].kind === "call" && /^[1-9]$/.test(e.key)){
+      var r = app.querySelectorAll('input[name="opt"]')[+e.key - 1]; if (r){ r.checked = true; r.focus(); }
+    }
+    if (t.name === "opt" && /^[1-9]$/.test(e.key)){ var r2 = app.querySelectorAll('input[name="opt"]')[+e.key - 1]; if (r2){ e.preventDefault(); r2.checked = true; r2.focus(); } }
+  });
+
+  var start = firstOpen(0);
+  cur = start === -1 ? ITEMS.length : start;
+  render();
+})();
+</script>
+</body>
+</html>

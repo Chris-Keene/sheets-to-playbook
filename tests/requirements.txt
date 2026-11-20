@@ -1,0 +1,4 @@
+# Python packages for the test generators and scorers (tested with Python 3.9, numpy 2.0, scipy 1.13, Pillow 11.3)
+numpy
+scipy
+Pillow

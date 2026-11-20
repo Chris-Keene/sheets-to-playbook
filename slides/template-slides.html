@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- v/*VERSION*/ · Facilitator slides for the forum. Built by slides/build_slides.py from the settings file (see slides/README.md); edit this template, not the output. -->
+<title>{{doc_title}}</title>
+<style>
+/*FONTS*/
+/* The brand's colours, worked out and contrast-checked by build_slides.py: --band is the slide background, --hi the
+   highlight for labels, --fill and --on-fill the highlight as a fill with its text, --soft secondary text */
+:root{
+/*COLOURS*/
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--band);overflow:hidden}
+body{font-family:Poppins,Arial,sans-serif;color:var(--on-band);-webkit-font-smoothing:antialiased}
+.visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+p,h1,h2,h3,ol,ul{margin:0}
+h2{text-wrap:balance}
+button{font:inherit;color:inherit}
+
+/* One fixed 1920 x 1080 stage, scaled to fit whatever screen it lands on and letterboxed in the brand colour */
+.stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform:translate(-50%,-50%) scale(var(--s,1))}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;padding:72px 96px 64px;background:var(--band)}
+.slide[hidden]{display:none}
+.slide:focus{outline:none}
+
+/* ---------- shared pieces ---------- */
+.top{display:flex;justify-content:space-between;align-items:center;min-height:96px;gap:40px}
+.label{color:var(--hi);font-weight:600;font-size:40px;line-height:1.2}
+.label .sep{margin:0 .35em}
+h2.q{font-weight:700;font-size:100px;line-height:1.08;letter-spacing:-.01em;margin:28px 0 44px;max-width:1700px}
+h2.q.long{font-size:88px}
+.lede{font-size:38px;line-height:1.45;color:var(--soft);max-width:1100px}
+.hl{color:var(--hi);font-weight:600;overflow-wrap:anywhere}
+.logo{display:block;align-self:flex-start;color:var(--on-band)}
+/* the stand-in when there's no logo file: the name set as SVG text, sized by its height so a long name stays in
+   proportion. Without geometricPrecision, Chromium at 1x pixel density swaps in Arial once the stage is scaled down */
+svg.wordmark{overflow:visible;text-rendering:geometricPrecision}
+
+.box{border:3px dashed var(--dash);border-radius:22px;padding:30px 36px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.box h3{font-weight:600;font-size:44px;line-height:1.2}
+.box p{font-size:32px;line-height:1.4;color:var(--soft)}
+.grid{display:grid;gap:28px;flex:1;min-height:0}
+.wl{display:block;border-bottom:3px solid var(--dash);height:46px}
+
+.timer{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:baseline;justify-content:center;gap:16px;
+  width:400px;padding:20px 30px;border-radius:999px;border:4px solid var(--ring);color:var(--on-band)}
+.timer .t-time{font-weight:700;font-size:56px;line-height:1;font-variant-numeric:tabular-nums}
+.timer .t-hint{font-weight:500;font-size:30px;line-height:1}
+.timer:focus-visible{outline:5px solid var(--on-band);outline-offset:8px}
+.timer.last,.timer.done{background:var(--fill);color:var(--on-fill)}
+.timer.paused .t-time{opacity:.75}
+
+.rail{list-style:none;padding:0;display:flex;gap:14px;margin-top:auto;padding-top:32px}
+.rail li{font-size:26px;font-weight:500;line-height:1;padding:14px 24px;border-radius:999px;border:2px solid var(--chip-line);color:var(--soft)}
+.rail li[aria-current]{background:var(--fill);border-color:var(--fill);color:var(--on-fill);font-weight:600}
+
+.note{display:flex;gap:18px;align-items:baseline;font-size:32px;line-height:1.4;color:var(--soft);margin-top:24px}
+.note b{color:var(--hi);font-weight:600;white-space:nowrap}
+.nw{white-space:nowrap}
+
+.steps{list-style:none;padding:0;counter-reset:st;display:flex;flex-direction:column;gap:34px}
+.steps li{counter-increment:st;display:grid;grid-template-columns:76px 1fr;gap:30px;align-items:start;font-size:42px;line-height:1.35}
+.steps li::before{content:counter(st);display:grid;place-items:center;width:76px;height:76px;border-radius:50%;
+  background:var(--fill);color:var(--on-fill);font-weight:700;font-size:38px;line-height:1}
+.s-share .big{font-size:52px;line-height:1.35;margin:auto 0;color:var(--soft)}
+.steps.small li{font-size:36px;grid-template-columns:64px 1fr;gap:26px}
+.steps.small li::before{width:64px;height:64px;font-size:32px}
+
+.qr-tile{background:var(--paper);border-radius:18px;padding:10px;flex:none}
+.qr-tile svg{display:block;width:100%;height:auto}
+
+/* ---------- title ---------- */
+.s-title .logo{width:350px;height:auto}
+.s-title .logo.wordmark{width:auto;height:96px}
+.s-title .head{margin-top:auto}
+.s-title .kicker{color:var(--hi);font-weight:700;font-size:42px;margin-bottom:30px}
+.s-title h2{font-weight:700;font-size:134px;line-height:1.08;letter-spacing:-.005em;max-width:1700px}
+.s-title .welcome{color:var(--hi);font-size:50px;line-height:1.3;margin-top:auto;padding-bottom:30px}
+
+/* ---------- facilitators (left out when the settings list none) ---------- */
+.s-people h2{color:var(--hi);font-weight:500;font-size:52px;margin:90px 0 0 40px}
+.people{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:110px 60px;margin:120px 0 0 40px}
+.person{display:grid;grid-template-columns:184px 1fr;gap:52px;align-items:center}
+.avatar{width:184px;height:184px;border-radius:50%;border:6px solid var(--on-band);background:var(--fill);color:var(--on-fill);
+  display:grid;place-items:center;font-weight:700;font-size:62px;overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.person .name{font-weight:700;font-size:38px;line-height:1.3}
+.person .role{font-size:36px;line-height:1.35}
+/* five or six people: tighter rows; seven or more: three columns */
+.people.compact{gap:56px 60px;margin-top:64px}
+.people.compact .person{grid-template-columns:150px 1fr;gap:40px}
+.people.compact .avatar{width:150px;height:150px;font-size:52px}
+.people.three{grid-template-columns:repeat(3,1fr);gap:48px 44px;margin-top:56px}
+.people.three .person{grid-template-columns:124px 1fr;gap:30px}
+.people.three .avatar{width:124px;height:124px;font-size:44px;border-width:5px}
+.people.three .name{font-size:32px}
+.people.three .role{font-size:28px}
+.s-people:has(.compact) h2{margin-top:56px}
+.s-people:has(.three) h2{margin-top:32px}
+
+/* ---------- the playbook ---------- */
+.s-book .cols{display:grid;grid-template-columns:860px 1fr;gap:76px;align-items:center;flex:1;min-height:0}
+.s-book h2{font-weight:700;font-size:86px;line-height:1.08;letter-spacing:-.01em;margin:0 0 30px}
+.s-book .lede{font-size:38px;margin:0}
+/* no screenshot in the settings: the words take the whole slide */
+.s-book .cols.solo{grid-template-columns:minmax(0,1500px);align-content:center}
+.s-book .solo h2{font-size:112px;margin-bottom:44px}
+.s-book .solo .lede{font-size:46px;max-width:1400px}
+.s-book .addr{font-size:40px;line-height:1.4;color:var(--soft);margin-top:48px}
+.browser{border-radius:20px;overflow:hidden;background:var(--paper);box-shadow:0 0 0 3px var(--browser-edge),0 30px 60px var(--shadow);min-width:0}
+.browser .bar{display:flex;align-items:center;gap:12px;padding:18px 22px;background:var(--browser-bar)}
+.browser .bar i{width:18px;height:18px;border-radius:50%;background:var(--browser-dot);flex:none}
+.browser .bar span{margin-left:16px;flex:1;min-width:0;background:var(--paper);color:var(--paper-ink);border-radius:999px;padding:8px 22px;
+  font-size:24px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* a tall screenshot shows its top, like a browser window */
+.browser img{display:block;width:100%;height:auto;max-height:680px;object-fit:cover;object-position:top}
+
+/* ---------- how it gets made ---------- */
+.s-how h2.q{margin-bottom:34px}
+.flow{list-style:none;padding:0;counter-reset:fl;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin:0 0 24px}
+.flow li{counter-increment:fl;display:flex;flex-direction:column;gap:16px;padding:36px 34px;border-radius:24px;background:var(--panel);min-width:0}
+.flow li::before{content:counter(fl);display:grid;place-items:center;width:72px;height:72px;border-radius:50%;background:var(--fill);color:var(--on-fill);font-weight:700;font-size:36px;margin-bottom:8px}
+.flow h3{font-weight:600;font-size:40px;line-height:1.2}
+.flow p{font-size:31px;line-height:1.4;color:var(--soft)}
+.rule{margin-top:auto;flex:none;background:var(--fill);color:var(--on-fill);border-radius:24px;padding:30px 40px;font-size:34px;line-height:1.4}
+.rule b{font-weight:700}
+
+/* ---------- table card ---------- */
+.s-card .cols{display:grid;grid-template-columns:1fr 620px;gap:80px;align-items:center;flex:1}
+.tent{background:var(--paper);color:var(--paper-ink);border-radius:14px;aspect-ratio:1.414/1;padding:40px 44px;display:flex;flex-direction:column;
+  box-shadow:0 30px 60px var(--shadow);transform:rotate(-2deg)}
+.tent .t{font-weight:700;font-size:44px}
+.tent .wl{border-color:var(--paper-line);height:58px}
+.tent svg{width:64px;height:auto;color:var(--band);margin-top:auto;align-self:flex-start}
+.tent svg.wordmark{width:auto;height:44px}
+
+/* ---------- commitment card ---------- */
+.s-commit h2.q{font-size:84px;margin-bottom:40px}
+.s-commit .cols{display:grid;grid-template-columns:1fr 660px;gap:64px;align-items:start;flex:1}
+.cc{background:var(--fill);color:var(--on-fill);border-radius:12px;aspect-ratio:1.414/1;display:grid;grid-template-columns:1fr 1fr;position:relative;
+  box-shadow:0 30px 60px var(--shadow)}
+.cc::after{content:"";position:absolute;top:0;bottom:0;left:50%;border-left:3px dashed var(--fill-line)}
+.cc > div{padding:28px 26px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.cc .tag{align-self:flex-start;background:var(--on-fill);color:var(--fill);font-weight:600;font-size:26px;line-height:1;padding:14px 20px;border-radius:999px}
+.cc .wl{border-color:var(--fill-faint);border-bottom-width:2px;height:34px}
+.cc .foot{margin-top:auto;display:flex;align-items:center;gap:14px;font-size:22px;line-height:1.3;font-weight:500}
+.cc .mini-qr{width:70px;height:70px;flex:none;background:var(--paper);border-radius:6px;padding:4px}
+.cc .mini-qr svg{display:block;width:100%;height:auto}
+.cc-caption{font-size:28px;color:var(--soft);margin-top:22px;line-height:1.4}
+
+/* ---------- thank you ---------- */
+.s-end .logo{width:300px;height:auto}
+.s-end .logo.wordmark{width:auto;height:80px}
+.s-end .cols{display:grid;grid-template-columns:1fr auto;gap:80px;align-items:center;flex:1}
+.s-end h2{font-weight:700;font-size:150px;line-height:1.05;letter-spacing:-.01em;margin-bottom:36px}
+.s-end .lede{font-size:42px;margin-bottom:48px}
+.s-end .lede.join{margin:0}
+.s-end .qr-tile{width:380px}
+.s-end .qr-col{display:flex;flex-direction:column;align-items:center;gap:22px;max-width:640px}
+.s-end .qr-col .url{color:var(--hi);font-weight:600;font-size:40px;line-height:1.3;text-align:center;overflow-wrap:anywhere}
+
+/* ---------- presenter chrome (screen only, outside the stage so it never scales) ---------- */
+.controls{position:fixed;right:16px;bottom:16px;display:flex;gap:6px;align-items:center;padding:6px;border-radius:12px;
+  background:var(--chrome);font-size:15px;line-height:1;transition:opacity .25s;z-index:5}
+/* keyboard focus keeps the bar up; a mouse click leaves focus on a button, which must not pin it to the big screen */
+.controls.idle:not(:has(:focus-visible)){opacity:0}
+.controls button{all:unset;cursor:pointer;color:var(--on-chrome);padding:9px 12px;border-radius:8px;font-weight:500}
+.controls button:hover{background:var(--chrome-hover)}
+.controls button:focus-visible{outline:3px solid var(--chrome-focus);outline-offset:1px}
+.controls .count{color:var(--on-chrome);padding:0 8px;font-variant-numeric:tabular-nums;min-width:4.5em;text-align:center}
+#notes{position:fixed;left:16px;right:16px;bottom:72px;max-height:44vh;overflow:auto;background:var(--chrome);color:var(--on-chrome);
+  border-radius:14px;padding:18px 24px;font-size:17px;line-height:1.55;z-index:4}
+#notes h2{font-size:15px;font-weight:600;color:var(--chrome-hi);margin-bottom:6px;letter-spacing:.02em}
+#notes ul{padding-left:1.2em;margin:4px 0}
+#notes p + p, #notes p + ul, #notes ul + p{margin-top:6px}
+#notes .keys{margin-top:10px;color:var(--chrome-soft);font-size:14px}
+#notes[hidden],#blackout[hidden]{display:none}
+.slide-notes{display:none}
+#blackout{position:fixed;inset:0;background:#000;z-index:10;cursor:none}
+
+@page{size:1920px 1080px;margin:0}
+@media print{
+  html,body{height:auto;overflow:visible}
+  .stage{position:static;transform:none}
+  .slide,.slide[hidden]{position:relative;display:flex;width:1920px;height:1080px;break-after:page;page-break-after:always}
+  .slide:last-of-type{break-after:auto;page-break-after:auto}
+  .controls,#notes,#blackout{display:none!important}
+  .timer .t-hint{display:none}
+  .tent,.cc,.browser{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<h1 class="visually-hidden">{{h1}}</h1>
+<main class="stage" id="stage">
+
+<!-- Welcome ----------------------------------------------------------- -->
+<section class="slide s-title" aria-roledescription="slide" aria-label="Welcome" tabindex="-1">
+  <!--LOGO-->
+  <div class="head">
+    <!--IF:kicker--><p class="kicker">{{forum}}:</p><!--END:kicker-->
+    <h2>{{title}}</h2>
+  </div>
+  <p class="welcome">{{welcome}}</p>
+  <div class="slide-notes">
+    <p>Minutes 0 to 10: the welcome, from this slide up to Question 1.</p>
+    <p>The hour at a glance, in minutes from the start:</p>
+    <ul>
+      <li>0 to 10: welcome</li>
+      <li>10 to 22: Question 1 (7 minutes on the sheet, then 5 with the table cards, on one 12-minute timer)</li>
+      <li>22 to 35: Question 2 (13 minutes)</li>
+      <li>35 to 50: Question 3 (15 minutes)</li>
+      <li>50 to 55: Question 4, the commitment card (5 minutes)</li>
+      <li>55 to 60: share-back and close (skip the share-back if you’re running late)</li>
+    </ul>
+    <p>Afterwards, allow about 30 minutes to photograph the sheets and collect the commitment card halves.</p>
+  </div>
+</section>
+
+<!--IF:people-->
+<!-- Facilitators ------------------------------------------------------ -->
+<section class="slide s-people" aria-roledescription="slide" aria-label="Your facilitators" tabindex="-1" hidden>
+  <h2>Your facilitators:</h2>
+  <ul class="{{people_class}}">
+    <!--PEOPLE-->
+  </ul>
+  <div class="slide-notes">
+    <p>Still the welcome. Wave when you’re introduced, so tables know who to ask.</p>
+  </div>
+</section>
+<!--END:people-->
+
+<!-- The playbook ------------------------------------------------------ -->
+<section class="slide s-book" aria-roledescription="slide" aria-label="The {{playbook}}" tabindex="-1" hidden>
+  <div class="top"><p class="label">The {{playbook}}</p></div>
+  <div class="{{book_cols}}">
+    <div>
+      <h2>Today, we’re writing a playbook together</h2>
+      <p class="lede">Everything your table writes becomes a website of practical ideas that anyone can use, whether they were in the room or not.</p>
+      <!--IF:image--><!--ELSE:image--><!--IF:url--><p class="addr">It’ll live at <span class="hl">{{url}}</span></p><!--END:url--><!--END:image-->
+    </div>
+    <!--IF:image--><div class="browser">
+      <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>{{bar}}</span></div>
+      <!--HERO-->
+    </div><!--END:image-->
+  </div>
+  <div class="slide-notes">
+    <p>Still the welcome. The playbook is a website built from the tables’ sheets.</p>
+  </div>
+</section>
+
+<!-- How it gets made -------------------------------------------------- -->
+<section class="slide s-how" aria-roledescription="slide" aria-label="How the playbook gets made" tabindex="-1" hidden>
+  <div class="top"><p class="label">How it gets made</p></div>
+  <h2 class="q">From your sheets to the playbook</h2>
+  <ol class="flow">
+    <li><h3>Talk and write</h3><p>Your table fills in a sheet for each question. A side sheet catches quotes, questions and resources.</p></li>
+    <li><h3>We photograph the sheets</h3><p>Sheets only, never people. Nothing is recorded.</p></li>
+    <li><h3>AI reads, people check</h3><p>AI reads every sheet. People check each line against the photos before anything goes live.</p></li>
+    <li><h3>The playbook goes live</h3><p>Soon after today. <!--IF:url-->The QR code on your commitment card takes you there.<!--ELSE:url-->We’ll tell you where to find it.<!--END:url--></p></li>
+  </ol>
+  <p class="rule"><b>Chatham House Rule.</b> Nothing said today is attributed to anyone. A name only appears in the playbook on a commitment card, and only if you write it there.</p>
+  <div class="slide-notes">
+    <p>The last of the welcome: Question 1 starts at minute 10.</p>
+    <p>Say: there are no wrong answers, and nobody has to write. Anyone can speak and the table lead or side-sheet keeper writes it down.</p>
+    <p>Thick black markers only, so the photos are readable.</p>
+  </div>
+</section>
+
+<!-- Question 1 -------------------------------------------------------- -->
+<section class="slide s-q1" aria-roledescription="slide" aria-label="Question 1" tabindex="-1" hidden>
+  <div class="top">
+    <p class="label">Question 1<span class="sep" aria-hidden="true">·</span><span class="visually-hidden">, </span>Sheet 1</p>
+    <button class="timer" type="button" data-minutes="12" data-timer="q1"><span class="t-time">12:00</span><span class="t-hint">Start timer</span></button>
+  </div>
+  <h2 class="q">Where does support get stuck?</h2>
+  <div class="grid" style="grid-template-rows:1fr auto;grid-template-columns:56fr 44fr">
+    <div class="box" style="grid-column:1 / -1"><h3>Every challenge at this table</h3><p>Write them all down.</p></div>
+    <div class="box"><h3>Our top three</h3><p>Star the three that matter most.</p></div>
+    <div class="box"><h3>The one we’re tackling</h3><p>Copy it onto your table card too.</p></div>
+  </div>
+  <p class="note"><b>All session</b><span>Heard something good? Write quotes, open questions and resources on the side sheet.</span></p>
+  <ol class="rail" aria-label="Where we are in the session">
+    <li aria-current="step">Where it’s stuck</li><li>Table cards</li><li>What helped</li><li>What to try</li><li>Commitment</li><li>Share-back</li>
+  </ol>
+  <div class="slide-notes">
+    <p>Minutes 10 to 22 for the whole of Question 1. Start the 12-minute timer here: it keeps running on the next slide.</p>
+    <p>Read the question out in full. About 7 minutes on the sheet: 5 to list every challenge and star the top three, then 2 to pick one and copy it onto the table card. Move on with about 5 minutes left (minute 17).</p>
+    <p>Prompts if a table stalls:</p>
+    <ul><li>What would you fix first if you could?</li><li>What makes support drop off after a good start?</li><li>What does your boss ask that you can’t answer?</li></ul>
+  </div>
+</section>
+
+<!-- Question 1, table cards ------------------------------------------- -->
+<section class="slide s-card" aria-roledescription="slide" aria-label="Table cards" tabindex="-1" hidden>
+  <div class="top">
+    <p class="label">Question 1<span class="sep" aria-hidden="true">·</span><span class="visually-hidden">, </span>Table card</p>
+    <button class="timer" type="button" data-minutes="12" data-timer="q1"><span class="t-time">12:00</span><span class="t-hint">Start timer</span></button>
+  </div>
+  <h2 class="q">What is your table tackling?</h2>
+  <div class="cols">
+    <ol class="steps">
+      <li>Turn your table card so “We’re tackling” faces the room.</li>
+      <li>Fancy a different challenge? You’re welcome to move tables.</li>
+      <li>Heard something good? Write quotes, open questions and resources on the side sheet.</li>
+    </ol>
+    <div class="tent" aria-hidden="true"><p class="t">We’re tackling:</p><span class="wl"></span><span class="wl"></span><span class="wl"></span><!--MARK--></div>
+  </div>
+  <ol class="rail" aria-label="Where we are in the session">
+    <li>Where it’s stuck</li><li aria-current="step">Table cards</li><li>What helped</li><li>What to try</li><li>Commitment</li><li>Share-back</li>
+  </ol>
+  <div class="slide-notes">
+    <p>Minutes 17 to 22, still Question 1. The timer carries on from the last slide, so don’t restart it (T here pauses it). About 5 minutes left. Facilitators guide anyone who wants to move, and can take the conversation to someone instead of them moving.</p>
+  </div>
+</section>
+
+<!-- Question 2 -------------------------------------------------------- -->
+<section class="slide s-q2" aria-roledescription="slide" aria-label="Question 2" tabindex="-1" hidden>
+  <div class="top">
+    <p class="label">Question 2<span class="sep" aria-hidden="true">·</span><span class="visually-hidden">, </span>Sheet 2</p>
+    <button class="timer" type="button" data-minutes="13"><span class="t-time">13:00</span><span class="t-hint">Start timer</span></button>
+  </div>
+  <h2 class="q">What has helped, or not?</h2>
+  <div class="grid" style="grid-template-columns:1fr 1fr;grid-template-rows:1fr auto">
+    <div class="box"><h3>Helped</h3><p>What happened, and why did it work?</p></div>
+    <div class="box"><h3>Got in the way</h3><p>What would you change or avoid?</p></div>
+    <div class="box" style="grid-column:1 / -1"><h3>If we did it again, we’d…</h3></div>
+  </div>
+  <ol class="rail" aria-label="Where we are in the session">
+    <li>Where it’s stuck</li><li>Table cards</li><li aria-current="step">What helped</li><li>What to try</li><li>Commitment</li><li>Share-back</li>
+  </ol>
+  <div class="slide-notes">
+    <p>Minutes 22 to 35. Read the question out in full. 13 minutes, about the challenge on the table card.</p>
+    <p>Prompts if a table stalls:</p>
+    <ul><li>Tell me about a time it worked. What was different?</li><li>What would you never try again?</li><li>What made the difference?</li></ul>
+  </div>
+</section>
+
+<!-- Question 3 -------------------------------------------------------- -->
+<section class="slide s-q3" aria-roledescription="slide" aria-label="Question 3" tabindex="-1" hidden>
+  <div class="top">
+    <p class="label">Question 3<span class="sep" aria-hidden="true">·</span><span class="visually-hidden">, </span>Sheet 3</p>
+    <button class="timer" type="button" data-minutes="15"><span class="t-time">15:00</span><span class="t-hint">Start timer</span></button>
+  </div>
+  <h2 class="q long">What could people try now, and how does it stick?</h2>
+  <div class="grid" style="grid-template-columns:46fr 27fr 27fr;grid-template-rows:1fr auto">
+    <div class="box"><h3>What to try</h3><p>Something someone could start on Monday.</p></div>
+    <div class="box"><h3>What you need</h3><p>What would make it happen?</p></div>
+    <div class="box"><h3>How it sticks</h3><p>What stops it fading after a month?</p></div>
+    <p class="note" style="grid-column:1 / -1;margin-top:0"><b>Up to three actions.</b><span>Tick who each one is good for: just starting, growing or established.</span></p>
+  </div>
+  <ol class="rail" aria-label="Where we are in the session">
+    <li>Where it’s stuck</li><li>Table cards</li><li>What helped</li><li aria-current="step">What to try</li><li>Commitment</li><li>Share-back</li>
+  </ol>
+  <div class="slide-notes">
+    <p>Minutes 35 to 50. Read the question out in full. 15 minutes. Up to three actions, each with what to try, what you need and how it sticks.</p>
+    <p>Prompts if a table stalls:</p>
+    <ul><li>What could someone do on Monday?</li><li>What would they need to make it happen?</li><li>What stops it fading after a month?</li></ul>
+  </div>
+</section>
+
+<!-- Question 4, commitment card --------------------------------------- -->
+<section class="slide s-commit" aria-roledescription="slide" aria-label="Commitment card" tabindex="-1" hidden>
+  <div class="top">
+    <p class="label">Question 4<span class="sep" aria-hidden="true">·</span><span class="visually-hidden">, </span>Commitment card</p>
+    <button class="timer" type="button" data-minutes="5"><span class="t-time">5:00</span><span class="t-hint">Start timer</span></button>
+  </div>
+  <h2 class="q">One thing I will try, adapt or explore is…</h2>
+  <div class="cols">
+    <ol class="steps small">
+      <li>Write your commitment on both halves.</li>
+      <li>On the right half, add your name and organisation only if you’re happy for them to appear in the playbook.</li>
+      <li>Tear along the perforation and keep the <!--IF:url-->half with the QR code<!--ELSE:url-->half marked Keep<!--END:url-->.</li>
+      <li>Leave the other half on your table. We’ll collect them.</li>
+    </ol>
+    <div>
+      <div class="cc" aria-hidden="true">
+        <div><span class="tag">Keep</span><span class="wl"></span><span class="wl"></span><span class="wl"></span>
+          <!--IF:url--><div class="foot"><span class="mini-qr"><!--QR_MINI--></span><span>Scan for the playbook</span></div><!--END:url--></div>
+        <div><span class="tag">Hand in</span><span class="wl"></span><span class="wl"></span><span class="wl"></span>
+          <div class="foot"><span>Name and organisation, if you’d like</span></div></div>
+      </div>
+      <p class="cc-caption">Prefer not to write? Ask your table lead.</p>
+    </div>
+  </div>
+  <ol class="rail" aria-label="Where we are in the session">
+    <li>Where it’s stuck</li><li>Table cards</li><li>What helped</li><li>What to try</li><li aria-current="step">Commitment</li><li>Share-back</li>
+  </ol>
+  <div class="slide-notes">
+    <p>Minutes 50 to 55. 5 minutes. Make it small enough to start this month. What’s one thing you heard today that you could try?</p>
+    <p>The card itself doesn’t say how to hand in the right-hand half, so this slide is where people find out. Then on to the share-back.</p>
+  </div>
+</section>
+
+<!-- Share-back -------------------------------------------------------- -->
+<section class="slide s-share" aria-roledescription="slide" aria-label="Share-back" tabindex="-1" hidden>
+  <div class="top"><p class="label">Share-back</p></div>
+  <h2 class="q">Share your actions</h2>
+  <p class="big">Please wait for the mic, so everyone can hear.</p>
+  <ol class="rail" aria-label="Where we are in the session">
+    <li>Where it’s stuck</li><li>Table cards</li><li>What helped</li><li>What to try</li><li>Commitment</li><li aria-current="step">Share-back</li>
+  </ol>
+  <div class="slide-notes">
+    <p>Minutes 55 to 60. Share-back and close have 5 minutes between them, and this part is loose on purpose: take as many tables as time allows. If you’re running late, skip it and go straight to the thank-you slide. Repeat anything said off-mic.</p>
+  </div>
+</section>
+
+<!-- Thank you --------------------------------------------------------- -->
+<section class="slide s-end" aria-roledescription="slide" aria-label="Thank you" tabindex="-1" hidden>
+  <!--LOGO-->
+  <div class="cols">
+    <div>
+      <h2>Thank you</h2>
+      <p class="lede">The {{playbook}} goes live soon after today. Share it with anyone who couldn’t be here.</p>
+      <!--IF:join--><p class="lede join">{{join_label}}<br><span class="hl">{{join_url}}</span></p><!--END:join-->
+    </div>
+    <!--IF:url--><div class="qr-col">
+      <div class="qr-tile"><!--QR--></div>
+      <p class="url">{{url}}</p>
+    </div><!--END:url-->
+  </div>
+  <div class="slide-notes">
+    <p>The end of the 5 minutes for share-back and close (minute 60): what happens next, and thank you.<!--IF:url--> Leave this slide up so people can scan the QR code.<!--END:url--></p>
+    <!--IF:url--><!--ELSE:url--><p><b>Add your playbook’s address in playbook.config.json</b> (playbook.url) and rebuild: its QR code then appears on this slide and on the commitment card.</p><!--END:url-->
+    <p>Afterwards, allow about 30 minutes to photograph every sheet and collect the card halves left on the tables.</p>
+  </div>
+</section>
+
+</main>
+
+<div class="controls" id="controls" role="toolbar" aria-label="Slide controls">
+  <button type="button" id="prev">Previous</button>
+  <span class="count" id="count" aria-hidden="true">1 / {{slide_count}}</span>
+  <button type="button" id="next">Next</button>
+  <button type="button" id="notes-btn" aria-pressed="false">Notes</button>
+  <button type="button" id="fs-btn">Full screen</button>
+</div>
+<section id="notes" aria-label="Presenter notes" hidden></section>
+<div id="blackout" hidden></div>
+<p class="visually-hidden" id="live" aria-live="polite"></p>
+
+<script>
+(function(){
+  var stage = document.getElementById("stage");
+  var slides = [].slice.call(document.querySelectorAll(".slide"));
+  var live = document.getElementById("live"), count = document.getElementById("count");
+  var notes = document.getElementById("notes"), notesBtn = document.getElementById("notes-btn");
+  var blackout = document.getElementById("blackout"), controls = document.getElementById("controls");
+  var cur = 0;
+  // a weight used only on hidden slides is never fetched, so load every face now rather than mid-session or mid-print
+  if (document.fonts) document.fonts.forEach(function(f){ f.load(); });
+
+  function fit(){
+    var s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    stage.style.setProperty("--s", s);
+  }
+  window.addEventListener("resize", fit);
+  if (window.ResizeObserver) new ResizeObserver(fit).observe(document.documentElement);
+  fit();
+
+  function title(i){
+    var h = slides[i].querySelector("h2");
+    return h ? h.textContent.replace(/\s+/g, " ").trim() : slides[i].getAttribute("aria-label");
+  }
+
+  function show(i, announce){
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    var old = slides[cur], hadFocus = old.contains(document.activeElement);
+    slides.forEach(function(s, n){ s.hidden = n !== i; });
+    cur = i;
+    count.textContent = (i + 1) + " / " + slides.length;
+    history.replaceState(null, "", "#" + (i + 1));
+    // focus would be lost inside a hidden slide, so hand it to the new one
+    if (hadFocus) slides[i].focus({preventScroll:true});
+    if (announce) live.textContent = "Slide " + (i + 1) + " of " + slides.length + ": " + title(i);
+    renderNotes();
+  }
+
+  function renderNotes(){
+    if (notes.hidden) return;
+    var n = slides[cur].querySelector(".slide-notes");
+    notes.innerHTML = "<h2>Notes, slide " + (cur + 1) + " of " + slides.length + "</h2>" + (n ? n.innerHTML : "") +
+      '<p class="keys">Next: right arrow, Page Down or Space. Back: left arrow or Page Up. T starts or pauses the timer, R resets it. ' +
+      "B blanks the screen. F goes full screen. N hides these notes.</p>";
+  }
+  function toggleNotes(){
+    notes.hidden = !notes.hidden;
+    notesBtn.setAttribute("aria-pressed", String(!notes.hidden));
+    renderNotes();
+  }
+
+  function fullscreen(){
+    var el = document.documentElement;
+    // Safari before 16.4 only has the webkit-prefixed calls
+    if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    else if (el.requestFullscreen || el.webkitRequestFullscreen) (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+  }
+
+  /* ---------- timers: worked out from the clock so a throttled tab can't drift. Buttons that share a data-timer
+     (Q1's sheet and table-card slides) drive one countdown, so the question's time runs on across both slides ---------- */
+  var timers = [], byGroup = {};
+  [].slice.call(document.querySelectorAll(".timer")).forEach(function(btn, i){
+    var key = btn.dataset.timer || ("t" + i), t = byGroup[key];
+    if (!t){
+      t = byGroup[key] = {btns:[], total:+btn.dataset.minutes * 60000, left:0, end:0, state:"idle", warned:false};
+      t.left = t.total;
+      timers.push(t);
+    }
+    t.btns.push(btn);
+    btn.addEventListener("click", function(){ toggle(t); });
+  });
+  function onScreen(t){ return t.btns.some(function(b){ return slides[cur].contains(b); }); }
+  function fmt(ms){
+    var s = Math.max(0, Math.ceil(ms / 1000));
+    return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2);
+  }
+  function paint(t){
+    var left = t.state === "running" ? t.end - Date.now() : t.left;
+    var hint = {idle:"Start timer", running:"left", paused:"Paused", done:"Time’s up"}[t.state];
+    t.btns.forEach(function(b){
+      b.querySelector(".t-time").textContent = fmt(left);
+      b.querySelector(".t-hint").textContent = hint;
+      b.classList.toggle("last", t.state !== "idle" && t.state !== "done" && left <= 60000);
+      b.classList.toggle("done", t.state === "done");
+      b.classList.toggle("paused", t.state === "paused");
+    });
+  }
+  function toggle(t){
+    if (t.state === "done") return reset(t);
+    if (t.state === "running"){ t.left = t.end - Date.now(); t.state = "paused"; }
+    else { t.end = Date.now() + t.left; t.state = "running"; }
+    paint(t);
+  }
+  function reset(t){ t.state = "idle"; t.left = t.total; t.warned = false; paint(t); }
+  setInterval(function(){
+    timers.forEach(function(t){
+      if (t.state !== "running") return;
+      var left = t.end - Date.now();
+      if (left <= 60000 && !t.warned){ t.warned = true; if (onScreen(t)) live.textContent = "One minute left"; }
+      if (left <= 0){ t.state = "done"; t.left = 0; if (onScreen(t)) live.textContent = "Time’s up"; }
+      paint(t);
+    });
+  }, 250);
+  function currentTimer(){
+    for (var i = 0; i < timers.length; i++) if (onScreen(timers[i])) return timers[i];
+  }
+
+  /* ---------- keys: arrows, Page Up/Down (what most clickers send), Space, B and . (clicker "blank"), F5 (clicker "start") ---------- */
+  document.addEventListener("keydown", function(e){
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (!blackout.hidden){ blackout.hidden = true; e.preventDefault(); return; }
+    var onButton = e.target.closest && e.target.closest("button");
+    var k = e.key;
+    if (k === "ArrowRight" || k === "ArrowDown" || k === "PageDown" || (k === " " && !onButton)) { e.preventDefault(); show(cur + 1, true); }
+    else if (k === "ArrowLeft" || k === "ArrowUp" || k === "PageUp") { e.preventDefault(); show(cur - 1, true); }
+    else if (k === "Home") { e.preventDefault(); show(0, true); }
+    else if (k === "End") { e.preventDefault(); show(slides.length - 1, true); }
+    else if (k === "b" || k === "B" || k === ".") { e.preventDefault(); blackout.hidden = false; }
+    else if (k === "f" || k === "F" || k === "F5") { e.preventDefault(); fullscreen(); }
+    else if (k === "n" || k === "N") { e.preventDefault(); toggleNotes(); }
+    else if (k === "t" || k === "T") { var t = currentTimer(); if (t){ e.preventDefault(); toggle(t); } }
+    else if (k === "r" || k === "R") { var r = currentTimer(); if (r){ e.preventDefault(); reset(r); } }
+  });
+  blackout.addEventListener("click", function(){ blackout.hidden = true; });
+
+  document.getElementById("prev").addEventListener("click", function(){ show(cur - 1, true); });
+  document.getElementById("next").addEventListener("click", function(){ show(cur + 1, true); });
+  notesBtn.addEventListener("click", toggleNotes);
+  document.getElementById("fs-btn").addEventListener("click", fullscreen);
+
+  // the controls fade out on the big screen and come back when the mouse moves or anything in them has focus
+  var idleT;
+  function wake(){ controls.classList.remove("idle"); clearTimeout(idleT); idleT = setTimeout(function(){ controls.classList.add("idle"); }, 2500); }
+  document.addEventListener("mousemove", wake);
+  wake();
+
+  var start = parseInt(location.hash.slice(1), 10);
+  show(isNaN(start) ? 0 : start - 1, false);
+})();
+</script>
+</body>
+</html>

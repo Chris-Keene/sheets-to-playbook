@@ -1,0 +1,283 @@
+{
+ "_note": "BLANK TEMPLATE. The ingest copies this into each run as the starting point for session.json; you can also fill it by hand from the photos and card stubs, then build with: python3 build/build.py <your session.json> --out playbook/index.html. Set meta.status to 'draft' for the review (empty slots and source tags show) and 'final' to publish (empty sections hide; the build refuses gaps that matter). One challenge per table to start; when two tables tackled the same challenge, merge them into one entry with both table numbers. Ids are short slugs (they become page addresses).",
+ "_fields": {
+  "themes[]": "Sheet 1 'Every challenge at this table' from all tables, grouped. {id, label, tables:[n], heard:['short phrases as written']}",
+  "challenges[].title": "Sheet 1 'The one we're tackling' (also on the tent card)",
+  "challenges[].theme": "id of the theme it belongs to",
+  "challenges[].summary": "1-2 sentences on why it's hard, from Sheet 1 and the side sheet",
+  "challenges[].context": "sectors, from the table's industry tally if one is collected (see the workflow doc); no organisation sizes",
+  "challenges[].quotes[]": "side sheet Quotes column: {text (exact words), src}; no attribution unless a sector is written next to the quote",
+  "challenges[].helped[] / hindered[]": "Sheet 2 columns: {text, src}",
+  "challenges[].lessons[]": "Sheet 2 'If we did it again, we'd...'",
+  "challenges[].actions[]": "Sheet 3 boxes: {title, what, needs, sticks, stages: [starting|growing|established], src}",
+  "challenges[].questions[]": "side sheet Questions column (plain strings)",
+  "challenges[].resources[]": "side sheet Resources column: {title, url, source}; check every link",
+  "commitments[]": "card stubs: {text, name (only if written on the card), org (only if written), challenge: <challenge id or null>, src}",
+  "resources[]": "general reading not tied to one challenge: {title, url (optional: without one it shows as text), source, src}",
+  "quotes[]": "Heard on the day, on the front page: {text (word for word), src, tables:[n], challenge: <challenge id or null>}",
+  "src": "optional on any object item, e.g. 'T07 · Sheet 2'. Shown only in draft so lines can be checked against the paper",
+  "meta.table_names": "{\"13\": \"Virtual\"}: a table shown by name, not number (\"the Virtual table\"). It keeps its number for the ring and the counts",
+  "meta.supporters": "[{name, url, logo}] shown in the footer; logo files go in supporters/ beside your playbook.config.json, as <logo>-light.svg and <logo>-dark.svg",
+  "meta.hero": "{file, alt}: an optional photo across the top of the homepage. alt text is required"
+ },
+ "meta": {
+  "status": "template",
+  "edition": "Template",
+  "title": "Growing and sustaining support for accessibility",
+  "event": "Northfield Accessibility Summit 2026",
+  "session": "Community forum",
+  "date": "Thursday 4 June 2026",
+  "time": "11:30 to 12:30",
+  "tables": 12,
+  "people": "about 120",
+  "credit": "Built with sheets-to-playbook",
+  "contact": null,
+  "supporters": [],
+  "links": {}
+ },
+ "themes": [],
+ "challenges": [
+  {
+   "id": "table-1",
+   "theme": "",
+   "title": "",
+   "tables": [
+    1
+   ],
+   "summary": "",
+   "context": {
+    "sectors": [],
+    "sizes": []
+   },
+   "quotes": [],
+   "helped": [],
+   "hindered": [],
+   "lessons": [],
+   "actions": [],
+   "questions": [],
+   "resources": []
+  },
+  {
+   "id": "table-2",
+   "theme": "",
+   "title": "",
+   "tables": [
+    2
+   ],
+   "summary": "",
+   "context": {
+    "sectors": [],
+    "sizes": []
+   },
+   "quotes": [],
+   "helped": [],
+   "hindered": [],
+   "lessons": [],
+   "actions": [],
+   "questions": [],
+   "resources": []
+  },
+  {
+   "id": "table-3",
+   "theme": "",
+   "title": "",
+   "tables": [
+    3
+   ],
+   "summary": "",
+   "context": {
+    "sectors": [],
+    "sizes": []
+   },
+   "quotes": [],
+   "helped": [],
+   "hindered": [],
+   "lessons": [],
+   "actions": [],
+   "questions": [],
+   "resources": []
+  },
+  {
+   "id": "table-4",
+   "theme": "",
+   "title": "",
+   "tables": [
+    4
+   ],
+   "summary": "",
+   "context": {
+    "sectors": [],
+    "sizes": []
+   },
+   "quotes": [],
+   "helped": [],
+   "hindered": [],
+   "lessons": [],
+   "actions": [],
+   "questions": [],
+   "resources": []
+  },
+  {
+   "id": "table-5",
+   "theme": "",
+   "title": "",
+   "tables": [
+    5
+   ],
+   "summary": "",
+   "context": {
+    "sectors": [],
+    "sizes": []
+   },
+   "quotes": [],
+   "helped": [],
+   "hindered": [],
+   "lessons": [],
+   "actions": [],
+   "questions": [],
+   "resources": []
+  },
+  {
+   "id": "table-6",
+   "theme": "",
+   "title": "",
+   "tables": [
+    6
+   ],
+   "summary": "",
+   "context": {
+    "sectors": [],
+    "sizes": []
+   },
+   "quotes": [],
+   "helped": [],
+   "hindered": [],
+   "lessons": [],
+   "actions": [],
+   "questions": [],
+   "resources": []
+  },
+  {
+   "id": "table-7",
+   "theme": "",
+   "title": "",
+   "tables": [
+    7
+   ],
+   "summary": "",
+   "context": {
+    "sectors": [],
+    "sizes": []
+   },
+   "quotes": [],
+   "helped": [],
+   "hindered": [],
+   "lessons": [],
+   "actions": [],
+   "questions": [],
+   "resources": []
+  },
+  {
+   "id": "table-8",
+   "theme": "",
+   "title": "",
+   "tables": [
+    8
+   ],
+   "summary": "",
+   "context": {
+    "sectors": [],
+    "sizes": []
+   },
+   "quotes": [],
+   "helped": [],
+   "hindered": [],
+   "lessons": [],
+   "actions": [],
+   "questions": [],
+   "resources": []
+  },
+  {
+   "id": "table-9",
+   "theme": "",
+   "title": "",
+   "tables": [
+    9
+   ],
+   "summary": "",
+   "context": {
+    "sectors": [],
+    "sizes": []
+   },
+   "quotes": [],
+   "helped": [],
+   "hindered": [],
+   "lessons": [],
+   "actions": [],
+   "questions": [],
+   "resources": []
+  },
+  {
+   "id": "table-10",
+   "theme": "",
+   "title": "",
+   "tables": [
+    10
+   ],
+   "summary": "",
+   "context": {
+    "sectors": [],
+    "sizes": []
+   },
+   "quotes": [],
+   "helped": [],
+   "hindered": [],
+   "lessons": [],
+   "actions": [],
+   "questions": [],
+   "resources": []
+  },
+  {
+   "id": "table-11",
+   "theme": "",
+   "title": "",
+   "tables": [
+    11
+   ],
+   "summary": "",
+   "context": {
+    "sectors": [],
+    "sizes": []
+   },
+   "quotes": [],
+   "helped": [],
+   "hindered": [],
+   "lessons": [],
+   "actions": [],
+   "questions": [],
+   "resources": []
+  },
+  {
+   "id": "table-12",
+   "theme": "",
+   "title": "",
+   "tables": [
+    12
+   ],
+   "summary": "",
+   "context": {
+    "sectors": [],
+    "sizes": []
+   },
+   "quotes": [],
+   "helped": [],
+   "hindered": [],
+   "lessons": [],
+   "actions": [],
+   "questions": [],
+   "resources": []
+  }
+ ],
+ "commitments": [],
+ "resources": []
+}

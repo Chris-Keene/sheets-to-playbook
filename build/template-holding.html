@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- a holding page for the playbook's address (the QR code on the commitment card) until the real playbook replaces it -->
+<meta name="robots" content="noindex">
+<title>{{NAME}}: coming soon</title>
+<style>
+/*FONTS*/
+:root{
+  --bg:#fbf9fe; --surface:#ffffff; --ink:#1d1326; --muted:#5b5168; --accent:#57258c; --line:#e2d9ee;
+  --yellow:#ffd35d; --on-yellow:#1d1326; --focus:#57258c;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#150e1d; --surface:#221830; --ink:#f1ecf7; --muted:#b5abc2; --accent:#c4a6ee; --line:#3d2a52; --focus:#ffd35d; }
+}
+*{box-sizing:border-box}
+html{color-scheme:light dark}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--ink);
+  font-family:Poppins,Arial,sans-serif;line-height:1.55;padding:24px 16px}
+main{width:100%;max-width:36rem;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:36px 32px}
+.logo{display:block;width:13rem;max-width:70%;height:auto;color:var(--accent);margin-bottom:28px}
+.tag{display:inline-block;background:var(--yellow);color:var(--on-yellow);font-weight:600;font-size:.875rem;
+  padding:4px 12px;border-radius:999px;margin:0 0 14px}
+h1{font-size:clamp(1.75rem,5vw,2.25rem);line-height:1.15;margin:0 0 14px;font-weight:700}
+p{margin:0 0 14px;font-size:1.0625rem}
+.muted{color:var(--muted);font-size:1rem}
+a{color:var(--accent);font-weight:600;text-underline-offset:3px}
+a:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:4px}
+@media (max-width:480px){main{padding:28px 20px}}
+</style>
+</head>
+<body>
+<main>
+  <!--LOGO-->
+  <p class="tag">{{WHEN}}</p>
+  <h1>{{NAME}}</h1>
+  <p>Practical ideas gathered from every table at the {{FORUM}}.</p>
+  <p>The playbook will appear here after the session. Thanks for stopping by: do come back then.</p>
+  {{JOIN}}
+</main>
+</body>
+</html>

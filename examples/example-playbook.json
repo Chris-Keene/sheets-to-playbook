@@ -1,0 +1,847 @@
+{
+ "_note": "EXAMPLE CONTENT. Written by hand as an example, to show the shape of the playbook. None of it came from attendees. Replace the whole file with the real session output; status 'example' drives the banner on every page. Names on commitments are obvious placeholders (Sam Sample, Example Bank) to show the optional 'By' line.",
+ "meta": {
+  "status": "example",
+  "edition": "Example draft",
+  "title": "Growing and sustaining support for accessibility",
+  "event": "Northfield Accessibility Summit 2026",
+  "session": "Community forum",
+  "date": "Thursday 4 June 2026",
+  "time": "11:30 to 12:30",
+  "tables": 12,
+  "people": "about 120",
+  "credit": "Built with sheets-to-playbook",
+  "contact": null,
+  "supporters": [],
+  "links": {}
+ },
+ "themes": [
+  {
+   "id": "leadership",
+   "label": "Leadership support fades",
+   "tables": [
+    1,
+    2,
+    5,
+    8,
+    11,
+    12
+   ],
+   "heard": [
+    "Exec sponsor left and nobody picked it up",
+    "Only matters after a complaint"
+   ]
+  },
+  {
+   "id": "impact",
+   "label": "Hard to prove impact",
+   "tables": [
+    3,
+    4,
+    6,
+    9,
+    12
+   ],
+   "heard": [
+    "Leaders want a number we can't give",
+    "Issue count went up, looked like failure"
+   ]
+  },
+  {
+   "id": "burnout",
+   "label": "Champions burning out",
+   "tables": [
+    2,
+    4,
+    7,
+    10
+   ],
+   "heard": [
+    "Same three people answer everything",
+    "Done on top of the day job"
+   ]
+  },
+  {
+   "id": "ownership",
+   "label": "Seen as someone else's job",
+   "tables": [
+    1,
+    3,
+    6,
+    10
+   ],
+   "heard": [
+    "Loses to deadlines every sprint",
+    "Product thinks it's the a11y team's job"
+   ]
+  },
+  {
+   "id": "budget",
+   "label": "No budget or headcount",
+   "tables": [
+    4,
+    5,
+    8,
+    11
+   ],
+   "heard": [
+    "Money only after a legal letter",
+    "Funding ends when the project ends"
+   ]
+  },
+  {
+   "id": "momentum",
+   "label": "Networks lose momentum",
+   "tables": [
+    2,
+    7,
+    9
+   ],
+   "heard": [
+    "Great launch, then nothing",
+    "200 members, 5 turn up"
+   ]
+  },
+  {
+   "id": "tools",
+   "label": "Belief a tool or AI will fix it",
+   "tables": [
+    7,
+    11
+   ],
+   "heard": [
+    "Bought a scanner, asked if we still need the team"
+   ]
+  },
+  {
+   "id": "lived",
+   "label": "Too little input from disabled people",
+   "tables": [
+    6,
+    12
+   ],
+   "heard": [
+    "We test with tools, rarely with people"
+   ]
+  },
+  {
+   "id": "suppliers",
+   "label": "Suppliers and procurement",
+   "tables": [
+    5
+   ],
+   "heard": [
+    "Third-party platforms we can't fix"
+   ]
+  }
+ ],
+ "challenges": [
+  {
+   "id": "leadership-support",
+   "theme": "leadership",
+   "title": "Keeping leadership support when sponsors move on",
+   "tables": [
+    1,
+    8
+   ],
+   "summary": "Support often rests on one senior sponsor. When they change role, leave or pick up a new priority, accessibility drops off the agenda and the work starts again from scratch.",
+   "context": {
+    "sectors": [
+     "Banking",
+     "Central government",
+     "Retail"
+    ],
+    "sizes": []
+   },
+   "quotes": [
+    {
+     "text": "We had a brilliant sponsor for two years. She left on a Friday and by Monday we were nobody's problem."
+    },
+    {
+     "text": "Leaders don't need convincing that it matters. They need convincing it's theirs."
+    }
+   ],
+   "helped": [
+    {
+     "text": "Two sponsors, one from the business and one from technology, so one leaving didn't stop everything."
+    },
+    {
+     "text": "Adding accessibility to the existing quarterly risk report instead of a separate update nobody reads."
+    },
+    {
+     "text": "A short monthly note to the exec team with one win, one risk and one ask."
+    }
+   ],
+   "hindered": [
+    {
+     "text": "A big launch event with the CEO and no follow-up plan. The energy was gone within a quarter."
+    },
+    {
+     "text": "Relying on legal risk alone. It got attention until the next audit passed."
+    }
+   ],
+   "lessons": [
+    "Write the sponsor role down: what they own, how often they hear from you, and who takes over if they move."
+   ],
+   "actions": [
+    {
+     "title": "Name a deputy sponsor now",
+     "what": "Ask your sponsor to nominate a deputy at the same level before anything changes.",
+     "needs": "Fifteen minutes with your sponsor and a one-page description of the sponsor role.",
+     "sticks": "Review the pair every six months, and add the handover to your sponsor's own exit checklist.",
+     "stages": [
+      "growing",
+      "established"
+     ]
+    },
+    {
+     "title": "Put accessibility in a report leaders already read",
+     "what": "Add a standing line to an existing report, such as risk, quality or ESG.",
+     "needs": "The report owner's agreement and two or three measures you can update each quarter.",
+     "sticks": "Once it's a standing line, a missing update gets noticed.",
+     "stages": [
+      "starting",
+      "growing",
+      "established"
+     ]
+    },
+    {
+     "title": "Send a one-win, one-risk, one-ask note",
+     "what": "A monthly note of five lines or fewer to your sponsor and their peers.",
+     "needs": "A shared template and 30 minutes a month.",
+     "sticks": "Keep the format fixed so it takes no thought to write or to read.",
+     "stages": [
+      "starting",
+      "growing"
+     ]
+    }
+   ],
+   "questions": [
+    "How do you get a new leader to care when they inherit accessibility rather than choose it?",
+    "Does linking accessibility to ESG help, or does it turn into a box-tick?"
+   ],
+   "resources": [
+    {
+     "title": "The Business Case for Digital Accessibility",
+     "url": "https://www.w3.org/WAI/business-case/",
+     "source": "W3C WAI"
+    },
+    {
+     "title": "Planning and Managing Web Accessibility",
+     "url": "https://www.w3.org/WAI/planning-and-managing/",
+     "source": "W3C WAI"
+    }
+   ]
+  },
+  {
+   "id": "proving-impact",
+   "theme": "impact",
+   "title": "Proving impact in terms leaders care about",
+   "tables": [
+    3,
+    9
+   ],
+   "summary": "Leaders ask for numbers, but the changes that matter most, like fewer barriers for customers and more confident teams, are hard to count. Issue counts can even go up when things are improving, because more people are finally looking.",
+   "context": {
+    "sectors": [
+     "Insurance",
+     "Higher education",
+     "Technology"
+    ],
+    "sizes": []
+   },
+   "quotes": [
+    {
+     "text": "Our issue count doubled and leadership panicked. It doubled because we'd finally started looking."
+    },
+    {
+     "text": "One video of a customer using a screen reader on our app did more than a year of dashboards."
+    }
+   ],
+   "helped": [
+    {
+     "text": "A before-and-after of one real customer journey instead of a score for the whole estate."
+    },
+    {
+     "text": "Tracking issues found before release against issues found by customers."
+    },
+    {
+     "text": "Linking complaints and contact-centre calls to specific barriers."
+    }
+   ],
+   "hindered": [
+    {
+     "text": "A single compliance percentage. It hid the important barriers and people learned to game it."
+    },
+    {
+     "text": "Reporting everything. Nobody read a 40-page audit summary."
+    }
+   ],
+   "lessons": [
+    "Pick measures that show where problems are caught, not just how many there are."
+   ],
+   "actions": [
+    {
+     "title": "Show one journey before and after",
+     "what": "Choose one high-value journey and show it before and after fixes, ideally with a disabled user.",
+     "needs": "A disabled tester or research budget, and a short recording or quote shared with consent.",
+     "sticks": "Repeat with a new journey each quarter so there's always a fresh story.",
+     "stages": [
+      "starting",
+      "growing",
+      "established"
+     ]
+    },
+    {
+     "title": "Measure where issues are found",
+     "what": "Report the share of issues caught before release against those found after.",
+     "needs": "A tag in your issue tracker for where each issue was found.",
+     "sticks": "Add it to the team's existing quality dashboard instead of a separate report.",
+     "stages": [
+      "growing",
+      "established"
+     ]
+    },
+    {
+     "title": "Get barrier data from support teams",
+     "what": "Work with customer support to tag contacts that mention accessibility.",
+     "needs": "A contact in customer support and an agreed tag.",
+     "sticks": "Send support a quarterly summary of what changed because of their tags.",
+     "stages": [
+      "starting",
+      "growing"
+     ]
+    }
+   ],
+   "questions": [
+    "Is there a shared set of measures network members could compare against?",
+    "How do you put a value on things that didn't go wrong?"
+   ],
+   "resources": [
+    {
+     "title": "Accessibility Maturity Model",
+     "url": "https://www.w3.org/TR/maturity-model/",
+     "source": "W3C"
+    },
+    {
+     "title": "Involving Users in Web Projects for Better, Easier Accessibility",
+     "url": "https://www.w3.org/WAI/planning/involving-users/",
+     "source": "W3C WAI"
+    }
+   ]
+  },
+  {
+   "id": "champion-burnout",
+   "theme": "burnout",
+   "title": "Stopping champions burning out",
+   "tables": [
+    4,
+    7
+   ],
+   "summary": "Champions usually do this on top of their day job. The most committed people take on the most, nobody sees the extra hours, and they quietly step back.",
+   "context": {
+    "sectors": [
+     "Media",
+     "Charity",
+     "Telecoms"
+    ],
+    "sizes": []
+   },
+   "quotes": [
+    {
+     "text": "Being the accessibility person at our place meant being the accessibility person for everything."
+    },
+    {
+     "text": "Our best champion left and said it felt like unpaid overtime with a badge."
+    }
+   ],
+   "helped": [
+    {
+     "text": "Protected time agreed with line managers, even two hours a month, written into objectives."
+    },
+    {
+     "text": "Rotating roles, so different champions host, answer questions and run training each quarter."
+    },
+    {
+     "text": "A clear list of what champions don't do, so they could say no to full audits."
+    }
+   ],
+   "hindered": [
+    {
+     "text": "Recognition that was only a certificate. People wanted it to count in their review."
+    },
+    {
+     "text": "An open chat channel where every question went to the same three people."
+    }
+   ],
+   "lessons": [],
+   "actions": [
+    {
+     "title": "Write champion work into objectives",
+     "what": "Agree with line managers that champion work counts in performance reviews.",
+     "needs": "A short template objective, and HR or a senior sponsor to back it.",
+     "sticks": "Make it part of joining the network, so every new champion starts with it agreed.",
+     "stages": [
+      "growing",
+      "established"
+     ]
+    },
+    {
+     "title": "Publish a 'champions don't' list",
+     "what": "Set out what champions do and don't do, such as no full audits and no sign-off.",
+     "needs": "An hour with your core group to agree it, and somewhere visible to publish it.",
+     "sticks": "Point to it every time a request goes over the line.",
+     "stages": [
+      "starting",
+      "growing"
+     ]
+    },
+    {
+     "title": "Rotate the jobs",
+     "what": "Split the network's work into roles and rotate them every quarter.",
+     "needs": "At least six active champions and a simple rota.",
+     "sticks": "Hand over in a 15-minute call with a checklist.",
+     "stages": [
+      "established"
+     ]
+    }
+   ],
+   "questions": [
+    "How do you spot burnout in a volunteer before they leave?",
+    "Should champion roles be recognised in pay or grade?"
+   ],
+   "resources": [
+    {
+     "title": "Teach and Advocate",
+     "url": "https://www.w3.org/WAI/teach-advocate/",
+     "source": "W3C WAI"
+    }
+   ]
+  },
+  {
+   "id": "product-ownership",
+   "theme": "ownership",
+   "title": "Getting product teams to own accessibility",
+   "tables": [
+    6,
+    10
+   ],
+   "summary": "Accessibility gets treated as a specialist's job or a check at the end. Product teams agree it matters, then it loses to deadlines every sprint.",
+   "context": {
+    "sectors": [
+     "E-commerce",
+     "Travel",
+     "Banking"
+    ],
+    "sizes": []
+   },
+   "quotes": [
+    {
+     "text": "Everyone agreed in the meeting. Then sprint planning happened."
+    },
+    {
+     "text": "The day a product manager watched a customer fail to check out, it stopped being our backlog and became theirs."
+    }
+   ],
+   "helped": [
+    {
+     "text": "Accessibility acceptance criteria in the definition of done, written with the teams."
+    },
+    {
+     "text": "Product managers sitting in on research sessions with disabled participants."
+    },
+    {
+     "text": "Automated checks in the pipeline, so basic issues block a merge instead of a release."
+    }
+   ],
+   "hindered": [
+    {
+     "text": "A central team fixing issues for product teams. It made the problem someone else's."
+    },
+    {
+     "text": "Training only developers, not designers or product managers."
+    }
+   ],
+   "lessons": [
+    "Ownership follows exposure: people who watch a real user struggle start owning the fix."
+   ],
+   "actions": [
+    {
+     "title": "Co-write acceptance criteria",
+     "what": "Work with one team to write accessibility acceptance criteria for their next feature.",
+     "needs": "A willing product manager and 30 minutes in refinement.",
+     "sticks": "Turn the criteria into a template the team reuses, then take it to the next team.",
+     "stages": [
+      "starting",
+      "growing"
+     ]
+    },
+    {
+     "title": "Get product managers in the room",
+     "what": "Invite product managers to watch a session with a disabled user.",
+     "needs": "Research budget or a partner organisation, and participant consent.",
+     "sticks": "Put one session a quarter in the product calendar.",
+     "stages": [
+      "starting",
+      "growing",
+      "established"
+     ]
+    },
+    {
+     "title": "Catch the basics automatically",
+     "what": "Run automated accessibility checks in the build pipeline so basic issues show up before review.",
+     "needs": "An engineer to set it up and agreement on which failures block.",
+     "sticks": "Share trends with team leads monthly, and keep manual and user testing for what automation can't catch.",
+     "stages": [
+      "growing",
+      "established"
+     ]
+    }
+   ],
+   "questions": [
+    "Who should own accessibility in a product team: the product manager, the designer or the engineers?",
+    "How do you stop automated checks being treated as the whole job?"
+   ],
+   "resources": [
+    {
+     "title": "Planning and Managing Web Accessibility",
+     "url": "https://www.w3.org/WAI/planning-and-managing/",
+     "source": "W3C WAI"
+    },
+    {
+     "title": "Inclusive Design",
+     "url": "https://inclusive.microsoft.design/",
+     "source": "Microsoft"
+    }
+   ]
+  },
+  {
+   "id": "budget",
+   "theme": "budget",
+   "title": "Securing budget before there's a crisis",
+   "tables": [
+    5,
+    12
+   ],
+   "summary": "Without a line in the budget, accessibility runs on goodwill and spare time. Money tends to appear after a complaint or a legal letter, then disappears once the fix is in.",
+   "context": {
+    "sectors": [
+     "Retail",
+     "Local government"
+    ],
+    "sizes": []
+   },
+   "quotes": [
+    {
+     "text": "We got budget the week after a legal letter. We lost it the year after we fixed it."
+    },
+    {
+     "text": "Ask for a small amount that's guaranteed rather than a big amount that's one-off."
+    }
+   ],
+   "helped": [
+    {
+     "text": "Bidding for a small recurring amount inside an existing budget, such as the design system or QA."
+    },
+    {
+     "text": "Costing what late fixes cost, using real examples from the past year."
+    },
+    {
+     "text": "Sharing training costs with HR and the disability staff network."
+    }
+   ],
+   "hindered": [
+    {
+     "text": "One big business case for a full programme. It was too big to approve."
+    },
+    {
+     "text": "Funding tied to one project, which ended when the project did."
+    }
+   ],
+   "lessons": [],
+   "actions": [
+    {
+     "title": "Cost a late fix",
+     "what": "Find two or three real issues that were fixed late and estimate what they cost compared with fixing them in design.",
+     "needs": "Time from a delivery lead to estimate the effort.",
+     "sticks": "Refresh the examples each year so the case stays current.",
+     "stages": [
+      "starting",
+      "growing"
+     ]
+    },
+    {
+     "title": "Ask for a small recurring line",
+     "what": "Request a modest yearly amount inside a budget that already exists.",
+     "needs": "A budget owner who benefits, such as the design system or QA lead.",
+     "sticks": "Recurring lines get rolled over; one-off funding doesn't.",
+     "stages": [
+      "starting",
+      "growing"
+     ]
+    },
+    {
+     "title": "Share costs with allies",
+     "what": "Co-fund training or testing with HR, the disability staff network or procurement.",
+     "needs": "One conversation with each potential partner.",
+     "sticks": "Agree shared goals so each partner reports on the joint work.",
+     "stages": [
+      "starting",
+      "growing",
+      "established"
+     ]
+    }
+   ],
+   "questions": [
+    "What's a realistic first budget ask for a team of one?"
+   ],
+   "resources": [
+    {
+     "title": "The Business Case for Digital Accessibility",
+     "url": "https://www.w3.org/WAI/business-case/",
+     "source": "W3C WAI"
+    }
+   ]
+  },
+  {
+   "id": "reviving-network",
+   "theme": "momentum",
+   "title": "Reviving a champions network that has stalled",
+   "tables": [
+    2
+   ],
+   "summary": "Networks often start with energy and a launch event, then attendance drops. A year later there are 200 names on the list and five people turning up.",
+   "context": {
+    "sectors": [
+     "Professional services"
+    ],
+    "sizes": []
+   },
+   "quotes": [
+    {
+     "text": "We had 200 members and no idea which ones were actually champions."
+    }
+   ],
+   "helped": [
+    {
+     "text": "Asking everyone to opt back in. Fewer members, but the ones who stayed were active."
+    },
+    {
+     "text": "Giving each meeting one practical thing to take away instead of only updates."
+    }
+   ],
+   "hindered": [
+    {
+     "text": "Monthly meetings in the same format for two years."
+    }
+   ],
+   "lessons": [],
+   "actions": [
+    {
+     "title": "Run an opt-in reset",
+     "what": "Ask every member to confirm they want to stay and what they want from the network.",
+     "needs": "A short form and a message from your sponsor.",
+     "sticks": "Repeat it yearly so membership reflects who's active.",
+     "stages": [
+      "growing",
+      "established"
+     ]
+    },
+    {
+     "title": "Make every session useful on Monday",
+     "what": "End every meeting with one thing members can do at work that week.",
+     "needs": "A rotating host who prepares one practical takeaway.",
+     "sticks": "Collect the takeaways in one place so new members can catch up.",
+     "stages": [
+      "starting",
+      "growing",
+      "established"
+     ]
+    }
+   ],
+   "questions": [
+    "Is a small, active network better than a large, quiet one?"
+   ],
+   "resources": []
+  },
+  {
+   "id": "tool-will-fix-it",
+   "theme": "tools",
+   "title": "When leaders think a tool or AI has solved it",
+   "tables": [
+    11
+   ],
+   "summary": "When a new tool or AI assistant arrives, leaders can assume accessibility is now handled. Manual testing and testing with disabled people are the first things cut.",
+   "context": {
+    "sectors": [
+     "Technology",
+     "Financial services"
+    ],
+    "sizes": []
+   },
+   "quotes": [
+    {
+     "text": "We bought a scanner and the next question was whether we still needed the accessibility team."
+    },
+    {
+     "text": "AI writes code fast, including inaccessible code."
+    }
+   ],
+   "helped": [
+    {
+     "text": "Explaining what automated tools can and can't find, with a short list of examples."
+    },
+    {
+     "text": "A budget line for testing with disabled people, kept separate from tooling."
+    }
+   ],
+   "hindered": [
+    {
+     "text": "Reporting the tool's score as the only measure. It became the target."
+    }
+   ],
+   "lessons": [],
+   "actions": [
+    {
+     "title": "Publish what your tools cover",
+     "what": "Write down what your tools check, and what still needs people.",
+     "needs": "Your tool's list of checks and an hour to write it up.",
+     "sticks": "Update it when tools change, and link it from every report.",
+     "stages": [
+      "growing",
+      "established"
+     ]
+    },
+    {
+     "title": "Protect testing with disabled people",
+     "what": "Ring-fence time and money for testing with disabled people.",
+     "needs": "Sponsor agreement that tooling doesn't replace it.",
+     "sticks": "Report user-testing findings next to the tool results each quarter.",
+     "stages": [
+      "starting",
+      "growing",
+      "established"
+     ]
+    }
+   ],
+   "questions": [
+    "How can we use AI to speed up accessibility work without it replacing judgement?"
+   ],
+   "resources": [
+    {
+     "title": "Involving Users in Web Projects for Better, Easier Accessibility",
+     "url": "https://www.w3.org/WAI/planning/involving-users/",
+     "source": "W3C WAI"
+    }
+   ]
+  }
+ ],
+ "commitments": [
+  {
+   "text": "Ask my sponsor to name a deputy before Christmas.",
+   "challenge": "leadership-support",
+   "name": "Sam Sample",
+   "org": "Example Bank"
+  },
+  {
+   "text": "Add one accessibility line to our quarterly risk report.",
+   "challenge": "leadership-support"
+  },
+  {
+   "text": "Record one customer journey before and after we fix it.",
+   "challenge": "proving-impact"
+  },
+  {
+   "text": "Get support to tag tickets that mention accessibility.",
+   "challenge": "proving-impact"
+  },
+  {
+   "text": "Agree two hours a month of protected time for our champions.",
+   "challenge": "champion-burnout",
+   "name": "Alex Example"
+  },
+  {
+   "text": "Write a 'champions don't' list with my core group.",
+   "challenge": "champion-burnout"
+  },
+  {
+   "text": "Sit in on a research session with my product manager.",
+   "challenge": "product-ownership"
+  },
+  {
+   "text": "Stop fixing other teams' issues and pair with them instead.",
+   "challenge": "product-ownership"
+  },
+  {
+   "text": "Write acceptance criteria with one team for their next feature.",
+   "challenge": "product-ownership"
+  },
+  {
+   "text": "Find two late fixes from last year and cost them.",
+   "challenge": "budget",
+   "name": "Jo Placeholder",
+   "org": "Example Council"
+  },
+  {
+   "text": "Ask our design system lead about a shared budget line.",
+   "challenge": "budget"
+  },
+  {
+   "text": "Email every network member and ask them to opt back in.",
+   "challenge": "reviving-network"
+  },
+  {
+   "text": "Write down what our scanner doesn't check.",
+   "challenge": "tool-will-fix-it"
+  },
+  {
+   "text": "Find a peer outside my organisation to swap notes with every month.",
+   "challenge": null
+  },
+  {
+   "text": "Share this playbook with my manager.",
+   "challenge": null
+  },
+  {
+   "text": "Keep in touch with someone I met at my table.",
+   "challenge": null
+  }
+ ],
+ "resources": [
+  {
+   "title": "The Business Case for Digital Accessibility",
+   "url": "https://www.w3.org/WAI/business-case/",
+   "source": "W3C WAI"
+  },
+  {
+   "title": "Planning and Managing Web Accessibility",
+   "url": "https://www.w3.org/WAI/planning-and-managing/",
+   "source": "W3C WAI"
+  },
+  {
+   "title": "Accessibility Maturity Model",
+   "url": "https://www.w3.org/TR/maturity-model/",
+   "source": "W3C"
+  },
+  {
+   "title": "Involving Users in Web Projects for Better, Easier Accessibility",
+   "url": "https://www.w3.org/WAI/planning/involving-users/",
+   "source": "W3C WAI"
+  },
+  {
+   "title": "Teach and Advocate",
+   "url": "https://www.w3.org/WAI/teach-advocate/",
+   "source": "W3C WAI"
+  },
+  {
+   "title": "Making your service accessible: an introduction",
+   "url": "https://www.gov.uk/service-manual/helping-people-to-use-your-service/making-your-service-accessible-an-introduction",
+   "source": "GOV.UK Service Manual"
+  },
+  {
+   "title": "Inclusive Design",
+   "url": "https://inclusive.microsoft.design/",
+   "source": "Microsoft"
+  }
+ ]
+}
