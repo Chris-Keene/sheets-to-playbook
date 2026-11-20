@@ -1,0 +1,49 @@
+## text
+The side sheet of the paper kit, out all session. Type into it on screen, or print it on A4. From the CAN Community Playbook kit · Print-ready PDF.
+
+All session
+
+Heard something good? Write it here.
+Table
+Quotes
+
+Exact words, no names
+
+Questions
+
+Things nobody could answer
+
+Resources
+
+Links, books, people, tools
+
+Best thing said today
+
+The table lead writes it in the last two minutes.
+
+CAN
+All of this goes into the CAN Community Playbook. No names, please.
+SS · Table
+
+## accessibility tree
+note
+main
+heading[1] "Heard something good? Write it here."
+LabelText
+textbox "Table"
+region "Quotes"
+region "Questions"
+region "Resources"
+region "Best thing said today"
+sectionfooter
+link "CAN Community Playbook kit"
+link "Print-ready PDF"
+heading[2] "Quotes"
+textbox "Quotes"
+heading[2] "Questions"
+textbox "Questions"
+heading[2] "Resources"
+textbox "Resources"
+heading[2] "Best thing said today"
+textbox "Best thing said today"
+image "Champions of Accessibility Network (CAN)"

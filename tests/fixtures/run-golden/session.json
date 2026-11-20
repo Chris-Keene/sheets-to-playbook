@@ -1,0 +1,326 @@
+{
+ "meta": {
+  "status": "draft",
+  "edition": "Draft for review",
+  "title": "Growing and sustaining support for accessibility",
+  "series": "Community Playbook",
+  "event": "Example Conference 2026",
+  "session": "Community forum",
+  "date": "Thursday 19 November 2026",
+  "time": "11:30 to 12:30",
+  "tables": 12,
+  "people": "about 120",
+  "credit": "Built with sheets-to-playbook",
+  "contact": null,
+  "banner": [
+   "Test run.",
+   "Built automatically from fake sheets and voice notes made to test the engine; none of it came from real people. Dashed boxes are gaps, and tags show which sheet each line came from."
+  ]
+ },
+ "themes": [
+  {
+   "id": "leadership",
+   "label": "Leadership support fades",
+   "tables": [
+    2,
+    5
+   ],
+   "heard": [
+    "Leaders only care at audit time",
+    "Leadership support fades"
+   ]
+  },
+  {
+   "id": "champions",
+   "label": "Champions drift away",
+   "tables": [
+    2
+   ],
+   "heard": [
+    "Champions drift away after 6 months",
+    "Champions don't know what to do"
+   ]
+  },
+  {
+   "id": "budget",
+   "label": "Money only comes after complaints",
+   "tables": [
+    5
+   ],
+   "heard": [
+    "Only get money after complaints",
+    "Budget sits with IT not product"
+   ]
+  },
+  {
+   "id": "time",
+   "label": "No time in the day job",
+   "tables": [
+    2
+   ],
+   "heard": [
+    "No time in the day job"
+   ]
+  },
+  {
+   "id": "impact",
+   "label": "Hard to prove impact",
+   "tables": [
+    2
+   ],
+   "heard": [
+    "Can't prove impact"
+   ]
+  },
+  {
+   "id": "compliance",
+   "label": "Seen as just compliance",
+   "tables": [
+    5
+   ],
+   "heard": [
+    "Seen as just compliance"
+   ]
+  }
+ ],
+ "challenges": [
+  {
+   "id": "keeping-champions-engaged",
+   "theme": "champions",
+   "title": "Keeping champions engaged after the launch",
+   "tables": [
+    2
+   ],
+   "summary": "Champions drift away after about six months. They have little time for it in the day job, aren't always sure what to do, and can feel invisible.",
+   "context": {
+    "sectors": [
+     "Retail",
+     "Banking",
+     "Insurance",
+     "Health"
+    ],
+    "sizes": []
+   },
+   "quotes": [
+    {
+     "text": "Champions need a job, not a badge",
+     "src": "T02.SS.quote1"
+    }
+   ],
+   "helped": [
+    {
+     "text": "A monthly fix-it Friday, with snacks.",
+     "src": "T02.S2.helped1"
+    },
+    {
+     "text": "Giving champions a real task each month.",
+     "src": "T02.S2.helped2"
+    },
+    {
+     "text": "Asking champions to present their fix at the all-hands meeting, which made other people want to join.",
+     "src": "T02.V.point2"
+    }
+   ],
+   "hindered": [
+    {
+     "text": "A newsletter nobody read.",
+     "src": "T02.S2.hindered1"
+    },
+    {
+     "text": "Meetings at 8am.",
+     "src": "T02.S2.hindered2"
+    }
+   ],
+   "lessons": [
+    {
+     "text": "Ask champions what they want before planning.",
+     "src": "T02.S2.lesson1"
+    }
+   ],
+   "actions": [
+    {
+     "title": "Run a monthly fix-it session",
+     "what": "Hold a 30-minute fix-it session every month.",
+     "needs": "A room, a list of small bugs and a host.",
+     "sticks": "Same day every month, and rotate the host.",
+     "stages": [
+      "starting",
+      "growing"
+     ],
+     "src": "T02.S3.action1"
+    },
+    {
+     "title": "Shout out a champion of the month",
+     "what": "Recognise one champion each month.",
+     "needs": "An executive to send the email.",
+     "sticks": "Link it to performance reviews.",
+     "stages": [
+      "growing"
+     ],
+     "src": "T02.S3.action2"
+    }
+   ],
+   "questions": [
+    {
+     "text": "How many champions is enough?",
+     "src": "T02.SS.question1"
+    },
+    {
+     "text": "Resource mentioned: “W3C planning & managing”. The address on the sheet is cut off at w3.org/WAI/planning-and-, so it needs finding before it can be linked.",
+     "src": "T02.SS.resource1"
+    }
+   ],
+   "resources": []
+  },
+  {
+   "id": "budget-before-crisis",
+   "theme": "budget",
+   "title": "Getting budget before something goes wrong",
+   "tables": [
+    5,
+    9
+   ],
+   "summary": "Money tends to arrive only after complaints, and the budget often sits with IT rather than product. Waiting for legal to push it, or asking for a big programme all at once, hasn't worked.",
+   "context": {
+    "sectors": [
+     "Local government",
+     "Higher education",
+     "Charity",
+     "Utilities",
+     "Telecoms"
+    ],
+    "sizes": []
+   },
+   "quotes": [
+    {
+     "text": "Small and recurring beats big and one-off",
+     "src": "T05.SS.quote1"
+    },
+    {
+     "text": "Money follows risk, so show the risk",
+     "src": "T09.SS.quote1"
+    }
+   ],
+   "helped": [
+    {
+     "text": "Showing the cost of fixing late compared with fixing early.",
+     "src": "T05.S2.helped1"
+    },
+    {
+     "text": "Piggybacking on the design system budget.",
+     "src": "T05.S2.helped2"
+    },
+    {
+     "text": "Bidding for accessibility as part of a design system refresh, so it was never a separate ask.",
+     "src": "T05.V.point1"
+    },
+    {
+     "text": "Linking it to complaints data.",
+     "src": "T09.S2.helped1"
+    }
+   ],
+   "hindered": [
+    {
+     "text": "Asking for a big programme all at once.",
+     "src": "T05.S2.hindered1"
+    },
+    {
+     "text": "Waiting for legal to push it.",
+     "src": "T09.S2.hindered1"
+    }
+   ],
+   "lessons": [
+    {
+     "text": "Small asks that repeat beat one big ask.",
+     "src": "T05.S2.lesson1"
+    },
+    {
+     "text": "One telecoms company's regulator now asks about accessibility in every review, so the risk argument is getting stronger.",
+     "src": "T09.V.point2"
+    }
+   ],
+   "actions": [
+    {
+     "title": "Cost two real late fixes",
+     "what": "Find two real issues that were fixed late, and work out what they cost.",
+     "needs": "Time from a delivery lead.",
+     "sticks": "Update the numbers every year.",
+     "stages": [
+      "starting",
+      "growing"
+     ],
+     "src": "T05.S3.action1"
+    },
+    {
+     "title": "Ask for a small recurring budget line",
+     "what": "Ask for a small recurring line in an existing budget.",
+     "needs": "A friendly budget owner.",
+     "sticks": "It rolls over each year.",
+     "stages": [
+      "starting"
+     ],
+     "src": "T05.S3.action2"
+    },
+    {
+     "title": "Share a complaint that cost money",
+     "what": "Find one complaint that cost money and share it.",
+     "needs": "A contact in customer services.",
+     "sticks": "Share a new one every quarter.",
+     "stages": [
+      "growing",
+      "established"
+     ],
+     "src": "T09.S3.action1"
+    }
+   ],
+   "questions": [
+    {
+     "text": "Who owns the budget: IT or product?",
+     "src": "T05.SS.question1"
+    }
+   ],
+   "resources": [
+    {
+     "title": "Business case",
+     "url": "https://www.w3.org/WAI/business-case/",
+     "source": "W3C WAI",
+     "src": "T09.SS.resource1"
+    }
+   ]
+  }
+ ],
+ "commitments": [
+  {
+   "text": "Cost one late fix this month",
+   "challenge": "budget-before-crisis",
+   "src": "C.card1"
+  },
+  {
+   "text": "Run a fix-it Friday in January",
+   "challenge": "keeping-champions-engaged",
+   "src": "C.card2"
+  },
+  {
+   "text": "Ask finance who owns the budget",
+   "challenge": "budget-before-crisis",
+   "src": "C.card3"
+  },
+  {
+   "text": "Send my exec one win a month",
+   "challenge": null,
+   "src": "C.card4"
+  },
+  {
+   "text": "Talk to our design system lead",
+   "challenge": null,
+   "src": "C.card5"
+  },
+  {
+   "text": "Share this playbook with my team",
+   "challenge": null,
+   "src": "C.card6"
+  }
+ ],
+ "resources": [],
+ "_note": "Golden fixture: the engine's fake-sheet test run (no real people). Used by tests/golden.py to check verify and the draft page don't change."
+}

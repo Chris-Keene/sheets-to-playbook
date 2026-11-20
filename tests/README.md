@@ -15,6 +15,7 @@ The number that matters is **silent errors**: readings that are wrong *and* unfl
 | `hw/get_fonts.py` | Fetches the fonts the generators need (they aren't shipped). |
 | `fixtures/make_fixtures.py` | A small fake inbox for an end-to-end smoke test: three tables on simplified sheets, card stubs, a stray room photo, three voice notes and a `notes.txt`, with planted problems (a missing sheet, a blurred duplicate, a HEIC, an EXIF-rotated photo, a half-scribbled word, a name in a voice note). Its answer key is the data at the top of the script. |
 | `check_fixture.py` | Scores an ingest run of the fixture inbox. |
+| `golden.py` | **Not a reading test: a "did anything change?" test.** Builds everything the kit makes (print files, fill-in sheets, slides, the playbook from three session files, and `verify` plus `draft` on the fake run in `fixtures/run-golden/`) and compares it with the snapshots in `golden/snapshots/`. Run it before and after a change: `PW=<.../node_modules/playwright> python3 tests/golden.py`, then `--update` once you've checked every difference is one you meant. Pictures of every page are compared too, but kept on your own machine (`golden/local/`), so a fresh clone runs `--update` once first. |
 | `four-tables.json` | Not a test of the reader: the example playbook squeezed onto four tables, to check the design copes with a small room. `python3 build/build.py tests/four-tables.json --out <folder>/index.html` |
 
 ## Before you start (once)

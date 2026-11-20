@@ -73,11 +73,16 @@ Then open Claude Code in this folder. The `sheets-to-playbook` skill is picked u
 | `org.about`, `org.join` | The About page and the closing band (a link to join your network) |
 | `playbook.name`, `playbook.url` | Page titles and footers; **the QR code on the commitment card points at the url**, so set it before printing |
 | `playbook.searchable` | `false` (the default) keeps every page out of search results. Set `true` to let search engines list the final playbook; drafts never are. |
+| `playbook.file_name` | What "Download this playbook" saves as. Default: the playbook's name, e.g. `community-playbook.html`. |
+| `playbook.share` | Optional link previews for LinkedIn, Slack and Teams once the playbook is online: `{"image": "share.jpg", "image_alt": "..."}`. Needs `playbook.url`. The picture is copied beside the page. |
 | `brand.accent`, `brand.highlight` | Two colours. Every other shade, in light and dark mode, is worked out from them and checked for contrast. |
-| `brand.logo` | Optional SVG or PNG logos, relative to the settings file. Without one, the name is set as a wordmark. |
+| `brand.logo` | Optional SVG or PNG logos (`primary`, `secondary`, `mark`), relative to the settings file. Without one, the name is set as a wordmark. An SVG takes the page's logo colour so it follows dark mode; set `"keep_colours": true` to keep its own colours. A logo in its own colours (or a PNG) can have a second file for dark backgrounds: `secondary_dark` and so on. The print kit draws SVGs only; with a PNG it uses the wordmark. |
+| `brand.font` | The typeface for every page, sheet and slide: `{"family": "Outfit", "files": {"Regular": ..., "Medium": ..., "SemiBold": ..., "Bold": ...}}`. Use static woff2 (or TTF) files, not a variable font: the print kit draws its lettering from them too. Poppins by default. |
 | `brand.palette` | Optional exact colours, if you'd rather set every shade yourself (still contrast-checked) |
 | `brand.cmyk` | Optional print colours your printer has proofed, `{"accent": [c, m, y, k], "highlight": [...]}`. Otherwise the kit converts your hex colours, which is fine for an office printer but worth proofing for a print shop. |
 | `kit.licence` | The licence line on the playbook's "Run your own" page. The default keeps the CC BY credit the kit needs when you pass it on. |
+| `kit.source` | Where the tools live, linked from the "Run your own" page. `""` leaves the link out. |
+| `credit` | The small "Built with sheets-to-playbook by Chris Keene" line, with its logo, at the foot of every playbook. `{"show": false}` switches it off. |
 
 `examples/can/playbook.config.json` is a complete worked example (the logo files aren't included: see `examples/can/brand/README.md`).
 

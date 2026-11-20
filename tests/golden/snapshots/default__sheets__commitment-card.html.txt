@@ -1,0 +1,34 @@
+## text
+The commitment card: write on both halves, tear, keep the half with the QR code. Print or stick your playbook’s QR code in the dashed box. Type into it on screen, or print it on A4. From the Community Playbook kit · Print-ready PDF.
+
+Commitment card
+Community Playbook
+One thing I will try, adapt or explore is…
+Your QR code here
+
+Scan for the Community Playbook: what every table came up with.
+
+Community Playbook
+One thing I will try, adapt or explore is…
+Name (optional)
+Organisation (optional)
+
+Add these only if you’re happy for them to appear in the public playbook.
+
+## accessibility tree
+note
+main
+heading[1] "Commitment card"
+region "The half you keep"
+region "The half you leave on the table"
+link "Print-ready PDF"
+image "Community Playbook"
+LabelText
+textbox "One thing I will try, adapt or explore is…"
+image "Community Playbook"
+LabelText
+textbox "One thing I will try, adapt or explore is…"
+LabelText
+LabelText
+textbox "Name (optional)"
+textbox "Organisation (optional)"

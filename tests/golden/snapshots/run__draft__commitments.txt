@@ -1,0 +1,93 @@
+## text
+Commitments, Community Playbook
+
+Skip to content
+Test run.
+Built automatically from fake sheets and voice notes made to test the engine; none of it came from real people. Dashed boxes are gaps, and tags show which sheet each line came from.
+Community
+Playbook
+Playbook
+Commitments
+Run your own
+How it was made
+
+COMMITMENTS
+
+One thing I will try, adapt or explore
+
+At the end of the session, everyone wrote one commitment on a card. Some linked it to a challenge, and some added their name.
+
+Show
+All commitments (6)
+Keeping champions engaged after the launch (1)
+Getting budget before something goes wrong (2)
+General (3)
+
+Cost one late fix this month Card stub
+
+Getting budget before something goes wrong
+
+Run a fix-it Friday in January Card stub
+
+Keeping champions engaged after the launch
+
+Ask finance who owns the budget Card stub
+
+Getting budget before something goes wrong
+
+Send my exec one win a month Card stub
+
+General
+
+Talk to our design system lead Card stub
+
+General
+
+Share this playbook with my team Card stub
+
+General
+
+Community Playbook: Growing and sustaining support for accessibility · Draft for review
+
+Download this playbook ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+note
+link "Community Playbook"
+navigation "Playbook"
+heading[1] "One thing I will try, adapt or explore"
+LabelText
+combobox "Show"
+status
+list
+strong
+list
+MenuListPopup
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+option "All commitments (6)"
+option "Keeping champions engaged after the launch (1)"
+option "Getting budget before something goes wrong (2)"
+option "General (3)"
+link "Getting budget before something goes wrong"
+link "Keeping champions engaged after the launch"
+link "Getting budget before something goes wrong"
+button "Download this playbook"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"

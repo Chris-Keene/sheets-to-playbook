@@ -1,0 +1,64 @@
+{
+  "table": 2,
+  "photos": ["P001", "P002", "P003", "P004", "P005"],
+  "audio": ["A003"],
+  "S1": {
+    "challenges": [
+      {"id": "T02.S1.challenge1", "text": "Champions drift away after 6 months"},
+      {"id": "T02.S1.challenge2", "text": "No time in the day job"},
+      {"id": "T02.S1.challenge3", "text": "Leaders only care at audit time"},
+      {"id": "T02.S1.challenge4", "text": "Can't prove impact"},
+      {"id": "T02.S1.challenge5", "text": "Champions don't know what to do"}
+    ],
+    "top3": [
+      {"id": "T02.S1.top1", "text": "Champions drift away"},
+      {"id": "T02.S1.top2", "text": "No time in day job"},
+      {"id": "T02.S1.top3", "text": "Can't prove impact"}
+    ],
+    "pick": {"id": "T02.S1.pick", "text": "Keeping champions engaged after the launch"}
+  },
+  "S2": {
+    "helped": [
+      {"id": "T02.S2.helped1", "text": "Monthly fix-it Friday with snacks", "who": "retail, 3k staff"},
+      {"id": "T02.S2.helped2", "text": "Giving champions a real task each month", "who": "bank, 20k"}
+    ],
+    "hindered": [
+      {"id": "T02.S2.hindered1", "text": "Newsletter nobody read", "who": "insurance"},
+      {"id": "T02.S2.hindered2", "text": "Meetings at 8am", "who": "NHS trust"}
+    ],
+    "lessons": [
+      {"id": "T02.S2.lesson1", "text": "Ask champions what they want before planning"}
+    ]
+  },
+  "S3": {
+    "actions": [
+      {"id": "T02.S3.action1", "action": "Monthly 30 min fix-it session", "needs": "a room, list of small bugs, a host",
+       "sticks": "same day every month, rotate the host", "stages": ["starting", "growing"]},
+      {"id": "T02.S3.action2", "action": "Champion of the month shout out", "needs": "exec [executive] to send the email",
+       "sticks": "link it to performance reviews", "stages": ["growing"]}
+    ]
+  },
+  "SS": {
+    "quotes": [
+      {"id": "T02.SS.quote1", "text": "Champions need a job, not a badge", "who": "retail"}
+    ],
+    "questions": [
+      {"id": "T02.SS.question1", "text": "How many champions is enough?"}
+    ],
+    "resources": [
+      {"id": "T02.SS.resource1", "text": "W3C planning & managing", "url": "w3.org/WAI/planning-and-"}
+    ]
+  },
+  "V": {
+    "points": [
+      {"id": "T02.V.point1", "text": "The table talked a lot about champions feeling invisible",
+       "excerpt": "We talked a lot about champions feeling invisible."},
+      {"id": "T02.V.point2", "text": "Asking champions to present their fix at the All Hands meeting made other people want to join",
+       "excerpt": "One person said they asked champions to present their fix at the All Hands meeting, and that made other people want to join."}
+    ]
+  },
+  "unclear": [
+    {"id": "T02.SS.resource1", "photo": "P005", "note": "Address is incomplete as written: it runs past the Resources box border and stops at 'w3.org/WAI/planning-and-' (trailing hyphen) at the paper's right edge, with nothing on the next line. The rest of the path is not on the sheet; not completed from memory."}
+  ],
+  "notes": "Printed 'Table 2' circle and corner codes (T02 · S1, T02 · S2, T02 · S3, T02 · SS) agree with the table 2 label on all four sheets. P002 is a blurry second shot of S1; cross-checked against P001, same content, nothing extra. S3 has two filled action boxes; the third box is blank with no ticks. No crossed-out text, arrows or joining lines on any sheet. Voice note A003 starts mid-sentence with 'table too', most likely a clipped and mis-heard 'table two' (transcribe.log shows the table as '?', manifest guess and labels say 2). Voice point1 (champions feeling invisible) is not on S1; S3 action2 'Champion of the month shout out' is the nearest sheet item. 'exec' on S3 action2 expanded as [executive]."
+}

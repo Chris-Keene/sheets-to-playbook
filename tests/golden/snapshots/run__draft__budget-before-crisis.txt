@@ -1,0 +1,211 @@
+## text
+Getting budget before something goes wrong, Community Playbook
+
+Skip to content
+Test run.
+Built automatically from fake sheets and voice notes made to test the engine; none of it came from real people. Dashed boxes are gaps, and tags show which sheet each line came from.
+Community
+Playbook
+Playbook
+Commitments
+Run your own
+How it was made
+
+← All challenges
+
+MONEY ONLY COMES AFTER COMPLAINTS
+
+Getting budget before something goes wrong
+Worked on at tables 5 and 9
+Local government
+Higher education
+Charity
+Utilities
+Telecoms
+
+Money tends to arrive only after complaints, and the budget often sits with IT rather than product. Waiting for legal to push it, or asking for a big programme all at once, hasn't worked.
+
+Small and recurring beats big and one-off
+
+T05 · side sheet
+
+Money follows risk, so show the risk
+
+T09 · side sheet
+What’s been tried
+Helped
+Showing the cost of fixing late compared with fixing early. T05 · Sheet 2
+Piggybacking on the design system budget. T05 · Sheet 2
+Bidding for accessibility as part of a design system refresh, so it was never a separate ask. T05 · voice note
+Linking it to complaints data. T09 · Sheet 2
+Got in the way
+Asking for a big programme all at once. T05 · Sheet 2
+Waiting for legal to push it. T09 · Sheet 2
+What we learned
+Small asks that repeat beat one big ask. T05 · Sheet 2
+One telecoms company's regulator now asks about accessibility in every review, so the risk argument is getting stronger. T09 · voice note
+Actions to try
+Show actions for
+Any stage
+Just starting
+Growing
+Established
+
+Showing all 3 actions.
+
+Cost two real late fixes T05 · Sheet 3
+What to do
+Find two real issues that were fixed late, and work out what they cost.
+What you need
+Time from a delivery lead.
+How it sticks
+Update the numbers every year.
+Good for
+Just starting
+Growing
+Ask for a small recurring budget line T05 · Sheet 3
+What to do
+Ask for a small recurring line in an existing budget.
+What you need
+A friendly budget owner.
+How it sticks
+It rolls over each year.
+Good for
+Just starting
+Share a complaint that cost money T09 · Sheet 3
+What to do
+Find one complaint that cost money and share it.
+What you need
+A contact in customer services.
+How it sticks
+Share a new one every quarter.
+Good for
+Growing
+Established
+Still open
+
+Questions the table didn’t answer. If you have, tell the organisers.
+
+Who owns the budget: IT or product? T05 · side sheet
+Resources
+Business case
+W3C WAI
+T09 · side sheet
+Previous challenge
+Keeping champions engaged after the launch
+
+Community Playbook: Growing and sustaining support for accessibility · Draft for review
+
+Download this playbook ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+note
+link "Community Playbook"
+navigation "Playbook"
+heading[1] "Getting budget before something goes wrong"
+list
+figure
+figure
+region "What’s been tried"
+region "Actions to try"
+region "Still open"
+region "Resources"
+navigation "Other challenges"
+strong
+list
+link "← All challenges"
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+blockquote
+Figcaption
+blockquote
+Figcaption
+heading[2] "What’s been tried"
+heading[3] "Helped"
+list
+heading[3] "Got in the way"
+list
+heading[3] "What we learned"
+list
+heading[2] "Actions to try"
+group "Show actions for"
+status
+list
+heading[2] "Still open"
+list
+heading[2] "Resources"
+list
+link "Previous challenge Keeping champions engaged after the launch"
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+Legend
+LabelText
+LabelText
+LabelText
+LabelText
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"
+radio "Any stage"
+radio "Just starting"
+radio "Growing"
+radio "Established"
+heading[3] "Cost two real late fixes T05 · Sheet 3"
+DescriptionList
+list "Good for"
+heading[3] "Ask for a small recurring budget line T05 · Sheet 3"
+DescriptionList
+list "Good for"
+heading[3] "Share a complaint that cost money T09 · Sheet 3"
+DescriptionList
+list "Good for"
+link "Business case"
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]

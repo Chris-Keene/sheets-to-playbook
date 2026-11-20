@@ -1,0 +1,155 @@
+## text
+Reviving a champions network that has stalled, Community Playbook
+
+Skip to content
+Community
+Playbook
+Playbook
+Commitments
+Run your own
+How it was made
+
+Example, not from the session
+
+← All challenges
+
+NETWORKS LOSE MOMENTUM
+
+Reviving a champions network that has stalled
+Worked on at table 2
+Professional services
+
+Networks often start with energy and a launch event, then attendance drops. A year later there are 200 names on the list and five people turning up.
+
+We had 200 members and no idea which ones were actually champions.
+
+What’s been tried
+Helped
+Asking everyone to opt back in. Fewer members, but the ones who stayed were active.
+Giving each meeting one practical thing to take away instead of only updates.
+Got in the way
+Monthly meetings in the same format for two years.
+Actions to try
+Show actions for
+Any stage
+Just starting
+Growing
+Established
+
+Showing all 2 actions.
+
+Run an opt-in reset
+What to do
+Ask every member to confirm they want to stay and what they want from the network.
+What you need
+A short form and a message from your sponsor.
+How it sticks
+Repeat it yearly so membership reflects who's active.
+Good for
+Growing
+Established
+Make every session useful on Monday
+What to do
+End every meeting with one thing members can do at work that week.
+What you need
+A rotating host who prepares one practical takeaway.
+How it sticks
+Collect the takeaways in one place so new members can catch up.
+Good for
+Just starting
+Growing
+Established
+Still open
+
+Questions the table didn’t answer. If you have, tell the organisers.
+
+Is a small, active network better than a large, quiet one?
+Previous challenge
+Securing budget before there's a crisis
+Next challenge
+When leaders think a tool or AI has solved it
+
+Community Playbook: Growing and sustaining support for accessibility · Example draft
+
+Download this playbook ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+link "Community Playbook"
+navigation "Playbook"
+heading[1] "Reviving a champions network that has stalled"
+list
+figure
+region "What’s been tried"
+region "Actions to try"
+region "Still open"
+navigation "Other challenges"
+list
+link "← All challenges"
+listitem[1]
+blockquote
+heading[2] "What’s been tried"
+heading[3] "Helped"
+list
+heading[3] "Got in the way"
+list
+heading[2] "Actions to try"
+group "Show actions for"
+status
+list
+heading[2] "Still open"
+list
+link "Previous challenge Securing budget before there's a crisis"
+link "Next challenge When leaders think a tool or AI has solved it"
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+Legend
+LabelText
+LabelText
+LabelText
+LabelText
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"
+radio "Any stage"
+radio "Just starting"
+radio "Growing"
+radio "Established"
+heading[3] "Run an opt-in reset"
+DescriptionList
+list "Good for"
+heading[3] "Make every session useful on Monday"
+DescriptionList
+list "Good for"
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]
+listitem[2]

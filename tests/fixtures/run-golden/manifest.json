@@ -1,0 +1,287 @@
+{
+ "created": "2026-10-23-113729",
+ "inbox": "tests/fixtures/inbox",
+ "photos": [
+  {
+   "id": "P001",
+   "source": "IMG_4402.JPG",
+   "taken": null,
+   "size": [
+    2250,
+    3000
+   ],
+   "sharpness": 1272.6,
+   "tiles": [
+    "P001-a1.jpg",
+    "P001-a2.jpg",
+    "P001-b1.jpg",
+    "P001-b2.jpg"
+   ],
+   "blurry": false
+  },
+  {
+   "id": "P002",
+   "source": "IMG_4403.JPG",
+   "taken": null,
+   "size": [
+    2250,
+    3000
+   ],
+   "sharpness": 2.5,
+   "tiles": [
+    "P002-a1.jpg",
+    "P002-a2.jpg",
+    "P002-b1.jpg",
+    "P002-b2.jpg"
+   ],
+   "blurry": true
+  },
+  {
+   "id": "P003",
+   "source": "IMG_4405.JPG",
+   "taken": null,
+   "size": [
+    2250,
+    3000
+   ],
+   "sharpness": 1124.1,
+   "tiles": [
+    "P003-a1.jpg",
+    "P003-a2.jpg",
+    "P003-b1.jpg",
+    "P003-b2.jpg"
+   ],
+   "blurry": false
+  },
+  {
+   "id": "P004",
+   "source": "IMG_4407.JPG",
+   "taken": null,
+   "size": [
+    2250,
+    3000
+   ],
+   "sharpness": 1302.7,
+   "tiles": [
+    "P004-a1.jpg",
+    "P004-a2.jpg",
+    "P004-b1.jpg",
+    "P004-b2.jpg"
+   ],
+   "blurry": false
+  },
+  {
+   "id": "P005",
+   "source": "IMG_4409.JPG",
+   "taken": null,
+   "size": [
+    2250,
+    3000
+   ],
+   "sharpness": 872.3,
+   "tiles": [
+    "P005-a1.jpg",
+    "P005-a2.jpg",
+    "P005-b1.jpg",
+    "P005-b2.jpg"
+   ],
+   "blurry": false
+  },
+  {
+   "id": "P006",
+   "source": "IMG_4411.JPG",
+   "taken": null,
+   "size": [
+    2250,
+    3000
+   ],
+   "sharpness": 1110.9,
+   "tiles": [
+    "P006-a1.jpg",
+    "P006-a2.jpg",
+    "P006-b1.jpg",
+    "P006-b2.jpg"
+   ],
+   "blurry": false
+  },
+  {
+   "id": "P007",
+   "source": "IMG_4413.HEIC",
+   "taken": null,
+   "size": [
+    2250,
+    3000
+   ],
+   "sharpness": 999.1,
+   "tiles": [
+    "P007-a1.jpg",
+    "P007-a2.jpg",
+    "P007-b1.jpg",
+    "P007-b2.jpg"
+   ],
+   "blurry": false
+  },
+  {
+   "id": "P008",
+   "source": "IMG_4415.JPG",
+   "taken": null,
+   "size": [
+    2250,
+    3000
+   ],
+   "sharpness": 1188.8,
+   "tiles": [
+    "P008-a1.jpg",
+    "P008-a2.jpg",
+    "P008-b1.jpg",
+    "P008-b2.jpg"
+   ],
+   "blurry": false
+  },
+  {
+   "id": "P009",
+   "source": "IMG_4417.JPG",
+   "taken": null,
+   "size": [
+    2250,
+    3000
+   ],
+   "sharpness": 778.4,
+   "tiles": [
+    "P009-a1.jpg",
+    "P009-a2.jpg",
+    "P009-b1.jpg",
+    "P009-b2.jpg"
+   ],
+   "blurry": false
+  },
+  {
+   "id": "P010",
+   "source": "IMG_4419.JPG",
+   "taken": null,
+   "size": [
+    2250,
+    3000
+   ],
+   "sharpness": 628.9,
+   "tiles": [
+    "P010-a1.jpg",
+    "P010-a2.jpg",
+    "P010-b1.jpg",
+    "P010-b2.jpg"
+   ],
+   "blurry": false
+  },
+  {
+   "id": "P011",
+   "source": "IMG_4421.JPG",
+   "taken": null,
+   "size": [
+    2250,
+    3000
+   ],
+   "sharpness": 993.8,
+   "tiles": [
+    "P011-a1.jpg",
+    "P011-a2.jpg",
+    "P011-b1.jpg",
+    "P011-b2.jpg"
+   ],
+   "blurry": false
+  },
+  {
+   "id": "P012",
+   "source": "IMG_4423.JPG",
+   "taken": null,
+   "size": [
+    2250,
+    3000
+   ],
+   "sharpness": 723.0,
+   "tiles": [
+    "P012-a1.jpg",
+    "P012-a2.jpg",
+    "P012-b1.jpg",
+    "P012-b2.jpg"
+   ],
+   "blurry": false
+  },
+  {
+   "id": "P013",
+   "source": "IMG_4424.JPG",
+   "taken": null,
+   "size": [
+    3000,
+    1800
+   ],
+   "sharpness": 644.9,
+   "tiles": [
+    "P013-a1.jpg",
+    "P013-a2.jpg",
+    "P013-b1.jpg",
+    "P013-b2.jpg"
+   ],
+   "blurry": false
+  },
+  {
+   "id": "P014",
+   "source": "IMG_4427.JPG",
+   "taken": null,
+   "size": [
+    3000,
+    2250
+   ],
+   "sharpness": 906.0,
+   "tiles": [
+    "P014-a1.jpg",
+    "P014-a2.jpg",
+    "P014-b1.jpg",
+    "P014-b2.jpg"
+   ],
+   "blurry": false
+  },
+  {
+   "id": "P015",
+   "source": "IMG_4428.JPG",
+   "taken": null,
+   "size": [
+    3000,
+    2250
+   ],
+   "sharpness": 44.7,
+   "tiles": [
+    "P015-a1.jpg",
+    "P015-a2.jpg",
+    "P015-b1.jpg",
+    "P015-b2.jpg"
+   ],
+   "blurry": true
+  }
+ ],
+ "audio": [
+  {
+   "id": "A001",
+   "source": "Lead T5.m4a",
+   "seconds": 13.1,
+   "table_guess": 5,
+   "words": 40
+  },
+  {
+   "id": "A002",
+   "source": "New Recording 3.mp3",
+   "seconds": 16.8,
+   "table_guess": 9,
+   "words": 49
+  },
+  {
+   "id": "A003",
+   "source": "PTT-20261119-WA0004.opus",
+   "seconds": 10.5,
+   "table_guess": 2,
+   "words": 33
+  }
+ ],
+ "ignored": [
+  "notes.txt"
+ ]
+}

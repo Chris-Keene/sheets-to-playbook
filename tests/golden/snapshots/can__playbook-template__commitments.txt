@@ -1,0 +1,65 @@
+## text
+Commitments, CAN Community Playbook
+
+Skip to content
+Template.
+Dashed boxes show where content from the day goes and which sheet it comes from. There’s one page per table; tables that pick the same challenge get merged.
+CAN
+Community
+Playbook
+Playbook
+Commitments
+Run your own
+How it was made
+
+COMMITMENTS
+
+One thing I will try, adapt or explore
+
+At the end of the session, everyone wrote one commitment on a card. Some linked it to a challenge, and some added their name.
+
+TO FILL
+Commitment
+From the commitment card stubs in the box by the door, with a name and organisation only if the person added them.
+TO FILL
+Commitment
+From the commitment card stubs in the box by the door, with a name and organisation only if the person added them.
+TO FILL
+Commitment
+From the commitment card stubs in the box by the door, with a name and organisation only if the person added them.
+TO FILL
+Commitment
+From the commitment card stubs in the box by the door, with a name and organisation only if the person added them.
+
+CAN Community Playbook: Growing and sustaining support for accessibility · Template
+
+Download this playbook ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+note
+link "Champions of Accessibility Network (CAN) Community Playbook"
+navigation "Playbook"
+heading[1] "One thing I will try, adapt or explore"
+list
+strong
+image "Champions of Accessibility Network (CAN)"
+list
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"

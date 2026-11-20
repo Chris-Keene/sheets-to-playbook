@@ -1,0 +1,112 @@
+## text
+Commitments, Community Playbook
+
+Skip to content
+Community
+Playbook
+Playbook
+Commitments
+Run your own
+How it was made
+
+Example, not from the session
+
+COMMITMENTS
+
+One thing I will try, adapt or explore
+
+At the end of the session, everyone wrote one commitment on a card. Some linked it to a challenge, and some added their name.
+
+Show
+All commitments (8)
+Keeping leadership support when sponsors move on (2)
+Proving impact in terms leaders care about (2)
+Stopping champions burning out (2)
+Getting product teams to own accessibility (2)
+
+Ask my sponsor to name a deputy before Christmas.
+
+By Sam Sample, Example Bank
+
+Keeping leadership support when sponsors move on
+
+Add one accessibility line to our quarterly risk report.
+
+Keeping leadership support when sponsors move on
+
+Record one customer journey before and after we fix it.
+
+Proving impact in terms leaders care about
+
+Get support to tag tickets that mention accessibility.
+
+Proving impact in terms leaders care about
+
+Agree two hours a month of protected time for our champions.
+
+By Alex Example
+
+Stopping champions burning out
+
+Write a 'champions don't' list with my core group.
+
+Stopping champions burning out
+
+Sit in on a research session with my product manager.
+
+Getting product teams to own accessibility
+
+Stop fixing other teams' issues and pair with them instead.
+
+Getting product teams to own accessibility
+
+Community Playbook: Growing and sustaining support for accessibility · Example draft
+
+Download this playbook ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+link "Community Playbook"
+navigation "Playbook"
+heading[1] "One thing I will try, adapt or explore"
+LabelText
+combobox "Show"
+status
+list
+list
+MenuListPopup
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+option "All commitments (8)"
+option "Keeping leadership support when sponsors move on (2)"
+option "Proving impact in terms leaders care about (2)"
+option "Stopping champions burning out (2)"
+option "Getting product teams to own accessibility (2)"
+link "Keeping leadership support when sponsors move on"
+link "Keeping leadership support when sponsors move on"
+link "Proving impact in terms leaders care about"
+link "Proving impact in terms leaders care about"
+link "Stopping champions burning out"
+link "Stopping champions burning out"
+link "Getting product teams to own accessibility"
+link "Getting product teams to own accessibility"
+button "Download this playbook"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"

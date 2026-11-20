@@ -1,0 +1,39 @@
+## text
+Sheet 2 of the paper kit. Type into it on screen, or print it on A4. From the CAN Community Playbook kit · Print-ready PDF.
+
+Question 2
+
+What has helped, or not?
+Table
+Helped
+
+What happened, and why did it work?
+
+Got in the way
+
+What would you change or avoid?
+
+If we did it again, we’d…
+CAN
+All of this goes into the CAN Community Playbook. No names, please.
+S2 · Table
+
+## accessibility tree
+note
+main
+heading[1] "What has helped, or not?"
+LabelText
+textbox "Table"
+region "Helped"
+region "Got in the way"
+region "If we did it again, we’d…"
+sectionfooter
+link "CAN Community Playbook kit"
+link "Print-ready PDF"
+heading[2] "Helped"
+textbox "Helped"
+heading[2] "Got in the way"
+textbox "Got in the way"
+heading[2] "If we did it again, we’d…"
+textbox "If we did it again, we’d…"
+image "Champions of Accessibility Network (CAN)"

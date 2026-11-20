@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!--SHARE-->
 <meta name="robots" content="noindex">
 <title>Community Playbook</title>
-<!-- v1.0.0 · built by build/build.py from a session file and playbook.config.json. Edit the template or the data, never this output. -->
+<!-- v1.1.0 · built by build/build.py from a session file and playbook.config.json. Edit the template or the data, never this output. -->
 <style>
 /*FONTS*/
 :root{
@@ -146,12 +147,23 @@ main{display:block}
 .card{position:relative;display:grid;gap:10px;align-content:start;height:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 22px 18px}
 .card:hover{border-color:var(--accent)}
 .card:focus-within{outline:3px solid var(--focus);outline-offset:3px}
-.card h3 a{color:var(--ink);text-decoration:none}
+.card h3 a{color:var(--accent);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px}
 .card h3 a::after{content:"";position:absolute;inset:0;border-radius:var(--radius)}
 .card h3 a:focus-visible{outline:none}
 .card .foot{display:flex;align-items:center;gap:10px;margin-top:4px;font-size:.875rem;color:var(--muted);font-variant-numeric:tabular-nums}
 .card .foot .ring{width:38px;height:38px;flex:none}
 .card .foot .ring path{stroke-width:7}
+/* People didn't realise the cards open (CAN forum, 19 Nov 2026), so each card says so. The cue is decoration: the title
+   link names the card for assistive tech, and its ::after already makes the whole card clickable. */
+.card .go{display:inline-flex;align-items:center;gap:8px;justify-self:start;margin-top:6px;padding:8px 14px;border-radius:999px;background:var(--accent);color:var(--on-accent);font-weight:600;font-size:.9375rem}
+.card .go svg{width:18px;height:18px;flex:none}
+.card:hover{box-shadow:0 6px 18px rgba(0,0,0,.12)}
+@media (prefers-reduced-motion:no-preference){
+  .card{transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+  .card:hover{transform:translateY(-2px)}
+  .card .go svg{transition:transform .15s ease}
+  .card:hover .go svg{transform:translateX(3px)}
+}
 
 /* Commitment cards */
 .commits{list-style:none;display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
@@ -191,8 +203,12 @@ main{display:block}
 .tried ul{list-style:none;display:grid;gap:14px}
 .tried li{padding-left:28px;position:relative}
 .tried li::before{content:"";position:absolute;left:8px;top:.7em;width:7px;height:7px;border-radius:50%;background:var(--muted)}
-.lesson{margin-top:24px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 20px;max-width:44rem}
-.lesson b{display:block;font-size:.8125rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.learned{margin-top:36px}
+.learned h3{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.learned h3 svg{width:20px;height:20px;flex:none;color:var(--accent)}
+.lessons{list-style:none;display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr))}
+.lessons li{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:var(--radius);padding:12px 16px;line-height:1.5}
+section[aria-labelledby="kit-after"] > p + p{margin-top:12px}
 .filter{border:0;padding:0;margin:0 0 18px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .filter legend{float:left;margin-right:6px;font-size:.9375rem;font-weight:600;padding:0}
 .filter label{position:relative;display:inline-flex}
@@ -305,6 +321,18 @@ main{display:block}
 .site-foot{border-top:1px solid var(--line);background:var(--surface);margin-top:48px}
 .site-foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;padding-block:26px;font-size:.875rem;color:var(--muted)}
 .site-foot a{font-weight:600}
+/* a logo (or the credit's logo) in its own colours can have a second file for dark mode */
+.brand-dark{display:none}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .brand-light{display:none}
+  :root:not([data-theme="light"]) .brand-dark{display:inline-block}
+}
+:root[data-theme="dark"] .brand-light{display:none}
+:root[data-theme="dark"] .brand-dark{display:inline-block}
+.brand img{height:46px;width:auto;flex:none}
+.brand img + span{padding-left:14px;border-left:1px solid var(--line)}
+.credit{display:inline-flex;align-items:center;gap:8px;vertical-align:middle}
+.credit img{height:20px;width:auto}
 
 @media print{
   .nav,.filter,.status,.skip,.btn,.hero-ring,#save{display:none!important}
@@ -404,6 +432,8 @@ main{display:block}
     return '<svg class="ring" viewBox="-50 -50 100 100" aria-hidden="true" focusable="false">' + out + centre + '</svg>';
   }
 
+  var ICON_ARROW = '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5.5l4.5 4.5-4.5 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var ICON_BULB = '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 2.5a5.5 5.5 0 0 0-3.2 10c.5.4.7.9.7 1.5v.5h5v-.5c0-.6.2-1.1.7-1.5A5.5 5.5 0 0 0 10 2.5zM8 17.5h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var ICON_OK = '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var ICON_NO = '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 5l10 10M15 5L5 15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
 
@@ -504,6 +534,7 @@ main{display:block}
         '<h3><a href="#' + esc(c.id) + '">' + esc(titleOf(c)) + '</a></h3>' +
         (c.summary ? '<p>' + esc(c.summary) + '</p>' : (SLOTS ? '<p class="muted">Title, summary and everything else on this page come from this table’s sheets.</p>' : "")) +
         '<p class="foot">' + ring(c.tables) + '<span>' + tablesText(c.tables) + (acts ? ' · ' + acts : "") + '</span></p>' +
+        (c.title ? '<span class="go" aria-hidden="true">Explore this challenge' + ICON_ARROW + '</span>' : "") +
         '</li>';
     }).join("");
 
@@ -547,7 +578,7 @@ main{display:block}
 
       '<section class="section" aria-labelledby="challenges-h"><div class="wrap">' +
         '<div class="section-head"><h2 id="challenges-h" tabindex="-1">The challenges</h2>' +
-        '<p>Each table picked one challenge and worked through what has helped, what hasn’t, and what to try next. Where two tables picked the same challenge, their work is combined.</p></div>' +
+        '<p>Each table picked one challenge and worked through what has helped, what hasn’t, and what to try next. Where two tables picked the same challenge, their work is combined. Open any challenge to see the full detail.</p></div>' +
         '<ul class="cards' + (D.challenges.length % 2 ? " odd" : "") + '">' + cards + '</ul>' +
       '</div></section>' +
 
@@ -600,7 +631,8 @@ main{display:block}
       }).join("") + '</ul>';
     }
 
-    var lessons = (c.lessons || []).map(function(l){ return '<p class="lesson"><b>What we learned</b>' + esc(textOf(l)) + srcTag(l) + '</p>'; }).join("");
+    var lessons = (c.lessons || []).length ? '<div class="learned"><h3>' + ICON_BULB + 'What we learned</h3><ul class="lessons">' +
+      c.lessons.map(function(l){ return '<li>' + esc(textOf(l)) + srcTag(l) + '</li>'; }).join("") + '</ul></div>' : "";
     if (!lessons && SLOTS) lessons = '<div class="lesson-slot">' + slot("What we learned", FROM.lesson) + '</div>';
 
     var filter = c.actions.length ? '<fieldset class="filter"><legend>Show actions for</legend>' +
@@ -752,11 +784,14 @@ main{display:block}
       }).join("");
     }
     var slides = kitList("slides"), webSheets = kitList("html"), files = kitList("print");
+    // the kit and the tools that built this site, as an open-source project (kit.source in the settings, or meta.links.source)
+    var SOURCE = M.links && M.links.source ? safeUrl(M.links.source) : "";
     var licence = M.kit_licence ? '<p class="summary">' + esc(M.kit_licence) + (SLOTS ? ' <span class="src-tag">Check the licence wording</span>' : "") + '</p>' : "";
     return '<div class="wrap"><div class="page-head">' +
       '<p class="eyebrow">Run your own</p>' +
       '<h1 tabindex="-1">Run your own forum</h1>' +
       '<p class="summary">Everything used to run this session: the plan for the hour, what’s on each sheet, prompts for when a table gets stuck, and the print files. Take it, change it, make it yours.</p>' + licence +
+      (SOURCE ? '<p><a class="btn" href="' + SOURCE + '">Get the whole kit on GitHub</a></p>' : "") +
       '</div>' +
       '<section class="block" aria-labelledby="kit-hour"><h2 id="kit-hour">The hour, in seven parts</h2>' +
         '<ol class="kit-hour">' + KIT_HOUR.map(function(r){
@@ -784,7 +819,9 @@ main{display:block}
         '<p class="note">These are ready for a professional printer: CMYK, with 3 mm bleed. The lettering is turned into outlines for the printer, so screen readers can’t read these PDFs: the text of every sheet is above. The commitment card’s QR code points to this playbook, so swap in your own.</p>' +
       '</section>' +
       '<section class="block" aria-labelledby="kit-after"><h2 id="kit-after">Turning the sheets into a playbook</h2>' +
-        '<p>Photograph every sheet, transcribe it, and check every line against the photos before anything goes live. <a href="#about">How this playbook was made</a> describes how we did it.</p></section>' +
+        '<p>Photograph every sheet, transcribe it, and check every line against the photos before anything goes live. <a href="#about">How this playbook was made</a> describes how we did it.</p>' +
+        (SOURCE ? '<p>The tools are free and open source: the paper kit, the slides, and the Claude Code skill that reads the photos and builds the site, with checks that stop it adding anything that wasn’t written down. You can rebrand all of it with your own name and colours. <a href="' + SOURCE + '">sheets-to-playbook on GitHub</a> has everything, with a guide to running it on the day.</p>' : "") +
+        '</section>' +
       '</div>';
   }
 
@@ -913,10 +950,14 @@ main{display:block}
       (logo.dark ? '<img class="logo-dark" src="' + logo.dark + '" alt="' + esc(sp.name) + '">' : "") : esc(sp.name);
     return '<li><a href="' + safeUrl(sp.url) + '"' + (logo ? ' class="has-logo"' : "") + '>' + inner + '</a></li>';
   }).join("");
+  // the "Built with" line from the settings (already HTML); an older session's own meta.credit if the settings' is off
+  var CREDIT = D.credit_html || (M.credit ? esc(M.credit) : "");
+  var SAVE = canSave ? '<button type="button" class="save-link" data-save>Download this playbook</button>' : "";
+  var FILE_NAME = D.file_name || "playbook.html";
   document.getElementById("foot").innerHTML =
     (supporters ? '<div class="supporters"><p>Supported by</p><ul>' + supporters + '</ul></div>' : "") +
     '<div class="foot-meta"><p>' + esc(M.series) + ': ' + esc(M.title) + ' · ' + esc(M.edition) + '</p>' +
-    '<p>' + (canSave ? '<button type="button" class="save-link" data-save>Download this playbook</button> · ' : "") + esc(M.credit) + '</p>' +
+    '<p>' + SAVE + (SAVE && CREDIT ? ' · ' : "") + CREDIT + '</p>' +
     '<p class="save-status" id="save-status" role="status" aria-live="polite"></p></div>';
 
   // Download a copy of the page as it was served (before any view was drawn), so the file opens and works offline.
@@ -928,10 +969,10 @@ main{display:block}
     try {
       var url = URL.createObjectURL(new Blob([PRISTINE], {type: "text/html"}));
       var a = document.createElement("a");
-      a.href = url; a.download = "can-community-playbook.html"; a.hidden = true;
+      a.href = url; a.download = FILE_NAME; a.hidden = true;
       document.body.appendChild(a); a.click(); a.remove();
       setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
-      status.textContent = "Downloading can-community-playbook.html. It opens in any browser, even offline.";
+      status.textContent = "Downloading " + FILE_NAME + ". It opens in any browser, even offline.";
     } catch (err){
       status.textContent = "Your browser blocked the download. Use its Save or Share option instead.";
     }

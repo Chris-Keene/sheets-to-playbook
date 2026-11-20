@@ -1,0 +1,121 @@
+## text
+--- slide 1
+CAN
+ CAN Community Forum:
+ Growing and sustaining support for accessibility
+ Welcome to the session. Great to have you here!
+ Minutes 0 to 10: the welcome, from this slide up to Question 1.
+ The hour at a glance, in minutes from the start:
+ 0 to 10: welcome
+ 10 to 22: Question 1 (7 minutes on the sheet, then 5 with the table cards, on one 12-minute timer)
+ 22 to 35: Question 2 (13 minutes)
+ 35 to 50: Question 3 (15 minutes)
+ 50 to 55: Question 4, the commitment card (5 minutes)
+ 55 to 60: share-back and close (skip the share-back if you’re running late)
+ Afterwards, allow about 30 minutes to photograph the sheets and collect the commitment card halves.
+--- slide 2
+The CAN Community Playbook
+ Today, we’re writing a playbook together
+ Everything your table writes becomes a website of practical ideas that anyone can use, whether they were in the room or not.
+ It’ll live at example.org/can-playbook
+ Still the welcome. The playbook is a website built from the tables’ sheets.
+--- slide 3
+How it gets made
+ From your sheets to the playbook
+ Talk and writeYour table fills in a sheet for each question. A side sheet catches quotes, questions and resources.
+ We photograph the sheetsSheets only, never people. Nothing is recorded.
+ AI reads, people checkAI reads every sheet. People check each line against the photos before anything goes live.
+ The playbook goes liveSoon after today. The QR code on your commitment card takes you there.
+ Chatham House Rule. Nothing said today is attributed to anyone. A name only appears in the playbook on a commitment card, and only if you write it there.
+ The last of the welcome: Question 1 starts at minute 10.
+ Say: there are no wrong answers, and nobody has to write. Anyone can speak and the table lead or side-sheet keeper writes it down.
+ Thick black markers only, so the photos are readable.
+--- slide 4
+Question 1·, Sheet 1
+ 12:00Start timer
+ Where does support get stuck?
+ Every challenge at this tableWrite them all down.
+ Our top threeStar the three that matter most.
+ The one we’re tacklingCopy it onto your table card too.
+ All sessionHeard something good? Write quotes, open questions and resources on the side sheet.
+ Where it’s stuckTable cardsWhat helpedWhat to tryCommitmentShare-back
+ Minutes 10 to 22 for the whole of Question 1. Start the 12-minute timer here: it keeps running on the next slide.
+ Read the question out in full. About 7 minutes on the sheet: 5 to list every challenge and star the top three, then 2 to pick one and copy it onto the table card. Move on with about 5 minutes left (minute 17).
+ Prompts if a table stalls:
+ What would you fix first if you could?What makes support drop off after a good start?What does your boss ask that you can’t answer?
+--- slide 5
+Question 1·, Table card
+ 12:00Start timer
+ What is your table tackling?
+ Turn your table card so “We’re tackling” faces the room.
+ Fancy a different challenge? You’re welcome to move tables.
+ Heard something good? Write quotes, open questions and resources on the side sheet.
+ We’re tackling:CAN
+ Where it’s stuckTable cardsWhat helpedWhat to tryCommitmentShare-back
+ Minutes 17 to 22, still Question 1. The timer carries on from the last slide, so don’t restart it (T here pauses it). About 5 minutes left. Facilitators guide anyone who wants to move, and can take the conversation to someone instead of them moving.
+--- slide 6
+Question 2·, Sheet 2
+ 13:00Start timer
+ What has helped, or not?
+ HelpedWhat happened, and why did it work?
+ Got in the wayWhat would you change or avoid?
+ If we did it again, we’d…
+ Where it’s stuckTable cardsWhat helpedWhat to tryCommitmentShare-back
+ Minutes 22 to 35. Read the question out in full. 13 minutes, about the challenge on the table card.
+ Prompts if a table stalls:
+ Tell me about a time it worked. What was different?What would you never try again?What made the difference?
+--- slide 7
+Question 3·, Sheet 3
+ 15:00Start timer
+ What could people try now, and how does it stick?
+ What to trySomething someone could start on Monday.
+ What you needWhat would make it happen?
+ How it sticksWhat stops it fading after a month?
+ Up to three actions.Tick who each one is good for: just starting, growing or established.
+ Where it’s stuckTable cardsWhat helpedWhat to tryCommitmentShare-back
+ Minutes 35 to 50. Read the question out in full. 15 minutes. Up to three actions, each with what to try, what you need and how it sticks.
+ Prompts if a table stalls:
+ What could someone do on Monday?What would they need to make it happen?What stops it fading after a month?
+--- slide 8
+Question 4·, Commitment card
+ 5:00Start timer
+ One thing I will try, adapt or explore is…
+ Write your commitment on both halves.
+ On the right half, add your name and organisation only if you’re happy for them to appear in the playbook.
+ Tear along the perforation and keep the half with the QR code.
+ Leave the other half on your table. We’ll collect them.
+ Keep
+ Scan for the playbook
+ Hand in
+ Name and organisation, if you’d like
+ Prefer not to write? Ask your table lead.
+ Where it’s stuckTable cardsWhat helpedWhat to tryCommitmentShare-back
+ Minutes 50 to 55. 5 minutes. Make it small enough to start this month. What’s one thing you heard today that you could try?
+ The card itself doesn’t say how to hand in the right-hand half, so this slide is where people find out. Then on to the share-back.
+--- slide 9
+Share-back
+ Share your actions
+ Please wait for the mic, so everyone can hear.
+ Where it’s stuckTable cardsWhat helpedWhat to tryCommitmentShare-back
+ Minutes 55 to 60. Share-back and close have 5 minutes between them, and this part is loose on purpose: take as many tables as time allows. If you’re running late, skip it and go straight to the thank-you slide. Repeat anything said off-mic.
+--- slide 10
+CAN
+ Thank you
+ The CAN Community Playbook goes live soon after today. Share it with anyone who couldn’t be here.
+ Join CAN on LinkedInlinkedin.com/groups/12499821
+ example.org/can-playbook
+ The end of the 5 minutes for share-back and close (minute 60): what happens next, and thank you. Leave this slide up so people can scan the QR code.
+ Afterwards, allow about 30 minutes to photograph every sheet and collect the card halves left on the tables.
+--- slide 11
+
+## accessibility tree
+heading[1] "CAN Community Forum slides: Growing and sustaining support for accessibility"
+main
+toolbar "Slide controls"
+region "Welcome"
+button "Previous"
+button "Next"
+button "Notes"
+button "Full screen"
+image "Champions of Accessibility Network (CAN)"
+heading[2] "Growing and sustaining support for accessibility"

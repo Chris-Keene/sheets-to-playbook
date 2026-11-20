@@ -1,0 +1,36 @@
+## text
+The commitment card: write on both halves, tear, keep the half with the QR code. The QR code points to example.org/can-playbook. Type into it on screen, or print it on A4. From the CAN Community Playbook kit · Print-ready PDF.
+
+Commitment card
+CAN
+One thing I will try, adapt or explore is…
+
+Scan for the CAN Community Playbook: what every table came up with.
+example.org/can-playbook
+
+CAN
+One thing I will try, adapt or explore is…
+Name (optional)
+Organisation (optional)
+
+Add these only if you’re happy for them to appear in the public playbook.
+
+## accessibility tree
+note
+main
+heading[1] "Commitment card"
+region "The half you keep"
+region "The half you leave on the table"
+link "CAN Community Playbook kit"
+link "Print-ready PDF"
+image "Champions of Accessibility Network (CAN)"
+LabelText
+textbox "One thing I will try, adapt or explore is…"
+image "QR code for example.org/can-playbook"
+image "Champions of Accessibility Network (CAN)"
+LabelText
+textbox "One thing I will try, adapt or explore is…"
+LabelText
+LabelText
+textbox "Name (optional)"
+textbox "Organisation (optional)"

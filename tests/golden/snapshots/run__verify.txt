@@ -1,0 +1,12 @@
+{
+ "errors": [],
+ "warnings": [
+  "2 transcribed items aren't used anywhere (fine if merged or off-topic): T02.V.point1, T09.V.point1"
+ ],
+ "raw_items": 51,
+ "used": 32,
+ "unused": [
+  "T02.V.point1",
+  "T09.V.point1"
+ ]
+}

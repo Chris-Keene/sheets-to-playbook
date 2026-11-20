@@ -1,0 +1,175 @@
+## text
+Keeping champions engaged after the launch, Community Playbook
+
+Skip to content
+Test run.
+Built automatically from fake sheets and voice notes made to test the engine; none of it came from real people. Dashed boxes are gaps, and tags show which sheet each line came from.
+Community
+Playbook
+Playbook
+Commitments
+Run your own
+How it was made
+
+← All challenges
+
+CHAMPIONS DRIFT AWAY
+
+Keeping champions engaged after the launch
+Worked on at table 2
+Retail
+Banking
+Insurance
+Health
+
+Champions drift away after about six months. They have little time for it in the day job, aren't always sure what to do, and can feel invisible.
+
+Champions need a job, not a badge
+
+T02 · side sheet
+What’s been tried
+Helped
+A monthly fix-it Friday, with snacks. T02 · Sheet 2
+Giving champions a real task each month. T02 · Sheet 2
+Asking champions to present their fix at the all-hands meeting, which made other people want to join. T02 · voice note
+Got in the way
+A newsletter nobody read. T02 · Sheet 2
+Meetings at 8am. T02 · Sheet 2
+What we learned
+Ask champions what they want before planning. T02 · Sheet 2
+Actions to try
+Show actions for
+Any stage
+Just starting
+Growing
+Established
+
+Showing all 2 actions.
+
+Run a monthly fix-it session T02 · Sheet 3
+What to do
+Hold a 30-minute fix-it session every month.
+What you need
+A room, a list of small bugs and a host.
+How it sticks
+Same day every month, and rotate the host.
+Good for
+Just starting
+Growing
+Shout out a champion of the month T02 · Sheet 3
+What to do
+Recognise one champion each month.
+What you need
+An executive to send the email.
+How it sticks
+Link it to performance reviews.
+Good for
+Growing
+Still open
+
+Questions the table didn’t answer. If you have, tell the organisers.
+
+How many champions is enough? T02 · side sheet
+Resource mentioned: “W3C planning & managing”. The address on the sheet is cut off at w3.org/WAI/planning-and-, so it needs finding before it can be linked. T02 · side sheet
+Resources
+TO FILL
+Resources
+From the side sheet, Resources column. Every link gets checked before publishing.
+Next challenge
+Getting budget before something goes wrong
+
+Community Playbook: Growing and sustaining support for accessibility · Draft for review
+
+Download this playbook ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+note
+link "Community Playbook"
+navigation "Playbook"
+heading[1] "Keeping champions engaged after the launch"
+list
+figure
+region "What’s been tried"
+region "Actions to try"
+region "Still open"
+region "Resources"
+navigation "Other challenges"
+strong
+list
+link "← All challenges"
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+blockquote
+Figcaption
+heading[2] "What’s been tried"
+heading[3] "Helped"
+list
+heading[3] "Got in the way"
+list
+heading[3] "What we learned"
+list
+heading[2] "Actions to try"
+group "Show actions for"
+status
+list
+heading[2] "Still open"
+list
+heading[2] "Resources"
+link "Next challenge Getting budget before something goes wrong"
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+Legend
+LabelText
+LabelText
+LabelText
+LabelText
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"
+radio "Any stage"
+radio "Just starting"
+radio "Growing"
+radio "Established"
+heading[3] "Run a monthly fix-it session T02 · Sheet 3"
+DescriptionList
+list "Good for"
+heading[3] "Shout out a champion of the month T02 · Sheet 3"
+DescriptionList
+list "Good for"
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]

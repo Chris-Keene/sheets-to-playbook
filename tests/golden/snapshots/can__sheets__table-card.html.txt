@@ -1,0 +1,21 @@
+## text
+The table card folds into a tent: the number on one side, the challenge on the other. Type into it on screen, or print it on A4. From the CAN Community Playbook kit · Print-ready PDF.
+
+Table card
+Table
+We’re tackling:
+CAN
+
+## accessibility tree
+note
+main
+heading[1] "Table card"
+region "Side one: the table number"
+region "Side two: the challenge"
+link "CAN Community Playbook kit"
+link "Print-ready PDF"
+LabelText
+textbox "Table"
+LabelText
+textbox "We’re tackling:"
+image "Champions of Accessibility Network (CAN)"

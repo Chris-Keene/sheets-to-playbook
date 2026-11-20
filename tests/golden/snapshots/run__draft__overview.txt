@@ -1,0 +1,173 @@
+## text
+Skip to content
+Test run.
+Built automatically from fake sheets and voice notes made to test the engine; none of it came from real people. Dashed boxes are gaps, and tags show which sheet each line came from.
+Community
+Playbook
+Playbook
+Commitments
+Run your own
+How it was made
+
+COMMUNITY PLAYBOOK
+
+Growing and sustaining support for accessibility
+
+Created from data collected during the community forum at Example Conference 2026.
+
+6 themes
+2 challenges
+5 actions
+6 commitments
+Go to the challenges
+Where support gets stuck
+
+Every table listed the challenges its members face. These are the themes that came up, and which tables raised them. Each ring is the room: one arrow per table.
+
+2
+Leadership support fades
+
+2 of 12 tables · Tables 2 and 5
+
+Heard: Leaders only care at audit time Leadership support fades
+
+1
+Champions drift away
+
+1 of 12 tables · Table 2
+
+Heard: Champions drift away after 6 months Champions don't know what to do
+
+Read: Keeping champions engaged after the launch
+
+1
+Money only comes after complaints
+
+1 of 12 tables · Table 5
+
+Heard: Only get money after complaints Budget sits with IT not product
+
+Read: Getting budget before something goes wrong
+
+1
+No time in the day job
+
+1 of 12 tables · Table 2
+
+Heard: No time in the day job
+
+1
+Hard to prove impact
+
+1 of 12 tables · Table 2
+
+Heard: Can't prove impact
+
+1
+Seen as just compliance
+
+1 of 12 tables · Table 5
+
+Heard: Seen as just compliance
+
+The challenges
+
+Each table picked one challenge and worked through what has helped, what hasn’t, and what to try next. Where two tables picked the same challenge, their work is combined. Open any challenge to see the full detail.
+
+MONEY ONLY COMES AFTER COMPLAINTS
+
+Getting budget before something goes wrong
+
+Money tends to arrive only after complaints, and the budget often sits with IT rather than product. Waiting for legal to push it, or asking for a big programme all at once, hasn't worked.
+
+Tables 5 and 9 · 3 actions to try
+
+Explore this challenge
+
+CHAMPIONS DRIFT AWAY
+
+Keeping champions engaged after the launch
+
+Champions drift away after about six months. They have little time for it in the day job, aren't always sure what to do, and can feel invisible.
+
+Table 2 · 2 actions to try
+
+Explore this challenge
+Shared on the day
+
+Links, tools and reading people recommended to each other on the tables’ side sheets.
+
+Business case
+
+Website · W3C WAI · w3.org
+
+Shared by table 9 · From Getting budget before something goes wrong
+
+T09 · side sheet
+
+Community Playbook: Growing and sustaining support for accessibility · Draft for review
+
+Download this playbook ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+note
+link "Community Playbook"
+navigation "Playbook"
+region "Growing and sustaining support for accessibility"
+region "Where support gets stuck"
+region "The challenges"
+region "Shared on the day"
+strong
+list
+heading[1] "Growing and sustaining support for accessibility"
+list "In this playbook"
+link "Go to the challenges"
+heading[2] "Where support gets stuck"
+list
+heading[2] "The challenges"
+list
+heading[2] "Shared on the day"
+list
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"
+heading[3] "Leadership support fades"
+heading[3] "Champions drift away"
+heading[3] "Money only comes after complaints"
+heading[3] "No time in the day job"
+heading[3] "Hard to prove impact"
+heading[3] "Seen as just compliance"
+heading[3] "Getting budget before something goes wrong"
+heading[3] "Keeping champions engaged after the launch"
+heading[3] "Business case"
+link "Read: Keeping champions engaged after the launch"
+link "Read: Getting budget before something goes wrong"
+link "Getting budget before something goes wrong"
+link "Keeping champions engaged after the launch"
+link "Business case"
+link "Getting budget before something goes wrong"

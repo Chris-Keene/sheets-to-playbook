@@ -25,3 +25,7 @@ tests/fixtures/fonts/
 
 # Your own brand files (examples/can/brand holds only a README)
 examples/can/brand/*.svg
+
+# Golden test: pictures are per machine, built files are scratch
+tests/golden/local/
+tests/golden/work/

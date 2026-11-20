@@ -1,0 +1,215 @@
+## text
+Skip to content
+Template.
+Dashed boxes show where content from the day goes and which sheet it comes from. There’s one page per table; tables that pick the same challenge get merged.
+CAN
+Community
+Playbook
+Playbook
+Commitments
+Run your own
+How it was made
+
+CAN COMMUNITY PLAYBOOK
+
+Growing and sustaining support for accessibility
+
+Created from data collected during the CAN Community Forum at Northfield Accessibility Summit 2026.
+
+Go to the challenges
+Where support gets stuck
+
+Every table listed the challenges its members face. These are the themes that came up, and which tables raised them. Each ring is the room: one arrow per table.
+
+TO FILL
+Theme 1
+Every challenge from every table’s Sheet 1, grouped into themes. The ring lights up the tables that raised each one.
+TO FILL
+Theme 2
+Grouped from Sheet 1.
+TO FILL
+Theme 3
+Grouped from Sheet 1.
+The challenges
+
+Each table picked one challenge and worked through what has helped, what hasn’t, and what to try next. Where two tables picked the same challenge, their work is combined. Open any challenge to see the full detail.
+
+Theme to fill
+
+Table 1’s challenge
+
+Title, summary and everything else on this page come from this table’s sheets.
+
+Table 1 · Actions to fill
+
+Theme to fill
+
+Table 2’s challenge
+
+Title, summary and everything else on this page come from this table’s sheets.
+
+Table 2 · Actions to fill
+
+Theme to fill
+
+Table 3’s challenge
+
+Title, summary and everything else on this page come from this table’s sheets.
+
+Table 3 · Actions to fill
+
+Theme to fill
+
+Table 4’s challenge
+
+Title, summary and everything else on this page come from this table’s sheets.
+
+Table 4 · Actions to fill
+
+Theme to fill
+
+Table 5’s challenge
+
+Title, summary and everything else on this page come from this table’s sheets.
+
+Table 5 · Actions to fill
+
+Theme to fill
+
+Table 6’s challenge
+
+Title, summary and everything else on this page come from this table’s sheets.
+
+Table 6 · Actions to fill
+
+Theme to fill
+
+Table 7’s challenge
+
+Title, summary and everything else on this page come from this table’s sheets.
+
+Table 7 · Actions to fill
+
+Theme to fill
+
+Table 8’s challenge
+
+Title, summary and everything else on this page come from this table’s sheets.
+
+Table 8 · Actions to fill
+
+Theme to fill
+
+Table 9’s challenge
+
+Title, summary and everything else on this page come from this table’s sheets.
+
+Table 9 · Actions to fill
+
+Theme to fill
+
+Table 10’s challenge
+
+Title, summary and everything else on this page come from this table’s sheets.
+
+Table 10 · Actions to fill
+
+Theme to fill
+
+Table 11’s challenge
+
+Title, summary and everything else on this page come from this table’s sheets.
+
+Table 11 · Actions to fill
+
+Theme to fill
+
+Table 12’s challenge
+
+Title, summary and everything else on this page come from this table’s sheets.
+
+Table 12 · Actions to fill
+
+Join the conversation
+
+The Champions of Accessibility Network (CAN) brings people interested in accessibility together to make the digital world a more accessible place.
+
+Join CAN on LinkedIn
+
+CAN Community Playbook: Growing and sustaining support for accessibility · Template
+
+Download this playbook ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+note
+link "Champions of Accessibility Network (CAN) Community Playbook"
+navigation "Playbook"
+region "Growing and sustaining support for accessibility"
+region "Where support gets stuck"
+region "The challenges"
+region "Join the conversation"
+strong
+image "Champions of Accessibility Network (CAN)"
+list
+heading[1] "Growing and sustaining support for accessibility"
+link "Go to the challenges"
+heading[2] "Where support gets stuck"
+list
+heading[2] "The challenges"
+list
+heading[2] "Join the conversation"
+link "Join CAN on LinkedIn"
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"
+heading[3] "Table 1’s challenge"
+heading[3] "Table 2’s challenge"
+heading[3] "Table 3’s challenge"
+heading[3] "Table 4’s challenge"
+heading[3] "Table 5’s challenge"
+heading[3] "Table 6’s challenge"
+heading[3] "Table 7’s challenge"
+heading[3] "Table 8’s challenge"
+heading[3] "Table 9’s challenge"
+heading[3] "Table 10’s challenge"
+heading[3] "Table 11’s challenge"
+heading[3] "Table 12’s challenge"
+link "Table 1’s challenge"
+link "Table 2’s challenge"
+link "Table 3’s challenge"
+link "Table 4’s challenge"
+link "Table 5’s challenge"
+link "Table 6’s challenge"
+link "Table 7’s challenge"
+link "Table 8’s challenge"
+link "Table 9’s challenge"
+link "Table 10’s challenge"
+link "Table 11’s challenge"
+link "Table 12’s challenge"

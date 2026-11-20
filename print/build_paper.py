@@ -19,6 +19,7 @@ from types import SimpleNamespace
 from urllib.parse import urlparse
 
 from pdfkit import BLACK, MM, WHITE, Page, svg_paths, write
+import pdfkit  # noqa: E402  use_fonts, cap_height
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "build"))
@@ -77,6 +78,9 @@ def kit_settings(cfg, qr_url):
     # the card's small print is black, unless the highlight is too dark for it (then no ink: the paper shows through)
     k.card_ink = BLACK if config.contrast("#000000", hi) >= 4.5 else WHITE
     k.logo = config.logo_path(cfg, "secondary") or config.logo_path(cfg, "primary")
+    if k.logo and k.logo.suffix.lower() != ".svg":
+        k.warnings.append(f"{k.logo.name} isn't an SVG, and the print kit draws logos as vector shapes, so the wordmark stands in")
+        k.logo = None
     if k.logo:
         try:
             svg_paths(k.logo)
@@ -102,7 +106,7 @@ def logo(p, k, x, y, h, max_w, baseline=None, colour=None):
         vb, _ = svg_paths(k.logo)
         w = min(h * vb[2] / vb[3], max_w)
         return p.svg("art", k.logo, x, y, w=w, fill=k.accent)[0]
-    cap = 0.705                          # Poppins Bold cap height, as a share of the font size
+    cap = pdfkit.cap_height("Bold")      # the brand font's capital height, as a share of the font size (Poppins: 0.7)
     size_mm = 0.5 * h / cap              # capitals half the logo's height, like the lettering in a logo lockup
     size_mm = min(size_mm, size_mm * max_w / p.text_width(k.wordmark, size_mm * MM, "Bold"))
     if baseline is None:
@@ -441,6 +445,7 @@ def main():
     if a.config and not Path(a.config).is_file():
         ap.error(f"no settings file at {a.config}")   # config.load would quietly fall back to the defaults
     cfg = config.load(a.config)
+    pdfkit.use_fonts(cfg)
     url = "" if a.no_qr else (a.qr_url or cfg["playbook"]["url"] or "").strip()
     if url and "://" not in url:
         url = "https://" + url               # without a scheme, a phone reads the code as plain text, not a link

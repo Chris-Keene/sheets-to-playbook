@@ -1,0 +1,78 @@
+{
+  "photos": {
+    "P001": {
+      "table": 2,
+      "sheet": "S1"
+    },
+    "P002": {
+      "table": 2,
+      "sheet": "S1"
+    },
+    "P003": {
+      "table": 2,
+      "sheet": "S2"
+    },
+    "P004": {
+      "table": 2,
+      "sheet": "S3"
+    },
+    "P005": {
+      "table": 2,
+      "sheet": "SS"
+    },
+    "P006": {
+      "table": 5,
+      "sheet": "S1"
+    },
+    "P007": {
+      "table": 5,
+      "sheet": "S2"
+    },
+    "P008": {
+      "table": 5,
+      "sheet": "S3"
+    },
+    "P009": {
+      "table": 5,
+      "sheet": "SS"
+    },
+    "P010": {
+      "table": 9,
+      "sheet": "S2"
+    },
+    "P011": {
+      "table": 9,
+      "sheet": "S3"
+    },
+    "P012": {
+      "table": 9,
+      "sheet": "SS"
+    },
+    "P013": {
+      "table": 9,
+      "sheet": "SS",
+      "note": "close-up of the top of the side sheet"
+    },
+    "P014": {
+      "kind": "stubs"
+    },
+    "P015": {
+      "kind": "other",
+      "note": "photo of the room"
+    }
+  },
+  "audio": {
+    "A001": {
+      "table": 5,
+      "by": "speech"
+    },
+    "A002": {
+      "table": 9,
+      "by": "speech"
+    },
+    "A003": {
+      "table": 2,
+      "by": "speech"
+    }
+  }
+}

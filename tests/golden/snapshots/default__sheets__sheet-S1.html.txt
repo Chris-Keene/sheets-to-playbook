@@ -1,0 +1,81 @@
+## text
+Sheet 1 of the paper kit. Type into it on screen, or print it on A4. From the Community Playbook kit · Print-ready PDF.
+
+Question 1
+
+Where does support get stuck?
+Table
+Who’s at this table?
+
+Everyone puts one tally mark against their sector, and writes their country.
+
+Public sector
+Finance
+Retail
+Tech
+Education
+Charity
+Health
+Other
+Countries:
+Every challenge at this table
+
+Write them all down. Budget, leadership, burnout, proving impact…
+
+Our top three
+The one we’re tackling
+
+Copy it onto your table card too.
+
+Community Playbook
+All of this goes into the Community Playbook. No names, please.
+S1 · Table
+
+## accessibility tree
+note
+main
+heading[1] "Where does support get stuck?"
+LabelText
+textbox "Table"
+region "Who’s at this table?"
+region "Every challenge at this table"
+region "Our top three"
+region "The one we’re tackling"
+sectionfooter
+link "Print-ready PDF"
+heading[2] "Who’s at this table?"
+group "Who’s at this table?"
+LabelText
+textbox "Countries:"
+heading[2] "Every challenge at this table"
+textbox "Every challenge at this table"
+heading[2] "Our top three"
+list
+heading[2] "The one we’re tackling"
+textbox "The one we’re tackling"
+image "Community Playbook"
+LabelText
+LabelText
+LabelText
+LabelText
+LabelText
+LabelText
+LabelText
+LabelText
+listitem[1]
+listitem[1]
+listitem[1]
+spinbutton "Public sector: how many people"
+spinbutton "Finance: how many people"
+spinbutton "Retail: how many people"
+spinbutton "Tech: how many people"
+spinbutton "Education: how many people"
+spinbutton "Charity: how many people"
+spinbutton "Health: how many people"
+spinbutton "Other: how many people"
+ListMarker "1."
+textbox "Top three, number 1"
+ListMarker "2."
+textbox "Top three, number 2"
+ListMarker "3."
+textbox "Top three, number 3"

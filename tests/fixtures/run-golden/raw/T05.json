@@ -1,0 +1,56 @@
+{
+  "table": 5,
+  "photos": ["P006", "P007", "P008", "P009"],
+  "audio": ["A001"],
+  "S1": {
+    "challenges": [
+      {"id": "T05.S1.challenge1", "text": "Only get money after complaints"},
+      {"id": "T05.S1.challenge2", "text": "Budget sits with IT not product"},
+      {"id": "T05.S1.challenge3", "text": "Leadership support fades"},
+      {"id": "T05.S1.challenge4", "text": "Seen as just compliance"}
+    ],
+    "top3": [
+      {"id": "T05.S1.top1", "text": "Only get money after complaints"},
+      {"id": "T05.S1.top2", "text": "Budget sits with IT"},
+      {"id": "T05.S1.top3", "text": "Seen as compliance"}
+    ],
+    "pick": {"id": "T05.S1.pick", "text": "Getting budget before something goes wrong"}
+  },
+  "S2": {
+    "helped": [
+      {"id": "T05.S2.helped1", "text": "Showed cost of fixing late vs early", "who": "local gov [government]"},
+      {"id": "T05.S2.helped2", "text": "Piggybacked on the design system budget", "who": "university"}
+    ],
+    "hindered": [
+      {"id": "T05.S2.hindered1", "text": "Asked for a big programme all at once", "who": "charity"}
+    ],
+    "lessons": [
+      {"id": "T05.S2.lesson1", "text": "Small asks that repeat beat one big ask"}
+    ]
+  },
+  "S3": {
+    "actions": [
+      {"id": "T05.S3.action1", "action": "Cost two real late fixes", "needs": "time from a delivery lead",
+       "sticks": "update the numbers every year", "stages": ["starting", "growing"]},
+      {"id": "T05.S3.action2", "action": "Ask for a small recurring line in an existing budget", "needs": "a friendly budget owner",
+       "sticks": "it rolls over each year", "stages": ["starting"]}
+    ]
+  },
+  "SS": {
+    "quotes": [
+      {"id": "T05.SS.quote1", "text": "Small and recurring beats big and one-off", "who": "local government"}
+    ],
+    "questions": [
+      {"id": "T05.SS.question1", "text": "Who owns the budget - IT or product?"}
+    ],
+    "resources": []
+  },
+  "V": {
+    "points": [
+      {"id": "T05.V.point1", "text": "Someone from a council bid for accessibility as part of the design system refresh, so it was never a separate ask; the lead says everyone at the table wrote it down",
+       "excerpt": "someone from a council who said they bid for accessibility as part of the design system refresh, so it was never a separate ask, everyone wrote that down afterwards"}
+    ]
+  },
+  "unclear": [],
+  "notes": "Printed table number (5) and corner codes (T05 · S1, S2, S3, SS) match the labels on all four photos. S2 helped1: the 'who' originally read 'local gov, 2k' but '2k' is scribbled out, so it's left out. S3: only two of the three action boxes are filled; the third is blank. SS: Resources column is empty. No arrows or joining lines on any sheet. Voice point V.point1 overlaps S2 helped2 ('Piggybacked on the design system budget') but the sector differs: the voice note says a council, the sheet says university. The lead calls it something 'that wasn't on the paper', so it may be a second, separate example rather than the same one; stage 2 should check before merging."
+}

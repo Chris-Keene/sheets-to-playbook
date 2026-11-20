@@ -1,0 +1,42 @@
+{
+  "table": 9,
+  "photos": ["P010", "P011", "P012", "P013"],
+  "audio": ["A002"],
+  "S2": {
+    "helped": [
+      {"id": "T09.S2.helped1", "text": "Linking it to complaints data", "who": "utility"}
+    ],
+    "hindered": [
+      {"id": "T09.S2.hindered1", "text": "Waiting for legal to push it", "who": "telco"}
+    ],
+    "lessons": []
+  },
+  "S3": {
+    "actions": [
+      {"id": "T09.S3.action1", "action": "Find one complaint that cost money and share it",
+       "needs": "a contact in customer services", "sticks": "share a new one every quarter",
+       "stages": ["growing", "established"]}
+    ]
+  },
+  "SS": {
+    "quotes": [
+      {"id": "T09.SS.quote1", "text": "Money follows risk, so show the risk", "who": "telecoms"}
+    ],
+    "questions": [],
+    "resources": [
+      {"id": "T09.SS.resource1", "text": "Business case", "url": "w3.org/WAI/business-case"}
+    ]
+  },
+  "V": {
+    "points": [
+      {"id": "T09.V.point1", "text": "The table picked budget: getting money before there's a crisis",
+       "excerpt": "We went for budget, getting money before there's a crisis."},
+      {"id": "T09.V.point2", "text": "Sarah from [?Farin Hollow] Telecom said their regulator now asks about accessibility in every review, so the risk argument is getting stronger",
+       "excerpt": "the best thing not on paper was Sarah from Farin Hollow Telecom saying their regulator now asks about accessibility in every review, so the risk argument is getting stronger."}
+    ]
+  },
+  "unclear": [
+    {"id": "T09.V.point2", "photo": "A002", "note": "Organisation name is Whisper's hearing of the voice note ('Farin Hollow Telecom'); proper nouns are often mis-heard, so the spelling is unconfirmed. Person ('Sarah') and organisation both need removing in stage 2."}
+  ],
+  "notes": "No S1 photo for this table: the lead says in the voice note 'Our first sheet got taken down early', so the S1 section is left out. The table's pick (budget, getting money before there's a crisis) is known only from the voice note and is recorded as T09.V.point1, not as S1.pick. Printed codes on every sheet read T09 (T09 · S2 on P010, T09 · S3 on P011, T09 · SS on P012/P013), matching the labels. P013 is a close-up of the top of the same side sheet as P012; it shows the same quote and resource, transcribed once. Empty boxes: S2 'If we did it again, we'd...' (no lessons), S3 action boxes 2 and 3, and the SS Questions column. S3 action 1 ticks are on Growing and Established; Just starting is unticked. No crossed-out text, arrows or joining lines on any sheet."
+}

@@ -70,9 +70,10 @@ address without `https://` gets it added, so phones open it as a link.
 ## Needs
 
 Python 3.9 or later with `pikepdf`, `fonttools` and `brotli` (to read the woff2 fonts), `segno` for QR codes and
-`Pillow`; and Poppler's `pdftoppm` for the overview image. The font is Poppins (SIL Open Font License), from
-`assets/fonts/`, so any name in your settings needs to use characters Poppins has; the builder stops and says so
-if one doesn't.
+`Pillow`; and Poppler's `pdftoppm` for the overview image. The font is the settings' `brand.font` (Poppins,
+SIL Open Font License, from `assets/fonts/` by default), so any name in your settings needs to use characters that
+font has; the builder stops and says so if one doesn't. Give it static files, one per weight: the lettering is drawn
+from them as outlines.
 
 ## Checking your own build
 

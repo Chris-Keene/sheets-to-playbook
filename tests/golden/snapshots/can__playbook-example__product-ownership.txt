@@ -1,0 +1,210 @@
+## text
+Getting product teams to own accessibility, CAN Community Playbook
+
+Skip to content
+CAN
+Community
+Playbook
+Playbook
+Commitments
+Run your own
+How it was made
+
+Example, not from the session
+
+← All challenges
+
+SEEN AS SOMEONE ELSE'S JOB
+
+Getting product teams to own accessibility
+Worked on at tables 6 and 10
+E-commerce
+Travel
+Banking
+
+Accessibility gets treated as a specialist's job or a check at the end. Product teams agree it matters, then it loses to deadlines every sprint.
+
+Everyone agreed in the meeting. Then sprint planning happened.
+
+The day a product manager watched a customer fail to check out, it stopped being our backlog and became theirs.
+
+What’s been tried
+Helped
+Accessibility acceptance criteria in the definition of done, written with the teams.
+Product managers sitting in on research sessions with disabled participants.
+Automated checks in the pipeline, so basic issues block a merge instead of a release.
+Got in the way
+A central team fixing issues for product teams. It made the problem someone else's.
+Training only developers, not designers or product managers.
+What we learned
+Ownership follows exposure: people who watch a real user struggle start owning the fix.
+Actions to try
+Show actions for
+Any stage
+Just starting
+Growing
+Established
+
+Showing all 3 actions.
+
+Co-write acceptance criteria
+What to do
+Work with one team to write accessibility acceptance criteria for their next feature.
+What you need
+A willing product manager and 30 minutes in refinement.
+How it sticks
+Turn the criteria into a template the team reuses, then take it to the next team.
+Good for
+Just starting
+Growing
+Get product managers in the room
+What to do
+Invite product managers to watch a session with a disabled user.
+What you need
+Research budget or a partner organisation, and participant consent.
+How it sticks
+Put one session a quarter in the product calendar.
+Good for
+Just starting
+Growing
+Established
+Catch the basics automatically
+What to do
+Run automated accessibility checks in the build pipeline so basic issues show up before review.
+What you need
+An engineer to set it up and agreement on which failures block.
+How it sticks
+Share trends with team leads monthly, and keep manual and user testing for what automation can't catch.
+Good for
+Growing
+Established
+Still open
+
+Questions the table didn’t answer. If you have, tell CAN.
+
+Who should own accessibility in a product team: the product manager, the designer or the engineers?
+How do you stop automated checks being treated as the whole job?
+Resources
+Planning and Managing Web Accessibility
+W3C WAI
+Inclusive Design
+Microsoft
+Previous challenge
+Stopping champions burning out
+Next challenge
+Securing budget before there's a crisis
+
+CAN Community Playbook: Growing and sustaining support for accessibility · Example draft
+
+Download this playbook ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+link "Champions of Accessibility Network (CAN) Community Playbook"
+navigation "Playbook"
+heading[1] "Getting product teams to own accessibility"
+list
+figure
+figure
+region "What’s been tried"
+region "Actions to try"
+region "Still open"
+region "Resources"
+navigation "Other challenges"
+image "Champions of Accessibility Network (CAN)"
+list
+link "← All challenges"
+listitem[1]
+listitem[1]
+listitem[1]
+blockquote
+blockquote
+heading[2] "What’s been tried"
+heading[3] "Helped"
+list
+heading[3] "Got in the way"
+list
+heading[3] "What we learned"
+list
+heading[2] "Actions to try"
+group "Show actions for"
+status
+list
+heading[2] "Still open"
+list
+heading[2] "Resources"
+list
+link "Previous challenge Stopping champions burning out"
+link "Next challenge Securing budget before there's a crisis"
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+Legend
+LabelText
+LabelText
+LabelText
+LabelText
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"
+radio "Any stage"
+radio "Just starting"
+radio "Growing"
+radio "Established"
+heading[3] "Co-write acceptance criteria"
+DescriptionList
+list "Good for"
+heading[3] "Get product managers in the room"
+DescriptionList
+list "Good for"
+heading[3] "Catch the basics automatically"
+DescriptionList
+list "Good for"
+link "Planning and Managing Web Accessibility"
+link "Inclusive Design"
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]
+listitem[2]
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]

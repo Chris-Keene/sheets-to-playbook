@@ -11,7 +11,7 @@ empty, plus source tags on every line), final (empty sections hide, and the buil
 
 The brand (names, colours, logo, the playbook's address) comes from the settings file: see build/config.py.
 The colours are checked for WCAG 2.2 contrast every build, and the build stops if a pairing fails.
-Fonts (Poppins, OFL) and the logo are inlined, so each output is one portable file.
+The font (Poppins, OFL, unless the settings name another) and the logo are inlined, so each output is one portable file.
 """
 import argparse, base64, json, re, shutil, sys
 from pathlib import Path
@@ -25,33 +25,135 @@ WEIGHTS = {"Regular": 400, "Medium": 500, "SemiBold": 600, "Bold": 700}
 LOGO_NAMES = {"primary": "primary", "secondary": "secondary", "logomark": "mark", "mark": "mark"}
 
 
-def font_css():
+MIME = {".svg": "image/svg+xml", ".png": "image/png", ".webp": "image/webp", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
+        ".woff2": "font/woff2", ".woff": "font/woff", ".ttf": "font/ttf", ".otf": "font/otf"}
+FONT_FORMAT = {".woff2": "woff2", ".woff": "woff", ".ttf": "truetype", ".otf": "opentype"}
+
+
+def data_uri(f):
+    f = Path(f)
+    return f"data:{MIME[f.suffix.lower()]};base64," + base64.b64encode(f.read_bytes()).decode()
+
+
+def font_css(cfg=None):
+    """@font-face rules for the brand font, with the files inlined."""
+    cfg = cfg or config.load()
+    family = cfg["brand"]["font"]["family"]
     out = []
     for name, weight in WEIGHTS.items():
-        b64 = base64.b64encode((ASSETS / "fonts" / f"poppins-{name}.woff2").read_bytes()).decode()
+        f = config.font_file(cfg, name)
         out.append(
-            "@font-face{font-family:\"Poppins\";font-style:normal;font-weight:%d;font-display:swap;"
-            "src:url(data:font/woff2;base64,%s) format(\"woff2\")}" % (weight, b64)
+            "@font-face{font-family:\"%s\";font-style:normal;font-weight:%d;font-display:swap;"
+            "src:url(%s) format(\"%s\")}" % (family, weight, data_uri(f), FONT_FORMAT[f.suffix.lower()])
         )
     return "\n".join(out)
 
 
-def logo(name, label, cls="", cfg=None):
-    """The brand's logo as inline SVG (name: primary, secondary or mark), or the wordmark if there's no logo file.
-    Other builders (sheets, slides) call this too: pass the settings you loaded, or the default file is used."""
+def with_font(html, cfg):
+    """Swap the default typeface's name for the brand font's wherever a page's CSS names it."""
+    family = cfg["brand"]["font"]["family"]
+    if family == "Poppins":
+        return html
+    return html.replace('"Poppins"', f'"{family}"').replace("Poppins,", f'"{family}",')
+
+
+def logo(name, label, cls="", cfg=None, on="auto"):
+    """The brand's logo (name: primary, secondary or mark), or the wordmark if there's no logo file.
+    Other builders (sheets, slides) call this too: pass the settings you loaded, or the default file is used.
+
+    An SVG logo is recoloured to the page's logo colour (so it follows dark mode) unless brand.logo.keep_colours is
+    set. A logo in its own colours, or a PNG, can have a second file for dark backgrounds, named <name>_dark
+    (e.g. "secondary_dark"). `on` says what it sits on: "light", "dark", or "auto" (both, swapped by the page's theme,
+    which must style .brand-light and .brand-dark)."""
     cfg = cfg or config.load()
-    f = config.logo_path(cfg, LOGO_NAMES.get(name, name))
+    key = LOGO_NAMES.get(name, name)
+    f = config.logo_path(cfg, key)
     if not f:
         return config.wordmark(cfg, label, cls)
+    dark = config.logo_path(cfg, key + "_dark")
+    keep = bool((cfg["brand"].get("logo") or {}).get("keep_colours")) or f.suffix.lower() != ".svg"
+    if not keep:
+        return _logo_file(f, label, cls, recolour=True)
+    if on == "dark":
+        return _logo_file(dark or f, label, cls)
+    if on == "light" or not dark:
+        return _logo_file(f, label, cls)
+    return _logo_file(f, label, (cls + " brand-light").strip()) + _logo_file(dark, label, (cls + " brand-dark").strip())
+
+
+def _logo_file(f, label, cls="", recolour=False):
     import html as h
+    c = f' class="{h.escape(cls)}"' if cls else ""
+    if f.suffix.lower() != ".svg":
+        return f'<img{c} src="{data_uri(f)}" alt="{h.escape(label)}">'
     svg = f.read_text()
-    svg = re.sub(r"<defs>.*?</defs>", "", svg, flags=re.S)
-    svg = re.sub(r'\s(id|data-name|class)="[^"]*"', "", svg)
-    # currentColor lets the page theme the logo (and switch it to light in dark mode)
-    attrs = f' role="img" aria-label="{h.escape(label)}" fill="currentColor" focusable="false"'
-    if cls:
-        attrs += f' class="{cls}"'
-    return svg.replace("<svg", "<svg" + attrs, 1)
+    attrs = f' role="img" aria-label="{h.escape(label)}"'
+    if recolour:
+        svg = re.sub(r"<defs>.*?</defs>", "", svg, flags=re.S)
+        svg = re.sub(r'\s(id|data-name|class)="[^"]*"', "", svg)
+        # currentColor lets the page theme the logo (and switch it to light in dark mode)
+        attrs += ' fill="currentColor"'
+    return svg.replace("<svg", "<svg" + attrs + ' focusable="false"' + c, 1)
+
+
+def credit_html(cfg):
+    """The small "Built with" line for the foot of the page, from the credit settings ("" when it's switched off)."""
+    import html as h
+    c = cfg.get("credit") or {}
+    if not c.get("show") or not c.get("text"):
+        return ""
+    imgs = ""
+    for key, cls in (("logo", "brand-light"), ("logo_dark", "brand-dark")):
+        f = config.asset(cfg, c.get(key))
+        if f:
+            # decorative: the words beside it say the same thing
+            imgs += f'<img class="credit-logo {cls}" src="{data_uri(f)}" alt="">'
+    if imgs and "brand-dark" not in imgs:
+        imgs = imgs.replace(" brand-light", "")
+    inner = imgs + f'<span>{h.escape(c["text"])}</span>'
+    if c.get("url"):
+        return f'<a class="credit" href="{h.escape(c["url"])}">{inner}</a>'
+    return f'<span class="credit">{inner}</span>'
+
+
+def slug(text):
+    return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-") or "playbook"
+
+
+def share_tags(data, cfg, out_dir):
+    """Link-preview tags (LinkedIn, Slack, Teams...) for a final playbook, when the settings give its address
+    (playbook.url) and a preview picture (playbook.share.image). The picture has to be a real file at a full web
+    address, so it's copied beside the page. The description's counts come from the data, so they can't drift."""
+    import html as h
+    m, pb = data["meta"], cfg["playbook"]
+    share = pb.get("share") or {}
+    if not pb.get("url") or m.get("status") != "final":
+        return ""
+    url = pb["url"].rstrip("/") + "/"
+    acts = sum(len(c.get("actions", [])) for c in data["challenges"])
+    desc = (f"What the people at the {cfg['org']['forum']}{' at ' + m['event'] if m.get('event') else ''} wrote down: "
+            f"{len(data['challenges'])} challenges, {acts} actions to try and {len(data['commitments'])} commitments.")
+    og = {"og:type": "website", "og:site_name": m["series"], "og:title": m.get("title") or m["series"], "og:description": desc, "og:url": url}
+    card = "summary"
+    picture = config.asset(cfg, share.get("image"))
+    if picture:
+        if not share.get("image_alt"):
+            sys.exit("playbook.share.image needs image_alt: a sentence describing the picture")
+        name = "share" + picture.suffix.lower()
+        shutil.copy(picture, Path(out_dir) / name)
+        og["og:image"] = url + name
+        og["og:image:alt"] = share["image_alt"]
+        try:
+            from PIL import Image
+            with Image.open(picture) as im:
+                og["og:image:width"], og["og:image:height"] = str(im.width), str(im.height)
+        except Exception:
+            pass
+        card = "summary_large_image"
+    out = [f'<meta name="description" content="{h.escape(desc)}">']
+    out += [f'<meta property="{k}" content="{h.escape(v)}">' for k, v in og.items()]
+    out += [f'<meta name="twitter:card" content="{card}">']
+    return "\n".join(out)
 
 
 def header_logo(cfg):
@@ -216,6 +318,11 @@ def build_playbook(data_path, out, cfg):
     data["playbook"] = dict(cfg["playbook"])
     data["meta"].setdefault("series", cfg["playbook"]["name"])
     data["meta"].setdefault("kit_licence", cfg["kit"]["licence"])
+    # the tools' home, for the "Run your own" page: the session can override the settings, and "" leaves it out
+    links = data["meta"].setdefault("links", {}) if isinstance(data["meta"].get("links", {}), dict) else {}
+    links.setdefault("source", cfg["kit"].get("source") or "")
+    data["credit_html"] = credit_html(cfg)
+    data["file_name"] = (cfg["playbook"].get("file_name") or slug(data["meta"]["series"])).removesuffix(".html") + ".html"
     hero = data["meta"].get("hero") or {}
     if hero.get("file"):
         # a photo across the top of the homepage, inlined so the page stays one portable file
@@ -237,7 +344,9 @@ def build_playbook(data_path, out, cfg):
         html = re.sub(r'\n?<meta name="robots" content="noindex">', "", html, count=1)
     import html as _h
     html = html.replace("<title>Community Playbook</title>", f"<title>{_h.escape(data['meta']['series'])}</title>", 1)
-    html = html.replace("/*FONTS*/", font_css(), 1)
+    html = html.replace("/*FONTS*/", font_css(cfg), 1)
+    html = with_font(html, cfg)
+    html = html.replace("<!--SHARE-->", share_tags(data, cfg, Path(out).parent), 1)
     html = html.replace("<!--LOGO-->", header_logo(cfg), 1)
     html = html.replace("<span>Community<br>Playbook</span>", f"<span>{header_name(cfg, data['meta']['series'])}</span>", 1)
     html = html.replace("/*DATA*/", json_for_script(data), 1)
@@ -255,12 +364,15 @@ def build_holding(out_dir, cfg, when="Coming soon"):
     out.mkdir(parents=True, exist_ok=True)
     page = (ROOT / "build" / "template-holding.html").read_text()
     pal = config.palette(cfg)
-    page = re.sub(r"--accent:#57258c", "--accent:" + pal["light"]["--accent"], page)
-    page = re.sub(r"--yellow:#ffd35d", "--yellow:" + pal["light"]["--yellow"], page)
-    page = re.sub(r"--focus:#57258c", "--focus:" + pal["light"]["--focus"], page)
-    page = re.sub(r"--accent:#c4a6ee", "--accent:" + pal["dark"]["--accent"], page)
+    # the page's colours from the palette (light first, then the dark-mode block), whatever the template holds now
+    keys = ["--bg", "--surface", "--ink", "--muted", "--accent", "--line", "--yellow", "--on-yellow", "--focus"]
+    css = lambda mode: " ".join(f"{k}:{pal[mode][k]};" for k in keys if k in pal[mode])
+    page = re.sub(r":root\{[^}]*\}", lambda m: ":root{ " + css("light") + " }", page, count=1)
+    page = re.sub(r"(@media \(prefers-color-scheme: dark\)\{\s*):root\{[^}]*\}", lambda m: m.group(1) + ":root{ " + css("dark") + " }", page, count=1)
     join = cfg["org"].get("join")
-    page = (page.replace("/*FONTS*/", font_css(), 1)
+    page = with_font(page, cfg)
+    page = (page.replace("/*FONTS*/", font_css(cfg), 1)
+                .replace("<!--CREDIT-->", credit_html(cfg), 1)
                 .replace("<!--LOGO-->", logo("secondary", brand_label(cfg), "logo", cfg=cfg), 1)
                 .replace("{{NAME}}", h.escape(cfg["playbook"]["name"]))
                 .replace("{{WHEN}}", h.escape(when))

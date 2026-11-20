@@ -184,12 +184,12 @@ def page(k, title, desc, pdf, body, extra_class=""):
     intro = (f'<div class="intro" role="note"><p>{e(desc)} Type into it on screen, or print it on A4. '
              f'From the {kit}' + (f' · <a href="{e(pdf)}">Print-ready PDF</a>' if pdf else "") + '.</p></div>')
     return (f'<!doctype html>\n<html lang="en-GB">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n'
-            f'<title>{e(title)} · {e(k.name)} kit</title>\n<style>{playbook.font_css()}{k.css}{CSS}</style>\n</head>\n'
+            f'<title>{e(title)} · {e(k.name)} kit</title>\n<style>{playbook.font_css(k.cfg)}{k.css}{playbook.with_font(CSS, k.cfg)}</style>\n</head>\n'
             f'<body class="{extra_class}">\n{intro}\n<main>\n{body}\n</main>\n</body>\n</html>\n')
 
 
 def logo_svg(k, cls="logo"):
-    return playbook.logo("secondary", e(k.label), cls, cfg=k.cfg)
+    return playbook.logo("secondary", e(k.label), cls, cfg=k.cfg, on="light")   # the sheets are light only
 
 
 def frame(k, label, question, code, inner):

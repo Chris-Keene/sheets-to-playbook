@@ -1,0 +1,12 @@
+{
+  "photos": ["P014"],
+  "cards": [
+    {"id": "C.card1", "text": "Cost one late fix this month", "challenge_hint": null},
+    {"id": "C.card2", "text": "Run a fix-it Friday in January", "challenge_hint": null},
+    {"id": "C.card3", "text": "Ask finance who owns the budget", "challenge_hint": "budget"},
+    {"id": "C.card4", "text": "Send my exec one win a month", "challenge_hint": "exec"},
+    {"id": "C.card5", "text": "Talk to our design system lead", "challenge_hint": "design system"},
+    {"id": "C.card6", "text": "Share this playbook with my team", "challenge_hint": null}
+  ],
+  "unclear": []
+}

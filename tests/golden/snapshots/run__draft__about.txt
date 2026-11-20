@@ -1,0 +1,76 @@
+## text
+How it was made, Community Playbook
+
+Skip to content
+Test run.
+Built automatically from fake sheets and voice notes made to test the engine; none of it came from real people. Dashed boxes are gaps, and tags show which sheet each line came from.
+Community
+Playbook
+Playbook
+Commitments
+Run your own
+How it was made
+
+ABOUT THIS PLAYBOOK
+
+How this playbook was made
+
+This playbook was written by the people in the room at the community forum at Example Conference 2026 on Thursday 19 November 2026, 11:30 to 12:30. People came from different organisations, sectors and stages: some just starting out, some working alone, some running established programmes.
+
+From the tables to this page
+Each of the 12 tables worked through four questions on large printed sheets: where support gets stuck, what has helped or not, what to try next, and one personal commitment.
+A separate sheet on every table collected good quotes, open questions and resources as they came up.
+After the session, the organisers photographed every sheet.
+Claude, an AI model, transcribed the sheets and grouped the challenges into themes. It was told not to add anything that wasn’t written down, and to flag anything it couldn’t read.
+The organisers checked every entry against the original sheets before publishing.
+Who said what
+
+The session ran under the Chatham House Rule. Nothing from the table discussions is linked to a named person or organisation. Commitments show a name only where someone chose to add one.
+
+Keep a copy
+
+This playbook is a single web page that works offline, so you can keep it, share it or open it without an internet connection.
+
+Download this playbook
+
+Community Playbook: Growing and sustaining support for accessibility · Draft for review
+
+Download this playbook ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+note
+link "Community Playbook"
+navigation "Playbook"
+heading[1] "How this playbook was made"
+heading[2] "From the tables to this page"
+list
+heading[2] "Who said what"
+heading[2] "Keep a copy"
+strong
+list
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+ListMarker "1."
+ListMarker "2."
+ListMarker "3."
+ListMarker "4."
+ListMarker "5."
+button "Download this playbook"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"

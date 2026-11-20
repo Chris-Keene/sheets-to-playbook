@@ -1,0 +1,208 @@
+## text
+Proving impact in terms leaders care about, Community Playbook
+
+Skip to content
+Community
+Playbook
+Playbook
+Commitments
+Run your own
+How it was made
+
+Example, not from the session
+
+← All challenges
+
+HARD TO PROVE IMPACT
+
+Proving impact in terms leaders care about
+Worked on at tables 3 and 9
+Insurance
+Higher education
+Technology
+
+Leaders ask for numbers, but the changes that matter most, like fewer barriers for customers and more confident teams, are hard to count. Issue counts can even go up when things are improving, because more people are finally looking.
+
+Our issue count doubled and leadership panicked. It doubled because we'd finally started looking.
+
+One video of a customer using a screen reader on our app did more than a year of dashboards.
+
+What’s been tried
+Helped
+A before-and-after of one real customer journey instead of a score for the whole estate.
+Tracking issues found before release against issues found by customers.
+Linking complaints and contact-centre calls to specific barriers.
+Got in the way
+A single compliance percentage. It hid the important barriers and people learned to game it.
+Reporting everything. Nobody read a 40-page audit summary.
+What we learned
+Pick measures that show where problems are caught, not just how many there are.
+Actions to try
+Show actions for
+Any stage
+Just starting
+Growing
+Established
+
+Showing all 3 actions.
+
+Show one journey before and after
+What to do
+Choose one high-value journey and show it before and after fixes, ideally with a disabled user.
+What you need
+A disabled tester or research budget, and a short recording or quote shared with consent.
+How it sticks
+Repeat with a new journey each quarter so there's always a fresh story.
+Good for
+Just starting
+Growing
+Established
+Measure where issues are found
+What to do
+Report the share of issues caught before release against those found after.
+What you need
+A tag in your issue tracker for where each issue was found.
+How it sticks
+Add it to the team's existing quality dashboard instead of a separate report.
+Good for
+Growing
+Established
+Get barrier data from support teams
+What to do
+Work with customer support to tag contacts that mention accessibility.
+What you need
+A contact in customer support and an agreed tag.
+How it sticks
+Send support a quarterly summary of what changed because of their tags.
+Good for
+Just starting
+Growing
+Still open
+
+Questions the table didn’t answer. If you have, tell the organisers.
+
+Is there a shared set of measures network members could compare against?
+How do you put a value on things that didn't go wrong?
+Resources
+Accessibility Maturity Model
+W3C
+Involving Users in Web Projects for Better, Easier Accessibility
+W3C WAI
+Previous challenge
+Keeping leadership support when sponsors move on
+Next challenge
+Stopping champions burning out
+
+Community Playbook: Growing and sustaining support for accessibility · Example draft
+
+Download this playbook ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+link "Community Playbook"
+navigation "Playbook"
+heading[1] "Proving impact in terms leaders care about"
+list
+figure
+figure
+region "What’s been tried"
+region "Actions to try"
+region "Still open"
+region "Resources"
+navigation "Other challenges"
+list
+link "← All challenges"
+listitem[1]
+listitem[1]
+listitem[1]
+blockquote
+blockquote
+heading[2] "What’s been tried"
+heading[3] "Helped"
+list
+heading[3] "Got in the way"
+list
+heading[3] "What we learned"
+list
+heading[2] "Actions to try"
+group "Show actions for"
+status
+list
+heading[2] "Still open"
+list
+heading[2] "Resources"
+list
+link "Previous challenge Keeping leadership support when sponsors move on"
+link "Next challenge Stopping champions burning out"
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+Legend
+LabelText
+LabelText
+LabelText
+LabelText
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"
+radio "Any stage"
+radio "Just starting"
+radio "Growing"
+radio "Established"
+heading[3] "Show one journey before and after"
+DescriptionList
+list "Good for"
+heading[3] "Measure where issues are found"
+DescriptionList
+list "Good for"
+heading[3] "Get barrier data from support teams"
+DescriptionList
+list "Good for"
+link "Accessibility Maturity Model"
+link "Involving Users in Web Projects for Better, Easier Accessibility"
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]
+listitem[2]
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]

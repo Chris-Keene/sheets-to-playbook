@@ -25,6 +25,8 @@ DEFAULT = {
         "name": "Community Playbook",    # page titles, sheet footers, the card's QR caption
         "url": "",                       # where the playbook will live: the commitment card's QR code points here
         "searchable": False,             # true lets search engines list the final playbook (drafts never are)
+        "file_name": "",                 # what "Download this playbook" saves as; default: the playbook's name, e.g. community-playbook.html
+        "share": None,                   # link previews once it's online: {"image": "share.jpg", "image_alt": "..."}; needs url
     },
     "brand": {
         "accent": "#24508c",             # buttons, links, headings, the header band
@@ -32,11 +34,28 @@ DEFAULT = {
         "logo": {},                      # {"primary": "brand/primary.svg", "secondary": ..., "mark": ...}, paths relative to this file
         "palette": None,                 # optional exact colours: {"light": {"--accent": "#..."}, "dark": {...}}
         "cmyk": None,                    # optional proofed print colours: {"accent": [c, m, y, k], "highlight": [...]}
+        # the typeface for every page, sheet and slide. Give static (not variable) woff2 files, one per weight: the
+        # print kit draws its lettering from them too. Paths are relative to this file.
+        "font": {
+            "family": "Poppins",
+            "files": {"Regular": "assets/fonts/poppins-Regular.woff2", "Medium": "assets/fonts/poppins-Medium.woff2",
+                      "SemiBold": "assets/fonts/poppins-SemiBold.woff2", "Bold": "assets/fonts/poppins-Bold.woff2"},
+        },
     },
     "kit": {
         # shown on the playbook's "Run your own" page. The kit is CC BY 4.0, so passing it on means crediting it:
         # keep the credit if you adapt this line, and add your own alongside
         "licence": "Free to use and adapt under CC BY 4.0: please credit the sheets-to-playbook kit by Chris Keene.",
+        # where the tools live, linked from the "Run your own" page ("" to leave the link out)
+        "source": "https://github.com/Chris-Keene/sheets-to-playbook",
+    },
+    # the small "Built with" line at the foot of every playbook. Switch it off with "show": false.
+    "credit": {
+        "show": True,
+        "text": "Built with sheets-to-playbook by Chris Keene",
+        "url": "https://chriskeene.me",
+        "logo": "assets/credit/ck.png",          # light backgrounds
+        "logo_dark": "assets/credit/ck-white.png",  # dark mode
     },
 }
 
@@ -189,29 +208,50 @@ def apply_palette(html, p):
 
 # ---------------------------------------------------------------- logo
 
-def logo_path(cfg, which):
-    f = (cfg["brand"].get("logo") or {}).get(which)
+def asset(cfg, f):
+    """A file named in the settings: absolute, or relative to the settings file, or (for the defaults) to the repo."""
     if not f:
         return None
-    p = Path(f) if Path(f).is_absolute() else Path(cfg["_dir"]) / f
-    return p if p.exists() else None
+    p = Path(f)
+    if p.is_absolute():
+        return p if p.exists() else None
+    for base in (Path(cfg["_dir"]), ROOT):
+        if (base / p).exists():
+            return base / p
+    return None
 
 
-_BOLD = None
+def logo_path(cfg, which):
+    return asset(cfg, (cfg["brand"].get("logo") or {}).get(which))
 
 
-def text_width(text, size):
-    """How wide `text` sets in Poppins Bold at `size`, measured from the font's own advance widths."""
-    global _BOLD
+# ---------------------------------------------------------------- font
+
+def font_file(cfg, weight):
+    """The brand font's file for a weight (Regular, Medium, SemiBold, Bold)."""
+    files = cfg["brand"]["font"]["files"]
+    f = asset(cfg, files.get(weight))
+    if not f:
+        raise SystemExit(f"brand.font.files.{weight} is missing or not found: {files.get(weight)!r}")
+    return f
+
+
+
+_BOLD = {}
+
+
+def text_width(text, size, cfg=None):
+    """How wide `text` sets in the brand font's Bold at `size`, measured from the font's own advance widths."""
     try:
-        if _BOLD is None:
+        f = str(font_file(cfg or load(), "Bold"))
+        if f not in _BOLD:
             from fontTools.ttLib import TTFont   # woff2 also needs the brotli package
-            f = TTFont(str(ROOT / "assets" / "fonts" / "poppins-Bold.woff2"))
-            _BOLD = (f.getBestCmap(), f["hmtx"], f["head"].unitsPerEm)
-        cmap, hmtx, upm = _BOLD
+            t = TTFont(f)
+            _BOLD[f] = (t.getBestCmap(), t["hmtx"], t["head"].unitsPerEm)
+        cmap, hmtx, upm = _BOLD[f]
         return sum(hmtx[cmap.get(ord(c), ".notdef")][0] for c in text) * size / upm
     except Exception:
-        return len(text) * size * 0.78   # no fontTools: generous enough for capitals, Poppins' widest common case
+        return len(text) * size * 0.78   # no fontTools: generous enough for capitals in a wide font
 
 
 def wordmark(cfg, label, cls=""):
@@ -219,7 +259,8 @@ def wordmark(cfg, label, cls=""):
     swapping the text to a fallback font when a scaled-down page puts it below a pixel threshold."""
     import html
     text = cfg["org"]["short"] or cfg["playbook"]["name"]
-    w = max(60, math.ceil(text_width(text, 30)) + 4)
+    w = max(60, math.ceil(text_width(text, 30, cfg)) + 4)
+    family = html.escape(cfg["brand"]["font"]["family"])
     c = f' class="{html.escape(cls)}"' if cls else ""
     return (f'<svg{c} viewBox="0 0 {w} 40" role="img" aria-label="{html.escape(label)}" focusable="false">'
-            f'<text x="0" y="30" font-family="Poppins, Arial, sans-serif" font-weight="700" font-size="30" fill="currentColor" text-rendering="geometricPrecision">{html.escape(text)}</text></svg>')
+            f'<text x="0" y="30" font-family="{family}, Arial, sans-serif" font-weight="700" font-size="30" fill="currentColor" text-rendering="geometricPrecision">{html.escape(text)}</text></svg>')

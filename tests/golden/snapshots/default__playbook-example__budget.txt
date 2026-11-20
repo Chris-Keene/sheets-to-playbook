@@ -1,0 +1,195 @@
+## text
+Securing budget before there's a crisis, Community Playbook
+
+Skip to content
+Community
+Playbook
+Playbook
+Commitments
+Run your own
+How it was made
+
+Example, not from the session
+
+← All challenges
+
+NO BUDGET OR HEADCOUNT
+
+Securing budget before there's a crisis
+Worked on at tables 5 and 12
+Retail
+Local government
+
+Without a line in the budget, accessibility runs on goodwill and spare time. Money tends to appear after a complaint or a legal letter, then disappears once the fix is in.
+
+We got budget the week after a legal letter. We lost it the year after we fixed it.
+
+Ask for a small amount that's guaranteed rather than a big amount that's one-off.
+
+What’s been tried
+Helped
+Bidding for a small recurring amount inside an existing budget, such as the design system or QA.
+Costing what late fixes cost, using real examples from the past year.
+Sharing training costs with HR and the disability staff network.
+Got in the way
+One big business case for a full programme. It was too big to approve.
+Funding tied to one project, which ended when the project did.
+Actions to try
+Show actions for
+Any stage
+Just starting
+Growing
+Established
+
+Showing all 3 actions.
+
+Cost a late fix
+What to do
+Find two or three real issues that were fixed late and estimate what they cost compared with fixing them in design.
+What you need
+Time from a delivery lead to estimate the effort.
+How it sticks
+Refresh the examples each year so the case stays current.
+Good for
+Just starting
+Growing
+Ask for a small recurring line
+What to do
+Request a modest yearly amount inside a budget that already exists.
+What you need
+A budget owner who benefits, such as the design system or QA lead.
+How it sticks
+Recurring lines get rolled over; one-off funding doesn't.
+Good for
+Just starting
+Growing
+Share costs with allies
+What to do
+Co-fund training or testing with HR, the disability staff network or procurement.
+What you need
+One conversation with each potential partner.
+How it sticks
+Agree shared goals so each partner reports on the joint work.
+Good for
+Just starting
+Growing
+Established
+Still open
+
+Questions the table didn’t answer. If you have, tell the organisers.
+
+What's a realistic first budget ask for a team of one?
+Resources
+The Business Case for Digital Accessibility
+W3C WAI
+Previous challenge
+Getting product teams to own accessibility
+Next challenge
+Reviving a champions network that has stalled
+
+Community Playbook: Growing and sustaining support for accessibility · Example draft
+
+Download this playbook ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+link "Community Playbook"
+navigation "Playbook"
+heading[1] "Securing budget before there's a crisis"
+list
+figure
+figure
+region "What’s been tried"
+region "Actions to try"
+region "Still open"
+region "Resources"
+navigation "Other challenges"
+list
+link "← All challenges"
+listitem[1]
+listitem[1]
+blockquote
+blockquote
+heading[2] "What’s been tried"
+heading[3] "Helped"
+list
+heading[3] "Got in the way"
+list
+heading[2] "Actions to try"
+group "Show actions for"
+status
+list
+heading[2] "Still open"
+list
+heading[2] "Resources"
+list
+link "Previous challenge Getting product teams to own accessibility"
+link "Next challenge Reviving a champions network that has stalled"
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+Legend
+LabelText
+LabelText
+LabelText
+LabelText
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"
+radio "Any stage"
+radio "Just starting"
+radio "Growing"
+radio "Established"
+heading[3] "Cost a late fix"
+DescriptionList
+list "Good for"
+heading[3] "Ask for a small recurring line"
+DescriptionList
+list "Good for"
+heading[3] "Share costs with allies"
+DescriptionList
+list "Good for"
+link "The Business Case for Digital Accessibility"
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]
+listitem[2]

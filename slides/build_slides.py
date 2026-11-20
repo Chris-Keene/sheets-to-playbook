@@ -301,10 +301,10 @@ def build(cfg):
 
     has_logo = config.logo_path(cfg, "primary") is not None
     label = playbook.brand_label(cfg).replace('"', "'")
-    logo = playbook.logo("primary", label, "logo" if has_logo else "logo wordmark", cfg=cfg)
+    logo = playbook.logo("primary", label, "logo" if has_logo else "logo wordmark", cfg=cfg, on="dark")   # it sits on the band
     out = out.replace("<!--LOGO-->", escaped(logo, not has_logo))
     if config.logo_path(cfg, "mark"):
-        mark = hidden(playbook.logo("mark", "", "mark", cfg=cfg))
+        mark = hidden(playbook.logo("mark", "", "mark", cfg=cfg, on="light"))   # on the table card drawing
     elif cfg["org"]["short"]:
         mark = escaped(hidden(config.wordmark(cfg, "", "mark wordmark")), True)
     else:
@@ -317,7 +317,8 @@ def build(cfg):
     out = out.replace("<!--PEOPLE-->", people_html(cfg, people), 1)
     out = out.replace("/*VERSION*/", VERSION, 1)
     out = out.replace("/*COLOURS*/", "\n".join(f"  {k}:{c};" for k, c in colours.items()), 1)
-    out = out.replace("/*FONTS*/", playbook.font_css(), 1)
+    out = playbook.with_font(out, cfg)
+    out = out.replace("/*FONTS*/", playbook.font_css(cfg), 1)
 
     left = re.findall(r"<!--(?:[A-Z_]+|IF:\w+|ELSE:\w+|END:\w+)-->|\{\{\w+\}\}|/\*(?:FONTS|COLOURS|VERSION)\*/", out)
     assert not left, f"template placeholders left unfilled: {sorted(set(left))}"

@@ -16,6 +16,27 @@ from pikepdf import Array, Dictionary, Name
 MM = 72 / 25.4
 ROOT = Path(__file__).resolve().parent.parent
 FONTS = ROOT / "assets" / "fonts"   # the same Poppins files the web pages inline (fontTools reads woff2 via brotli)
+FONT_FILES = {}                      # weight -> file, from the settings' brand.font (use_fonts); Poppins if unset
+FAMILY = ["Poppins"]
+
+
+def use_fonts(cfg):
+    """Draw lettering in the settings' brand font (static files, one per weight) instead of Poppins."""
+    import sys as _sys
+    _sys.path.insert(0, str(ROOT / "build"))
+    import config as _config
+    FONT_FILES.clear()
+    for weight in ("Regular", "Medium", "SemiBold", "Bold"):
+        FONT_FILES[weight] = _config.font_file(cfg, weight)
+    FAMILY[0] = cfg["brand"]["font"]["family"]
+    _fonts.clear()
+
+
+def cap_height(weight="Bold"):
+    """The font's capital height as a share of its size (from the OS/2 table; 0.7 if the font doesn't say)."""
+    f = font_obj(weight)
+    cap = getattr(f["OS/2"], "sCapHeight", 0) if "OS/2" in f else 0
+    return cap / f["head"].unitsPerEm if cap else 0.7
 
 # Brand colours aren't set here: the builders work them out from the settings file (build/config.py).
 BLACK = (0, 0, 0, 1)
@@ -143,7 +164,7 @@ class Page:
         missing = sorted({ch for ch in s if ord(ch) not in cmap})
         if missing:
             # a missing glyph would print as an empty box; fail loudly instead
-            raise ValueError(f"Poppins {font} has no glyph for {missing!r} in {s!r}")
+            raise ValueError(f"{FAMILY[0]} {font} has no glyph for {missing!r} in {s!r}")
         names = [cmap[ord(ch)] for ch in s]
         advance = sum(hmtx[n][0] for n in names) * scale + tracking * max(len(names) - 1, 0)
         if align == "center":
@@ -194,7 +215,7 @@ _fonts, _svgs = {}, {}
 
 def font_obj(weight):
     if weight not in _fonts:
-        _fonts[weight] = TTFont(FONTS / f"poppins-{weight}.woff2")
+        _fonts[weight] = TTFont(FONT_FILES.get(weight) or FONTS / f"poppins-{weight}.woff2")
     return _fonts[weight]
 
 
