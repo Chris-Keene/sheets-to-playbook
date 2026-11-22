@@ -1,0 +1,38 @@
+## text
+Sheet 2 of the paper kit. Type into it on screen, or print it on A4. From the Workshop Notes kit · Print-ready PDF.
+
+Question 2
+
+What has helped, or not?
+Table
+Helped
+
+What happened, and why did it work?
+
+Got in the way
+
+What would you change or avoid?
+
+If we did it again, we’d…
+All of this goes into the Workshop Notes. No names, please.
+S2 · Table
+
+## accessibility tree
+note
+main
+heading[1] "What has helped, or not?"
+LabelText
+textbox "Table"
+region "Helped"
+region "Got in the way"
+region "If we did it again, we’d…"
+sectionfooter
+link "Workshop Notes kit"
+link "Print-ready PDF"
+heading[2] "Helped"
+textbox "Helped"
+heading[2] "Got in the way"
+textbox "Got in the way"
+heading[2] "If we did it again, we’d…"
+textbox "If we did it again, we’d…"
+image "Acme Accessibility Group (Acme)"

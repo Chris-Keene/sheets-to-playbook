@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / "assets"
 sys.path.insert(0, str(ROOT / "build"))
 import config  # noqa: E402
+import formats  # noqa: E402
 
 WEIGHTS = {"Regular": 400, "Medium": 500, "SemiBold": 600, "Bold": 700}
 LOGO_NAMES = {"primary": "primary", "secondary": "secondary", "logomark": "mark", "mark": "mark"}
@@ -94,6 +95,13 @@ def _logo_file(f, label, cls="", recolour=False):
         # currentColor lets the page theme the logo (and switch it to light in dark mode)
         attrs += ' fill="currentColor"'
     return svg.replace("<svg", "<svg" + attrs + ' focusable="false"' + c, 1)
+
+
+def nav_html(W):
+    """The header's links, from the workshop's pages ([id, label], in order)."""
+    import html as h
+    return "\n".join(f'        <li><a href="#{h.escape(i)}" data-nav="{h.escape(i)}">{h.escape(label)}</a></li>'
+                     for i, label in W.data.get("pages", [["overview", "Playbook"]]))
 
 
 def credit_html(cfg):
@@ -177,7 +185,9 @@ def header_name(cfg, series):
 
 def brand_label(cfg):
     o = cfg["org"]
-    return f"{o['name']} ({o['short']})" if o["name"] and o["short"] else (o["name"] or o["short"] or cfg["playbook"]["name"])
+    if o["name"] and o["short"] and o["name"] != o["short"]:
+        return f"{o['name']} ({o['short']})"
+    return o["name"] or o["short"] or cfg["playbook"]["name"]
 
 
 def supporter_logos(data, cfg):
@@ -206,84 +216,23 @@ def json_for_script(data):
     return json.dumps(data, ensure_ascii=False, indent=1).replace("</", "<\\/")
 
 
-def check(data):
-    """Catch the mistakes a hand-edit or an AI pass is most likely to make."""
-    ids = {c["id"] for c in data["challenges"]}
-    themes = {t["id"] for t in data["themes"]}
-    n = data["meta"]["tables"]
-    status = data["meta"]["status"]
-    problems = []
-    if status not in ("example", "template", "draft", "final"):
-        problems.append(f"meta.status must be example, template, draft or final, not {status!r}")
-    if status == "final":
-        # nothing half-filled goes live: these are the parts every challenge page leans on
-        if not data["themes"]:
-            problems.append("final: no themes")
-        for c in data["challenges"]:
-            for field in ("title", "summary", "theme"):
-                if not c.get(field):
-                    problems.append(f'final: {c["id"]} has no {field}')
-            if not c["actions"]:
-                problems.append(f'final: {c["id"]} has no actions')
-        if len(ids) != len(data["challenges"]):
-            problems.append("duplicate challenge ids")
-    for c in data["challenges"]:
-        if c["theme"] and c["theme"] not in themes:
-            problems.append(f'{c["id"]}: unknown theme {c["theme"]}')
-        if not re.fullmatch(r"[a-z0-9][a-z0-9-]*", c["id"]):
-            problems.append(f'{c["id"]}: id must be lowercase letters, digits and hyphens (used as the URL #anchor)')
-        if c["id"] in ("overview", "commitments", "resources", "about", "kit"):
-            problems.append(f'{c["id"]}: id clashes with a page name')
-        for a in c["actions"]:
-            bad = set(a.get("stages", [])) - {"starting", "growing", "established"}
-            if bad:
-                problems.append(f'{c["id"]}: unknown stage {bad}')
-    for t in data["themes"] + data["challenges"]:
-        out = [x for x in t["tables"] if not 1 <= x <= n]
-        if out:
-            problems.append(f'{t.get("id")}: table numbers outside 1-{n}: {out}')
-    for q in data.get("quotes", []):
-        if q.get("challenge") and q["challenge"] not in ids:
-            problems.append(f'quote links unknown challenge {q["challenge"]}')
-        out = [x for x in q.get("tables", []) if not 1 <= x <= n]
-        if out:
-            problems.append(f'quote "{q.get("text", "")[:40]}": table numbers outside 1-{n}: {out}')
-    for k in data["meta"].get("table_names") or {}:
-        if not (str(k).isdigit() and 1 <= int(k) <= n):
-            problems.append(f"meta.table_names: {k!r} isn't a table number from 1 to {n}")
-    for m in data["commitments"]:
-        if m.get("challenge") and m["challenge"] not in ids:
-            problems.append(f'commitment links unknown challenge {m["challenge"]}')
+def check(data, W=None):
+    """Catch the mistakes a hand-edit or an AI pass is most likely to make: the workshop's own rules (rules.py)."""
+    W = W or formats.load(config.load())
+    rules = W.rules()
+    problems = rules.check(data) if rules and hasattr(rules, "check") else []
     if problems:
         sys.exit("Data problems:\n  " + "\n  ".join(problems))
 
 
-# The paper kit offered on the playbook's "Run your own" page. Copied into kit/ beside the built page,
-# so the links work wherever the page goes (the draft in a run folder, playbook/, the hosting folder).
-# The kit offered on the playbook's "Run your own" page. Copied into kit/ beside the built page, so the links work
+# The kit offered on the playbook's "Run your own" page comes from the workshop (formats.Workshop.kit_files): each
+# exercise lists its fill-in page and print file. They're copied into kit/ beside the built page, so the links work
 # wherever the page goes. Patterns, because the builders name files after the brand.
-KIT_FILES = [   # (folder, file pattern, title, note, group)
-    ("slides/out", "*.html", "The slides", "Opens in any browser and works offline. Arrow keys move, T starts each question\u2019s timer, N shows the facilitator notes.", "slides"),
-    ("slides/out", "*.pdf", "The slides as a PDF", "One slide per page, without the notes.", "slides"),
-    ("print/out/html", "*sheet-S1*.html", "Sheet 1: Where does support get stuck?", "Type into it, or print it on A4.", "html"),
-    ("print/out/html", "*sheet-S2*.html", "Sheet 2: What has helped, or not?", "Type into it, or print it on A4.", "html"),
-    ("print/out/html", "*sheet-S3*.html", "Sheet 3: What could people try now, and how does it stick?", "Type into it, or print it on A4.", "html"),
-    ("print/out/html", "*sheet-SS*.html", "Side sheet: Heard something good?", "Type into it, or print it on A4.", "html"),
-    ("print/out/html", "*commitment-card*.html", "Commitment card", "Both halves, with the QR code and the name and organisation lines.", "html"),
-    ("print/out/html", "*table-card*.html", "Table card", "The table number on one side, \u201cWe\u2019re tackling\u201d on the other.", "html"),
-    ("print/out/paper", "*sheet-S1*.pdf", "Sheet 1: Where does support get stuck?", "A1 poster, one per table.", "print"),
-    ("print/out/paper", "*sheet-S2*.pdf", "Sheet 2: What has helped, or not?", "A1 poster, one per table.", "print"),
-    ("print/out/paper", "*sheet-S3*.pdf", "Sheet 3: What could people try now, and how does it stick?", "A1 poster, one per table.", "print"),
-    ("print/out/paper", "*sheet-SS*.pdf", "Side sheet: Heard something good?", "A1 poster, one per table, out all session.", "print"),
-    ("print/out/paper", "*commitment-card*.pdf", "Commitment card", "A5, perforated down the middle. One per person.", "print"),
-    ("print/out/paper", "*table-cards*.pdf", "Table cards", "A4, folding to an A5 tent: the table number on one side, \u201cWe\u2019re tackling\u201d on the other.", "print"),
-    ("print/out", "*.zip", "The whole paper kit", "All the print files in one zip.", "print"),
-]
 
 
-def kit_files(dest):
+def kit_files(dest, W):
     out = []
-    for folder, pattern, title, note, group in KIT_FILES:
+    for folder, pattern, title, note, group in W.kit_files():
         found = sorted((ROOT / folder).glob(pattern), key=lambda f: f.stat().st_mtime)
         if not found:
             continue
@@ -311,8 +260,9 @@ def themed(html, cfg):
 
 def build_playbook(data_path, out, cfg):
     data = json.loads(Path(data_path).read_text())
-    check(data)
-    data["kit"] = kit_files(Path(out).parent / "kit")
+    W = formats.load(cfg)
+    check(data, W)
+    data["kit"] = kit_files(Path(out).parent / "kit", W)
     # who the playbook belongs to, for the page's wording: the settings fill any gaps in the session's meta
     data["org"] = {k: v for k, v in cfg["org"].items()}
     data["playbook"] = dict(cfg["playbook"])
@@ -322,6 +272,8 @@ def build_playbook(data_path, out, cfg):
     links = data["meta"].setdefault("links", {}) if isinstance(data["meta"].get("links", {}), dict) else {}
     links.setdefault("source", cfg["kit"].get("source") or "")
     data["credit_html"] = credit_html(cfg)
+    data["sheet_names"] = W.sheet_names()          # for the draft's source tags ("T07 · Sheet 2")
+    data["card_prefixes"] = list(W.card_prefixes())
     data["file_name"] = (cfg["playbook"].get("file_name") or slug(data["meta"]["series"])).removesuffix(".html") + ".html"
     hero = data["meta"].get("hero") or {}
     if hero.get("file"):
@@ -337,6 +289,9 @@ def build_playbook(data_path, out, cfg):
         if not hero.get("alt"):
             sys.exit("meta.hero needs alt text")
     html = (ROOT / "build" / "template-playbook.html").read_text()
+    # the workshop's own views go into the shared page, and its pages into the navigation
+    html = html.replace("/*VIEWS*/", W.views_js().rstrip(), 1)
+    html = html.replace("<!--NAV-->", nav_html(W), 1)
     html = themed(html, cfg)
     if cfg["playbook"].get("searchable") and data["meta"].get("status") == "final":
         # search engines may list it: only a final playbook, and only when the settings say so (commitment cards

@@ -1,0 +1,44 @@
+{
+ "id": "round-tables",
+ "name": "Round tables",
+ "description": "A community forum in an hour: each table names where support gets stuck, what has helped or not, and what people could try now. Ends with a commitment card each.",
+ "group": "table",
+ "privacy": "public",
+ "agenda": [
+  {
+   "exercise": "stuck",
+   "minutes": 12
+  },
+  {
+   "exercise": "helped",
+   "minutes": 13
+  },
+  {
+   "exercise": "try-now",
+   "minutes": 15
+  }
+ ],
+ "addons": [
+  "side-sheet",
+  "commitment-card",
+  "table-card"
+ ],
+ "pages": [
+  [
+   "overview",
+   "Playbook"
+  ],
+  [
+   "commitments",
+   "Commitments"
+  ],
+  [
+   "kit",
+   "Run your own"
+  ],
+  [
+   "about",
+   "How it was made"
+  ]
+ ]
+}

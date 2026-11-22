@@ -1,0 +1,75 @@
+## text
+How it was made, Workshop Notes
+
+Skip to content
+Template.
+Dashed boxes show where content from the day goes and which sheet it comes from. There’s one page per table; tables that pick the same challenge get merged.
+Workshop
+Notes
+Playbook
+Commitments
+Run your own
+How it was made
+
+ABOUT THIS PLAYBOOK
+
+How this playbook was made
+
+This playbook was written by the people in the room at the team workshop at Northfield Accessibility Summit 2026 on Thursday 4 June 2026, 11:30 to 12:30. People came from different organisations, sectors and stages: some just starting out, some working alone, some running established programmes.
+
+From the tables to this page
+Each of the 12 tables worked through four questions on large printed sheets: where support gets stuck, what has helped or not, what to try next, and one personal commitment.
+A separate sheet on every table collected good quotes, open questions and resources as they came up.
+After the session, the Acme team photographed every sheet.
+Claude, an AI model, transcribed the sheets and grouped the challenges into themes. It was told not to add anything that wasn’t written down, and to flag anything it couldn’t read.
+The Acme team checked every entry against the original sheets before publishing.
+Who said what
+
+The session ran under the Chatham House Rule. Nothing from the table discussions is linked to a named person or organisation. Commitments show a name only where someone chose to add one.
+
+Keep a copy
+
+This playbook is a single web page that works offline, so you can keep it, share it or open it without an internet connection.
+
+Download this playbook
+
+Workshop Notes: Growing and sustaining support for accessibility · Template
+
+Download this playbook
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+note
+link "Acme Accessibility Group (Acme) Workshop Notes"
+navigation "Playbook"
+heading[1] "How this playbook was made"
+heading[2] "From the tables to this page"
+list
+heading[2] "Who said what"
+heading[2] "Keep a copy"
+strong
+image "Acme Accessibility Group (Acme)"
+list
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+ListMarker "1."
+ListMarker "2."
+ListMarker "3."
+ListMarker "4."
+ListMarker "5."
+button "Download this playbook"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"

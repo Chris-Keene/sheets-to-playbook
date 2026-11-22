@@ -21,6 +21,7 @@ TOOL = Path(__file__).resolve().parent
 ROOT = TOOL.parent.parent
 sys.path.insert(0, str(ROOT / "build"))
 import config  # noqa: E402
+import formats  # noqa: E402
 
 ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
 ap.add_argument("--run", help="the run folder (default: runs/latest)")
@@ -35,13 +36,14 @@ OCR_DIR, IMG_DIR = OUT / "ocr", OUT / "img"
 OUT.mkdir(exist_ok=True)
 CFG = config.load(A.config)
 MK = re.compile(r"\[\?[^\]]*\]|\[illegible\]", re.I)
-SEC_NAMES = {"quotes": "Quote", "helped": "Helped", "hindered": "Got in the way", "lessons": "If we did it again",
-             "actions": "Action", "questions": "Question", "card": "Commitment card"}
-SHEET_NAMES = {"S1": "Sheet 1", "S2": "Sheet 2", "S3": "Sheet 3", "SS": "Side sheet"}
+WS = formats.load(CFG)                    # the workshop: its sheets, cards and the lines on its page
+SHEET_NAMES = WS.sheet_names(capital=True)
+CARDS = WS.card_prefixes()
+CARD = next((e.get("close_up") for e in WS.per_person() if e.get("close_up")), None)
+GROUP = WS.group[:1].upper() + WS.group[1:]
 
 session = json.loads((RUN / "session.json").read_text())
 labels = json.loads((RUN / "labels.json").read_text())["photos"]
-challenge_titles = {c["id"]: c["title"] for c in session["challenges"]}
 EXTRA = json.loads((OUT / "extra.json").read_text()) if (OUT / "extra.json").exists() else {}
 
 
@@ -69,7 +71,7 @@ OCR_BIN = ocr_binary()
 raw, unclear = {}, {}
 for f in sorted(glob.glob(str(RUN / "raw" / "T*.json"))):
     r = json.loads(Path(f).read_text())
-    for sec in ("S1", "S2", "S3", "SS"):
+    for sec in WS.sheet_codes():
         for v in (r.get(sec) or {}).values():
             for it in (v if isinstance(v, list) else [v] if isinstance(v, dict) else []):
                 if isinstance(it, dict) and it.get("id"):
@@ -78,11 +80,12 @@ for f in sorted(glob.glob(str(RUN / "raw" / "T*.json"))):
         unclear.setdefault(u.get("id"), []).append(u)
 card_photos = {}
 # card stubs: raw/commitments.json, plus any cards-*.json sets when more than one agent read the cards
-for f in sorted(glob.glob(str(RUN / "raw" / "cards-*.json"))) + [str(RUN / "raw" / "commitments.json")]:
+for raw_file, card_key, _prefix in WS.card_sources():
+  for f in sorted(glob.glob(str(RUN / "raw" / f"{card_key}-*.json"))) + [str(RUN / "raw" / raw_file)]:
     if not Path(f).exists():
         continue
     d = json.loads(Path(f).read_text())
-    for c in d["cards"]:
+    for c in d[card_key]:
         raw[c["id"]] = c
         card_photos[c["id"]] = c["photos"] if c.get("photos") else [c["photo"]] if c.get("photo") else d.get("photos", [])
     for u in d.get("unclear", []):
@@ -91,7 +94,7 @@ for f in sorted(glob.glob(str(RUN / "raw" / "cards-*.json"))) + [str(RUN / "raw"
 
 
 def photos_for(src):
-    if src.startswith("C."):
+    if src.startswith(CARDS):
         return card_photos.get(src, [])
     table, sheet = int(src[1:3]), src.split(".")[1]
     named = [u["photo"] for u in unclear.get(src, []) if u.get("photo")]
@@ -104,7 +107,7 @@ def raw_text(src, field=None):
     it = raw.get(src, {})
     if field and field in it:
         return it[field]
-    return it.get("text") or " ".join(str(it.get(k, "")) for k in ("action", "needs", "sticks") if it.get(k))
+    return it.get("text") or " ".join(str(it.get(k, "")) for k in WS.row_fields() if it.get(k))
 
 
 # notes added after the readers finished (extra.json "notes"), shown with theirs: say whose reading it is
@@ -127,15 +130,8 @@ def ocr(path):
     return json.loads(r.stdout or "[]")
 
 
-# the paper kit's printed text, so headings are never mistaken for handwriting
-PRINTED = ["where does support get stuck", "who's at this table", "everyone puts one tally mark", "every challenge at this table",
-           "write them all down", "budget, leadership, burnout", "our top three", "the one we're tackling", "copy it onto your table card",
-           "what has helped, or not", "what happened, and why did it work", "got in the way", "what would you change or avoid",
-           "if we did it again, we'd", "what could people try now", "and how does it stick", "what to try", "what you need",
-           "how it sticks", "good for", "just starting", "established", "heard something good", "write it here",
-           "exact words, no names", "things nobody could answer", "links, books, people, tools", "best thing said today",
-           "the table lead writes it", "one thing i will try, adapt or explore", "name (optional)", "organisation (optional)",
-           "add these only if you're happy", "public playbook", "all of this goes into the", "scan for the", "countries:"]
+# the paper kit's printed text, so headings are never mistaken for handwriting (from the workshop's exercises)
+PRINTED = list(WS.printed())
 # and the names the settings print on the sheets and cards
 PRINTED += [x.lower() for x in (CFG["playbook"]["name"], CFG["org"]["name"], urlparse(CFG["playbook"]["url"]).netloc) if x]
 SHORT = re.escape(CFG["org"]["short"].lower()) if CFG["org"]["short"] else "(?!)"
@@ -190,7 +186,7 @@ def hit(w, line_words):
     return any(w == x or difflib.SequenceMatcher(None, w, x).ratio() >= 0.72 for x in line_words)
 
 
-def locate(pid, target, card=False, s3=False):
+def locate(pid, target, card=False, row=None):
     """Crop box (pixels, in the upright image) around the handwriting that matches `target`, plus how sure the match is.
 
     Every handwritten line is the centre of a small neighbourhood (a sticky note's worth of lines); the neighbourhood
@@ -204,7 +200,7 @@ def locate(pid, target, card=False, s3=False):
     hand = [o for o in lines if not o.get("printed")]
     if not tw or not hand:
         return img, None, 0.0
-    if card:
+    if card and CARD:
         found = locate_card(lines, hand, tw, W, H)
         if found:
             return img, found[0], found[1]
@@ -230,25 +226,29 @@ def locate(pid, target, card=False, s3=False):
     x0 = min(o["x"] for o in region); x1 = max(o["x"] + o["w"] for o in region)
     y0 = min(o["y"] for o in region); y1 = max(o["y"] + o["h"] for o in region)
     printed = [o for o in lines if o.get("printed")]
-    if card:
+    if card and CARD:
         # the whole card: from its printed heading down to the line under the Name and Organisation boxes
-        heads = [o for o in printed if "thing" in o["t"].lower() and o["y"] < y0 + lh and o["x"] < x1 and o["x"] + o["w"] > x0 - 0.05]
-        feet = [o for o in printed if re.search(r"playbook|these only", o["t"].lower()) and o["y"] > y1 and o["x"] < x1 + 0.05 and o["x"] + o["w"] > x0 - 0.08]
+        heads = [o for o in printed if CARD["heading"] in o["t"].lower() and o["y"] < y0 + lh and o["x"] < x1 and o["x"] + o["w"] > x0 - 0.05]
+        feet = [o for o in printed if re.search(CARD["foot"], o["t"].lower()) and o["y"] > y1 and o["x"] < x1 + 0.05 and o["x"] + o["w"] > x0 - 0.08]
         if heads:
-            # every card is the same shape, so its printed heading gives the whole card: the heading spans about 83% of
-            # the card's width and sits about a fifth of the way down; the card is 1.41 times as tall as it is wide
+            # every card is the same shape, so its printed heading gives the whole card (round tables: the heading
+            # spans about 83% of the card's width and sits about a fifth of the way down; the card is 1.41 times as
+            # tall as it is wide)
             h = max(heads, key=lambda o: o["y"])
-            cw = h["w"] * W / 0.83; ch = 1.41 * cw
-            left, top = h["x"] * W - 0.08 * cw, h["y"] * H - 0.22 * ch
+            cw = h["w"] * W / CARD["heading_width"]; ch = CARD["aspect"] * cw
+            left, top = h["x"] * W - CARD["left"] * cw, h["y"] * H - CARD["down"] * ch
             box = (max(0, left - 0.03 * cw), max(0, top - 0.02 * ch), min(W, left + 1.05 * cw), min(H, top + 1.02 * ch))
             return img, box, round(min(f, recall), 2)
         if feet:
             ft = min(feet, key=lambda o: o["y"]); y1 = max(y1, ft["y"] + ft["h"]); x1 = max(x1, ft["x"] + ft["w"])
-    if s3:
-        # the whole action row, from its printed "Action N" heading down to its "Good for" tick boxes and across all
-        # three columns, so the reviewer sees what to try, what you need, how it sticks and the ticks together
-        ticks = [o for o in printed if re.search(r"good for|just starting|growing|established", o["t"].lower()) and o["y"] > y0 - lh]
-        heads = [o for o in lines if re.fullmatch(r"\s*action\s*\d\s*", o["t"].lower()) and o["y"] < y0 + lh]
+    if row:
+        # the whole row, from its printed heading ("Action N") down to its tick boxes ("Good for") and across all its
+        # columns, so the reviewer sees every part of it (what to try, what you need, how it sticks) and the ticks
+        t = row.get("ticks") or {}
+        tick_re = "|".join(re.escape(x.lower().rstrip(":")) for x in [t.get("label", "")] + [o[1] if isinstance(o, list) else o for o in t.get("options", [])] if x)
+        head_re = r"\s*" + re.escape(row.get("label", "").lower()).replace(r"\{n\}", r"\s*\d").replace(r"\ ", r"\s*") + r"\s*"
+        ticks = [o for o in printed if tick_re and re.search(tick_re, o["t"].lower()) and o["y"] > y0 - lh]
+        heads = [o for o in lines if re.fullmatch(head_re, o["t"].lower()) and o["y"] < y0 + lh]
         if ticks:
             tk = min(ticks, key=lambda o: o["y"]); y1 = max(y1, tk["y"] + tk["h"])
         if heads:
@@ -267,11 +267,11 @@ def locate(pid, target, card=False, s3=False):
 def locate_card(lines, hand, tw, W, H):
     """Whole-card matching for photos of many cards (line matching picked the wrong card when cards share words). Every card has the same printed heading and shape, so each heading gives one card's box; the card whose
     handwriting best matches the target (both covering the target and holding little else) wins."""
-    heads = [o for o in lines if "thing" in o["t"].lower() and re.search(r"try|adapt|explore", o["t"].lower())]
+    heads = [o for o in lines if CARD["heading"] in o["t"].lower() and re.search(CARD["also"], o["t"].lower())]
     best = None
     for h in heads:
-        cw = h["w"] * W / 0.83; ch = 1.41 * cw
-        left, top = h["x"] * W - 0.08 * cw, h["y"] * H - 0.22 * ch
+        cw = h["w"] * W / CARD["heading_width"]; ch = CARD["aspect"] * cw
+        left, top = h["x"] * W - CARD["left"] * cw, h["y"] * H - CARD["down"] * ch
         box = (max(0, left - 0.03 * cw), max(0, top - 0.02 * ch), min(W, left + 1.05 * cw), min(H, top + 1.02 * ch))
         inside = [o for o in hand if box[0] <= (o["x"] + o["w"] / 2) * W <= box[2] and box[1] <= (o["y"] + o["h"] / 2) * H <= box[3]]
         got = [w for o in inside for w in words(o["t"])]
@@ -300,7 +300,8 @@ def picture(key, srcs, target, card=False):
         return {"photos": []}
     best = None
     for pid in pids:
-        img, box, conf = locate(pid, target, card, s3=any(".S3." in x for x in srcs))
+        row = next((WS.row_box(x.split(".")[1]) for x in srcs if x.startswith("T") and WS.row_box(x.split(".")[1])), None)
+        img, box, conf = locate(pid, target, card, row=row)
         # a retake was sent because the first photo was poor: prefer it whenever it matches reasonably well
         score = conf + (0.3 if "retake" in (labels.get(pid, {}).get("note") or "") and conf >= 0.3 else 0)
         if not best or score > best[4]:
@@ -325,72 +326,68 @@ def add(kind, key, where, srcs, **kw):
     items.append(dict(kind=kind, key=key, where=where, src=srcs, **kw))
 
 
-def where_of(cid, sec, i):
-    if cid == "commitments":
-        return f"Commitments › card {i}"
-    return f"{challenge_titles[cid]} › {SEC_NAMES[sec]} {i}"
+def sheet_label(src):
+    """Where a raw id was written: "Table 7, Sheet 2", or "Commitment card"."""
+    if src.startswith(CARDS):
+        e = next(e for e in WS.per_person() if src.startswith(e["prefix"]))
+        return e.get("short", "card")[:1].upper() + e.get("short", "card")[1:]
+    return f"{GROUP} {src[1:3].lstrip('0')}, {SHEET_NAMES[src.split('.')[1]]}"
 
 
-for c in session["challenges"]:
-    for sec in ("quotes", "helped", "hindered", "lessons", "actions", "questions"):
-        for i, x in enumerate(c[sec], 1):
-            if isinstance(x, str):
-                continue
-            fields = [k for k in ("text", "title", "what", "needs", "sticks") if isinstance(x.get(k), str) and MK.search(x[k])]
-            if not fields:
-                continue
-            srcs = x["src"] if isinstance(x["src"], list) else [x["src"]]
-            msrc = [s for s in srcs if MK.search(json.dumps(raw.get(s, {}), ensure_ascii=False))] or srcs
-            key = f"{c['id']}-{sec}-{i}"
-            target = " ".join(next((str(raw.get(s, {}).get(k)) for k in ("needs", "sticks", "action", "text")
-                                    if MK.search(str(raw.get(s, {}).get(k, "")))), raw_text(s)) for s in msrc)
-            add("reading", key, where_of(c["id"], sec, i), srcs,
-                fields={k: x[k] for k in fields}, page={k: v for k, v in x.items() if isinstance(v, str) and k != "src"},
-                raw=[f"{s}: {raw_text(s)}" for s in msrc], notes=notes_for(msrc),
-                sheet=f"Table {msrc[0][1:3].lstrip('0')}, {SHEET_NAMES[msrc[0].split('.')[1]]}",
-                **picture(key, msrc, target))
-# general reading and "Heard on the day" live outside the challenges
-for kind, label, lst in (("resources", "General reading", session.get("resources", [])), ("quotes", "Heard on the day", session.get("quotes", []))):
-    for i, x in enumerate(lst, 1):
-        fields = [k for k in ("text", "title", "source") if isinstance(x.get(k), str) and MK.search(x[k])]
-        if not fields:
-            continue
-        srcs = x["src"] if isinstance(x["src"], list) else [x["src"]]
-        key = f"{kind}-{srcs[0].replace('.', '-')}"
-        add("reading", key, f"{label} › {i}", srcs, fields={k: x[k] for k in fields},
-            page={k: v for k, v in x.items() if isinstance(v, str) and k != "src"},
-            raw=[f"{s_}: {raw_text(s_)}" for s_ in srcs], notes=notes_for(srcs),
-            sheet=f"Table {srcs[0][1:3].lstrip('0')}, {SHEET_NAMES[srcs[0].split('.')[1]]}",
-            **picture(key, srcs, " ".join(raw_text(s_) for s_ in srcs)))
-for i, m in enumerate(session["commitments"], 1):
-    fields = [k for k in ("text", "name", "org") if isinstance(m.get(k), str) and MK.search(m[k])]
+# one screen per line on the page that still holds a [?word] or [illegible], in the workshop's review order
+ORDER = WS.output.get("review_order")
+FIELD_ORDER = [f for f in WS.row_fields() if f not in WS.text_fields()] + WS.text_fields()
+for spec, _label, owner, x in WS.page_items(session, ORDER):
+    rv = spec.get("review", {})
+    if rv is False or not isinstance(x, dict) or not x.get("src"):
+        continue
+    fields = [k for k in rv.get("fields", ["text", "title"]) if isinstance(x.get(k), str) and MK.search(x[k])]
     if not fields:
         continue
-    key = "card-" + re.sub(r"\W+", "-", m["src"])
-    rc = raw.get(m["src"], {})
-    add("reading", key, where_of("commitments", "card", i), [m["src"]],
-        fields={k: m[k] for k in fields}, page={k: m[k] for k in ("text", "name", "org") if m.get(k)},
-        raw=[f"{m['src']}: " + " · ".join(filter(None, [rc.get("text"), rc.get("name"), rc.get("org")]))],
-        notes=notes_for([m["src"]]), sheet="Commitment card", published_name=bool(set(fields) & {"name", "org"}),
-        **picture(key, [m["src"]], " ".join(filter(None, [rc.get("text"), rc.get("name")])), card=True))
+    srcs = x["src"] if isinstance(x["src"], list) else [x["src"]]
+    page = {k: v for k, v in x.items() if isinstance(v, str) and k != "src"}
+    n = _label.rsplit(" ", 1)[-1]
+    if rv.get("style") == "card":
+        src = srcs[0]
+        rc = raw.get(src, {})
+        key = rv["key"].format(src=re.sub(r"\W+", "-", src))
+        names = WS.name_fields()
+        add("reading", key, rv["where"].format(n=n), [src],
+            fields={k: x[k] for k in fields}, page={k: x[k] for k in rv["fields"] if x.get(k)},
+            raw=[f"{src}: " + " · ".join(filter(None, [rc.get(k) for k in ["text"] + names]))],
+            notes=notes_for([src]), sheet=sheet_label(src), published_name=bool(set(fields) & set(names)),
+            **picture(key, [src], " ".join(filter(None, [rc.get("text")] + [rc.get(k) for k in names[:1]])), card=True))
+    elif "[]." in spec["path"]:
+        # a line inside a section (a challenge's quote, helped, action...): show the raw line that carries the marker
+        parent_id = _label.split(" ", 1)[0]
+        child = spec["path"].split("[].", 1)[1][:-2]
+        msrc = [s_ for s_ in srcs if MK.search(json.dumps(raw.get(s_, {}), ensure_ascii=False))] or srcs
+        key = f"{parent_id}-{child}-{n}"
+        target = " ".join(next((str(raw.get(s_, {}).get(k)) for k in FIELD_ORDER
+                                if MK.search(str(raw.get(s_, {}).get(k, "")))), raw_text(s_)) for s_ in msrc)
+        add("reading", key, f"{owner} › {rv.get('name', child)} {n}", srcs,
+            fields={k: x[k] for k in fields}, page=page,
+            raw=[f"{s_}: {raw_text(s_)}" for s_ in msrc], notes=notes_for(msrc),
+            sheet=sheet_label(msrc[0]), **picture(key, msrc, target))
+    else:
+        # a line in a section of its own ("Heard on the day", general reading)
+        key = rv.get("key", spec["path"][:-2] + "-{src}").format(src=srcs[0].replace(".", "-"))
+        add("reading", key, rv.get("where", owner + " › {n}").format(n=n), srcs, fields={k: x[k] for k in fields}, page=page,
+            raw=[f"{s_}: {raw_text(s_)}" for s_ in srcs], notes=notes_for(srcs),
+            sheet=sheet_label(srcs[0]), **picture(key, srcs, " ".join(raw_text(s_) for s_ in srcs)))
+
 
 def place_of(src):
     """Where a raw id ended up on the page, for a check's heading."""
-    for c in session["challenges"]:
-        for sec in ("quotes", "helped", "hindered", "lessons", "actions", "questions"):
-            for x in c[sec]:
-                s_ = x.get("src") if isinstance(x, dict) else None
-                if src in (s_ if isinstance(s_, list) else [s_]):
-                    return c["title"]
-    for label, lst in (("General reading", session.get("resources", [])), ("Heard on the day", session.get("quotes", [])),
-                       ("Commitments", session.get("commitments", []))):
-        if any(src in (x.get("src") if isinstance(x.get("src"), list) else [x.get("src")]) for x in lst):
-            return label
+    for _spec, _label, owner, x in WS.page_items(session, ORDER):
+        s_ = x.get("src") if isinstance(x, dict) else None
+        if src in (s_ if isinstance(s_, list) else [s_]):
+            return owner
     return "Not on the page"
 
 
 def sheet_of(src):
-    return "Commitment card" if src.startswith("C.") else f"Table {src[1:3].lstrip('0')}, {SHEET_NAMES[src.split('.')[1]]}"
+    return sheet_label(src)
 
 
 # photo checks the readers asked for: {"src": raw id, "note": the question}
@@ -398,13 +395,13 @@ for ch in EXTRA.get("checks", []):
     src = ch["src"]
     key = "check-" + re.sub(r"\W+", "-", src)
     add("check", key, f"{place_of(src)} · {src}", [src], raw=[f"{src}: {raw_text(src)}"], notes=[ch["note"]],
-        sheet=sheet_of(src), **picture(key, [src], raw_text(src), card=src.startswith("C.")))
+        sheet=sheet_of(src), **picture(key, [src], raw_text(src), card=src.startswith(CARDS)))
 
 # calls only a reviewer can make: {"key", "src": [raw ids, may be empty], "text", "options": [two to four answers]}
 for cl in EXTRA.get("calls", []):
     srcs = cl.get("src") or []
     key = "call-" + re.sub(r"\W+", "-", cl["key"])
-    pic = picture(key, srcs, " ".join(raw_text(s_) for s_ in srcs), card=bool(srcs and srcs[0].startswith("C."))) if srcs else {"photos": []}
+    pic = picture(key, srcs, " ".join(raw_text(s_) for s_ in srcs), card=bool(srcs and srcs[0].startswith(CARDS))) if srcs else {"photos": []}
     add("call", key, "Your call", srcs, notes=[cl["text"]], options=cl["options"], **pic)
 
 if not items:

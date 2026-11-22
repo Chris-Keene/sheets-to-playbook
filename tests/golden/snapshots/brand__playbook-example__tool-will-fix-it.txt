@@ -1,0 +1,165 @@
+## text
+When leaders think a tool or AI has solved it, Workshop Notes
+
+Skip to content
+Workshop
+Notes
+Playbook
+Commitments
+Run your own
+How it was made
+
+Example, not from the session
+
+← All challenges
+
+BELIEF A TOOL OR AI WILL FIX IT
+
+When leaders think a tool or AI has solved it
+Worked on at table 11
+Technology
+Financial services
+
+When a new tool or AI assistant arrives, leaders can assume accessibility is now handled. Manual testing and testing with disabled people are the first things cut.
+
+We bought a scanner and the next question was whether we still needed the accessibility team.
+
+AI writes code fast, including inaccessible code.
+
+What’s been tried
+Helped
+Explaining what automated tools can and can't find, with a short list of examples.
+A budget line for testing with disabled people, kept separate from tooling.
+Got in the way
+Reporting the tool's score as the only measure. It became the target.
+Actions to try
+Show actions for
+Any stage
+Just starting
+Growing
+Established
+
+Showing all 2 actions.
+
+Publish what your tools cover
+What to do
+Write down what your tools check, and what still needs people.
+What you need
+Your tool's list of checks and an hour to write it up.
+How it sticks
+Update it when tools change, and link it from every report.
+Good for
+Growing
+Established
+Protect testing with disabled people
+What to do
+Ring-fence time and money for testing with disabled people.
+What you need
+Sponsor agreement that tooling doesn't replace it.
+How it sticks
+Report user-testing findings next to the tool results each quarter.
+Good for
+Just starting
+Growing
+Established
+Still open
+
+Questions the table didn’t answer. If you have, tell Acme.
+
+How can we use AI to speed up accessibility work without it replacing judgement?
+Resources
+Involving Users in Web Projects for Better, Easier Accessibility
+W3C WAI
+Previous challenge
+Reviving a champions network that has stalled
+
+Workshop Notes: Growing and sustaining support for accessibility · Example draft
+
+Download this playbook
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+link "Acme Accessibility Group (Acme) Workshop Notes"
+navigation "Playbook"
+heading[1] "When leaders think a tool or AI has solved it"
+list
+figure
+figure
+region "What’s been tried"
+region "Actions to try"
+region "Still open"
+region "Resources"
+navigation "Other challenges"
+image "Acme Accessibility Group (Acme)"
+list
+link "← All challenges"
+listitem[1]
+listitem[1]
+blockquote
+blockquote
+heading[2] "What’s been tried"
+heading[3] "Helped"
+list
+heading[3] "Got in the way"
+list
+heading[2] "Actions to try"
+group "Show actions for"
+status
+list
+heading[2] "Still open"
+list
+heading[2] "Resources"
+list
+link "Previous challenge Reviving a champions network that has stalled"
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+Legend
+LabelText
+LabelText
+LabelText
+LabelText
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"
+radio "Any stage"
+radio "Just starting"
+radio "Growing"
+radio "Established"
+heading[3] "Publish what your tools cover"
+DescriptionList
+list "Good for"
+heading[3] "Protect testing with disabled people"
+DescriptionList
+list "Good for"
+link "Involving Users in Web Projects for Better, Easier Accessibility"
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]
+listitem[2]

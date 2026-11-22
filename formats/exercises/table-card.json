@@ -1,0 +1,26 @@
+{
+ "id": "table-card",
+ "code": "TC",
+ "short": "table card",
+ "title": "Table card",
+ "per": "group",
+ "boxes": [],
+ "printed": [
+  "all of this goes into the"
+ ],
+ "print": {
+  "renderer": "legacy"
+ },
+ "kit": {
+  "html": {
+   "file": "*table-card*.html",
+   "title": "Table card",
+   "note": "The table number on one side, “We’re tackling” on the other."
+  },
+  "print": {
+   "file": "*table-cards*.pdf",
+   "title": "Table cards",
+   "note": "A4, folding to an A5 tent: the table number on one side, “We’re tackling” on the other."
+  }
+ }
+}

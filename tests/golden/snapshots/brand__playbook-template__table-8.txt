@@ -1,0 +1,162 @@
+## text
+Table 8’s challenge, Workshop Notes
+
+Skip to content
+Template.
+Dashed boxes show where content from the day goes and which sheet it comes from. There’s one page per table; tables that pick the same challenge get merged.
+Workshop
+Notes
+Playbook
+Commitments
+Run your own
+How it was made
+
+← All challenges
+
+Theme to fill
+
+Table 8’s challenge
+TO FILL
+Challenge title
+From Sheet 1, “The one we’re tackling”. It’s also on the table’s tent card.
+Worked on at table 8
+Sectors and sizes, from Sheet 2
+TO FILL
+Why it’s hard
+One or two sentences on why it’s hard, from Sheet 1 and the table lead’s voice note.
+TO FILL
+Quote
+From the side sheet, Quotes column. Exact words, labelled by sector only.
+TO FILL
+Quote
+From the side sheet, Quotes column. Exact words, labelled by sector only.
+What’s been tried
+Helped
+TO FILL
+What helped
+From Sheet 2, Helped column. One line each, with who it worked for.
+Got in the way
+TO FILL
+What got in the way
+From Sheet 2, Got in the way column. One line each, with who it was for.
+TO FILL
+What we learned
+From Sheet 2, “If we did it again, we’d…”
+Actions to try
+TO FILL
+Action 1
+What to do
+From Sheet 3, the action box.
+What you need
+From Sheet 3, “What you need”.
+How it sticks
+From Sheet 3, “How it sticks”.
+Good for
+The ticks on Sheet 3
+TO FILL
+Action 2
+What to do
+From Sheet 3, the action box.
+What you need
+From Sheet 3, “What you need”.
+How it sticks
+From Sheet 3, “How it sticks”.
+Good for
+The ticks on Sheet 3
+TO FILL
+Action 3
+What to do
+From Sheet 3, the action box.
+What you need
+From Sheet 3, “What you need”.
+How it sticks
+From Sheet 3, “How it sticks”.
+Good for
+The ticks on Sheet 3
+Still open
+
+Questions the table didn’t answer. If you have, tell Acme.
+
+TO FILL
+Open questions
+From the side sheet, Questions column.
+Resources
+TO FILL
+Resources
+From the side sheet, Resources column. Every link gets checked before publishing.
+Previous challenge
+Table 7’s challenge
+Next challenge
+Table 9’s challenge
+
+Workshop Notes: Growing and sustaining support for accessibility · Template
+
+Download this playbook
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+note
+link "Acme Accessibility Group (Acme) Workshop Notes"
+navigation "Playbook"
+heading[1] "Table 8’s challenge"
+region "What’s been tried"
+region "Actions to try"
+region "Still open"
+region "Resources"
+navigation "Other challenges"
+strong
+image "Acme Accessibility Group (Acme)"
+list
+link "← All challenges"
+heading[2] "What’s been tried"
+heading[3] "Helped"
+list
+heading[3] "Got in the way"
+list
+heading[2] "Actions to try"
+list
+heading[2] "Still open"
+heading[2] "Resources"
+link "Previous challenge Table 7’s challenge"
+link "Next challenge Table 9’s challenge"
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"
+heading[3] "Action 1"
+DescriptionList
+heading[3] "Action 2"
+DescriptionList
+heading[3] "Action 3"
+DescriptionList
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition

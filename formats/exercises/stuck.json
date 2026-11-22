@@ -1,0 +1,82 @@
+{
+ "id": "stuck",
+ "code": "S1",
+ "short": "Sheet 1",
+ "label": "Question 1",
+ "title": "Where does support get stuck?",
+ "per": "group",
+ "boxes": [
+  {
+   "id": "room",
+   "type": "tally",
+   "key": "room",
+   "label": "Who's at this table?",
+   "hint": "Everyone puts one tally mark against their sector, and writes their country.",
+   "optional": true,
+   "options": [
+    "Public sector",
+    "Finance",
+    "Retail",
+    "Tech",
+    "Education",
+    "Charity",
+    "Health",
+    "Other"
+   ],
+   "text_line": "Countries",
+   "review_label": "Who was at the table",
+   "reader": "Count the tally marks in each sector box (a gate of four strokes with a fifth across is 5) and copy the countries line as written. It goes in S1.room, with no id: it describes the table, not an item. Leave out sectors with no marks.",
+   "fields_key": "countries"
+  },
+  {
+   "id": "challenges",
+   "type": "list",
+   "key": "challenges",
+   "stem": "challenge",
+   "label": "Every challenge at this table",
+   "hint": "Write them all down. Budget, leadership, burnout, proving impact…"
+  },
+  {
+   "id": "top3",
+   "type": "ranked",
+   "key": "top3",
+   "stem": "top",
+   "count": 3,
+   "label": "Our top three"
+  },
+  {
+   "id": "pick",
+   "type": "text",
+   "key": "pick",
+   "stem": "pick",
+   "label": "The one we're tackling",
+   "hint": "Copy it onto your table card too."
+  }
+ ],
+ "printed": [
+  "where does support get stuck",
+  "who's at this table",
+  "everyone puts one tally mark",
+  "every challenge at this table",
+  "write them all down",
+  "budget, leadership, burnout",
+  "our top three",
+  "the one we're tackling",
+  "copy it onto your table card",
+  "countries:"
+ ],
+ "print": {
+  "renderer": "legacy"
+ },
+ "kit": {
+  "title": "Sheet 1: Where does support get stuck?",
+  "html": {
+   "file": "*sheet-S1*.html",
+   "note": "Type into it, or print it on A4."
+  },
+  "print": {
+   "file": "*sheet-S1*.pdf",
+   "note": "A1 poster, one per table."
+  }
+ }
+}

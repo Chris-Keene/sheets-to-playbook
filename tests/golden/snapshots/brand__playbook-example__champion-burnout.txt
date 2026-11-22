@@ -1,0 +1,194 @@
+## text
+Stopping champions burning out, Workshop Notes
+
+Skip to content
+Workshop
+Notes
+Playbook
+Commitments
+Run your own
+How it was made
+
+Example, not from the session
+
+← All challenges
+
+CHAMPIONS BURNING OUT
+
+Stopping champions burning out
+Worked on at tables 4 and 7
+Media
+Charity
+Telecoms
+
+Champions usually do this on top of their day job. The most committed people take on the most, nobody sees the extra hours, and they quietly step back.
+
+Being the accessibility person at our place meant being the accessibility person for everything.
+
+Our best champion left and said it felt like unpaid overtime with a badge.
+
+What’s been tried
+Helped
+Protected time agreed with line managers, even two hours a month, written into objectives.
+Rotating roles, so different champions host, answer questions and run training each quarter.
+A clear list of what champions don't do, so they could say no to full audits.
+Got in the way
+Recognition that was only a certificate. People wanted it to count in their review.
+An open chat channel where every question went to the same three people.
+Actions to try
+Show actions for
+Any stage
+Just starting
+Growing
+Established
+
+Showing all 3 actions.
+
+Write champion work into objectives
+What to do
+Agree with line managers that champion work counts in performance reviews.
+What you need
+A short template objective, and HR or a senior sponsor to back it.
+How it sticks
+Make it part of joining the network, so every new champion starts with it agreed.
+Good for
+Growing
+Established
+Publish a 'champions don't' list
+What to do
+Set out what champions do and don't do, such as no full audits and no sign-off.
+What you need
+An hour with your core group to agree it, and somewhere visible to publish it.
+How it sticks
+Point to it every time a request goes over the line.
+Good for
+Just starting
+Growing
+Rotate the jobs
+What to do
+Split the network's work into roles and rotate them every quarter.
+What you need
+At least six active champions and a simple rota.
+How it sticks
+Hand over in a 15-minute call with a checklist.
+Good for
+Established
+Still open
+
+Questions the table didn’t answer. If you have, tell Acme.
+
+How do you spot burnout in a volunteer before they leave?
+Should champion roles be recognised in pay or grade?
+Resources
+Teach and Advocate
+W3C WAI
+Previous challenge
+Proving impact in terms leaders care about
+Next challenge
+Getting product teams to own accessibility
+
+Workshop Notes: Growing and sustaining support for accessibility · Example draft
+
+Download this playbook
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+link "Acme Accessibility Group (Acme) Workshop Notes"
+navigation "Playbook"
+heading[1] "Stopping champions burning out"
+list
+figure
+figure
+region "What’s been tried"
+region "Actions to try"
+region "Still open"
+region "Resources"
+navigation "Other challenges"
+image "Acme Accessibility Group (Acme)"
+list
+link "← All challenges"
+listitem[1]
+listitem[1]
+listitem[1]
+blockquote
+blockquote
+heading[2] "What’s been tried"
+heading[3] "Helped"
+list
+heading[3] "Got in the way"
+list
+heading[2] "Actions to try"
+group "Show actions for"
+status
+list
+heading[2] "Still open"
+list
+heading[2] "Resources"
+list
+link "Previous challenge Proving impact in terms leaders care about"
+link "Next challenge Getting product teams to own accessibility"
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+Legend
+LabelText
+LabelText
+LabelText
+LabelText
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"
+radio "Any stage"
+radio "Just starting"
+radio "Growing"
+radio "Established"
+heading[3] "Write champion work into objectives"
+DescriptionList
+list "Good for"
+heading[3] "Publish a 'champions don't' list"
+DescriptionList
+list "Good for"
+heading[3] "Rotate the jobs"
+DescriptionList
+list "Good for"
+link "Teach and Advocate"
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]

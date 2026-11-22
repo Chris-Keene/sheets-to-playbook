@@ -100,7 +100,8 @@ Photos of sheets can include names, faces in the background and the odd phone nu
 ```
 .claude/skills/sheets-to-playbook/   the Claude Code skill: the whole day, stage by stage
 ingest/ingest.py                     prepare, status, verify, draft, review, publish
-ingest/RAW_FORMAT.md                 how handwriting is transcribed, and the rules for writing the playbook
+ingest/RAW_FORMAT.md                 how handwriting is transcribed, and the rules every workshop's writing follows
+formats/                             the workshops: exercises (one per sheet or card) and agendas, recipes and page views
 build/                               site builder, settings and colour maths, templates
 print/                               paper kit: PDFs and fillable HTML
 slides/                              facilitator deck

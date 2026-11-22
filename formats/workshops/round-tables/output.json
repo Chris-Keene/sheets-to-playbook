@@ -1,0 +1,177 @@
+{
+ "_note": "What the round-tables page holds, and how ingest.py verify checks each part. policy: verbatim (word for word, at least `min` alike), trace (must cite a source), optional (may cite one). strings_ok: a plain string is allowed without a source. links: verify --links checks its url. review: how the review app shows a line (name, which fields can hold markers, screen key and heading); false leaves it out. review_order: the order of the app's screens. raw_field_map: a page field whose words live under another name in the transcription.",
+ "paths": [
+  {
+   "path": "challenges[].quotes[]",
+   "label": "{parent} quote {n}",
+   "policy": "verbatim",
+   "min": 0.86,
+   "review": {
+    "name": "Quote",
+    "fields": [
+     "text",
+     "title",
+     "what",
+     "needs",
+     "sticks"
+    ]
+   }
+  },
+  {
+   "path": "challenges[].helped[]",
+   "label": "{parent} helped {n}",
+   "policy": "trace",
+   "review": {
+    "name": "Helped",
+    "fields": [
+     "text",
+     "title",
+     "what",
+     "needs",
+     "sticks"
+    ]
+   }
+  },
+  {
+   "path": "challenges[].hindered[]",
+   "label": "{parent} hindered {n}",
+   "policy": "trace",
+   "review": {
+    "name": "Got in the way",
+    "fields": [
+     "text",
+     "title",
+     "what",
+     "needs",
+     "sticks"
+    ]
+   }
+  },
+  {
+   "path": "challenges[].actions[]",
+   "label": "{parent} action {n}",
+   "policy": "trace",
+   "review": {
+    "name": "Action",
+    "fields": [
+     "text",
+     "title",
+     "what",
+     "needs",
+     "sticks"
+    ]
+   }
+  },
+  {
+   "path": "challenges[].questions[]",
+   "label": "{parent} questions {n}",
+   "policy": "trace",
+   "strings_ok": true,
+   "review": {
+    "name": "Question",
+    "fields": [
+     "text",
+     "title",
+     "what",
+     "needs",
+     "sticks"
+    ]
+   }
+  },
+  {
+   "path": "challenges[].lessons[]",
+   "label": "{parent} lessons {n}",
+   "policy": "trace",
+   "strings_ok": true,
+   "review": {
+    "name": "If we did it again",
+    "fields": [
+     "text",
+     "title",
+     "what",
+     "needs",
+     "sticks"
+    ]
+   }
+  },
+  {
+   "path": "challenges[].resources[]",
+   "label": "{parent} resource {n}",
+   "policy": "optional",
+   "links": true,
+   "review": false
+  },
+  {
+   "path": "quotes[]",
+   "label": "heard on the day {n}",
+   "section": "Heard on the day",
+   "policy": "verbatim",
+   "min": 0.86,
+   "review": {
+    "fields": [
+     "text",
+     "title",
+     "source"
+    ],
+    "key": "quotes-{src}"
+   }
+  },
+  {
+   "path": "resources[]",
+   "label": "general resource {n}",
+   "section": "General reading",
+   "owner": "general reading",
+   "policy": "optional",
+   "links": true,
+   "review": {
+    "fields": [
+     "text",
+     "title",
+     "source"
+    ],
+    "key": "resources-{src}"
+   }
+  },
+  {
+   "path": "commitments[]",
+   "label": "commitment {n}",
+   "section": "Commitments",
+   "policy": "verbatim",
+   "min": 0.8,
+   "review": {
+    "style": "card",
+    "fields": [
+     "text",
+     "name",
+     "org"
+    ],
+    "key": "card-{src}",
+    "where": "Commitments › card {n}"
+   }
+  }
+ ],
+ "not_on_page": [
+  "S1.challenges",
+  "S1.top3",
+  "S1.pick"
+ ],
+ "roles": {
+  "S1.challenges": "feeds the themes",
+  "S1.top3": "feeds the themes",
+  "S1.pick": "the challenge title"
+ },
+ "review_order": [
+  "challenges[].quotes[]",
+  "challenges[].helped[]",
+  "challenges[].hindered[]",
+  "challenges[].lessons[]",
+  "challenges[].actions[]",
+  "challenges[].questions[]",
+  "resources[]",
+  "quotes[]",
+  "commitments[]"
+ ],
+ "raw_field_map": {
+  "what": "action"
+ }
+}

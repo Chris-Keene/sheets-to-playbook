@@ -1,0 +1,336 @@
+## text
+Skip to content
+Community
+Playbook
+Playbook
+Commitments
+Run your own
+How it was made
+
+Example, not from the session
+
+COMMUNITY PLAYBOOK
+
+Growing and sustaining support for accessibility
+
+Created from data collected during the team workshop at Example Conference 2026.
+
+9 themes
+4 challenges
+12 actions
+8 commitments
+Go to the challenges
+Where support gets stuck
+
+Every table listed the challenges its members face. These are the themes that came up, and which tables raised them. Each ring is the room: one arrow per table.
+
+4
+Leadership support fades
+
+4 of 4 tables · Tables 1, 2, 3 and 4
+
+Heard: Exec sponsor left and nobody picked it up Only matters after a complaint
+
+Read: Keeping leadership support when sponsors move on
+
+4
+Hard to prove impact
+
+4 of 4 tables · Tables 1, 2, 3 and 4
+
+Heard: Leaders want a number we can't give Issue count went up, looked like failure
+
+Read: Proving impact in terms leaders care about
+
+3
+Champions burning out
+
+3 of 4 tables · Tables 2, 3 and 4
+
+Heard: Same three people answer everything Done on top of the day job
+
+Read: Stopping champions burning out
+
+3
+Seen as someone else's job
+
+3 of 4 tables · Tables 1, 2 and 3
+
+Heard: Loses to deadlines every sprint Product thinks it's the a11y team's job
+
+Read: Getting product teams to own accessibility
+
+3
+No budget or headcount
+
+3 of 4 tables · Tables 1, 3 and 4
+
+Heard: Money only after a legal letter Funding ends when the project ends
+
+3
+Networks lose momentum
+
+3 of 4 tables · Tables 1, 2 and 3
+
+Heard: Great launch, then nothing 200 members, 5 turn up
+
+2
+Too little input from disabled people
+
+2 of 4 tables · Tables 2 and 4
+
+Heard: We test with tools, rarely with people
+
+1
+Belief a tool or AI will fix it
+
+1 of 4 tables · Table 3
+
+Heard: Bought a scanner, asked if we still need the team
+
+1
+Suppliers and procurement
+
+1 of 4 tables · Table 1
+
+Heard: Third-party platforms we can't fix
+
+The challenges
+
+Each table picked one challenge and worked through what has helped, what hasn’t, and what to try next. Where two tables picked the same challenge, their work is combined. Open any challenge to see the full detail.
+
+LEADERSHIP SUPPORT FADES
+
+Keeping leadership support when sponsors move on
+
+Support often rests on one senior sponsor. When they change role, leave or pick up a new priority, accessibility drops off the agenda and the work starts again from scratch.
+
+Table 1 · 3 actions to try
+
+Explore this challenge
+
+HARD TO PROVE IMPACT
+
+Proving impact in terms leaders care about
+
+Leaders ask for numbers, but the changes that matter most, like fewer barriers for customers and more confident teams, are hard to count. Issue counts can even go up when things are improving, because more people are finally looking.
+
+Table 2 · 3 actions to try
+
+Explore this challenge
+
+CHAMPIONS BURNING OUT
+
+Stopping champions burning out
+
+Champions usually do this on top of their day job. The most committed people take on the most, nobody sees the extra hours, and they quietly step back.
+
+Table 3 · 3 actions to try
+
+Explore this challenge
+
+SEEN AS SOMEONE ELSE'S JOB
+
+Getting product teams to own accessibility
+
+Accessibility gets treated as a specialist's job or a check at the end. Product teams agree it matters, then it loses to deadlines every sprint.
+
+Table 4 · 3 actions to try
+
+Explore this challenge
+Shared on the day
+
+Links, tools and reading people recommended to each other on the tables’ side sheets.
+
+The Business Case for Digital Accessibility
+
+Website · W3C WAI · w3.org
+
+Planning and Managing Web Accessibility
+
+Website · W3C WAI · w3.org
+
+Accessibility Maturity Model
+
+Website · W3C · w3.org
+
+Involving Users in Web Projects for Better, Easier Accessibility
+
+Website · W3C WAI · w3.org
+
+Teach and Advocate
+
+Website · W3C WAI · w3.org
+
+Making your service accessible: an introduction
+
+Website · GOV.UK Service Manual · gov.uk
+
+Inclusive Design
+
+Website · Microsoft · inclusive.microsoft.design
+
+The Business Case for Digital Accessibility
+
+Website · W3C WAI · w3.org
+
+From Keeping leadership support when sponsors move on
+
+Planning and Managing Web Accessibility
+
+Website · W3C WAI · w3.org
+
+From Keeping leadership support when sponsors move on
+
+Accessibility Maturity Model
+
+Website · W3C · w3.org
+
+From Proving impact in terms leaders care about
+
+Involving Users in Web Projects for Better, Easier Accessibility
+
+Website · W3C WAI · w3.org
+
+From Proving impact in terms leaders care about
+
+Teach and Advocate
+
+Website · W3C WAI · w3.org
+
+From Stopping champions burning out
+
+Planning and Managing Web Accessibility
+
+Website · W3C WAI · w3.org
+
+From Getting product teams to own accessibility
+
+Inclusive Design
+
+Website · Microsoft · inclusive.microsoft.design
+
+From Getting product teams to own accessibility
+
+Community Playbook: Growing and sustaining support for accessibility · Example draft
+
+Download this playbook · Site built by the organisers
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+link "Acme Accessibility Group (Acme) Community Playbook"
+navigation "Playbook"
+region "Growing and sustaining support for accessibility"
+region "Where support gets stuck"
+region "The challenges"
+region "Shared on the day"
+image "Acme Accessibility Group (Acme)"
+list
+heading[1] "Growing and sustaining support for accessibility"
+list "In this playbook"
+link "Go to the challenges"
+heading[2] "Where support gets stuck"
+list
+heading[2] "The challenges"
+list
+heading[2] "Shared on the day"
+list
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"
+heading[3] "Leadership support fades"
+heading[3] "Hard to prove impact"
+heading[3] "Champions burning out"
+heading[3] "Seen as someone else's job"
+heading[3] "No budget or headcount"
+heading[3] "Networks lose momentum"
+heading[3] "Too little input from disabled people"
+heading[3] "Belief a tool or AI will fix it"
+heading[3] "Suppliers and procurement"
+heading[3] "Keeping leadership support when sponsors move on"
+heading[3] "Proving impact in terms leaders care about"
+heading[3] "Stopping champions burning out"
+heading[3] "Getting product teams to own accessibility"
+heading[3] "The Business Case for Digital Accessibility"
+heading[3] "Planning and Managing Web Accessibility"
+heading[3] "Accessibility Maturity Model"
+heading[3] "Involving Users in Web Projects for Better, Easier Accessibility"
+heading[3] "Teach and Advocate"
+heading[3] "Making your service accessible: an introduction"
+heading[3] "Inclusive Design"
+heading[3] "The Business Case for Digital Accessibility"
+heading[3] "Planning and Managing Web Accessibility"
+heading[3] "Accessibility Maturity Model"
+heading[3] "Involving Users in Web Projects for Better, Easier Accessibility"
+heading[3] "Teach and Advocate"
+heading[3] "Planning and Managing Web Accessibility"
+heading[3] "Inclusive Design"
+link "Read: Keeping leadership support when sponsors move on"
+link "Read: Proving impact in terms leaders care about"
+link "Read: Stopping champions burning out"
+link "Read: Getting product teams to own accessibility"
+link "Keeping leadership support when sponsors move on"
+link "Proving impact in terms leaders care about"
+link "Stopping champions burning out"
+link "Getting product teams to own accessibility"
+link "The Business Case for Digital Accessibility"
+link "Planning and Managing Web Accessibility"
+link "Accessibility Maturity Model"
+link "Involving Users in Web Projects for Better, Easier Accessibility"
+link "Teach and Advocate"
+link "Making your service accessible: an introduction"
+link "Inclusive Design"
+link "The Business Case for Digital Accessibility"
+link "Keeping leadership support when sponsors move on"
+link "Planning and Managing Web Accessibility"
+link "Keeping leadership support when sponsors move on"
+link "Accessibility Maturity Model"
+link "Proving impact in terms leaders care about"
+link "Involving Users in Web Projects for Better, Easier Accessibility"
+link "Proving impact in terms leaders care about"
+link "Teach and Advocate"
+link "Stopping champions burning out"
+link "Planning and Managing Web Accessibility"
+link "Getting product teams to own accessibility"
+link "Inclusive Design"
+link "Getting product teams to own accessibility"

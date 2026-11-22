@@ -78,14 +78,15 @@ def kit_settings(cfg, qr_url):
     # the card's small print is black, unless the highlight is too dark for it (then no ink: the paper shows through)
     k.card_ink = BLACK if config.contrast("#000000", hi) >= 4.5 else WHITE
     k.logo = config.logo_path(cfg, "secondary") or config.logo_path(cfg, "primary")
+    # a logo in its own colours keeps them on paper too (each shape's fill, converted to CMYK); otherwise it's
+    # printed in the accent colour
+    k.logo_colours = config.hex_to_cmyk if (cfg["brand"].get("logo") or {}).get("keep_colours") else None
     if k.logo and k.logo.suffix.lower() != ".svg":
         k.warnings.append(f"{k.logo.name} isn't an SVG, and the print kit draws logos as vector shapes, so the wordmark stands in")
         k.logo = None
     if k.logo:
         try:
             svg_paths(k.logo)
-            if "transform=" in k.logo.read_text():
-                k.warnings.append(f"{k.logo.name} uses SVG transforms, which the print kit ignores: flatten it if the logo prints oddly")
         except (OSError, ValueError) as err:
             k.warnings.append(f"can't draw the logo ({err}), so the wordmark stands in")
             k.logo = None
@@ -99,13 +100,13 @@ def kit_settings(cfg, qr_url):
 # ---------------------------------------------------------------- shared pieces
 
 def logo(p, k, x, y, h, max_w, baseline=None, colour=None):
-    """The logo file in the accent colour, or the wordmark in its place: the org's short name (or the playbook's
-    name) in Poppins Bold, sized to the same box. `colour` is the wordmark's, for a background other than white.
+    """The logo file in the accent colour (or its own colours, with brand.logo.keep_colours), or the wordmark in its
+    place: the org's short name (or the playbook's name) in the brand font's Bold, sized to the same box. `colour` is the wordmark's, for a background other than white.
     Returns the width used."""
     if k.logo:
         vb, _ = svg_paths(k.logo)
         w = min(h * vb[2] / vb[3], max_w)
-        return p.svg("art", k.logo, x, y, w=w, fill=k.accent)[0]
+        return p.svg("art", k.logo, x, y, w=w, fill=k.accent, colours=k.logo_colours)[0]
     cap = pdfkit.cap_height("Bold")      # the brand font's capital height, as a share of the font size (Poppins: 0.7)
     size_mm = 0.5 * h / cap              # capitals half the logo's height, like the lettering in a logo lockup
     size_mm = min(size_mm, size_mm * max_w / p.text_width(k.wordmark, size_mm * MM, "Bold"))

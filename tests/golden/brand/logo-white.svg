@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40">
+  <!-- a test logo for tests/golden.py: nested transforms and two colours, like a real exported logo -->
+  <g transform="translate(-10 -5)">
+    <g transform="translate(10 5)">
+      <path d="M4 32V8h8l8 14 8-14h8v24h-7V19l-9 15-9-15v13z" fill="#ffffff"/>
+    </g>
+    <path d="M0 0a6 6 0 1 0 12 0a6 6 0 1 0-12 0" transform="translate(66 25)" fill="#e63946"/>
+    <path d="M0 0a6 6 0 1 0 12 0a6 6 0 1 0-12 0" transform="translate(84 25)" fill="#2a9d8f"/>
+  </g>
+</svg>

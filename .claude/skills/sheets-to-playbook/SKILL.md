@@ -5,7 +5,9 @@ description: Turn a folder of photos of the paper worksheets from a workshop or 
 
 # Sheets to playbook
 
-Repo: the folder holding `ingest/ingest.py` (the current project, if Claude Code was opened in the clone). All paths below are relative to it. Read `ingest/RAW_FORMAT.md` before stage 3: it holds the transcription format and the rules for writing the playbook.
+Repo: the folder holding `ingest/ingest.py` (the current project, if Claude Code was opened in the clone). All paths below are relative to it. Read `ingest/RAW_FORMAT.md` before stage 3: it holds the transcription rules and the hard rules for writing the page that every workshop shares.
+
+**Which workshop:** the settings' `workshop` (round tables unless they name another; `formats/workshops/` lists them). Its sheets, boxes and ids come from `python3 ingest/ingest.py brief`, and how to write its page from `formats/workshops/<workshop>/recipe.md`. Read both before stage 3.
 
 The goal is speed on the day **without inventing anything**. Every line on the website must trace to a photo or a voice note; `ingest.py verify` enforces it.
 
@@ -40,13 +42,14 @@ Then run `python3 ingest/ingest.py status` (add `--tables <n>` if there weren't 
 ## 3. Transcribe each table (parallel, about 5 to 10 minutes)
 Spawn one sub-agent per table (Agent tool, `general-purpose`, in the background, all in one message), plus one for card stubs if there are any. Don't downgrade the model: handwriting accuracy is where it matters. Each prompt must stand alone and include:
 - The absolute repo path, the run folder, the table number, its photo ids (`view/<id>.jpg` and the tiles listed in `manifest.json`), and its voice transcript path if any.
-- "Read `ingest/RAW_FORMAT.md`, stage 1, and follow it exactly. Write `raw/T<nn>.json` in the run folder, then run `python3 ingest/ingest.py verify --run <run>` and fix any error it reports about your file. Reply with a short summary: items per sheet, every `unclear` entry, and every crossed-out word you left out."
-- For stubs: write `raw/commitments.json` as described at the end of stage 1, including the card's optional Name and Organisation lines exactly as written, and following the card rules there (untorn cards, sign-offs, one card in two photos).
+- The output of `python3 ingest/ingest.py brief --table <nn>` (the workshop's sheets, ids and file shape), pasted in full.
+- "Read `ingest/RAW_FORMAT.md`, stage 1, and follow it exactly, with the sheet brief above. Write `raw/T<nn>.json` in the run folder, then run `python3 ingest/ingest.py verify --run <run>` and fix any error it reports about your file. Reply with a short summary: items per sheet, every `unclear` entry, and every crossed-out word you left out."
+- For stubs: write the card file the brief describes (`raw/commitments.json` for round tables), including the card's optional Name and Organisation lines exactly as written, and following the card rules there (untorn cards, sign-offs, one card in two photos).
 
 While they run, read the voice transcripts yourself (if any) so you know the room before writing.
 
 ## 4. Write the playbook (about 10 to 15 minutes)
-Follow `RAW_FORMAT.md` stage 2. Write `<run>/session.json` with `meta.status: "draft"`. Start `meta` from `examples/session-template.json` and fill in the event's own details (event name, date, venue) from what the user tells you; set `people` to the real headcount if they know it. Never guess these: leave a field as the template has it and list it for the user.
+Follow `RAW_FORMAT.md` stage 2 and the workshop's `recipe.md`. Write `<run>/session.json` with `meta.status: "draft"`. Start `meta` from the session template the recipe names (`examples/session-template.json` for round tables) and fill in the event's own details (event name, date, venue) from what the user tells you; set `people` to the real headcount if they know it. Never guess these: leave a field as the template has it and list it for the user.
 
 ## 5. Verify, fix, build the review pack
 ```bash

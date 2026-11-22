@@ -1,0 +1,204 @@
+## text
+Keeping leadership support when sponsors move on, Workshop Notes
+
+Skip to content
+Workshop
+Notes
+Playbook
+Commitments
+Run your own
+How it was made
+
+Example, not from the session
+
+← All challenges
+
+LEADERSHIP SUPPORT FADES
+
+Keeping leadership support when sponsors move on
+Worked on at tables 1 and 8
+Banking
+Central government
+Retail
+
+Support often rests on one senior sponsor. When they change role, leave or pick up a new priority, accessibility drops off the agenda and the work starts again from scratch.
+
+We had a brilliant sponsor for two years. She left on a Friday and by Monday we were nobody's problem.
+
+Leaders don't need convincing that it matters. They need convincing it's theirs.
+
+What’s been tried
+Helped
+Two sponsors, one from the business and one from technology, so one leaving didn't stop everything.
+Adding accessibility to the existing quarterly risk report instead of a separate update nobody reads.
+A short monthly note to the exec team with one win, one risk and one ask.
+Got in the way
+A big launch event with the CEO and no follow-up plan. The energy was gone within a quarter.
+Relying on legal risk alone. It got attention until the next audit passed.
+What we learned
+Write the sponsor role down: what they own, how often they hear from you, and who takes over if they move.
+Actions to try
+Show actions for
+Any stage
+Just starting
+Growing
+Established
+
+Showing all 3 actions.
+
+Name a deputy sponsor now
+What to do
+Ask your sponsor to nominate a deputy at the same level before anything changes.
+What you need
+Fifteen minutes with your sponsor and a one-page description of the sponsor role.
+How it sticks
+Review the pair every six months, and add the handover to your sponsor's own exit checklist.
+Good for
+Growing
+Established
+Put accessibility in a report leaders already read
+What to do
+Add a standing line to an existing report, such as risk, quality or ESG.
+What you need
+The report owner's agreement and two or three measures you can update each quarter.
+How it sticks
+Once it's a standing line, a missing update gets noticed.
+Good for
+Just starting
+Growing
+Established
+Send a one-win, one-risk, one-ask note
+What to do
+A monthly note of five lines or fewer to your sponsor and their peers.
+What you need
+A shared template and 30 minutes a month.
+How it sticks
+Keep the format fixed so it takes no thought to write or to read.
+Good for
+Just starting
+Growing
+Still open
+
+Questions the table didn’t answer. If you have, tell Acme.
+
+How do you get a new leader to care when they inherit accessibility rather than choose it?
+Does linking accessibility to ESG help, or does it turn into a box-tick?
+Resources
+The Business Case for Digital Accessibility
+W3C WAI
+Planning and Managing Web Accessibility
+W3C WAI
+Next challenge
+Proving impact in terms leaders care about
+
+Workshop Notes: Growing and sustaining support for accessibility · Example draft
+
+Download this playbook
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+link "Acme Accessibility Group (Acme) Workshop Notes"
+navigation "Playbook"
+heading[1] "Keeping leadership support when sponsors move on"
+list
+figure
+figure
+region "What’s been tried"
+region "Actions to try"
+region "Still open"
+region "Resources"
+navigation "Other challenges"
+image "Acme Accessibility Group (Acme)"
+list
+link "← All challenges"
+listitem[1]
+listitem[1]
+listitem[1]
+blockquote
+blockquote
+heading[2] "What’s been tried"
+heading[3] "Helped"
+list
+heading[3] "Got in the way"
+list
+heading[3] "What we learned"
+list
+heading[2] "Actions to try"
+group "Show actions for"
+status
+list
+heading[2] "Still open"
+list
+heading[2] "Resources"
+list
+link "Next challenge Proving impact in terms leaders care about"
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+Legend
+LabelText
+LabelText
+LabelText
+LabelText
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"
+radio "Any stage"
+radio "Just starting"
+radio "Growing"
+radio "Established"
+heading[3] "Name a deputy sponsor now"
+DescriptionList
+list "Good for"
+heading[3] "Put accessibility in a report leaders already read"
+DescriptionList
+list "Good for"
+heading[3] "Send a one-win, one-risk, one-ask note"
+DescriptionList
+list "Good for"
+link "The Business Case for Digital Accessibility"
+link "Planning and Managing Web Accessibility"
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]
+listitem[2]
+term "What to do"
+definition
+term "What you need"
+definition
+term "How it sticks"
+definition
+listitem[2]
+listitem[2]

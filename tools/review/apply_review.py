@@ -18,7 +18,9 @@ from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
-RAW_FIELD = {"text": "text", "what": "action", "needs": "needs", "sticks": "sticks", "name": "name", "org": "org"}
+sys.path.insert(0, str(ROOT / "build"))
+import config  # noqa: E402
+import formats  # noqa: E402
 
 
 def replace_markers(s, pairs):
@@ -34,22 +36,21 @@ def replace_markers(s, pairs):
     return s, left
 
 
-def page_items(session):
-    """Every line on the page that carries a src."""
-    for c in session.get("challenges", []):
-        for sec in ("quotes", "helped", "hindered", "lessons", "actions", "questions"):
-            for x in c.get(sec, []):
-                if isinstance(x, dict):
-                    yield x
-    for key in ("commitments", "quotes", "resources"):
-        yield from session.get(key, [])
+def page_items(session, W):
+    """Every line on the page that carries a src, with its path's settings from the workshop's output.json."""
+    for spec, _label, _owner, x in W.page_items(session):
+        if isinstance(x, dict):
+            yield spec, x
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("decisions", nargs="?")
     ap.add_argument("--run", help="the run folder (default: runs/latest)")
+    ap.add_argument("--config", help="settings file, if not playbook.config.json (it says which workshop the run is)")
     a = ap.parse_args()
+    W = formats.load(config.load(a.config))
+    raw_field = dict(W.output.get("raw_field_map", {}))   # a page field whose words live under another name in the raw file
     run = Path(a.run).expanduser().resolve() if a.run else (ROOT / "runs" / "latest").resolve()
     if not (run / "session.json").exists():
         sys.exit(f"No session.json in {run}.")
@@ -74,7 +75,7 @@ def main():
         while stack:
             x = stack.pop()
             if isinstance(x, dict):
-                if isinstance(x.get("id"), str) and ("text" in x or "action" in x):
+                if isinstance(x.get("id"), str) and any(f in x for f in W.text_fields()):
                     index.setdefault(x["id"], []).append((f, x))
                 stack.extend(x.values())
             elif isinstance(x, list):
@@ -98,7 +99,7 @@ def main():
             # every copy gets the same fix, each starting from the full list of readings
             for sid in d["src"]:
                 for f, item in index.get(sid, []):
-                    rf = RAW_FIELD.get(field, field)
+                    rf = raw_field.get(field, field)
                     todo_pairs = list(pairs)
                     for k in [rf] + [k for k, val in item.items() if isinstance(val, str) and k not in (rf, "id", "photo")]:
                         if not todo_pairs or not isinstance(item.get(k), str):
@@ -109,7 +110,7 @@ def main():
                             item[k] = new; changed.add(f); raw_changes += 1
                         todo_pairs = left
             # the page: the line whose src matches this screen's
-            for x in page_items(session):
+            for _spec, x in page_items(session, W):
                 s = x.get("src")
                 if set(s if isinstance(s, list) else [s]) != set(d["src"]) or not isinstance(x.get(field), str):
                     continue
@@ -122,14 +123,18 @@ def main():
                 missing.append((key, unresolved))
         if d["status"] == "edited" and d.get("line"):
             first = next(iter(d.get("fields") or {"text": None}))
-            for x in page_items(session):
+            word_for_word = False
+            for spec, x in page_items(session, W):
                 s = x.get("src")
-                if set(s if isinstance(s, list) else [s]) == set(d["src"]) and x.get(first) != d["line"]:
-                    x[first] = d["line"]; page_changes += 1
-            if d["src"][0].startswith("C.") or ".SS.quote" in d["src"][0]:
-                # cards and quotes are checked word for word against the raw text, so the raw text takes the edit
+                if set(s if isinstance(s, list) else [s]) == set(d["src"]):
+                    word_for_word |= spec.get("policy") == "verbatim"
+                    if x.get(first) != d["line"]:
+                        x[first] = d["line"]; page_changes += 1
+            if word_for_word:
+                # quotes and cards are checked word for word against the raw text, so the raw text takes the edit
+                # too (wherever the quote was written: a quote taken from Sheet 2 used to keep its old raw text)
                 for f, item in index.get(d["src"][0], []):
-                    rf = RAW_FIELD.get(first, first)
+                    rf = raw_field.get(first, first)
                     if item.get(rf) != d["line"]:
                         item[rf] = d["line"]; changed.add(f); raw_changes += 1
         # leave a trail in the readers' unclear lists

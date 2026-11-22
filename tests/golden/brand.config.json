@@ -1,0 +1,13 @@
+{
+  "_note": "For tests/golden.py: a branded build that exercises logos in their own colours (with transforms and a dark-mode file), a custom download name, no credit and no source link.",
+  "org": {"short": "Acme", "name": "Acme Accessibility Group", "forum": "team workshop", "team": "the Acme team", "about": "", "join": null},
+  "playbook": {"name": "Workshop Notes", "url": "https://example.org/notes", "file_name": "acme-notes"},
+  "brand": {
+    "accent": "#1d3557",
+    "highlight": "#f4a261",
+    "logo": {"keep_colours": true, "primary": "brand/logo.svg", "primary_dark": "brand/logo-white.svg",
+             "secondary": "brand/logo.svg", "secondary_dark": "brand/logo-white.svg", "mark": "brand/logo.svg"}
+  },
+  "kit": {"source": ""},
+  "credit": {"show": false}
+}

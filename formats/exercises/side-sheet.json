@@ -1,0 +1,80 @@
+{
+ "id": "side-sheet",
+ "code": "SS",
+ "short": "side sheet",
+ "label": "All session",
+ "title": "Heard something good? Write it here.",
+ "per": "group",
+ "boxes": [
+  {
+   "id": "quotes",
+   "type": "list",
+   "key": "quotes",
+   "stem": "quote",
+   "label": "Quotes",
+   "hint": "Exact words, no names",
+   "fields": [
+    {
+     "key": "who",
+     "label": "Who it was for"
+    }
+   ],
+   "reader": "If someone writes a sector beside a quote, put it in `who`, not in `text`."
+  },
+  {
+   "id": "questions",
+   "type": "list",
+   "key": "questions",
+   "stem": "question",
+   "label": "Questions",
+   "hint": "Things nobody could answer"
+  },
+  {
+   "id": "resources",
+   "type": "list",
+   "key": "resources",
+   "stem": "resource",
+   "label": "Resources",
+   "hint": "Links, books, people, tools",
+   "fields": [
+    {
+     "key": "url",
+     "label": "the address, if one is written"
+    }
+   ]
+  },
+  {
+   "id": "best",
+   "type": "text",
+   "key": "best",
+   "stem": "best",
+   "label": "Best thing said today",
+   "hint": "The table lead writes it in the last two minutes.",
+   "optional": true,
+   "reader": "The table lead's pick, copied word for word into SS.best with the id T07.SS.best. Keep it even if it repeats a quote or another item; the writer decides what to do with it."
+  }
+ ],
+ "printed": [
+  "heard something good",
+  "write it here",
+  "exact words, no names",
+  "things nobody could answer",
+  "links, books, people, tools",
+  "best thing said today",
+  "the table lead writes it"
+ ],
+ "print": {
+  "renderer": "legacy"
+ },
+ "kit": {
+  "title": "Side sheet: Heard something good?",
+  "html": {
+   "file": "*sheet-SS*.html",
+   "note": "Type into it, or print it on A4."
+  },
+  "print": {
+   "file": "*sheet-SS*.pdf",
+   "note": "A1 poster, one per table, out all session."
+  }
+ }
+}

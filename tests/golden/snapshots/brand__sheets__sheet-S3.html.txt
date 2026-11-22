@@ -1,0 +1,83 @@
+## text
+Sheet 3 of the paper kit. Type into it on screen, or print it on A4. From the Workshop Notes kit · Print-ready PDF.
+
+Question 3
+
+What could people try now, and how does it stick?
+Table
+Action 1
+What to try
+What you need
+How it sticks
+Good for:
+Just starting
+Growing
+Established
+Action 2
+What to try
+What you need
+How it sticks
+Good for:
+Just starting
+Growing
+Established
+Action 3
+What to try
+What you need
+How it sticks
+Good for:
+Just starting
+Growing
+Established
+All of this goes into the Workshop Notes. No names, please.
+S3 · Table
+
+## accessibility tree
+note
+main
+heading[1] "What could people try now, and how does it stick?"
+LabelText
+textbox "Table"
+region "Action 1"
+region "Action 2"
+region "Action 3"
+sectionfooter
+link "Workshop Notes kit"
+link "Print-ready PDF"
+heading[2] "Action 1"
+LabelText
+textbox "What to try"
+LabelText
+textbox "What you need"
+LabelText
+textbox "How it sticks"
+group "Good for:"
+heading[2] "Action 2"
+LabelText
+textbox "What to try"
+LabelText
+textbox "What you need"
+LabelText
+textbox "How it sticks"
+group "Good for:"
+heading[2] "Action 3"
+LabelText
+textbox "What to try"
+LabelText
+textbox "What you need"
+LabelText
+textbox "How it sticks"
+group "Good for:"
+image "Acme Accessibility Group (Acme)"
+Legend
+checkbox "Just starting"
+checkbox "Growing"
+checkbox "Established"
+Legend
+checkbox "Just starting"
+checkbox "Growing"
+checkbox "Established"
+Legend
+checkbox "Just starting"
+checkbox "Growing"
+checkbox "Established"

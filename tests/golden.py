@@ -32,6 +32,7 @@ PY = sys.executable
 CONFIGS = {
     "default": "playbook.config.json",
     "can": "examples/can/playbook.config.json",
+    "brand": "tests/golden/brand.config.json",
 }
 SESSIONS = {
     "example": "examples/example-playbook.json",
@@ -114,7 +115,7 @@ def snapshot_pages(jobs, shots, work):
                  "folder (.../node_modules/playwright).\n" + r.stderr[-2000:])
     out = {}
     for key, snap in json.loads(result.read_text()).items():
-        out[key] = "## text\n" + norm(snap["text"]) + "\n## accessibility tree\n" + snap["ax"]
+        out[key] = "## text\n" + norm(snap["text"]) + "\n## accessibility tree\n" + norm(snap["ax"])
     return out
 
 

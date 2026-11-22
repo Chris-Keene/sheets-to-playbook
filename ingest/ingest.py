@@ -8,13 +8,15 @@ the sheets-to-playbook skill (.claude/skills/sheets-to-playbook/SKILL.md) and in
     python3 ingest/ingest.py prepare <folder> --into <run> # a later batch joins the same run
     python3 ingest/ingest.py transcribe                   # Whisper, locally, on any voice notes (optional)
     python3 ingest/ingest.py status                       # coverage and blur, once labels.json exists
+    python3 ingest/ingest.py brief [--table 7]            # the workshop's sheets, ids and file shape, for the readers
     python3 ingest/ingest.py verify [--links]             # raw files + session.json: traceability, verbatim quotes, gaps, names
     python3 ingest/ingest.py review                       # review.html: every line next to its photos
     python3 ingest/ingest.py draft                        # the draft playbook, in the run folder
     python3 ingest/ingest.py publish [--links]            # final checks, then build playbook/index.html
 
 Every command after `prepare` works on runs/latest unless --run is given. --config <file> picks a settings file
-other than playbook.config.json for the draft and publish builds. History: CHANGELOG.md.
+other than playbook.config.json; its "workshop" setting says which sheets to expect (round tables unless it
+names another, see build/formats.py). History: CHANGELOG.md.
 """
 import argparse, concurrent.futures, difflib, html, json, re, shutil, subprocess, sys, urllib.request
 from datetime import datetime
@@ -23,11 +25,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 RUNS = ROOT / "runs"
 sys.path.insert(0, str(ROOT / "build"))
+import config as _config  # noqa: E402
+import formats  # noqa: E402
 
 IMAGE_EXT = {".jpg", ".jpeg", ".png", ".heic", ".heif", ".webp", ".tif", ".tiff"}
 AUDIO_EXT = {".m4a", ".mp3", ".wav", ".aac", ".ogg", ".opus", ".amr", ".caf", ".aif", ".aiff", ".flac", ".mp4", ".mov", ".3gp"}
-SHEETS = ["S1", "S2", "S3", "SS"]
-SHEET_NAMES = {"S1": "Sheet 1", "S2": "Sheet 2", "S3": "Sheet 3", "SS": "side sheet", "V": "voice note"}
 VIEW_EDGE = 1568      # roughly what a vision model sees of a whole image
 WORK_EDGE = 3000      # kept for tiles, so small handwriting stays readable
 WHISPER_MODEL = "small.en"   # downloaded to ~/.cache/whisper on first use; works offline after that
@@ -320,8 +322,15 @@ def label_sheets(lab):
     return [s for s in (sh if isinstance(sh, list) else [sh]) if s]
 
 
+def workshop(args=None):
+    """The workshop the settings name: its sheets, lists and checks (build/formats.py)."""
+    return formats.load(_config.load(getattr(args, "config", None)))
+
+
 def status(args):
     run = run_dir(args.run)
+    W = workshop(args)
+    SHEETS, SHEET_NAMES = W.sheet_codes(), W.sheet_names()
     m = load(run / "manifest.json")
     labels = load(run / "labels.json", {"photos": {}, "audio": {}})
     tables = args.tables
@@ -390,13 +399,10 @@ def status(args):
 
 # ---------------------------------------------------------------- raw items
 
-RAW_LISTS = [("S1", "challenges"), ("S1", "top3"), ("S2", "helped"), ("S2", "hindered"), ("S2", "lessons"),
-             ("S3", "actions"), ("SS", "quotes"), ("SS", "questions"), ("SS", "resources"), ("V", "points")]
-ID_RE = re.compile(r"^(T(\d{2})\.(S1|S2|S3|SS|V)\.[a-z]+\d*|C\.card\d+)$")
-
-
-def raw_items(run):
-    """Every transcribed item across all raw files, keyed by id."""
+def raw_items(run, W=None):
+    """Every transcribed item across all raw files, keyed by id. W is the workshop (default: from the settings)."""
+    W = W or workshop()
+    id_re, text_fields = W.id_re(), W.text_fields()
     items, problems = {}, []
     for f in sorted((run / "raw").glob("T*.json")):
         d = load(f)
@@ -404,31 +410,29 @@ def raw_items(run):
         if not isinstance(t, int):
             problems.append(f"{f.name}: 'table' must be a number"); continue
         prefix = f"T{t:02d}."
-        lists = list(RAW_LISTS)
-        for sheet, key in lists:
+        for sheet, key in W.raw_lists():
             for it in (d.get(sheet) or {}).get(key, []) or []:
-                add_item(items, problems, f.name, it, prefix, f"{sheet}.{key}")
-        pick = (d.get("S1") or {}).get("pick")
-        if pick:
-            add_item(items, problems, f.name, pick, prefix, "S1.pick")
-        best = (d.get("SS") or {}).get("best")
-        if best:
-            add_item(items, problems, f.name, best, prefix, "SS.best")
-    c = load(run / "raw" / "commitments.json")
-    if c:
-        for it in c.get("cards", []):
-            add_item(items, problems, "commitments.json", it, "C.", "card")
+                add_item(items, problems, f.name, it, prefix, f"{sheet}.{key}", id_re, text_fields)
+        for sheet, key in W.raw_singles():
+            one = (d.get(sheet) or {}).get(key)
+            if one:
+                add_item(items, problems, f.name, one, prefix, f"{sheet}.{key}", id_re, text_fields)
+    for raw_file, key, prefix in W.card_sources():
+        c = load(run / "raw" / raw_file)
+        if c:
+            for it in c.get(key, []):
+                add_item(items, problems, raw_file, it, prefix, "card", id_re, text_fields)
     return items, problems
 
 
-def add_item(items, problems, fname, it, prefix, kind):
+def add_item(items, problems, fname, it, prefix, kind, id_re, text_fields=("text",)):
     iid = it.get("id", "")
-    if not ID_RE.match(iid) or not iid.startswith(prefix):
+    if not id_re.match(iid) or not iid.startswith(prefix):
         problems.append(f"{fname}: bad id {iid!r} (expected {prefix}...)")
         return
     if iid in items:
         problems.append(f"{fname}: duplicate id {iid}")
-    text = it.get("text") or it.get("action") or ""
+    text = next((it.get(f) for f in text_fields if it.get(f)), "")
     if not text.strip():
         problems.append(f"{fname}: {iid} has no text")
     items[iid] = dict(it, _kind=kind, _file=fname)
@@ -462,10 +466,22 @@ def srcs(x):
 
 # ---------------------------------------------------------------- verify
 
+def page_items(data, W, order=None):
+    """Every checked line on the page: see formats.Workshop.page_items."""
+    return W.page_items(data, order)
+
+
+class Checks:
+    """What a workshop's rules.verify() gets: the page, the transcribed items, and somewhere to report."""
+    def __init__(self, **kw):
+        self.__dict__.update(kw)
+
+
 def verify(args):
     run = run_dir(args.run)
+    W = workshop(args)
     errors, warnings = [], []
-    items, problems = raw_items(run)
+    items, problems = raw_items(run, W)
     errors += problems
     transcripts = {p.stem: p.read_text() for p in (run / "transcripts").glob("*.txt")}
 
@@ -477,7 +493,7 @@ def verify(args):
     else:
         from build import check as build_check
         try:
-            build_check(data)
+            build_check(data, W)
         except SystemExit as e:
             errors.append(str(e))
         status_ = data["meta"].get("status")
@@ -491,7 +507,7 @@ def verify(args):
             if need_src and not ids:
                 (errors if status_ == "final" else warnings).append(f"{where}: no src, so it can't be traced to a sheet")
             if verbatim and ids:
-                pool = [items[i].get("text") or items[i].get("action", "") for i in ids if i in items]
+                pool = [next((items[i].get(f) for f in W.text_fields() if items[i].get(f)), "") for i in ids if i in items]
                 pool += [items[i].get("excerpt", "") for i in ids if i in items]
                 pool += [transcripts.get(a, "") for a in transcripts]
                 best = max((similar(verbatim, p) for p in pool if p), default=0)
@@ -501,60 +517,19 @@ def verify(args):
             if re.search(r"\[\?|\[illegible\]|\[unclear\]", text):
                 warnings.append(f"{where}: still contains an unclear-reading marker")
 
-        for c in data["challenges"]:
-            cid = c["id"]
-            for i, q in enumerate(c.get("quotes", []), 1):
-                walk(f"{cid} quote {i}", q, verbatim=q.get("text"))
-            for key in ("helped", "hindered"):
-                for i, h in enumerate(c.get(key, []), 1):
-                    walk(f"{cid} {key} {i}", h)
-            for i, a in enumerate(c.get("actions", []), 1):
-                walk(f"{cid} action {i}", a)
-            for key in ("questions", "lessons"):
-                for i, q in enumerate(c.get(key, []), 1):
-                    walk(f"{cid} {key} {i}", q if isinstance(q, dict) else {}, need_src=isinstance(q, dict))
-            for i, r in enumerate(c.get("resources", []), 1):
-                walk(f"{cid} resource {i}", r, need_src=False)
-            # the tables credited must be the ones whose items the page actually uses
-            used_tables = {int(s[1:3]) for x in c.get("helped", []) + c.get("hindered", []) + c.get("actions", []) + c.get("quotes", [])
-                           for s in srcs(x) if s.startswith("T")}
-            extra = used_tables - set(c["tables"])
-            if extra:
-                warnings.append(f"{cid}: uses items from table(s) {sorted(extra)} that aren't in its tables list")
-        # "Heard on the day" (top-level quotes) are word for word too; general resources are traced like any other item
-        for i, q in enumerate(data.get("quotes", []), 1):
-            walk(f"heard on the day {i}", q, verbatim=q.get("text"))
-        for i, r in enumerate(data.get("resources", []), 1):
-            walk(f"general resource {i}", r, need_src=False)
-        for i, m in enumerate(data.get("commitments", []), 1):
-            walk(f"commitment {i}", m, verbatim=m.get("text"), min_ratio=0.8)
-            # a name goes on the page only if that person wrote it in the card's Name or Organisation line
-            card = next((items[s_] for s_ in srcs(m) if s_ in items), {})
-            for field in ("name", "org"):
-                if m.get(field) and similar(m[field], card.get(field, "")) < 0.85:
-                    errors.append(f"commitment {i}: {field} \"{m[field]}\" isn't what the card's own {field} line says")
+        # every line the workshop's output.json lists: traced to a sheet, and word for word where it must be
+        for spec, where, _owner, x in page_items(data, W):
+            policy = spec.get("policy", "trace")
+            plain = not isinstance(x, dict)
+            need = policy != "optional" and not (plain and spec.get("strings_ok"))
+            verbatim = x.get(spec.get("field", "text")) if policy == "verbatim" and not plain else None
+            walk(where, {} if plain else x, need_src=need, verbatim=verbatim, min_ratio=spec.get("min", 0.86))
 
-        # theme phrases are meant to be copied from Sheet 1, so each should match something written there
-        s1 = [it.get("text", "") for i, it in items.items() if it["_kind"].startswith("S1.")]
-        for t in data.get("themes", []):
-            for h in t.get("heard", []):
-                if s1 and max(similar(h, x) for x in s1) < 0.8:
-                    warnings.append(f"theme {t['id']}: \"{h}\" doesn't match anything written on a Sheet 1")
-            stray = set(t["tables"]) - {int(i[1:3]) for i, it in items.items() if it["_kind"].startswith("S1.")}
-            if stray:
-                warnings.append(f"theme {t['id']}: tables {sorted(stray)} have no transcribed Sheet 1")
-
-        # every table that worked on a challenge should land on exactly one page
-        raw_tables = sorted({int(i[1:3]) for i in items if i.startswith("T")})
-        homes = {}
-        for c in data["challenges"]:
-            for t in c["tables"]:
-                homes.setdefault(t, []).append(c["id"])
-        for t in raw_tables:
-            if t not in homes:
-                warnings.append(f"Table {t} has transcribed sheets but no challenge page")
-            elif len(homes[t]) > 1:
-                warnings.append(f"Table {t} appears on more than one challenge page: {homes[t]}")
+        # the checks particular to this workshop (round tables: themes match Sheet 1, one page per table, card names)
+        rules = W.rules()
+        if rules and hasattr(rules, "verify"):
+            rules.verify(Checks(data=data, items=items, used=used, errors=errors, warnings=warnings, status=status_,
+                                similar=similar, srcs=srcs, workshop=W))
 
         everything = json.dumps(data, ensure_ascii=False)
         for pat, what in [(r"[\w.+-]+@[\w-]+(?:\.[\w.]+)?", "email address"), (r"(?<![\w.+-])@\w{2,}", "social handle"),
@@ -566,10 +541,10 @@ def verify(args):
         allow = {"I", "IT", "AI", "UK", "W3C", "WAI", "WCAG", "GOV", "ESG", "QA", "UX", "UI", "PM", "CEO", "CFO", "CTO",
                  "HR", "SEO", "PDF", "API", "OK"} | set("Monday Tuesday Wednesday Thursday Friday Saturday Sunday January February March "
                  "April May June July August September October November December".split())
-        import config as _config   # the org's own short name (e.g. "CAN") isn't a person to scrub
-        allow |= {w for w in _config.load(getattr(args, "config", None))["org"]["short"].split() if w}
+        allow |= {w for w in _config.load(getattr(args, "config", None))["org"]["short"].split() if w}   # the org's own short name isn't a person
         candidates = set()
-        sources = [it.get(k, "") for it in items.values() for k in ("text", "excerpt", "who", "action", "needs", "sticks")]
+        fields = ["text", "excerpt"] + [f for f in W.text_fields() + W.extra_fields() if f != "text"]
+        sources = [it.get(k, "") for it in items.values() for k in fields]
         sources += list(transcripts.values())
         for src_text in sources:
             for sentence in re.split(r"(?<=[.!?])\s+|\n", src_text or ""):
@@ -592,15 +567,15 @@ def verify(args):
                     errors.append(f"Name or organisation on the scrub list appears: {n}")
 
         if args.links:
-            for owner, rs in [(c["id"], c.get("resources", [])) for c in data["challenges"]] + [("general reading", data.get("resources", []))]:
-                for r in rs:
-                    if not r.get("url"):
-                        continue   # named without an address: listed as text, nothing to check
-                    ok, why = link_ok(r.get("url", ""))
-                    if not ok:
-                        warnings.append(f"{owner}: resource link {r.get('url')} {why}")
+            for spec, _where, owner, r in page_items(data, W):
+                if not spec.get("links") or not isinstance(r, dict) or not r.get("url"):
+                    continue   # named without an address: listed as text, nothing to check
+                ok, why = link_ok(r.get("url", ""))
+                if not ok:
+                    warnings.append(f"{spec.get('owner', owner)}: resource link {r.get('url')} {why}")
 
-    unused = sorted(i for i, it in items.items() if i not in used and it["_kind"] not in ("S1.challenges", "S1.top3", "S1.pick"))
+    skip = set(W.output.get("not_on_page", []))   # items that shape the page without being quoted (Sheet 1 feeds the themes)
+    unused = sorted(i for i, it in items.items() if i not in used and it["_kind"] not in skip)
     if data is not None and unused:
         warnings.append(f"{len(unused)} transcribed items aren't used anywhere (fine if merged or off-topic): " + ", ".join(unused))
 
@@ -645,19 +620,18 @@ def review(args):
     run = run_dir(args.run)
     m = load(run / "manifest.json")
     labels = load(run / "labels.json", {"photos": {}, "audio": {}})
-    items, _ = raw_items(run)
+    W = workshop(args)
+    SHEET_NAMES = W.sheet_names()
+    items, _ = raw_items(run, W)
     data = load(run / "session.json")
     rep = load(run / "verify.json", {"errors": [], "warnings": []})
     where_used = {}
     if data:
-        for c in data["challenges"]:
-            for key in ("quotes", "helped", "hindered", "actions", "questions", "lessons", "resources"):
-                for x in c.get(key, []):
-                    for s in srcs(x):
-                        where_used.setdefault(s, []).append(c.get("title") or c["id"])
-        for x in data.get("commitments", []):
+        for _spec, _where, owner, x in page_items(data, W):
             for s in srcs(x):
-                where_used.setdefault(s, []).append("Commitments")
+                where_used.setdefault(s, []).append(owner)
+    roles = W.output.get("roles", {})
+    row_fields, name_fields = W.row_fields(), W.name_fields()
     photos_by_table = {}
     for pid, lab in labels["photos"].items():
         photos_by_table.setdefault(lab.get("table") or lab.get("kind", "other"), []).append((pid, lab))
@@ -667,13 +641,12 @@ def review(args):
         rows = []
         for iid in sorted(i for i in items if i.startswith(prefix)):
             it = items[iid]
-            txt = it.get("text") or " / ".join(filter(None, [it.get("action"), it.get("needs"), it.get("sticks")]))
-            card_who = " · ".join(filter(None, [it.get("name"), it.get("org")]))
+            txt = it.get("text") or " / ".join(filter(None, [it.get(f) for f in row_fields]))
+            card_who = " · ".join(filter(None, [it.get(f) for f in name_fields]))
             extra = it.get("who") or it.get("url") or (f"Name and organisation lines: {card_who}" if card_who else "")
             used = where_used.get(iid)
-            # Sheet 1 feeds the themes and titles, which don't carry per-line sources
-            role = {"S1.challenges": "feeds the themes", "S1.top3": "feeds the themes", "S1.pick": "the challenge title",
-                    "SS.best": None}.get(it["_kind"])
+            # some items shape the page without per-line sources (round tables: Sheet 1 feeds the themes and titles)
+            role = roles.get(it["_kind"])
             unclear = "[?" in txt or "[illegible]" in txt
             rows.append(f'<tr class="{"unclear" if unclear else ""}"><th scope="row">{e(iid)}</th><td>{e(txt)}'
                         f'{"<br><small>" + e(extra) + "</small>" if extra else ""}</td>'
@@ -696,16 +669,24 @@ def review(args):
         aud = [aid for aid, lab in labels["audio"].items() if lab.get("table") == t]
         voice = "".join(f'<details><summary>Voice note {aid}</summary><p>{e((run / "transcripts" / f"{aid}.txt").read_text() if (run / "transcripts" / f"{aid}.txt").exists() else "(not transcribed)")}</p></details>' for aid in aud)
         flagged, notes_html = reader_flags(raw)
-        room = (raw.get("S1") or {}).get("room") or {}
-        tally = ", ".join(f"{k} {v}" for k, v in (room.get("tally") or {}).items() if v)
-        room_html = (f"<p><b>Who was at the table:</b> {e(tally or 'no tally')}"
-                     f"{'; countries: ' + e(room['countries']) if room.get('countries') else ''}</p>") if room else ""
+        room_html = ""
+        for ex in W.per_group():
+            for b in ex["boxes"]:
+                if b["type"] != "tally":
+                    continue
+                room = (raw.get(ex["code"]) or {}).get(b["key"]) or {}
+                tally = ", ".join(f"{k} {v}" for k, v in (room.get("tally") or {}).items() if v)
+                line = (b.get("text_line") or "").lower()
+                room_html += (f"<p><b>{e(b.get('review_label') or b['label'].rstrip('?'))}:</b> {e(tally or 'no tally')}"
+                              f"{'; ' + e(line) + ': ' + e(room['countries']) if room.get('countries') and line else ''}</p>") if room else ""
         sections.append(f'<section><h2>Table {t}</h2><div class="photos">{ph or "<p>No photos labelled</p>"}</div>{voice}'
                         f'{flagged}{room_html}{notes_html}'
                         f'<table><thead><tr><th>Item</th><th>Transcribed</th><th>Used on</th></tr></thead><tbody>{item_rows(f"T{t:02d}.")}</tbody></table></section>')
     stub_ph = "".join(f'<a href="photos/{pid}.jpg"><img src="view/{pid}.jpg" alt="{pid}: card stubs" loading="lazy"><span>{pid}</span></a>' for pid, _ in photos_by_table.get("stubs", []))
-    card_flags, card_notes = reader_flags(load(run / "raw" / "commitments.json", {}))
-    sections.append(f'<section><h2>Commitment cards</h2><div class="photos">{stub_ph}</div>{card_flags}{card_notes}<table><thead><tr><th>Item</th><th>Transcribed</th><th>Used on</th></tr></thead><tbody>{item_rows("C.")}</tbody></table></section>')
+    for ex in W.per_person():
+        card_flags, card_notes = reader_flags(load(run / "raw" / ex["raw_file"], {}))
+        title = ex.get("review_title") or (ex.get("short", "cards")[:1].upper() + ex.get("short", "cards")[1:] + "s")
+        sections.append(f'<section><h2>{e(title)}</h2><div class="photos">{stub_ph}</div>{card_flags}{card_notes}<table><thead><tr><th>Item</th><th>Transcribed</th><th>Used on</th></tr></thead><tbody>{item_rows(ex["prefix"])}</tbody></table></section>')
     note = (data or {}).get("meta", {}).get("banner")
     banner = f'<p class="note-banner"><b>{e(note[0])}</b> {e(note[1])}</p>' if note else ""
     findings = "".join(f'<li class="err">{e(x)}</li>' for x in rep.get("errors", [])) + "".join(f"<li>{e(x)}</li>" for x in rep.get("warnings", []))
@@ -724,6 +705,83 @@ tr.unclear td{{background:#fff4cc}} .unused{{color:#9b2335;font-weight:600}} .er
 <h2>Checks</h2><ul>{findings or "<li>No problems found.</li>"}</ul>{"".join(sections)}</main></body></html>"""
     (run / "review.html").write_text(page)
     print(run / "review.html")
+
+
+# ---------------------------------------------------------------- brief
+
+def brief_text(W, table=7):
+    """The workshop's sheets for a reader: codes, headings, boxes, ids and the raw file's shape (Markdown)."""
+    t = f"T{table:02d}"
+    out = [f"# Reading the sheets: {W.name}", "",
+           "What's on this workshop's paper, generated from its format files. Read it with ingest/RAW_FORMAT.md, which "
+           f"holds the rules for every workshop. Examples use {W.group} {table}.", ""]
+    example = {"table": table, "photos": ["P012", "P013"], "audio": []}
+    for e in W.per_group():
+        out.append(f"## {e['code']}: {e.get('title', '')}")
+        out.append(f"{e.get('label', '')}{' · ' if e.get('label') else ''}{e.get('short', '')}. Section `{e['code']}` in raw/{t}.json.")
+        if e.get("reader"):
+            out += ["", e["reader"]]
+        out.append("")
+        section = {}
+        for b in e["boxes"]:
+            label = b.get("label", "").replace("{n}", "N")
+            what = {"list": "a list of items", "ranked": f"a numbered list of {b.get('count', 3)}", "text": "one item",
+                    "tally": "a tally (no id)", "row": "a list of rows, one per box", "name": "a name line",
+                    "list+votes": "a list of items, each with its dot votes in `votes`"}.get(b["type"], b["type"])
+            parts = [f"**{label}**{' (optional)' if b.get('optional') else ''}: `{b['key']}`, {what}."]
+            if b["type"] in ("list", "ranked", "row", "list+votes"):
+                parts.append(f"Ids `{t}.{e['code']}.{b['stem']}1`, `{t}.{e['code']}.{b['stem']}2` and so on.")
+            elif b.get("stem"):
+                parts.append(f"Id `{t}.{e['code']}.{b['stem']}`.")
+            if b.get("hint"):
+                parts.append(f"Printed hint: \u201c{b['hint']}\u201d")
+            if b.get("fields"):
+                parts.append("Fields: " + ", ".join(f"`{f['key']}` ({f['label']})" for f in b["fields"]) + ".")
+            if b.get("ticks"):
+                tk = b["ticks"]
+                parts.append(f"Ticks under \u201c{tk.get('label', '').rstrip(':')}\u201d go in `{tk['key']}`: " + ", ".join(f"`{o[0]}` ({o[1]})" if isinstance(o, list) else f"`{o}`" for o in tk["options"]) + ".")
+            if b.get("reader"):
+                parts.append(b["reader"])
+            line = "- " + " ".join(parts)
+            out.append(line)
+            # the example shape
+            sid = f"{t}.{e['code']}.{b.get('stem', '')}"
+            if b["type"] in ("list", "ranked", "list+votes"):
+                item = {"id": sid + "1", "text": "..."}
+                if b["type"] == "list+votes":
+                    item["votes"] = 3
+                section[b["key"]] = [item]
+            elif b["type"] == "text" and b.get("stem"):
+                section[b["key"]] = {"id": sid, "text": "..."}
+            elif b["type"] == "row":
+                row = {"id": sid + "1"}
+                row.update({f["key"]: "..." for f in b.get("fields", [])})
+                if b.get("ticks"):
+                    row[b["ticks"]["key"]] = [b["ticks"]["options"][0][0] if isinstance(b["ticks"]["options"][0], list) else b["ticks"]["options"][0]]
+                section[b["key"]] = [row]
+            elif b["type"] == "tally":
+                tally = {"tally": {o: 0 for o in b.get("options", [])[:2]}}
+                if b.get("text_line"):
+                    tally[b.get("fields_key", b["text_line"].lower())] = "..."
+                section[b["key"]] = tally
+        example[e["code"]] = section
+        out.append("")
+    example["V"] = {"points": [{"id": f"{t}.V.point1", "text": "...", "excerpt": "..."}]}
+    example["unclear"] = [{"id": f"{t}.{W.sheet_codes()[0]}.{W.per_group()[0]['boxes'][0].get('stem', 'item')}1", "photo": "P013", "note": "..."}]
+    example["notes"] = "..."
+    out += [f"## The file: raw/{t}.json", "```json", json.dumps(example, indent=1, ensure_ascii=False), "```", ""]
+    for e in W.per_person():
+        out.append(f"## {e.get('short', 'cards')[:1].upper() + e.get('short', 'cards')[1:]}s: raw/{e['raw_file']}")
+        out.append(f"One file for the whole room: `{e['key']}`, each with an id like `{e['prefix']}{e['stem']}1`. "
+                   "Fields: " + ", ".join(f"`{b['key']}` ({b.get('label', '')})" for b in e["boxes"]) + ".")
+        if e.get("reader"):
+            out += ["", e["reader"]]
+        out.append("")
+    return "\n".join(out).rstrip() + "\n"
+
+
+def brief(args):
+    print(brief_text(workshop(args), args.table))
 
 
 # ---------------------------------------------------------------- publish
@@ -763,10 +821,11 @@ def main():
     p.set_defaults(fn=prepare)
     p = sub.add_parser("transcribe", help="transcribe any voice notes locally with Whisper", description="Transcribe any voice notes locally with Whisper."); p.add_argument("--run", help="run folder (default: runs/latest)"); p.add_argument("--model", default=WHISPER_MODEL)
     p.add_argument("--jobs", type=int, default=3); p.add_argument("--force", action="store_true"); p.set_defaults(fn=transcribe)
-    p = sub.add_parser("status", help="coverage and blur per table, once labels.json is written", description="Coverage and blur per table, once labels.json is written."); p.add_argument("--run", help="run folder (default: runs/latest)"); p.add_argument("--tables", type=int, default=12, help="how many tables to expect (default 12)"); p.set_defaults(fn=status)
+    p = sub.add_parser("status", help="coverage and blur per table, once labels.json is written", description="Coverage and blur per table, once labels.json is written."); p.add_argument("--run", help="run folder (default: runs/latest)"); p.add_argument("--tables", type=int, default=12, help="how many tables to expect (default 12)"); p.add_argument("--config", help="settings file (default: playbook.config.json)"); p.set_defaults(fn=status)
+    p = sub.add_parser("brief", help="the workshop's sheets, ids and file shape, for the readers", description="Print the workshop's sheets, boxes, ids and the raw file's shape, generated from its format files. Give it to each reader with RAW_FORMAT.md."); p.add_argument("--table", type=int, default=7, help="the table number the examples use (default 7)"); p.add_argument("--config", help="settings file (default: playbook.config.json)"); p.set_defaults(fn=brief)
     p = sub.add_parser("verify", help="check the raw files and session.json: traceability, verbatim quotes, gaps, names", description="Check the raw files and session.json: traceability, verbatim quotes, gaps, names."); p.add_argument("--run", help="run folder (default: runs/latest)"); p.add_argument("--data"); p.add_argument("--links", action="store_true")
     p.add_argument("--config", help="settings file (default: playbook.config.json)"); p.set_defaults(fn=verify)
-    p = sub.add_parser("review", help="build review.html: every line next to its photos", description="Build review.html: every line next to its photos."); p.add_argument("--run", help="run folder (default: runs/latest)"); p.set_defaults(fn=review)
+    p = sub.add_parser("review", help="build review.html: every line next to its photos", description="Build review.html: every line next to its photos."); p.add_argument("--run", help="run folder (default: runs/latest)"); p.add_argument("--config", help="settings file (default: playbook.config.json)"); p.set_defaults(fn=review)
     p = sub.add_parser("draft", help="build the draft playbook in the run folder", description="Build the draft playbook in the run folder."); p.add_argument("--run", help="run folder (default: runs/latest)"); p.add_argument("--config", help="settings file (default: playbook.config.json)"); p.set_defaults(fn=draft)
     p = sub.add_parser("publish", help="final checks, then build playbook/index.html", description="Final checks, then build playbook/index.html."); p.add_argument("--run", help="run folder (default: runs/latest)"); p.add_argument("--links", action="store_true"); p.add_argument("--config", help="settings file (default: playbook.config.json)")
     p.set_defaults(fn=publish)

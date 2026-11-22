@@ -1,0 +1,18 @@
+# Round tables: writing the playbook
+
+The second stage for the round-tables workshop (see ingest/RAW_FORMAT.md for the rules every workshop shares, including the hard rules: nothing that isn't in the raw files, every item carries `src`, quotes and commitments word for word, anonymise, carry uncertainty forward).
+
+Write `runs/<run>/session.json`, starting from `examples/session-template.json` (same shape), with `meta.status` set to `"draft"`.
+
+### Shaping it
+- **Challenges**: start from each table's `S1.pick`. Tables that picked the same challenge (same problem, even if worded differently) become one entry with both table numbers; give it a short, plain title in the participants' terms. A table with no readable `pick` gets a page titled from its S2 and S3 content and a voice point, and goes on the review list. Ids are short lowercase slugs, such as `budget-before-crisis`.
+- **Themes**: group every `S1.challenge` from every table into 5 to 10 themes. A theme's `tables` are the tables that listed something in it; `heard` holds 1 to 3 short phrases copied from the sheets. Every challenge points at one theme.
+- **summary**: one or two sentences on why the challenge is hard, built only from that challenge's raw items (S1 wording, S2 hindered items, voice points). Cite nothing; it's a summary, not a quote.
+- **helped / hindered**: one line each, lightly tidied into a full sentence (fix grammar, expand note-form) without adding meaning. No `where`: the published page doesn't show who it worked for.
+- **actions**: `title` is a short imperative from the action text; `what`, `needs`, `sticks` from the matching boxes; `stages` exactly as ticked.
+- **quotes**: the strongest one to three per challenge, from the side sheets of its tables, or from a voice `excerpt` if the lead was clearly quoting someone. A table's `SS.best` is its lead's own pick of the session, so prefer it: use it as a quote (cite `T07.SS.best`) unless it repeats a quote you're already using, in which case cite both ids on that quote.
+- **Who was in the room**: `S1.room` isn't published yet (the website doesn't show it yet). Leave it in the raw files; `review` shows it per table.
+- **commitments**: every card, word for word, with `name` and `org` only where the card's own Name and Organisation lines were filled in (copied as written; `verify` checks them against the card); set `challenge` only when the card's wording or hint clearly points at one challenge (for example it repeats that challenge's action). Otherwise `null`.
+- **Heard on the day** (top-level `quotes`: it matters most when few tables used a side sheet): every side-sheet quote (it also stays on its challenge page) plus phrases the tables wrote in quotation marks on the main sheets that read as something a person said ("I'd rather pay the fines"), not scare-quoted terms ("pink + fluffy"). Word for word (`verify` checks), no names, nothing with an unclear marker. Each has `src`, `tables` and `challenge` (the page it links to). When several tables wrote versions of the same line, quote one and list every table and every src.
+- **resources**: from side sheets, into the top-level `resources` list ("General reading") unless one clearly belongs to one challenge. Turn a written address into a full `https://` URL only when it's unambiguous. A resource named without an address is listed without a `url` (shown as text, not a link) and flagged for the reviewer, who may add one. `verify --links` checks every link.
+- Merging is the only reason to drop a raw item. `verify` lists unused items so the reviewer can see what was left out.

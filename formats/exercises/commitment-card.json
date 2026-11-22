@@ -1,0 +1,65 @@
+{
+ "id": "commitment-card",
+ "code": "C",
+ "short": "commitment card",
+ "title": "One thing I will try, adapt or explore…",
+ "per": "person",
+ "raw_file": "commitments.json",
+ "key": "cards",
+ "prefix": "C.",
+ "stem": "card",
+ "boxes": [
+  {
+   "id": "text",
+   "type": "text",
+   "key": "text",
+   "label": "One thing I will try, adapt or explore…"
+  },
+  {
+   "id": "name",
+   "type": "name",
+   "key": "name",
+   "label": "Name (optional)"
+  },
+  {
+   "id": "org",
+   "type": "name",
+   "key": "org",
+   "label": "Organisation (optional)"
+  }
+ ],
+ "printed": [
+  "one thing i will try, adapt or explore",
+  "name (optional)",
+  "organisation (optional)",
+  "add these only if you're happy",
+  "public playbook",
+  "scan for the"
+ ],
+ "print": {
+  "renderer": "legacy"
+ },
+ "kit": {
+  "title": "Commitment card",
+  "html": {
+   "file": "*commitment-card*.html",
+   "note": "Both halves, with the QR code and the name and organisation lines."
+  },
+  "print": {
+   "file": "*commitment-card*.pdf",
+   "note": "A5, perforated down the middle. One per person."
+  }
+ },
+ "review_title": "Commitment cards",
+ "close_up": {
+  "_note": "For the review app: every card has the same printed heading and shape, so the heading gives the whole card. heading/also/foot are patterns in lower case; the numbers are shares of the card's width (the heading's span, how far left of it the card starts) and height (aspect: height over width; down: how far above the heading the card starts).",
+  "heading": "thing",
+  "also": "try|adapt|explore",
+  "foot": "playbook|these only",
+  "heading_width": 0.83,
+  "aspect": 1.41,
+  "left": 0.08,
+  "down": 0.22
+ },
+ "reader": "Card stubs go in raw/commitments.json: {\"photos\": [\"P040\"], \"cards\": [{\"id\": \"C.card1\", \"text\": \"...\", \"name\": \"Sam Sample\", \"org\": \"Example Bank\", \"challenge_hint\": \"budget\"}], \"unclear\": [...]}. `name` and `org` come only from the card's optional \"Name\" and \"Organisation\" lines, copied exactly; leave them out when those lines are blank. A name written anywhere else on the card is not consent to publish it.\n\nCard rules (from real cards):\n- **The commitment is the half with the Name and Organisation lines** (the stub). If a card arrives untorn, transcribe that half as the card and copy the other half (the QR half, the person's own copy) into `notes`, even when it says something different. If only a QR half comes in, transcribe it with no `name` or `org`.\n- **Sign-offs aren't part of the commitment.** Leave \"Thank you\", \"Thanks Sam :)\" and other messages to the facilitators out of `text` and quote them in `notes`. That also keeps a name written outside the Name line out of the item text.\n- **The same card in two photos** (one upside down, say) is one card. List both photo ids in `photos` and transcribe it once."
+}

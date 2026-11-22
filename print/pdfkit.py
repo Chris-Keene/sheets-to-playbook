@@ -140,19 +140,30 @@ class Page:
         self._paint(layer, self.line_ops(x1, y1, x2, y2), **kw)
 
     # -- artwork from files
-    def svg(self, layer, svg, x, y, w=None, h=None, fill=BLACK, paths=None):
-        """Draw an SVG file's paths in one colour into a box at (x, y). Only <path> shapes are drawn, and
-        transforms are ignored, so a logo should be a flat, single-colour SVG of filled paths."""
+    def svg(self, layer, svg, x, y, w=None, h=None, fill=BLACK, paths=None, colours=None):
+        """Draw an SVG file's <path> shapes into a box at (x, y), with any transforms applied. They're drawn in one
+        colour (`fill`), unless `colours` is given: a function from a hex colour to CMYK, used to keep each shape's
+        own fill (for a logo in its own colours). Other SVG elements (circles, text, gradients) aren't drawn."""
         vb, ds = svg_paths(svg)
+        fills = svg_fills(svg)
         if paths is not None:
-            ds = [ds[i] for i in paths]
+            ds, fills = [ds[i] for i in paths], [fills[i] for i in paths]
             vb = bbox_of(ds)
         vx, vy, vw, vh = vb
         s = (w / vw) if w else (h / vh)
-        pen = _Pen(lambda p: self.pt(x + (p[0] - vx) * s, y + (p[1] - vy) * s))
-        for d in ds:
-            parse_path(d, pen)
-        self._paint(layer, pen.ops, fill=fill)
+        to_page = lambda p: self.pt(x + (p[0] - vx) * s, y + (p[1] - vy) * s)
+        if colours is None:
+            pen = _Pen(to_page)
+            for d in ds:
+                parse_path(d, pen)
+            self._paint(layer, pen.ops, fill=fill)
+        else:
+            for d, own in zip(ds, fills):
+                if own == "none":
+                    continue
+                pen = _Pen(to_page)
+                parse_path(d, pen)
+                self._paint(layer, pen.ops, fill=colours(own) if own else fill)
         return vw * s, vh * s
 
     def text(self, layer, s, x, y, size_pt, font="SemiBold", fill=BLACK, align="left", tracking=0.0):
@@ -220,18 +231,94 @@ def font_obj(weight):
 
 
 def svg_paths(path):
-    """(viewBox, [path data]) for an SVG file. Raises ValueError if it has no <path> to draw."""
+    """(viewBox, [path data]) for an SVG file, with each path's own and its groups' transforms applied, so a logo
+    exported with nested groups draws where it should. Raises ValueError if it has no <path> to draw."""
+    return _svg(path)[:2]
+
+
+def svg_fills(path):
+    """Each path's fill colour, in the same order as svg_paths: "#rrggbb", "none", or "" when it doesn't say."""
+    return _svg(path)[2]
+
+
+def _svg(path):
     key = str(path)
     if key not in _svgs:
-        s = Path(path).read_text()
-        ds = re.findall(r"""<path\b[^>]*?\sd=(["'])(.+?)\1""", s, flags=re.S)
-        ds = [d for _, d in ds]
+        import xml.etree.ElementTree as ET
+        from fontTools.pens.svgPathPen import SVGPathPen
+        from fontTools.pens.transformPen import TransformPen
+        root = ET.fromstring(Path(path).read_text())
+        ds, fills = [], []
+
+        def walk(el, m, fill):
+            m = _compose(m, _transform(el.get("transform")))
+            fill = _fill_of(el) or fill
+            if el.tag.rsplit("}", 1)[-1] == "path" and el.get("d"):
+                d = el.get("d")
+                if m != _IDENTITY:
+                    out = SVGPathPen(None)
+                    parse_path(d, TransformPen(out, m))
+                    d = out.getCommands()
+                ds.append(d)
+                fills.append(fill)
+            for child in el:
+                walk(child, m, fill)
+
+        walk(root, _IDENTITY, "")
         if not ds:
             raise ValueError(f"{path} has no <path> shapes to draw")
-        m = re.search(r"""viewBox=(["'])([^"']+)\1""", s)
+        m = re.search(r"""viewBox=(["'])([^"']+)\1""", Path(path).read_text())
         vb = tuple(float(v) for v in re.split(r"[\s,]+", m.group(2).strip())) if m else bbox_of(ds)
-        _svgs[key] = (vb, ds)
+        _svgs[key] = (vb, ds, fills)
     return _svgs[key]
+
+
+_IDENTITY = (1.0, 0.0, 0.0, 1.0, 0.0, 0.0)
+
+
+def _compose(a, b):
+    """Apply b inside a (the SVG nesting order): the matrix for a parent's transform a and a child's b."""
+    a1, b1, c1, d1, e1, f1 = a
+    a2, b2, c2, d2, e2, f2 = b
+    return (a1 * a2 + c1 * b2, b1 * a2 + d1 * b2, a1 * c2 + c1 * d2, b1 * c2 + d1 * d2,
+            a1 * e2 + c1 * f2 + e1, b1 * e2 + d1 * f2 + f1)
+
+
+def _transform(attr):
+    """An SVG transform attribute as a matrix: translate, scale, rotate and matrix(), in sequence."""
+    import math
+    m = _IDENTITY
+    for name, args in re.findall(r"(\w+)\s*\(([^)]*)\)", attr or ""):
+        v = [float(x) for x in re.split(r"[\s,]+", args.strip()) if x]
+        if name == "translate":
+            t = (1, 0, 0, 1, v[0], v[1] if len(v) > 1 else 0)
+        elif name == "scale":
+            t = (v[0], 0, 0, v[1] if len(v) > 1 else v[0], 0, 0)
+        elif name == "rotate":
+            r = math.radians(v[0])
+            t = (math.cos(r), math.sin(r), -math.sin(r), math.cos(r), 0, 0)
+            if len(v) == 3:
+                t = _compose(_compose((1, 0, 0, 1, v[1], v[2]), t), (1, 0, 0, 1, -v[1], -v[2]))
+        elif name == "matrix" and len(v) == 6:
+            t = tuple(v)
+        else:
+            continue
+        m = _compose(m, t)
+    return m
+
+
+def _fill_of(el):
+    """An element's own fill as "#rrggbb" or "none" ("" if it doesn't set one), from the attribute or its style."""
+    f = el.get("fill") or ""
+    m = re.search(r"fill\s*:\s*([^;]+)", el.get("style") or "")
+    if m:
+        f = m.group(1).strip()
+    f = f.strip().lower()
+    if f == "none" or f.startswith("rgba(") and f.replace(" ", "").endswith(",0)"):
+        return "none"
+    if re.fullmatch(r"#[0-9a-f]{3}", f):
+        f = "#" + "".join(ch * 2 for ch in f[1:])
+    return f if re.fullmatch(r"#[0-9a-f]{6}", f) else ""
 
 
 def bbox_of(ds):

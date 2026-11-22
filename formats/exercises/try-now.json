@@ -1,0 +1,76 @@
+{
+ "id": "try-now",
+ "code": "S3",
+ "short": "Sheet 3",
+ "label": "Question 3",
+ "title": "What could people try now, and how does it stick?",
+ "per": "group",
+ "boxes": [
+  {
+   "id": "actions",
+   "type": "row",
+   "key": "actions",
+   "stem": "action",
+   "count": 3,
+   "label": "Action {n}",
+   "text_field": "action",
+   "fields": [
+    {
+     "key": "action",
+     "label": "What to try"
+    },
+    {
+     "key": "needs",
+     "label": "What you need"
+    },
+    {
+     "key": "sticks",
+     "label": "How it sticks"
+    }
+   ],
+   "ticks": {
+    "key": "stages",
+    "label": "Good for:",
+    "options": [
+     [
+      "starting",
+      "Just starting"
+     ],
+     [
+      "growing",
+      "Growing"
+     ],
+     [
+      "established",
+      "Established"
+     ]
+    ]
+   },
+   "reader": "One object per action box. Put the words in `action`, `needs` and `sticks`; the ticked boxes become `stages` from `starting`, `growing`, `established` (leave `[]` if none are ticked; don't infer)."
+  }
+ ],
+ "printed": [
+  "what could people try now",
+  "and how does it stick",
+  "what to try",
+  "what you need",
+  "how it sticks",
+  "good for",
+  "just starting",
+  "established"
+ ],
+ "print": {
+  "renderer": "legacy"
+ },
+ "kit": {
+  "title": "Sheet 3: What could people try now, and how does it stick?",
+  "html": {
+   "file": "*sheet-S3*.html",
+   "note": "Type into it, or print it on A4."
+  },
+  "print": {
+   "file": "*sheet-S3*.pdf",
+   "note": "A1 poster, one per table."
+  }
+ }
+}

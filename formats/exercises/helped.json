@@ -1,0 +1,68 @@
+{
+ "id": "helped",
+ "code": "S2",
+ "short": "Sheet 2",
+ "label": "Question 2",
+ "title": "What has helped, or not?",
+ "per": "group",
+ "boxes": [
+  {
+   "id": "helped",
+   "type": "list",
+   "key": "helped",
+   "stem": "helped",
+   "label": "Helped",
+   "hint": "What happened, and why did it work?",
+   "fields": [
+    {
+     "key": "who",
+     "label": "Who it was for"
+    }
+   ],
+   "reader": "The sheets no longer ask who it was for, but if someone writes a sector or size beside an item anyway, put it in `who`, not in `text`."
+  },
+  {
+   "id": "hindered",
+   "type": "list",
+   "key": "hindered",
+   "stem": "hindered",
+   "label": "Got in the way",
+   "hint": "What would you change or avoid?",
+   "fields": [
+    {
+     "key": "who",
+     "label": "Who it was for"
+    }
+   ],
+   "reader": "The sheets no longer ask who it was for, but if someone writes a sector or size beside an item anyway, put it in `who`, not in `text`."
+  },
+  {
+   "id": "lessons",
+   "type": "list",
+   "key": "lessons",
+   "stem": "lesson",
+   "label": "If we did it again, we'd…"
+  }
+ ],
+ "printed": [
+  "what has helped, or not",
+  "what happened, and why did it work",
+  "got in the way",
+  "what would you change or avoid",
+  "if we did it again, we'd"
+ ],
+ "print": {
+  "renderer": "legacy"
+ },
+ "kit": {
+  "title": "Sheet 2: What has helped, or not?",
+  "html": {
+   "file": "*sheet-S2*.html",
+   "note": "Type into it, or print it on A4."
+  },
+  "print": {
+   "file": "*sheet-S2*.pdf",
+   "note": "A1 poster, one per table."
+  }
+ }
+}

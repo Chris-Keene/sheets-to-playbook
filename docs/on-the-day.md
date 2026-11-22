@@ -50,7 +50,7 @@ Optional: put `runs/<run>/names-to-scrub.txt` in the run, one name or organisati
 
 ## If Claude isn't available
 
-Everything except reading the handwriting still works. Run `prepare`, then label the photos in `labels.json` (the format is in the skill, `.claude/skills/sheets-to-playbook/SKILL.md`, section 2, "Label and check coverage"), and `review.html` lays the photos out per table. Copy `examples/session-template.json` to `runs/latest/session.json`, type the content in from the photos following `ingest/RAW_FORMAT.md`, "Stage 2: writing the playbook", then run `verify`, `draft` and `publish` as normal. It's slower, but the checks and the site are the same.
+Everything except reading the handwriting still works. Run `prepare`, then label the photos in `labels.json` (the format is in the skill, `.claude/skills/sheets-to-playbook/SKILL.md`, section 2, "Label and check coverage"), and `review.html` lays the photos out per table. Copy `examples/session-template.json` to `runs/latest/session.json`, type the content in from the photos following `ingest/RAW_FORMAT.md`, "Stage 2: writing the page", and the workshop's `recipe.md` (`formats/workshops/round-tables/recipe.md` for round tables), then run `verify`, `draft` and `publish` as normal. It's slower, but the checks and the site are the same.
 
 ## Afterwards
 

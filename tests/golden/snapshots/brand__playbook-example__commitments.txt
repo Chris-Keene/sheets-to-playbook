@@ -1,0 +1,166 @@
+## text
+Commitments, Workshop Notes
+
+Skip to content
+Workshop
+Notes
+Playbook
+Commitments
+Run your own
+How it was made
+
+Example, not from the session
+
+COMMITMENTS
+
+One thing I will try, adapt or explore
+
+At the end of the session, everyone wrote one commitment on a card. Some linked it to a challenge, and some added their name.
+
+Show
+All commitments (16)
+Keeping leadership support when sponsors move on (2)
+Proving impact in terms leaders care about (2)
+Stopping champions burning out (2)
+Getting product teams to own accessibility (3)
+Securing budget before there's a crisis (2)
+Reviving a champions network that has stalled (1)
+When leaders think a tool or AI has solved it (1)
+General (3)
+
+Ask my sponsor to name a deputy before Christmas.
+
+By Sam Sample, Example Bank
+
+Keeping leadership support when sponsors move on
+
+Add one accessibility line to our quarterly risk report.
+
+Keeping leadership support when sponsors move on
+
+Record one customer journey before and after we fix it.
+
+Proving impact in terms leaders care about
+
+Get support to tag tickets that mention accessibility.
+
+Proving impact in terms leaders care about
+
+Agree two hours a month of protected time for our champions.
+
+By Alex Example
+
+Stopping champions burning out
+
+Write a 'champions don't' list with my core group.
+
+Stopping champions burning out
+
+Sit in on a research session with my product manager.
+
+Getting product teams to own accessibility
+
+Stop fixing other teams' issues and pair with them instead.
+
+Getting product teams to own accessibility
+
+Write acceptance criteria with one team for their next feature.
+
+Getting product teams to own accessibility
+
+Find two late fixes from last year and cost them.
+
+By Jo Placeholder, Example Council
+
+Securing budget before there's a crisis
+
+Ask our design system lead about a shared budget line.
+
+Securing budget before there's a crisis
+
+Email every network member and ask them to opt back in.
+
+Reviving a champions network that has stalled
+
+Write down what our scanner doesn't check.
+
+When leaders think a tool or AI has solved it
+
+Find a peer outside my organisation to swap notes with every month.
+
+General
+
+Share this playbook with my manager.
+
+General
+
+Keep in touch with someone I met at my table.
+
+General
+
+Workshop Notes: Growing and sustaining support for accessibility · Example draft
+
+Download this playbook
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+link "Acme Accessibility Group (Acme) Workshop Notes"
+navigation "Playbook"
+heading[1] "One thing I will try, adapt or explore"
+LabelText
+combobox "Show"
+status
+list
+image "Acme Accessibility Group (Acme)"
+list
+MenuListPopup
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+option "All commitments (16)"
+option "Keeping leadership support when sponsors move on (2)"
+option "Proving impact in terms leaders care about (2)"
+option "Stopping champions burning out (2)"
+option "Getting product teams to own accessibility (3)"
+option "Securing budget before there's a crisis (2)"
+option "Reviving a champions network that has stalled (1)"
+option "When leaders think a tool or AI has solved it (1)"
+option "General (3)"
+link "Keeping leadership support when sponsors move on"
+link "Keeping leadership support when sponsors move on"
+link "Proving impact in terms leaders care about"
+link "Proving impact in terms leaders care about"
+link "Stopping champions burning out"
+link "Stopping champions burning out"
+link "Getting product teams to own accessibility"
+link "Getting product teams to own accessibility"
+link "Getting product teams to own accessibility"
+link "Securing budget before there's a crisis"
+link "Securing budget before there's a crisis"
+link "Reviving a champions network that has stalled"
+link "When leaders think a tool or AI has solved it"
+button "Download this playbook"
+link "Playbook"
+link "Commitments"
+link "Run your own"
+link "How it was made"

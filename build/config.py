@@ -13,6 +13,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 DEFAULT = {
+    "workshop": "round-tables",          # which format: formats/workshops/<id> (build/formats.py)
+    "formats": [],                       # more folders of formats to search first, relative to this file
     "org": {
         "short": "",                     # e.g. "CAN": used in "tell CAN", "About CAN"
         "name": "",                      # e.g. "Champions of Accessibility Network"
