@@ -33,11 +33,18 @@ CONFIGS = {
     "default": "playbook.config.json",
     "can": "examples/can/playbook.config.json",
     "brand": "tests/golden/brand.config.json",
+    "retro": "tests/golden/retro.config.json",
 }
-SESSIONS = {
-    "example": "examples/example-playbook.json",
-    "template": "examples/session-template.json",
-    "four": "tests/four-tables.json",
+SESSIONS = {   # the session files each workshop's playbook is built from
+    "round-tables": {
+        "example": "examples/example-playbook.json",
+        "template": "examples/session-template.json",
+        "four": "tests/four-tables.json",
+    },
+    "retro": {
+        "example": "examples/retro-example.json",
+        "template": "examples/retro-template.json",
+    },
 }
 PAGES = ["overview", "commitments", "about", "kit"]   # the playbook's fixed views; challenge pages are added per session
 BUILD_OUTPUTS = ["print/out", "slides/out"]
@@ -51,9 +58,17 @@ def run(cmd, **kw):
     return r.stdout
 
 
-def routes(session_file):
+def routes(session_file, workshop="round-tables"):
+    """Every view to snapshot: the workshop's pages (and their aliases), plus round tables' challenge pages."""
     data = json.loads(Path(session_file).read_text())
-    return PAGES + [c["id"] for c in data.get("challenges", [])]
+    if workshop == "round-tables":
+        return PAGES + [c["id"] for c in data.get("challenges", [])]
+    w = json.loads((ROOT / "formats" / "workshops" / workshop / "workshop.json").read_text())
+    return [p[0] for p in w.get("pages", [["overview", "Playbook"]])]
+
+
+def workshop_of(cfg_file):
+    return json.loads((ROOT / cfg_file).read_text()).get("workshop", "round-tables")
 
 
 def safe(key):
@@ -79,17 +94,20 @@ def build(work):
         for f in sorted((ROOT / "slides/out").glob("*.html")):
             (dest / "slides").mkdir(parents=True, exist_ok=True)
             jobs.append({"key": f"{cname}/slides/{f.name}", "file": str(shutil.copy2(f, dest / "slides" / f.name)), "kind": "slides"})
-        for sname, sfile in SESSIONS.items():
+        ws = workshop_of(cfg)
+        for sname, sfile in SESSIONS[ws].items():
             out = dest / f"playbook-{sname}" / "index.html"
             run([PY, "build/build.py", sfile, "--out", out, "--config", cfg])
-            jobs.append({"key": f"{cname}/playbook-{sname}", "file": str(out), "kind": "playbook", "routes": routes(ROOT / sfile)})
-    # verify and draft on the fake run (a copy, so the fixture folder stays clean)
-    rc = work / "run"
-    shutil.copytree(FIXTURE, rc)
-    run([PY, "ingest/ingest.py", "verify", "--run", rc])
-    report = json.loads((rc / "verify.json").read_text())
-    run([PY, "ingest/ingest.py", "draft", "--run", rc])
-    jobs.append({"key": "run/draft", "file": str(rc / "playbook-draft.html"), "kind": "playbook", "routes": routes(rc / "session.json")})
+            jobs.append({"key": f"{cname}/playbook-{sname}", "file": str(out), "kind": "playbook", "routes": routes(ROOT / sfile, ws)})
+        if cname == "default":
+            # verify and draft on the fake run (a copy, so the fixture folder stays clean), while the kit beside
+            # the draft is the default round-tables one
+            rc = work / "run"
+            shutil.copytree(FIXTURE, rc)
+            run([PY, "ingest/ingest.py", "verify", "--run", rc])
+            report = json.loads((rc / "verify.json").read_text())
+            run([PY, "ingest/ingest.py", "draft", "--run", rc])
+            jobs.append({"key": "run/draft", "file": str(rc / "playbook-draft.html"), "kind": "playbook", "routes": routes(rc / "session.json")})
     return jobs, pdfs, report
 
 

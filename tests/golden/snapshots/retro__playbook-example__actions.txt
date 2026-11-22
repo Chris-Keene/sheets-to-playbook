@@ -1,0 +1,145 @@
+## text
+Skip to content
+Retro
+Notes
+Notes
+Actions
+How it was made
+
+Example, not from the session
+
+RETRO NOTES
+
+Checkout redesign: sprint 14 retro
+
+What 2 teams wrote down at the sprint 14 retro, Thursday 3 December 2026.
+
+4 went well
+3 got in the way
+5 ideas
+3 actions
+How did it go?
+Went well
+Pairing designers with developers from day one meant fewer surprises at review. The Web team and the Mobile team
+Testing with screen reader users in week one caught the focus order problems early. The Web team
+The new component library saved time on the payment form. The Mobile team
+Daily stand-ups stayed under ten minutes. The Mobile team
+Got in the way
+The payment provider's sandbox was down for two days. The Web team and the Mobile team
+Requirements for saved cards changed in the second week. The Web team
+Too many meetings on Wednesdays. The Mobile team
+What could we try?
+
+Every idea, with the most dot votes first.
+
+How might we keep working when a third-party sandbox goes down? The Web team
+How might we lock requirements before the sprint starts? The Mobile team
+7 votes
+Keep a recorded mock of the payment API so we can test offline. The Web team
+6 votes
+Add a screen reader check to the definition of done. The Web team
+5 votes
+A short requirements sign-off before sprint planning. The Mobile team
+4 votes
+Meeting-free Wednesday mornings. The Mobile team
+2 votes
+Ask the provider for an uptime alert we can subscribe to. The Web team
+What we’ll do
+
+3 actions, each with who and by when, as the team wrote them.
+
+Record a mock of the payment API for local testing.
+Who
+Sam
+By when
+End of sprint 15
+The Web team
+Add a screen reader check to the definition of done.
+Who
+Priya
+By when
+Next Monday
+The Web team
+Trial meeting-free Wednesday mornings for a month.
+Who
+Alex
+By when
+From 9 December
+The Mobile team
+
+Retro Notes: Checkout redesign: sprint 14 retro · Example
+
+Download this playbook ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+link "Retro Notes"
+navigation "Playbook"
+region "Checkout redesign: sprint 14 retro"
+region "How did it go?"
+region "What could we try?"
+region "What we’ll do"
+list
+heading[1] "Checkout redesign: sprint 14 retro"
+list "In these notes"
+heading[2] "How did it go?"
+heading[3] "Went well"
+list
+heading[3] "Got in the way"
+list
+heading[2] "What could we try?"
+list
+list
+heading[2] "What we’ll do"
+list
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Notes"
+link "Actions"
+link "How it was made"
+heading[3] "Record a mock of the payment API for local testing."
+DescriptionList
+heading[3] "Add a screen reader check to the definition of done."
+DescriptionList
+heading[3] "Trial meeting-free Wednesday mornings for a month."
+DescriptionList
+term "Who"
+definition
+term "By when"
+definition
+term "Who"
+definition
+term "By when"
+definition
+term "Who"
+definition
+term "By when"
+definition

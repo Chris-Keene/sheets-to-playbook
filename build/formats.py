@@ -69,7 +69,7 @@ class Workshop:
         out = []
         for e in self.per_group():
             for b in e["boxes"]:
-                if b["type"] in ("list", "ranked", "row") and b.get("stem"):
+                if b["type"] in ("list", "ranked", "row", "list+votes") and b.get("stem"):
                     out.append((e["code"], b["key"]))
         return out + [(VOICE, "points")]
 
@@ -123,7 +123,7 @@ class Workshop:
                ("slides/out", "*.pdf", "The slides as a PDF", "One slide per page, without the notes.", "slides")]
         for kind in ("html", "print"):
             for e in self.exercises:
-                k = e.get("kit") or {}
+                k = e.get("kit") or (self._default_kit(e) if e.get("per", "group") == "group" and e.get("boxes") else {})
                 if kind in k:
                     folder = "print/out/html" if kind == "html" else "print/out/paper"
                     out.append((folder, k[kind]["file"], k[kind].get("title", k.get("title", e.get("title", ""))), k[kind]["note"], kind))
@@ -178,6 +178,12 @@ class Workshop:
         e = self.by_code(code)
         return next((b for b in (e or {}).get("boxes", []) if b["type"] == "row"), None)
 
+    def _default_kit(self, e):
+        """Kit entries for a sheet that doesn't list its own: its fill-in page and its A1 poster."""
+        return {"title": f"{e.get('short', e['code'])}: {e.get('title', '')}",
+                "html": {"file": f"*sheet-{e['code']}*.html", "note": "Type into it, or print it on A4."},
+                "print": {"file": f"*sheet-{e['code']}*.pdf", "note": f"A1 poster, one per {self.group}."}}
+
     # ------------------------------------------------------------ the workshop's own checks
 
     def rules(self):
@@ -195,6 +201,10 @@ class Workshop:
 
     def views_js(self):
         f = self.folder / "views.js"
+        return f.read_text() if f.exists() else ""
+
+    def views_css(self):
+        f = self.folder / "views.css"
         return f.read_text() if f.exists() else ""
 
 
@@ -225,8 +235,14 @@ def load(cfg=None, workshop=None):
     folder = find("workshops", name, cfg)
     data = _load_json(folder / "workshop.json")
     exercises = []
-    for item in data.get("agenda", []) + [{"exercise": a} if isinstance(a, str) else a for a in data.get("addons", [])]:
+    agenda = data.get("agenda", [])
+    for i, item in enumerate(agenda + [{"exercise": a} if isinstance(a, str) else a for a in data.get("addons", [])], 1):
         e = _load_json(find("exercises", item["exercise"], cfg))
+        if i <= len(agenda):
+            # an exercise's place in the agenda names it on the paper, unless it names itself: Sheet 2, Question 2, S2
+            e.setdefault("code", f"S{i}")
+            e.setdefault("short", f"Sheet {i}")
+            e.setdefault("label", f"Question {i}")
         e = dict(e, **{k: v for k, v in item.items() if k not in ("exercise",)})   # the agenda can override labels, minutes...
         exercises.append(e)
     return Workshop(data, folder, exercises)

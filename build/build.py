@@ -274,6 +274,7 @@ def build_playbook(data_path, out, cfg):
     data["credit_html"] = credit_html(cfg)
     data["sheet_names"] = W.sheet_names()          # for the draft's source tags ("T07 · Sheet 2")
     data["card_prefixes"] = list(W.card_prefixes())
+    data["group"] = W.group
     data["file_name"] = (cfg["playbook"].get("file_name") or slug(data["meta"]["series"])).removesuffix(".html") + ".html"
     hero = data["meta"].get("hero") or {}
     if hero.get("file"):
@@ -291,6 +292,7 @@ def build_playbook(data_path, out, cfg):
     html = (ROOT / "build" / "template-playbook.html").read_text()
     # the workshop's own views go into the shared page, and its pages into the navigation
     html = html.replace("/*VIEWS*/", W.views_js().rstrip(), 1)
+    html = html.replace("/*VIEWS_CSS*/", W.views_css().rstrip(), 1)
     html = html.replace("<!--NAV-->", nav_html(W), 1)
     html = themed(html, cfg)
     if cfg["playbook"].get("searchable") and data["meta"].get("status") == "final":

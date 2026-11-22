@@ -1,0 +1,45 @@
+{
+ "id": "went-well",
+ "title": "How did it go?",
+ "_note": "Retro, looking back. Two columns; reused by QBR with its own wording.",
+ "boxes": [
+  {
+   "id": "well",
+   "type": "list",
+   "key": "well",
+   "stem": "well",
+   "label": "Went well",
+   "hint": "What worked, and why did it work?"
+  },
+  {
+   "id": "pain",
+   "type": "list",
+   "key": "pain",
+   "stem": "pain",
+   "label": "Got in the way",
+   "hint": "What slowed us down or tripped us up?"
+  }
+ ],
+ "print": {
+  "rows": [
+   {
+    "height": "grow",
+    "cells": [
+     {
+      "box": "well"
+     },
+     {
+      "box": "pain"
+     }
+    ]
+   }
+  ]
+ },
+ "slide": {
+  "prompt": "Fill both columns: one thing per line. Short is fine.",
+  "notes": [
+   "Ask everyone to write before anyone talks: quiet writing first gets more voices onto the sheet.",
+   "If a column stays empty, ask: what would you want to keep doing? What would you rather never do again?"
+  ]
+ }
+}

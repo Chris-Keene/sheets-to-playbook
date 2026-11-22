@@ -1,0 +1,141 @@
+{
+ "_note": "An example retro, invented to show the page: no real team or company. Build it with a settings file whose workshop is \"retro\" (tests/golden/retro.config.json is one).",
+ "meta": {
+  "status": "example",
+  "edition": "Example",
+  "title": "Checkout redesign: sprint 14 retro",
+  "series": "Retro Notes",
+  "event": "the sprint 14 retro",
+  "date": "Thursday 3 December 2026",
+  "tables": 2,
+  "table_names": {
+   "1": "Web",
+   "2": "Mobile"
+  }
+ },
+ "went_well": [
+  {
+   "text": "Pairing designers with developers from day one meant fewer surprises at review.",
+   "tables": [
+    1,
+    2
+   ]
+  },
+  {
+   "text": "Testing with screen reader users in week one caught the focus order problems early.",
+   "tables": [
+    1
+   ]
+  },
+  {
+   "text": "The new component library saved time on the payment form.",
+   "tables": [
+    2
+   ]
+  },
+  {
+   "text": "Daily stand-ups stayed under ten minutes.",
+   "tables": [
+    2
+   ]
+  }
+ ],
+ "got_in_way": [
+  {
+   "text": "The payment provider's sandbox was down for two days.",
+   "tables": [
+    1,
+    2
+   ]
+  },
+  {
+   "text": "Requirements for saved cards changed in the second week.",
+   "tables": [
+    1
+   ]
+  },
+  {
+   "text": "Too many meetings on Wednesdays.",
+   "tables": [
+    2
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "text": "How might we keep working when a third-party sandbox goes down?",
+   "tables": [
+    1
+   ]
+  },
+  {
+   "text": "How might we lock requirements before the sprint starts?",
+   "tables": [
+    2
+   ]
+  }
+ ],
+ "ideas": [
+  {
+   "text": "Keep a recorded mock of the payment API so we can test offline.",
+   "votes": 7,
+   "tables": [
+    1
+   ]
+  },
+  {
+   "text": "A short requirements sign-off before sprint planning.",
+   "votes": 5,
+   "tables": [
+    2
+   ]
+  },
+  {
+   "text": "Meeting-free Wednesday mornings.",
+   "votes": 4,
+   "tables": [
+    2
+   ]
+  },
+  {
+   "text": "Ask the provider for an uptime alert we can subscribe to.",
+   "votes": 2,
+   "tables": [
+    1
+   ]
+  },
+  {
+   "text": "Add a screen reader check to the definition of done.",
+   "votes": 6,
+   "tables": [
+    1
+   ]
+  }
+ ],
+ "actions": [
+  {
+   "what": "Record a mock of the payment API for local testing.",
+   "who": "Sam",
+   "when": "End of sprint 15",
+   "tables": [
+    1
+   ]
+  },
+  {
+   "what": "Add a screen reader check to the definition of done.",
+   "who": "Priya",
+   "when": "Next Monday",
+   "tables": [
+    1
+   ]
+  },
+  {
+   "what": "Trial meeting-free Wednesday mornings for a month.",
+   "who": "Alex",
+   "when": "From 9 December",
+   "tables": [
+    2
+   ]
+  }
+ ]
+}

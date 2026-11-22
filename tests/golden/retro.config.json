@@ -1,0 +1,16 @@
+{
+ "_note": "For tests/golden.py: the retro workshop in the default look.",
+ "workshop": "retro",
+ "org": {
+  "short": "",
+  "name": "",
+  "forum": "retro",
+  "team": "the team",
+  "about": "",
+  "join": null
+ },
+ "playbook": {
+  "name": "Retro Notes",
+  "url": ""
+ }
+}

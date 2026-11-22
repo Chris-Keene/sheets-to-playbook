@@ -24,6 +24,7 @@ import pdfkit  # noqa: E402  use_fonts, cap_height
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "build"))
 import config  # noqa: E402
+import formats  # noqa: E402
 
 OUT = Path(__file__).resolve().parent / "out" / "paper"
 VERSION = "1.4.0"
@@ -35,6 +36,7 @@ RULE = (0, 0, 0, 0.45)     # write-on lines and fold marks
 SHEET_PDF = "sheet-{code}-A1.pdf"
 CARD_PDF = "commitment-card-A5-perforated.pdf"
 TABLES_PDF = "table-cards-A4-fold-to-A5-tables-1-to-{n}.pdf"
+SHEET_LAYOUT = "sheet-{code}-A1.layout.json"
 ZIP = "paper-kit-print-files-v{version}.zip"
 
 
@@ -54,8 +56,9 @@ def address(url):
     return (u.netloc + u.path).rstrip("/")
 
 
-def kit_settings(cfg, qr_url):
-    """Everything the artwork needs from the settings: colours as CMYK, the logo or wordmark, names and the QR."""
+def kit_settings(cfg, qr_url, W=None):
+    """Everything the artwork needs from the settings: colours as CMYK, the logo or wordmark, names and the QR.
+    W is the workshop: what a group is called on the sheets ("Table", "Team") and whether names are kept off them."""
     b = cfg["brand"]
     acc, hi = b["accent"], b["highlight"]
     # an optional brand.cmyk {"accent": [c, m, y, k], "highlight": [...]} keeps values a printer has already proofed
@@ -94,6 +97,8 @@ def kit_settings(cfg, qr_url):
     k.name = cfg["playbook"]["name"]
     k.qr_url = qr_url
     k.qr_text = address(qr_url) if qr_url else ""    # printed beside the code for anyone who can't scan it
+    k.group = (W.group if W else "table").capitalize()
+    k.public = (W.privacy if W else "public") == "public"
     return k
 
 
@@ -132,8 +137,9 @@ A1 = (594, 841)
 M = 34                     # outer margin
 
 
-def zone(p, k, x, y, w, h, title, hint=None, tint=False, title_pt=44, hint_pt=26):
-    """A dashed write-in box with a heading. Returns the y below its heading and hint, where writing starts."""
+def zone(p, k, x, y, w, h, title, hint=None, tint=False, title_pt=44, hint_pt=26, box=None, n=None):
+    """A dashed write-in box with a heading. Returns the y below its heading and hint, where writing starts.
+    The box is recorded on the page (p.zones), so its position can be saved beside the PDF for the tests."""
     if tint:
         p.rrect("art", x, y, w, h, 7, fill=k.tint)
     p.rrect("art", x, y, w, h, 7, stroke=k.dash, width=1.1, dash=(5, 3))
@@ -143,12 +149,16 @@ def zone(p, k, x, y, w, h, title, hint=None, tint=False, title_pt=44, hint_pt=26
     if hint:
         ty = p.para("art", hint, x + pad, ty + hint_pt / 2.835 * 1.35, hint_pt, w - 2 * pad, "Regular", HINT,
                     leading=1.3) - hint_pt / 2.835 * 1.3
+    if hasattr(p, "zones"):
+        p.zones.append({"box": box, "n": n, "title": title, "x": round(x, 2), "y": round(y, 2), "w": round(w, 2), "h": round(h, 2),
+                        "write_from": round(ty + 12, 2)})
     return ty + 12
 
 
 def sheet_frame(k, label, question, code):
     """Header band, the table circle to write in, and the footer. Returns (page, y where the boxes start, y where they end)."""
     p = Page(*A1, BLEED)
+    p.zones = []
     W, H = A1
     circle = 150
     band_w = W - 2 * M - circle - 22
@@ -163,16 +173,16 @@ def sheet_frame(k, label, question, code):
         p.text("art", ln, M + pad, M + pad + 16 + 12 + (i + 0.78) * lh, q_pt, "Bold", k.on_band)
     cx, cy = W - M - circle / 2, M + band_h / 2
     p.circle("art", cx, cy, circle / 2, stroke=k.accent, width=2.2)
-    p.text("art", "Table", cx, cy - circle / 2 + 40, 44, "SemiBold", k.accent_text, align="center")
+    p.text("art", k.group, cx, cy - circle / 2 + 40, 44, "SemiBold", k.accent_text, align="center")
     # footer: logo, a reminder, and the sheet code with a second place for the table number,
     # so close-up photos of any corner can still be matched to their table
     fy = H - M
     lw = logo(p, k, M, fy - 20, h=20, max_w=110, baseline=fy - 6.5)
-    note = f"All of this goes into the {k.name}. No names, please."
+    note = f"All of this goes into the {k.name}." + (" No names, please." if k.public else "")
     note_x = M + lw + 16
     code_x = W - M
     p.line("art", code_x - 38, fy - 5, code_x, fy - 5, stroke=BLACK, width=0.6)
-    code_w = p.text("art", f"{code} · Table", code_x - 41, fy - 6.5, 24, "SemiBold", BLACK, align="right")
+    code_w = p.text("art", f"{code} · {k.group}", code_x - 41, fy - 6.5, 24, "SemiBold", BLACK, align="right")
     room = code_x - 41 - code_w - 12 - note_x
     # a long playbook name wraps the note upwards from the baseline the code sits on
     note_lines = p.wrap(note, 20, room, "Regular")
@@ -275,6 +285,106 @@ def sheet_side(k, optional):
         zone(p, k, M, top + col_h + gap, W - 2 * M, best_h, "Best thing said today",
              "The table lead writes it in the last two minutes.", tint=True)
     return p
+
+
+# the round-tables sheets, drawn by hand before sheets came from exercises ("print": {"renderer": "legacy"})
+LEGACY_SHEETS = {"S1": sheet1, "S2": sheet2, "S3": sheet3, "SS": sheet_side}
+
+
+# ---------------------------------------------------------------- sheets drawn from an exercise's boxes
+
+def sheet_generic(k, e, optional):
+    """A sheet laid out from its exercise: rows of boxes ("print": {"rows": [...]}), each row a fixed height in mm
+    or "grow" (sharing what's left), each cell a box and its share of the width."""
+    p, top, bottom = sheet_frame(k, e["label"], e["title"], e["code"])
+    W = A1[0]
+    boxes = {b["id"]: b for b in e["boxes"]}
+    layout = e.get("print") or {}
+    rows = layout.get("rows") or [{"height": "grow", "cells": [{"box": b["id"]}]} for b in e["boxes"]]
+    rows = [r for r in rows if optional or not all(boxes[c["box"]].get("optional") for c in r["cells"])]
+    gap = layout.get("gap", 18)
+    fixed = sum(r["height"] for r in rows if r["height"] != "grow")
+    grow = [r for r in rows if r["height"] == "grow"] or [None]
+    free = bottom - top - fixed - gap * (len(rows) - 1)
+    y = top
+    for r in rows:
+        h = r["height"] if r["height"] != "grow" else free / len(grow)
+        shares = [c.get("share", 1) for c in r["cells"]]
+        room = W - 2 * M - gap * (len(r["cells"]) - 1)
+        x = M
+        for c, share in zip(r["cells"], shares):
+            w = room * share / sum(shares)
+            draw_box(p, k, boxes[c["box"]], x, y, w, h, tint=c.get("tint", False))
+            x += w + gap
+        y += h + gap
+    return p
+
+
+def draw_box(p, k, b, x, y, w, h, tint=False):
+    kind = b["type"]
+    label, hint = b.get("label", ""), b.get("hint")
+    if kind == "row":
+        n = b.get("count", 3)
+        gap = 18
+        rh = (h - gap * (n - 1)) / n
+        fields = b.get("fields", [])
+        shares = [f.get("share", 1) for f in fields]
+        for i in range(n):
+            ry = y + i * (rh + gap)
+            ty = zone(p, k, x, ry, w, rh, label.replace("{n}", str(i + 1)), tint=tint, box=b["id"], n=i + 1)
+            # labelled parts, so the reader knows what each bit of writing is
+            px = x + 14
+            inner = w - 28 - 12 * (len(fields) - 1)
+            for j, (f, share) in enumerate(zip(fields, shares)):
+                pw = inner * share / sum(shares)
+                p.text("art", f["label"], px, ty + 6, 24, "Medium", HINT)
+                if j:
+                    p.line("art", px - 6, ty - 2, px - 6, ry + rh - (46 if b.get("ticks") else 14), stroke=RULE, width=0.4)
+                px += pw + 12
+            if b.get("ticks"):
+                t = b["ticks"]
+                tick_y = ry + rh - 16
+                tx = p.text("art", t.get("label", ""), x + 14, tick_y - 1.5, 24, "Medium", BLACK) + x + 14 + 10
+                for o in t["options"]:
+                    tx = checkbox(p, tx, tick_y, 9, o[1] if isinstance(o, list) else o, 24) + 16
+        return
+    ty = zone(p, k, x, y, w, h, label, hint, tint=tint, box=b["id"])
+    if kind == "text":
+        write_lines(p, x + 14, x + w - 14, ty + 30, b.get("lines", 3), 28)
+    elif kind == "ranked":
+        for i in range(b.get("count", 3)):
+            ly = ty + 20 + i * 32
+            p.text("art", f"{i + 1}.", x + 14, ly, 28, "SemiBold", BLACK)
+            p.line("art", x + 34, ly + 1, x + w - 14, ly + 1, stroke=RULE, width=0.5)
+    elif kind == "name":
+        write_lines(p, x + 14, x + w - 14, ty + 24, 1, 28)
+    elif kind == "tally":
+        opts = b.get("options", [])
+        bw = (w - 28 - (len(opts) - 1) * 6) / max(len(opts), 1)
+        for i, o in enumerate(opts):
+            bx = x + 14 + i * (bw + 6)
+            p.text("art", o, bx + bw / 2, ty + 6, 22, "Medium", BLACK, align="center")
+            p.rrect("art", bx, ty + 11, bw, 40, 4, stroke=RULE, width=0.6)
+        if b.get("text_line"):
+            cy = ty + 11 + 40 + 22
+            lw = p.text("art", b["text_line"] + ":", x + 14, cy, 26, "Medium", BLACK)
+            p.line("art", x + 14 + lw + 6, cy + 1, x + w - 14, cy + 1, stroke=RULE, width=0.5)
+    elif kind == "list+votes":
+        # numbered idea boxes in reading order, each with a strip at the bottom for dot votes
+        n, cols = b.get("count", 8), b.get("columns", 4)
+        rows = -(-n // cols)
+        g = 10
+        cw = (w - 28 - g * (cols - 1)) / cols
+        ch = (y + h - 14 - ty - g * (rows - 1)) / rows
+        for i in range(n):
+            cx, cy = x + 14 + (i % cols) * (cw + g), ty + (i // cols) * (ch + g)
+            p.rrect("art", cx, cy, cw, ch, 5, stroke=RULE, width=0.6)
+            p.text("art", str(i + 1), cx + 7, cy + 10, 22, "SemiBold", HINT)
+            strip = 22
+            p.line("art", cx + 5, cy + ch - strip, cx + cw - 5, cy + ch - strip, stroke=RULE, width=0.4)
+            p.text("art", b.get("votes_label", "Votes"), cx + 7, cy + ch - strip / 2 + 2.5, 20, "Medium", HINT)
+            p.zones.append({"box": b["id"], "n": i + 1, "title": f"{b.get('item_label', label)} {i + 1}", "x": round(cx, 2), "y": round(cy, 2),
+                            "w": round(cw, 2), "h": round(ch, 2), "write_from": round(cy + 14, 2), "votes_from": round(cy + ch - strip, 2)})
 
 
 # ---------------------------------------------------------------- A5 commitment card
@@ -407,19 +517,19 @@ def table_card(k, n):
     return page
 
 
-def overview(out, tables):
+def overview(out, tables, codes=("S1", "S2", "S3", "SS"), made=()):
     """One image of every piece, for a quick look on screen (not for printing)."""
     import subprocess, tempfile
     from PIL import Image
     with tempfile.TemporaryDirectory() as tmp:
         tmp = Path(tmp)
         shots = []
-        for name, res in [(SHEET_PDF.format(code=c), 18) for c in ("S1", "S2", "S3", "SS")] + \
-                         [(CARD_PDF, 70), (TABLES_PDF.format(n=tables), 50)]:
+        for name, res in [(SHEET_PDF.format(code=c), 18) for c in codes] + \
+                         [(f, r) for f, r in ((CARD_PDF, 70), (TABLES_PDF.format(n=tables), 50)) if f in {Path(m).name for m in made}]:
             subprocess.run(["pdftoppm", "-r", str(res), "-png", "-f", "1", "-l", "1", str(OUT / name), str(tmp / name)], check=True)
             shots.append(Image.open(next(tmp.glob(name + "*.png"))).convert("RGB"))
     g = 24
-    sheets, rest = shots[:4], shots[4:]
+    sheets, rest = shots[:len(codes)], shots[len(codes):] or [Image.new("RGB", (1, 1), (232, 230, 236))]
     W = max(sum(i.width for i in sheets), sum(i.width for i in rest)) + g * 5
     H = g * 3 + max(i.height for i in sheets) + max(i.height for i in rest)
     c = Image.new("RGB", (W, H), (232, 230, 236))
@@ -450,22 +560,37 @@ def main():
     url = "" if a.no_qr else (a.qr_url or cfg["playbook"]["url"] or "").strip()
     if url and "://" not in url:
         url = "https://" + url               # without a scheme, a phone reads the code as plain text, not a link
-    k = kit_settings(cfg, url or None)
+    W = formats.load(cfg)
+    k = kit_settings(cfg, url or None, W)
     for w in k.warnings:
         print(f"  note: {w}")
     optional = not a.no_optional
     name = cfg["playbook"]["name"]
     OUT.mkdir(parents=True, exist_ok=True)
-    made = []
-    for code, fn in (("S1", sheet1), ("S2", sheet2), ("S3", sheet3), ("SS", sheet_side)):
-        made.append(write([fn(k, optional)], OUT / SHEET_PDF.format(code=code), f"{name}: sheet {code}, A1 (v{VERSION})"))
-    made.append(write([commitment_card(k)], OUT / CARD_PDF,
-                      f"{name}: commitment card, A5 landscape, perforated down the middle (v{VERSION})"))
-    for old in OUT.glob("table-cards-*.pdf"):
-        old.unlink()                     # a run for a different number of tables shouldn't linger in the kit
-    made.append(write([table_card(k, n) for n in range(1, a.tables + 1)], OUT / TABLES_PDF.format(n=a.tables),
-                      f"{name}: table cards 1 to {a.tables}, A4 portrait, one page per table, print one side, fold in half for an A5 tent (v{VERSION})"))
-    overview(OUT.parent / "paper-kit-overview.png", a.tables)
+    made, codes = [], []
+    for old in list(OUT.glob("sheet-*")) + list(OUT.glob("table-cards-*.pdf")) + list(OUT.glob(CARD_PDF)):
+        old.unlink()                     # another workshop's sheets, or a run for a different number of tables
+    for e in W.exercises:
+        legacy = (e.get("print") or {}).get("renderer") == "legacy"
+        if e["id"] == "commitment-card" and legacy:
+            made.append(write([commitment_card(k)], OUT / CARD_PDF,
+                              f"{name}: commitment card, A5 landscape, perforated down the middle (v{VERSION})"))
+        elif e["id"] == "table-card" and legacy:
+            made.append(write([table_card(k, n) for n in range(1, a.tables + 1)], OUT / TABLES_PDF.format(n=a.tables),
+                              f"{name}: table cards 1 to {a.tables}, A4 portrait, one page per table, print one side, fold in half for an A5 tent (v{VERSION})"))
+        elif e.get("per", "group") == "group" and e.get("boxes"):
+            code = e["code"]
+            page = LEGACY_SHEETS[code](k, optional) if legacy else sheet_generic(k, e, optional)
+            made.append(write([page], OUT / SHEET_PDF.format(code=code), f"{name}: sheet {code}, A1 (v{VERSION})"))
+            codes.append(code)
+            # where each box is on the page (mm from the top left), for the handwriting tests and anything else
+            # that needs to find a box in a photo of the sheet
+            import json
+            (OUT / SHEET_LAYOUT.format(code=code)).write_text(json.dumps(
+                {"sheet": code, "exercise": e["id"], "page_mm": list(A1), "zones": page.zones}, indent=1) + "\n")
+        else:
+            raise SystemExit(f"The print kit can't draw {e['id']!r} yet: only sheets for groups, and the round-tables cards")
+    overview(OUT.parent / "paper-kit-overview.png", a.tables, codes, made)
     import zipfile
     for old in OUT.parent.glob("paper-kit-print-files-v*.zip"):
         old.unlink()

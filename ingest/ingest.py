@@ -535,7 +535,8 @@ def verify(args):
         for pat, what in [(r"[\w.+-]+@[\w-]+(?:\.[\w.]+)?", "email address"), (r"(?<![\w.+-])@\w{2,}", "social handle"),
                           (r"\b(?:\+44|0)\s?\d{3,4}\s?\d{3}\s?\d{3,4}\b", "phone number")]:
             for hit in set(re.findall(pat, everything)):
-                errors.append(f"Personal detail? {what}: {hit}")
+                # a private workshop's notes go to the people who were there, so these are worth a look, not a block
+                (warnings if W.privacy == "private" else errors).append(f"Personal detail? {what}: {hit}")
         # Likely names: capitalised words in the middle of a raw sentence ("…said Sarah from Ofcom…").
         # Any that reach the page get flagged even if nobody put them on the scrub list.
         allow = {"I", "IT", "AI", "UK", "W3C", "WAI", "WCAG", "GOV", "ESG", "QA", "UX", "UI", "PM", "CEO", "CFO", "CTO",
@@ -556,6 +557,8 @@ def verify(args):
         page_text = " ".join(str(v) for v in json_strings(data))
         ok_file = run / "names-ok.txt"   # words a reviewer has confirmed aren't names, one per line
         ok_words = {l.strip() for l in ok_file.read_text().splitlines()} if ok_file.exists() else set()
+        if W.privacy == "private":
+            candidates = set()   # names are allowed in a private workshop's notes (an action's owner is a person)
         for w in sorted(candidates - ok_words):
             if re.search(r"\b" + re.escape(w) + r"\b", page_text):
                 # a heuristic, so a warning while drafting; publishing needs it gone or listed in names-ok.txt

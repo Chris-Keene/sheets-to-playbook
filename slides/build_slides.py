@@ -26,6 +26,7 @@ ROOT = HERE.parent
 sys.path.insert(0, str(ROOT / "build"))
 import config  # noqa: E402
 import build as playbook  # noqa: E402  reuse the playbook's font and logo inlining, so the two never drift apart
+import formats  # noqa: E402
 
 VERSION = "2.0.0"
 OUT = HERE / "out"
@@ -260,9 +261,143 @@ def conditionals(text, flags):
         text = new
 
 
+def agenda_slides(W, cfg):
+    """The slides for a workshop laid out from its agenda: a welcome, how it works, one slide per question (its own
+    timer, the sheet's boxes, a progress rail and facilitator notes) and a thank-you. Round tables keeps its own
+    hand-written hour (workshop.json "slides": "legacy")."""
+    group = W.group
+    steps = [e for e in W.exercises[:len(W.data.get("agenda", []))]]
+    welcome = W.data.get("welcome_minutes", 5)
+    close = W.data.get("close_minutes", 5)
+    plan, t = [f"0 to {welcome}: welcome"], welcome
+    starts = []
+    for e in steps:
+        m = e.get("minutes", 10)
+        starts.append((t, t + m))
+        plan.append(f"{t} to {t + m}: {e['label']}, {e['title']} ({m} minutes)")
+        t += m
+    plan.append(f"{t} to {t + close}: what happens next, and close")
+    total = t + close
+    rail = [e.get("rail") or e["title"] for e in steps]
+    out = [f"""<!-- Welcome ----------------------------------------------------------- -->
+<section class="slide s-title" aria-roledescription="slide" aria-label="Welcome" tabindex="-1">
+  <!--LOGO-->
+  <div class="head">
+    <!--IF:kicker--><p class="kicker">{{{{forum}}}}:</p><!--END:kicker-->
+    <h2>{{{{title}}}}</h2>
+  </div>
+  <p class="welcome">{{{{welcome}}}}</p>
+  <div class="slide-notes">
+    <p>Minutes 0 to {welcome}: the welcome, up to {esc(steps[0]['label']) if steps else 'the first question'}.</p>
+    <p>The session at a glance ({total} minutes), in minutes from the start:</p>
+    <ul>{''.join(f'<li>{esc(x)}</li>' for x in plan)}</ul>
+    <p>Afterwards, allow 10 minutes or so to photograph every sheet.</p>
+  </div>
+</section>
+
+<!--IF:people-->
+<section class="slide s-people" aria-roledescription="slide" aria-label="Your facilitators" tabindex="-1" hidden>
+  <h2>Your facilitators:</h2>
+  <ul class="{{{{people_class}}}}">
+    <!--PEOPLE-->
+  </ul>
+  <div class="slide-notes"><p>Still the welcome.</p></div>
+</section>
+<!--END:people-->
+
+<!-- How it works ------------------------------------------------------ -->
+<section class="slide s-how" aria-roledescription="slide" aria-label="How the {{{{playbook}}}} gets made" tabindex="-1" hidden>
+  <div class="top"><p class="label">How it works</p></div>
+  <h2 class="q">From your sheets to the {{{{playbook}}}}</h2>
+  <ol class="flow">
+    <li><h3>Talk and write</h3><p>Each {esc(group)} fills in a sheet for each question. Anyone can speak; one person writes.</p></li>
+    <li><h3>We photograph the sheets</h3><p>Sheets only, never people. Nothing is recorded.</p></li>
+    <li><h3>AI reads, people check</h3><p>AI reads every sheet. People check each line against the photos before anything goes out.</p></li>
+    <li><h3>The {{{{playbook}}}} arrives</h3><p>Soon after today. <!--IF:url-->It lives at {{{{url}}}}.<!--ELSE:url-->We’ll send it round.<!--END:url--></p></li>
+  </ol>
+  {'<p class="rule"><b>Names stay off the page.</b> Nothing said today is attributed to anyone.</p>' if W.privacy == "public" else ''}
+  <div class="slide-notes">
+    <p>The last of the welcome: {esc(steps[0]['label']) if steps else 'the first question'} starts at minute {welcome}.</p>
+    <p>Thick black markers only, so the photos are readable.</p>
+  </div>
+</section>
+"""]
+    for i, e in enumerate(steps):
+        boxes = {b["id"]: b for b in e["boxes"]}
+        rows = (e.get("print") or {}).get("rows") or [{"height": "grow", "cells": [{"box": b["id"]}]} for b in e["boxes"]]
+        rows = [r for r in rows if not all(boxes[c["box"]].get("optional") for c in r["cells"])]
+        cells, heights = [], []
+        for r in rows:
+            heights.append("1fr" if r["height"] == "grow" else "auto")
+            shares = [c.get("share", 1) for c in r["cells"]]
+            spans = [max(1, round(12 * sh / sum(shares))) for sh in shares]
+            spans[-1] = 12 - sum(spans[:-1])
+            for c, span in zip(r["cells"], spans):
+                b = boxes[c["box"]]
+                if b["type"] == "row":
+                    fs = b.get("fields", [])
+                    fspans = [max(1, round(span * f.get("share", 1) / sum(x.get("share", 1) for x in fs))) for f in fs]
+                    fspans[-1] = span - sum(fspans[:-1])
+                    cells += [f'<div class="box" style="grid-column:span {fs_}"><h3>{esc(f["label"])}</h3></div>' for f, fs_ in zip(fs, fspans)]
+                else:
+                    hint = b.get("slide_hint", b.get("hint", ""))
+                    cells.append(f'<div class="box" style="grid-column:span {span}"><h3>{esc(b.get("label", ""))}</h3>'
+                                 + (f"<p>{esc(hint)}</p>" if hint else "") + "</div>")
+        sl = e.get("slide") or {}
+        m = e.get("minutes", 10)
+        a, z = starts[i]
+        here = ' aria-current="step"'
+        rail_html = "".join(f'<li{here if j == i else ""}>{esc(x)}</li>' for j, x in enumerate(rail))
+        notes = "".join(f"<p>{esc(n)}</p>" for n in sl.get("notes", []))
+        out.append(f"""<!-- {esc(e['label'])} ------------------------------------------------------ -->
+<section class="slide s-q" aria-roledescription="slide" aria-label="{esc(e['label'])}" tabindex="-1" hidden>
+  <div class="top">
+    <p class="label">{esc(e['label'])}<span class="sep" aria-hidden="true">·</span><span class="visually-hidden">, </span>{esc(e['short'])}</p>
+    <button class="timer" type="button" data-minutes="{m}"><span class="t-time">{m}:00</span><span class="t-hint">Start timer</span></button>
+  </div>
+  <h2 class="q{' long' if len(e['title']) > 40 else ''}">{esc(e['title'])}</h2>
+  <div class="grid" style="grid-template-columns:repeat(12,1fr);grid-template-rows:{' '.join(heights)}">
+    {''.join(cells)}
+  </div>
+  {f'<p class="note"><b>{esc(e["label"])}</b><span>{esc(sl["prompt"])}</span></p>' if sl.get("prompt") else ''}
+  <ol class="rail" aria-label="Where we are in the session">{rail_html}</ol>
+  <div class="slide-notes">
+    <p>Minutes {a} to {z}. Read the question out in full. {m} minutes.</p>
+    {notes}
+  </div>
+</section>
+""")
+    out.append(f"""<!-- Thank you --------------------------------------------------------- -->
+<section class="slide s-end" aria-roledescription="slide" aria-label="Thank you" tabindex="-1" hidden>
+  <!--LOGO-->
+  <div class="cols">
+    <div>
+      <h2>Thank you</h2>
+      <p class="lede">{'The {{playbook}} goes live soon after today. Share it with anyone who couldn’t be here.' if W.privacy == 'public' else 'We’ll send the {{playbook}} round soon after today.'}</p>
+      <!--IF:join--><p class="lede join">{{{{join_label}}}}<br><span class="hl">{{{{join_url}}}}</span></p><!--END:join-->
+    </div>
+    <!--IF:url--><div class="qr-col">
+      <div class="qr-tile"><!--QR--></div>
+      <p class="url">{{{{url}}}}</p>
+    </div><!--END:url-->
+  </div>
+  <div class="slide-notes">
+    <p>Minutes {t} to {total}: what happens next, and thank you.</p>
+    <p>Afterwards, photograph every sheet before anyone takes them down.</p>
+  </div>
+</section>
+""")
+    return "\n".join(out)
+
+
 def build(cfg):
     s = slide_settings(cfg)
     tpl = (HERE / "template-slides.html").read_text()
+    W = formats.load(cfg)
+    if W.data.get("slides") != "legacy":
+        # every other workshop: the same deck design, its slides made from the agenda
+        a, b = tpl.index('<main class="stage" id="stage">') + len('<main class="stage" id="stage">'), tpl.index("</main>")
+        tpl = tpl[:a] + "\n\n" + agenda_slides(W, cfg) + "\n" + tpl[b:]
     # house style for the template's own words: no em dashes, and no spaced en dashes (they read as one)
     assert "\u2014" not in tpl and " \u2013 " not in tpl, "em dash or spaced en dash in template-slides.html"
 

@@ -1,0 +1,17 @@
+{
+ "_note": "The shape of a retro's session.json: start here when writing one (formats/workshops/retro/recipe.md).",
+ "meta": {
+  "status": "template",
+  "edition": "Template",
+  "title": "Our retro",
+  "series": "Retro Notes",
+  "event": "",
+  "date": "",
+  "tables": 3
+ },
+ "went_well": [],
+ "got_in_way": [],
+ "questions": [],
+ "ideas": [],
+ "actions": []
+}

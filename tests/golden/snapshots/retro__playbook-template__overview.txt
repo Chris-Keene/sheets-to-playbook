@@ -1,0 +1,76 @@
+## text
+Skip to content
+Template.
+Dashed boxes show where content from the session goes and which sheet it comes from.
+Retro
+Notes
+Notes
+Actions
+How it was made
+
+RETRO NOTES
+
+Our retro
+
+What 3 teams wrote down.
+
+How did it go?
+Went well
+TO FILL
+To fill
+From Sheet 1, Went well. One line each.
+Got in the way
+TO FILL
+To fill
+From Sheet 1, Got in the way. One line each.
+What could we try?
+TO FILL
+How might we…
+From Sheet 2, “How might we…”: each team’s question, word for word.
+TO FILL
+Ideas
+From Sheet 2, the idea boxes, with the dot votes each one got.
+What we’ll do
+TO FILL
+Actions
+From Sheet 3: what we’ll do, who and by when, as written.
+
+Retro Notes: Our retro · Template
+
+Download this playbook ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+note
+link "Retro Notes"
+navigation "Playbook"
+region "Our retro"
+region "How did it go?"
+region "What could we try?"
+region "What we’ll do"
+strong
+list
+heading[1] "Our retro"
+heading[2] "How did it go?"
+heading[3] "Went well"
+list
+heading[3] "Got in the way"
+list
+heading[2] "What could we try?"
+heading[2] "What we’ll do"
+list
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Notes"
+link "Actions"
+link "How it was made"

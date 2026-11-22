@@ -1,0 +1,79 @@
+{
+ "_note": "What the retro notes hold, and how ingest.py verify checks each part (see round-tables/output.json for the policies).",
+ "paths": [
+  {
+   "path": "went_well[]",
+   "label": "went well {n}",
+   "section": "Went well",
+   "policy": "trace",
+   "review": {
+    "name": "Went well",
+    "fields": [
+     "text"
+    ],
+    "key": "well-{src}"
+   }
+  },
+  {
+   "path": "got_in_way[]",
+   "label": "got in the way {n}",
+   "section": "Got in the way",
+   "policy": "trace",
+   "review": {
+    "name": "Got in the way",
+    "fields": [
+     "text"
+    ],
+    "key": "pain-{src}"
+   }
+  },
+  {
+   "path": "questions[]",
+   "label": "question {n}",
+   "section": "How might we",
+   "policy": "verbatim",
+   "min": 0.86,
+   "review": {
+    "fields": [
+     "text"
+    ],
+    "key": "question-{src}"
+   }
+  },
+  {
+   "path": "ideas[]",
+   "label": "idea {n}",
+   "section": "Ideas",
+   "policy": "trace",
+   "review": {
+    "fields": [
+     "text"
+    ],
+    "key": "idea-{src}"
+   }
+  },
+  {
+   "path": "actions[]",
+   "label": "action {n}",
+   "section": "Actions",
+   "policy": "trace",
+   "review": {
+    "fields": [
+     "what",
+     "who",
+     "when"
+    ],
+    "key": "action-{src}"
+   }
+  }
+ ],
+ "review_order": [
+  "went_well[]",
+  "got_in_way[]",
+  "questions[]",
+  "ideas[]",
+  "actions[]"
+ ],
+ "not_on_page": [],
+ "roles": {}
+}

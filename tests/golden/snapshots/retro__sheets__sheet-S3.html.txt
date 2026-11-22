@@ -1,0 +1,68 @@
+## text
+Sheet 3 of the paper kit. Type into it on screen, or print it on A4. From the Retro Notes kit · Print-ready PDF.
+
+Question 3
+
+What we'll do
+Team
+Action 1
+What we'll do
+Who
+By when
+Action 2
+What we'll do
+Who
+By when
+Action 3
+What we'll do
+Who
+By when
+Action 4
+What we'll do
+Who
+By when
+Retro Notes
+All of this goes into the Retro Notes.
+S3 · Team
+
+## accessibility tree
+note
+main
+heading[1] "What we'll do"
+LabelText
+textbox "Team"
+region "Action 1"
+region "Action 2"
+region "Action 3"
+region "Action 4"
+sectionfooter
+link "Print-ready PDF"
+heading[2] "Action 1"
+LabelText
+textbox "What we'll do"
+LabelText
+textbox "Who"
+LabelText
+textbox "By when"
+heading[2] "Action 2"
+LabelText
+textbox "What we'll do"
+LabelText
+textbox "Who"
+LabelText
+textbox "By when"
+heading[2] "Action 3"
+LabelText
+textbox "What we'll do"
+LabelText
+textbox "Who"
+LabelText
+textbox "By when"
+heading[2] "Action 4"
+LabelText
+textbox "What we'll do"
+LabelText
+textbox "Who"
+LabelText
+textbox "By when"
+image "Retro Notes"

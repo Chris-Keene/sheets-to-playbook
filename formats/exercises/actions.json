@@ -1,0 +1,52 @@
+{
+ "id": "actions",
+ "title": "What we'll do",
+ "boxes": [
+  {
+   "id": "actions",
+   "type": "row",
+   "key": "actions",
+   "stem": "action",
+   "count": 4,
+   "label": "Action {n}",
+   "text_field": "what",
+   "fields": [
+    {
+     "key": "what",
+     "label": "What we'll do",
+     "share": 3
+    },
+    {
+     "key": "who",
+     "label": "Who",
+     "share": 1
+    },
+    {
+     "key": "when",
+     "label": "By when",
+     "share": 1
+    }
+   ],
+   "reader": "One object per action box. Put the words in `what`, `who` and `when`, copied as written; leave a part out if it's blank. A name in `who` is the owner the team chose: keep it as written."
+  }
+ ],
+ "print": {
+  "rows": [
+   {
+    "height": "grow",
+    "cells": [
+     {
+      "box": "actions"
+     }
+    ]
+   }
+  ]
+ },
+ "slide": {
+  "prompt": "Pick the ideas you'll actually do. Every action needs a who and a by when.",
+  "notes": [
+   "Fewer, owned actions beat a long list. Two or three is plenty.",
+   "“Who” is one person, even when a group helps."
+  ]
+ }
+}

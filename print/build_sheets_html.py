@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "build"))
 import config  # noqa: E402
 import build as playbook  # noqa: E402  fonts and logo, shared with the playbook so they never drift
+import formats  # noqa: E402
 
 OUT = ROOT / "print" / "out" / "html"
 e = html.escape
@@ -71,6 +72,17 @@ input[type=text],input[type=number]{font:inherit;color:var(--ink);border:0;borde
 .goodfor legend{float:left;font-weight:500;margin-right:6px;font-size:.95rem}
 .goodfor label{display:flex;gap:6px;align-items:center;font-size:.95rem}
 .goodfor input{width:20px;height:20px;accent-color:var(--accent)}
+/* sheets laid out from an exercise: columns from the layout's shares, idea boxes with a votes line */
+.row.cols{grid-template-columns:1fr}
+@media (min-width:720px){.row.cols{grid-template-columns:var(--cols)}.action .cols[style]{grid-template-columns:var(--cols)}}
+.zone.short textarea{min-height:64px}
+.ideas{display:grid;gap:10px;grid-template-columns:repeat(2,1fr)}
+@media (min-width:720px){.ideas{grid-template-columns:repeat(4,1fr)}}
+.idea{border:1.5px solid var(--rule);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:4px;background:#fff}
+.idea > label:first-child{font-size:.85rem;font-weight:600;color:var(--hint)}
+.idea textarea{min-height:96px}
+.idea .votes{display:flex;gap:8px;align-items:baseline;font-size:.85rem;color:var(--hint);border-top:1px solid var(--rule);padding-top:4px}
+.idea .votes input{width:4em}
 /* a wordmark standing in for a logo file is measured roughly, so let its last letter show rather than clip */
 svg.logo{overflow:visible;max-width:100%}
 .foot{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;justify-content:space-between;font-size:.85rem;color:var(--hint);margin-top:4px}
@@ -119,6 +131,7 @@ svg.logo{overflow:visible;max-width:100%}
   .s2-cols textarea{min-height:120mm}.s2-lessons textarea{min-height:40mm}
   .action textarea{min-height:40mm}
   .ss-cols textarea{min-height:130mm}.ss-best textarea{min-height:36mm}
+  .zone.grow textarea{min-height:150mm}.idea textarea{min-height:30mm}
   .card .half{min-height:120mm}
   .tent .side{min-height:132mm}.tent .side:first-child{transform:rotate(180deg)}
 }
@@ -161,8 +174,9 @@ def colours(cfg):
     }
 
 
-def settings(cfg, tables):
+def settings(cfg, tables, W=None):
     o, pb = cfg["org"], cfg["playbook"]
+    W = W or formats.load(cfg)
     url = (pb.get("url") or "").strip()
     if url and "://" not in url:
         url = "https://" + url
@@ -174,6 +188,7 @@ def settings(cfg, tables):
         # the logo's accessible name: the organisation's full name, or whatever the wordmark says
         label=f"{o['name']} ({o['short']})" if o["name"] and o["short"] else (o["name"] or o["short"] or pb["name"]),
         css=":root{color-scheme:light;" + "".join(f"{k}:{v};" for k, v in colours(cfg).items()) + "}",
+        workshop=W, group=W.group.capitalize(), public=W.privacy == "public",
     )
 
 
@@ -194,9 +209,10 @@ def logo_svg(k, cls="logo"):
 
 def frame(k, label, question, code, inner):
     head = (f'<div class="head"><div class="band"><p class="label">{e(label)}</p><h1>{e(question)}</h1></div>'
-            f'<div class="circle"><label for="table-no">Table</label><input id="table-no" type="text" inputmode="numeric" autocomplete="off"></div></div>')
-    foot = (f'<footer class="foot"><div class="brand">{logo_svg(k)}<span>{e(f"All of this goes into the {k.name}. No names, please.")}</span></div>'
-            f'<div class="code" aria-hidden="true">{e(code)} · Table<span></span></div></footer>')
+            f'<div class="circle"><label for="table-no">{e(k.group)}</label><input id="table-no" type="text" inputmode="numeric" autocomplete="off"></div></div>')
+    note = f"All of this goes into the {k.name}." + (" No names, please." if k.public else "")
+    foot = (f'<footer class="foot"><div class="brand">{logo_svg(k)}<span>{e(note)}</span></div>'
+            f'<div class="code" aria-hidden="true">{e(code)} · {e(k.group)}<span></span></div></footer>')
     return f'<div class="sheet">{head}{inner}{foot}</div>'
 
 
@@ -247,6 +263,66 @@ def ss(k):
     return frame(k, "All session", "Heard something good? Write it here.", "SS", inner)
 
 
+def sheet_generic(k, ex):
+    """A fill-in page laid out from the exercise, like its A1 poster: rows of boxes, side by side on a wide screen."""
+    boxes = {b["id"]: b for b in ex["boxes"]}
+    layout = ex.get("print") or {}
+    rows = layout.get("rows") or [{"height": "grow", "cells": [{"box": b["id"]}]} for b in ex["boxes"]]
+    inner = ""
+    for r in rows:
+        cells = "".join(box_html(boxes[c["box"]], c.get("tint", False)) for c in r["cells"])
+        if len(r["cells"]) > 1:
+            cols = " ".join(f'{c.get("share", 1)}fr' for c in r["cells"])
+            inner += f'<div class="row cols" style="--cols:{cols}">{cells}</div>'
+        else:
+            inner += cells
+    return frame(k, ex["label"], ex["title"], ex["code"], inner)
+
+
+def box_html(b, tint=False):
+    zid, label, hint = b["id"], b.get("label", ""), b.get("hint", "")
+    kind = b["type"]
+    if kind == "list":
+        return zone(zid, label, hint, "grow", tint)
+    if kind in ("text", "name"):
+        return zone(zid, label, hint, "short", tint)
+    hint_html = f'<p class="hint" id="{zid}-hint">{e(hint)}</p>' if hint else ""
+    described = f' aria-describedby="{zid}-hint"' if hint else ""
+    head = f'<h2 id="{zid}-h">{e(label)}</h2>{hint_html}'
+    if kind == "ranked":
+        items = "".join(f'<li><input type="text" aria-label="{e(label)}, number {i}"></li>' for i in range(1, b.get("count", 3) + 1))
+        return f'<section class="zone top3{" tint" if tint else ""}" aria-labelledby="{zid}-h"{described}>{head}<ol>{items}</ol></section>'
+    if kind == "tally":
+        tally = "".join(f'<label>{e(o)}<input type="number" min="0" inputmode="numeric" aria-label="{e(o)}: how many people"></label>' for o in b.get("options", []))
+        line = (f'<div class="countries"><label for="{zid}-line">{e(b["text_line"])}:</label><input id="{zid}-line" type="text"></div>'
+                if b.get("text_line") else "")
+        return (f'<section class="zone{" tint" if tint else ""}" aria-labelledby="{zid}-h">{head}'
+                f'<div class="tally" role="group" aria-labelledby="{zid}-h"{described}>{tally}</div>{line}</section>')
+    if kind == "row":
+        out = ""
+        for i in range(1, b.get("count", 3) + 1):
+            title = label.replace("{n}", str(i))
+            cols = "".join(f'<div class="col"><label for="{zid}{i}-{f["key"]}">{e(f["label"])}</label><textarea id="{zid}{i}-{f["key"]}"></textarea></div>'
+                           for f in b.get("fields", []))
+            shares = " ".join(f'{f.get("share", 1)}fr' for f in b.get("fields", []))
+            ticks = ""
+            if b.get("ticks"):
+                t = b["ticks"]
+                opts = "".join(f'<label><input type="checkbox" name="{zid}{i}-{t["key"]}" value="{e(o[1] if isinstance(o, list) else o)}"> {e(o[1] if isinstance(o, list) else o)}</label>'
+                               for o in t["options"])
+                ticks = f'<fieldset class="goodfor"><legend>{e(t.get("label", ""))}</legend>{opts}</fieldset>'
+            out += (f'<section class="zone action" aria-labelledby="{zid}{i}-h"><h2 id="{zid}{i}-h">{e(title)}</h2>'
+                    f'<div class="cols" style="--cols:{shares}">{cols}</div>{ticks}</section>')
+        return f'<div class="actions">{out}</div>'
+    if kind == "list+votes":
+        item = b.get("item_label", label)
+        cards = "".join(f'<div class="idea"><label for="{zid}{i}">{e(item)} {i}</label><textarea id="{zid}{i}"></textarea>'
+                        f'<label class="votes">{e(b.get("votes_label", "Votes"))} <input type="number" min="0" inputmode="numeric" aria-label="{e(item)} {i}: {e(b.get("votes_label", "votes")).lower()}"></label></div>'
+                        for i in range(1, b.get("count", 8) + 1))
+        return f'<section class="zone{" tint" if tint else ""}" aria-labelledby="{zid}-h"{described}>{head}<div class="ideas">{cards}</div></section>'
+    raise SystemExit(f"The fill-in pages can't show a {kind!r} box yet")
+
+
 def card(k):
     caption = e(f"Scan for the {k.name}: what every table came up with.")
     if k.url:
@@ -276,20 +352,35 @@ def table_card(k):
             f'<textarea id="tent-what"></textarea>{logo_svg(k)}</section></div>')
 
 
+LEGACY = {"S1": (s1, "Sheet 1: Where does support get stuck?", "Sheet 1 of the paper kit."),
+          "S2": (s2, "Sheet 2: What has helped, or not?", "Sheet 2 of the paper kit."),
+          "S3": (s3, "Sheet 3: What could people try now?", "Sheet 3 of the paper kit."),
+          "SS": (ss, "Side sheet: Heard something good?", "The side sheet of the paper kit, out all session.")}
+
+
 def sheets(k):
+    """(file, title, description, print file, builder, body class) for each sheet and card the workshop uses."""
     if k.url:
         card_desc = f"The commitment card: write on both halves, tear, keep the half with the QR code. The QR code points to {k.address}."
     else:
         card_desc = "The commitment card: write on both halves, tear, keep the half with the QR code. Print or stick your playbook’s QR code in the dashed box."
-    return [
-        ("sheet-S1.html", "Sheet 1: Where does support get stuck?", "Sheet 1 of the paper kit.", SHEET_PDF.format(code="S1"), s1, ""),
-        ("sheet-S2.html", "Sheet 2: What has helped, or not?", "Sheet 2 of the paper kit.", SHEET_PDF.format(code="S2"), s2, ""),
-        ("sheet-S3.html", "Sheet 3: What could people try now?", "Sheet 3 of the paper kit.", SHEET_PDF.format(code="S3"), s3, ""),
-        ("sheet-SS.html", "Side sheet: Heard something good?", "The side sheet of the paper kit, out all session.", SHEET_PDF.format(code="SS"), ss, ""),
-        ("commitment-card.html", "Commitment card", card_desc, CARD_PDF, card, "card-page"),
-        ("table-card.html", "Table card", "The table card folds into a tent: the number on one side, the challenge on the other.",
-         TABLES_PDF.format(n=k.tables), table_card, ""),
-    ]
+    out = []
+    for ex in k.workshop.exercises:
+        legacy = (ex.get("print") or {}).get("renderer") == "legacy"
+        if ex["id"] == "commitment-card" and legacy:
+            out.append(("commitment-card.html", "Commitment card", card_desc, CARD_PDF, card, "card-page"))
+        elif ex["id"] == "table-card" and legacy:
+            out.append(("table-card.html", "Table card", "The table card folds into a tent: the number on one side, the challenge on the other.",
+                        TABLES_PDF.format(n=k.tables), table_card, ""))
+        elif ex.get("per", "group") == "group" and ex.get("boxes"):
+            code = ex["code"]
+            if legacy:
+                fn, title, desc = LEGACY[code]
+            else:
+                fn = (lambda kk, ex=ex: sheet_generic(kk, ex))
+                title, desc = f"{ex['short']}: {ex['title']}", f"{ex['short']} of the paper kit."
+            out.append((f"sheet-{code}.html", title, desc, SHEET_PDF.format(code=code), fn, ""))
+    return out
 
 
 def main():
@@ -303,6 +394,8 @@ def main():
         ap.error("--tables must be at least 1")
     k = settings(config.load(a.config), a.tables)
     OUT.mkdir(parents=True, exist_ok=True)
+    for old in OUT.glob("*.html"):
+        old.unlink()                     # another workshop's pages shouldn't linger in the kit
     for fname, title, desc, pdf, fn, cls in sheets(k):
         out = page(k, title, desc, pdf, fn(k), cls)
         if "\u2014" in out or " \u2013 " in out:

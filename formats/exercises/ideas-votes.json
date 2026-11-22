@@ -1,0 +1,55 @@
+{
+ "id": "ideas-votes",
+ "title": "What could we try?",
+ "boxes": [
+  {
+   "id": "question",
+   "type": "text",
+   "key": "question",
+   "stem": "question",
+   "label": "How might we…",
+   "hint": "Pick one thing that got in the way, and turn it into a question.",
+   "lines": 2
+  },
+  {
+   "id": "ideas",
+   "type": "list+votes",
+   "key": "ideas",
+   "stem": "idea",
+   "count": 8,
+   "columns": 4,
+   "label": "Ideas",
+   "hint": "One idea per box. Then everyone puts three dots on the ideas they'd back.",
+   "votes_label": "Votes",
+   "reader": "Copy each idea into `text` and count its dots into `votes` (a number; 0 if none). A dot drawn on the line between two boxes counts for the box it's mostly in; if you can't tell, record your reading and add it to `unclear`. Number ideas in reading order, by the printed number on each box.",
+   "item_label": "Idea"
+  }
+ ],
+ "print": {
+  "rows": [
+   {
+    "height": 120,
+    "cells": [
+     {
+      "box": "question"
+     }
+    ]
+   },
+   {
+    "height": "grow",
+    "cells": [
+     {
+      "box": "ideas"
+     }
+    ]
+   }
+  ]
+ },
+ "slide": {
+  "prompt": "Turn one thing that got in the way into a question, then fill the boxes with ideas. Last two minutes: three dots each.",
+  "notes": [
+   "The question works best when it's specific: “How might we stop releases slipping in the last week?”, not “How might we be better?”",
+   "Call time for dots with two minutes to go. Dots go on ideas, not on people."
+  ]
+ }
+}

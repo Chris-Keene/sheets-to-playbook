@@ -1,0 +1,11 @@
+/* Retro: ideas ranked by dot votes, "How might we" questions, the team a line came from */
+.hmw{list-style:none;display:grid;gap:10px;max-width:44rem;margin-bottom:24px}
+.hmw li{padding:14px 18px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);font-size:1.0625rem}
+.hmw q{quotes:"\201C" "\201D"}
+.ideas-ranked{list-style:none;display:grid;gap:10px;max-width:44rem}
+.ideas-ranked li{display:flex;gap:14px;align-items:baseline;padding:12px 16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.ideas-ranked .votes{flex:none;min-width:5.5em;font-size:.875rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.ideas-ranked .votes b{font-size:1.25rem;color:var(--accent);font-weight:700}
+.team-tag{display:inline-block;margin-left:6px;font-size:.8125rem;font-weight:600;color:var(--muted)}
+.steps-list{display:grid;gap:10px;padding-left:1.4em;max-width:44rem}
+.action .team-tag{margin-left:0;margin-top:4px}

@@ -1,0 +1,59 @@
+## text
+How it was made, Retro Notes
+
+Skip to content
+Retro
+Notes
+Notes
+Actions
+How it was made
+
+Example, not from the session
+
+HOW IT WAS MADE
+
+How these notes were made
+
+Each team wrote on three paper sheets during the session. Afterwards the sheets were photographed, the handwriting was read with the help of AI, and a person checked every uncertain word against the photos.
+
+Three questions
+How did it go? What went well, and what got in the way.
+What could we try? A “How might we…” question, ideas, and three dot votes each.
+What we’ll do. Actions, each with who and by when.
+Nothing added
+
+Every line here traces back to a sheet: nothing was added, and quotes and questions are word for word. Vote counts are the dots on the paper. If a word couldn’t be read for certain, a person checked it against the photo.
+
+Retro Notes: Checkout redesign: sprint 14 retro · Example
+
+Download this playbook ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+link "Retro Notes"
+navigation "Playbook"
+heading[1] "How these notes were made"
+region "Three questions"
+region "Nothing added"
+list
+heading[2] "Three questions"
+list
+heading[2] "Nothing added"
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download this playbook"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Notes"
+link "Actions"
+link "How it was made"
+ListMarker "1."
+ListMarker "2."
+ListMarker "3."

@@ -1,0 +1,36 @@
+{
+ "id": "retro",
+ "name": "Retro",
+ "description": "A team retrospective in 45 minutes: what went well and what got in the way, ideas with dot votes, and actions with an owner and a date.",
+ "group": "team",
+ "privacy": "private",
+ "agenda": [
+  {
+   "exercise": "went-well",
+   "minutes": 15
+  },
+  {
+   "exercise": "ideas-votes",
+   "minutes": 15
+  },
+  {
+   "exercise": "actions",
+   "minutes": 10
+  }
+ ],
+ "addons": [],
+ "pages": [
+  [
+   "overview",
+   "Notes"
+  ],
+  [
+   "actions",
+   "Actions"
+  ],
+  [
+   "about",
+   "How it was made"
+  ]
+ ]
+}

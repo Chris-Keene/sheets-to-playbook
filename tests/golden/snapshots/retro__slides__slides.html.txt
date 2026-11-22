@@ -1,0 +1,64 @@
+## text
+--- slide 1
+Retro Notes
+ Retro
+ Welcome to the session. Great to have you here!
+ Minutes 0 to 5: the welcome, up to Question 1.
+ The session at a glance (50 minutes), in minutes from the start:
+ 0 to 5: welcome5 to 20: Question 1, How did it go? (15 minutes)20 to 35: Question 2, What could we try? (15 minutes)35 to 45: Question 3, What we'll do (10 minutes)45 to 50: what happens next, and close
+ Afterwards, allow 10 minutes or so to photograph every sheet.
+--- slide 2
+How it works
+ From your sheets to the Retro Notes
+ Talk and writeEach team fills in a sheet for each question. Anyone can speak; one person writes.
+ We photograph the sheetsSheets only, never people. Nothing is recorded.
+ AI reads, people checkAI reads every sheet. People check each line against the photos before anything goes out.
+ The Retro Notes arrivesSoon after today. We’ll send it round.
+ The last of the welcome: Question 1 starts at minute 5.
+ Thick black markers only, so the photos are readable.
+--- slide 3
+Question 1·, Sheet 1
+ 15:00Start timer
+ How did it go?
+ Went wellWhat worked, and why did it work?Got in the wayWhat slowed us down or tripped us up?
+ Question 1Fill both columns: one thing per line. Short is fine.
+ How did it go?What could we try?What we'll do
+ Minutes 5 to 20. Read the question out in full. 15 minutes.
+ Ask everyone to write before anyone talks: quiet writing first gets more voices onto the sheet.If a column stays empty, ask: what would you want to keep doing? What would you rather never do again?
+--- slide 4
+Question 2·, Sheet 2
+ 15:00Start timer
+ What could we try?
+ How might we…Pick one thing that got in the way, and turn it into a question.IdeasOne idea per box. Then everyone puts three dots on the ideas they'd back.
+ Question 2Turn one thing that got in the way into a question, then fill the boxes with ideas. Last two minutes: three dots each.
+ How did it go?What could we try?What we'll do
+ Minutes 20 to 35. Read the question out in full. 15 minutes.
+ The question works best when it's specific: “How might we stop releases slipping in the last week?”, not “How might we be better?”Call time for dots with two minutes to go. Dots go on ideas, not on people.
+--- slide 5
+Question 3·, Sheet 3
+ 10:00Start timer
+ What we'll do
+ What we'll doWhoBy when
+ Question 3Pick the ideas you'll actually do. Every action needs a who and a by when.
+ How did it go?What could we try?What we'll do
+ Minutes 35 to 45. Read the question out in full. 10 minutes.
+ Fewer, owned actions beat a long list. Two or three is plenty.“Who” is one person, even when a group helps.
+--- slide 6
+Retro Notes
+ Thank you
+ We’ll send the Retro Notes round soon after today.
+ Minutes 45 to 50: what happens next, and thank you.
+ Afterwards, photograph every sheet before anyone takes them down.
+--- slide 7
+
+## accessibility tree
+heading[1] "Retro slides"
+main
+toolbar "Slide controls"
+region "Welcome"
+button "Previous"
+button "Next"
+button "Notes"
+button "Full screen"
+image "Retro Notes"
+heading[2] "Retro"

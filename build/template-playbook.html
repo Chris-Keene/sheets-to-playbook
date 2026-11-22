@@ -340,6 +340,7 @@ section[aria-labelledby="kit-after"] > p + p{margin-top:12px}
   .hero{background:#fff;color:#000}
   .action,.card,.quote{break-inside:avoid}
 }
+/*VIEWS_CSS*/
 </style>
 </head>
 <body>
@@ -401,11 +402,12 @@ section[aria-labelledby="kit-after"] > p + p{margin-top:12px}
   // meta.table_names gives a table a name instead of a number (an online table might write "Virtual").
   // It keeps its number for the ring and the counts, but reads as "the Virtual table" everywhere it's listed.
   var TNAMES = M.table_names || {};
+  var GROUP = D.group || "table";   // what the workshop calls a group: a table, a team
   function tname(n){ return TNAMES[n] || TNAMES[String(n)] || ""; }
   function tablesText(t, lower){
     var nums = t.filter(function(n){ return !tname(n); });
-    var names = t.filter(function(n){ return tname(n); }).map(function(n){ return "the " + tname(n) + " table"; });
-    var s = nums.length ? (nums.length === 1 ? "Table " : "Tables ") + list(nums.map(String).concat(names)) : list(names);
+    var names = t.filter(function(n){ return tname(n); }).map(function(n){ return "the " + tname(n) + " " + GROUP; });
+    var s = nums.length ? (nums.length === 1 ? cap(GROUP) + " " : cap(GROUP) + "s ") + list(nums.map(String).concat(names)) : list(names);
     return (lower ? s.charAt(0).toLowerCase() : s.charAt(0).toUpperCase()) + s.slice(1);
   }
 
@@ -530,6 +532,7 @@ section[aria-labelledby="kit-after"] > p + p{margin-top:12px}
     var key = current;
     var target = null;
     // some addresses are another view scrolled to a section, so they can be linked to directly (the workshop's ALIASES)
+    var asked = key;
     if (ALIASES[key]){ target = ALIASES[key][1]; key = ALIASES[key][0]; }
     // a detail page (the workshop's DETAIL: round tables has one per challenge), or one of its VIEWS
     var d = DETAIL(key), html, label, nav;
@@ -538,6 +541,8 @@ section[aria-labelledby="kit-after"] > p + p{margin-top:12px}
       if (!VIEWS[key]) key = "overview";
       html = VIEWS[key][0](); label = VIEWS[key][1]; nav = key;
     }
+    // an alias that has its own link in the header (retro: Actions) shows as the current page
+    if (ALIASES[asked] && document.querySelector('[data-nav="' + asked + '"]')) nav = asked;
     main.innerHTML = html;
     document.title = (label === "Playbook" ? "" : label + " · ") + SERIES;
     [].forEach.call(document.querySelectorAll("[data-nav]"), function(a){
@@ -592,7 +597,8 @@ section[aria-labelledby="kit-after"] > p + p{margin-top:12px}
 
   /* ---------- Chrome ---------- */
 
-  var BANNERS = {
+  // a workshop's views can give their own (VIEW_BANNERS); these are round tables'
+  var BANNERS = typeof VIEW_BANNERS !== "undefined" ? VIEW_BANNERS : {
     template: ["Template.", "Dashed boxes show where content from the day goes and which sheet it comes from. There\u2019s one page per table; tables that pick the same challenge get merged."],
     draft: ["Draft for review.", "Dashed boxes are still empty, and tags like T07 \u00b7 Sheet 2 show where each line came from. Both disappear when the playbook is published."]
   };

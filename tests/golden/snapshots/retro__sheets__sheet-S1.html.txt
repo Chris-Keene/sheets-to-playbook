@@ -1,0 +1,34 @@
+## text
+Sheet 1 of the paper kit. Type into it on screen, or print it on A4. From the Retro Notes kit · Print-ready PDF.
+
+Question 1
+
+How did it go?
+Team
+Went well
+
+What worked, and why did it work?
+
+Got in the way
+
+What slowed us down or tripped us up?
+
+Retro Notes
+All of this goes into the Retro Notes.
+S1 · Team
+
+## accessibility tree
+note
+main
+heading[1] "How did it go?"
+LabelText
+textbox "Team"
+region "Went well"
+region "Got in the way"
+sectionfooter
+link "Print-ready PDF"
+heading[2] "Went well"
+textbox "Went well"
+heading[2] "Got in the way"
+textbox "Got in the way"
+image "Retro Notes"
