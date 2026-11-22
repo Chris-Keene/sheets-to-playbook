@@ -47,6 +47,7 @@ Question 3·, Sheet 3
 Retro Notes
  Thank you
  We’ll send the Retro Notes round soon after today.
+ Built with sheets-to-playbook by Chris Keene
  Minutes 45 to 50: what happens next, and thank you.
  Afterwards, photograph every sheet before anyone takes them down.
 --- slide 7

@@ -99,6 +99,7 @@ Share-back
 Community Playbook
  Thank you
  The Community Playbook goes live soon after today. Share it with anyone who couldn’t be here.
+ Built with sheets-to-playbook by Chris Keene
  The end of the 5 minutes for share-back and close (minute 60): what happens next, and thank you.
  Add your playbook’s address in playbook.config.json (playbook.url) and rebuild: its QR code then appears on this slide and on the commitment card.
  Afterwards, allow about 30 minutes to photograph every sheet and collect the card halves left on the tables.

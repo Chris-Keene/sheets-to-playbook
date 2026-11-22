@@ -159,6 +159,9 @@ svg.wordmark{overflow:visible;text-rendering:geometricPrecision}
 .s-end .lede{font-size:42px;margin-bottom:48px}
 .s-end .lede.join{margin:0}
 .s-end .qr-tile{width:380px}
+/* the "Built with" credit from the settings, small at the foot of the last slide */
+.s-end .credit{display:inline-flex;align-items:center;gap:12px;align-self:flex-start;margin-top:24px;font-size:22px;font-weight:500;color:var(--on-band)}
+.s-end .credit img{height:30px;width:auto}
 .s-end .qr-col{display:flex;flex-direction:column;align-items:center;gap:22px;max-width:640px}
 .s-end .qr-col .url{color:var(--hi);font-weight:600;font-size:40px;line-height:1.3;text-align:center;overflow-wrap:anywhere}
 
@@ -422,6 +425,7 @@ svg.wordmark{overflow:visible;text-rendering:geometricPrecision}
       <p class="url">{{url}}</p>
     </div><!--END:url-->
   </div>
+  <!--CREDIT-->
   <div class="slide-notes">
     <p>The end of the 5 minutes for share-back and close (minute 60): what happens next, and thank you.<!--IF:url--> Leave this slide up so people can scan the QR code.<!--END:url--></p>
     <!--IF:url--><!--ELSE:url--><p><b>Add your playbook’s address in playbook.config.json</b> (playbook.url) and rebuild: its QR code then appears on this slide and on the commitment card.</p><!--END:url-->

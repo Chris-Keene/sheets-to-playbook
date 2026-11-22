@@ -261,6 +261,17 @@ def conditionals(text, flags):
         text = new
 
 
+def slide_credit(cfg):
+    """The settings' "Built with" credit for the last slide: its dark-background logo (the slide is the band colour)."""
+    c = cfg.get("credit") or {}
+    if not c.get("show") or not c.get("text"):
+        return ""
+    f = config.asset(cfg, c.get("logo_dark") or c.get("logo"))
+    img = f'<img src="{playbook.data_uri(f)}" alt="">' if f else ""
+    inner = img + f"<span>{esc(c['text'])}</span>"
+    return f'<a class="credit" href="{esc(c["url"])}">{inner}</a>' if c.get("url") else f'<p class="credit">{inner}</p>'
+
+
 def agenda_slides(W, cfg):
     """The slides for a workshop laid out from its agenda: a welcome, how it works, one slide per question (its own
     timer, the sheet's boxes, a progress rail and facilitator notes) and a thank-you. Round tables keeps its own
@@ -381,6 +392,7 @@ def agenda_slides(W, cfg):
       <p class="url">{{{{url}}}}</p>
     </div><!--END:url-->
   </div>
+  <!--CREDIT-->
   <div class="slide-notes">
     <p>Minutes {t} to {total}: what happens next, and thank you.</p>
     <p>Afterwards, photograph every sheet before anyone takes them down.</p>
@@ -449,6 +461,7 @@ def build(cfg):
         out = out.replace("<!--QR-->", qr_svg(url, f"QR code for {display_url(url)}", colours["--paper-ink"]), 1)
         out = out.replace("<!--QR_MINI-->", qr_svg(url, "", colours["--paper-ink"]), 1)
     out = out.replace("<!--HERO-->", hero, 1)
+    out = out.replace("<!--CREDIT-->", slide_credit(cfg), 1)
     out = out.replace("<!--PEOPLE-->", people_html(cfg, people), 1)
     out = out.replace("/*VERSION*/", VERSION, 1)
     out = out.replace("/*COLOURS*/", "\n".join(f"  {k}:{c};" for k, c in colours.items()), 1)

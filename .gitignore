@@ -29,3 +29,11 @@ examples/can/brand/*.svg
 # Golden test: pictures are per machine, built files are scratch
 tests/golden/local/
 tests/golden/work/
+
+# Events set up with tools/new_event.py: your settings, kept out of the repo
+events/
+
+# Format handwriting tests: photos and answer keys are made on demand
+tests/hw/*/inbox/
+tests/hw/*/truth.json
+tests/hw/*/PROFILE.md

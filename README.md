@@ -1,6 +1,6 @@
 # sheets-to-playbook
 
-Run a round-table workshop on paper, photograph the sheets, and have a playbook website the same afternoon, where every line traces back to something someone wrote.
+Run a workshop on paper, photograph the sheets, and have a website of what people wrote the same afternoon, where every line traces back to something someone wrote. Round tables, retros, or a format of your own: each workshop is a short agenda of exercises, and the sheets, slides, reading, checks and page all come from it.
 
 ![The example playbook's home page: a blue band headed "Growing and sustaining support for accessibility", with counts of themes, challenges, actions and commitments, and a ring of arrows standing for the tables in the room](docs/playbook.png)
 
@@ -15,9 +15,20 @@ It comes in four parts:
 
 It was built for the CAN Community Forum (Champions of Accessibility Network) in November 2026, and opened up after people at the session asked to run their own.
 
+## Workshops
+
+| Workshop | What it's for | Sheets | Output |
+| --- | --- | --- | --- |
+| `round-tables` | A community forum in an hour: where support gets stuck, what has helped or not, what people could try now. Tables of about ten. Public. | 3 A1 sheets, a side sheet, a commitment card, table cards | A playbook: themes, a page per challenge, commitments |
+| `retro` | A team retrospective in 45 minutes. Private to the team. | How did it go?, What could we try? (with dot votes), What we'll do | Notes: went well and got in the way, ideas ranked by votes, actions with who and by when |
+
+`python3 tools/new_event.py` lists them, and `python3 tools/new_event.py retro events/q4-retro` sets up a settings file for one. Every builder then takes it with `--config`.
+
+**Make your own** in `formats/`: an exercise is one sheet (`formats/exercises/<id>.json`: its question and boxes, laid out in rows), and a workshop strings exercises together (`formats/workshops/<id>/`: the agenda, what the page holds and how each part is checked, the page's views and how to write it). Box types are text, list, ranked, tally, row (a repeating group like an action with who and by when), list+votes (ideas with dot votes) and name. The sheets, the fill-in pages, the slides, the readers' brief (`ingest.py brief`), `verify` and the review app all follow. `tests/hw/make_format_test.py` makes synthetic handwritten photos of a new workshop's sheets from an answer bank, so you can measure how well they're read before using them for real. Another repository can keep its own formats and point at them with `formats` in its settings.
+
 ## How it works
 
-1. **Before the day:** set your names and colours in `playbook.config.json`, then build the paper kit and the slides.
+1. **Before the day:** pick a workshop, set your names and colours in `playbook.config.json`, then build the paper kit and the slides. (The steps below are for round tables; other workshops work the same way with their own sheets.)
 2. **On the day:** each table works through the three sheets. A table lead writes, everyone else talks. People fill in a commitment card, tear off the stub and hand it in.
 3. **Straight after:** photograph every sheet and every stub. Hand the folder to Claude Code: *"build the playbook from this folder"*.
 4. **Claude prepares and checks the photos**, tells you at once if a sheet is missing or blurred (while it's still on the wall), then reads every table in parallel.
@@ -71,6 +82,7 @@ Then open Claude Code in this folder. The `sheets-to-playbook` skill is picked u
 | `org.short`, `org.name` | "About CAN", sheet footers, the header wordmark when there's no logo |
 | `org.forum`, `org.team` | Sentences on the site: "created during the *community forum*", "*the organisers* photographed every sheet" |
 | `org.about`, `org.join` | The About page and the closing band (a link to join your network) |
+| `workshop`, `formats` | Which workshop (`round-tables` unless you say otherwise), and any folders of your own formats to search first |
 | `playbook.name`, `playbook.url` | Page titles and footers; **the QR code on the commitment card points at the url**, so set it before printing |
 | `playbook.searchable` | `false` (the default) keeps every page out of search results. Set `true` to let search engines list the final playbook; drafts never are. |
 | `playbook.file_name` | What "Download this playbook" saves as. Default: the playbook's name, e.g. `community-playbook.html`. |
@@ -120,4 +132,6 @@ tests/                               fixtures and handwriting stress tests (see 
 
 ## Credits
 
-Designed and built by Chris Keene for the CAN Community Forum. Built with Claude Code.
+<a href="https://chriskeene.me"><img src="assets/credit/ck.png" alt="" width="29" height="24"></a> Designed and built by [Chris Keene](https://chriskeene.me), first for the CAN Community Forum. Built with Claude Code.
+
+Every page the kit makes says so in a small line at its foot ("Built with sheets-to-playbook by Chris Keene"), and on the slides' last card. Keep it if you can; `"credit": {"show": false}` in the settings takes it off.

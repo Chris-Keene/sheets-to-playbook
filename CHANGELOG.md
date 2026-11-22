@@ -2,6 +2,26 @@
 
 Versions follow [SemVer](https://semver.org/): a new feature or changed behaviour bumps the minor version, a fix the patch.
 
+## 2.0.0 (unreleased)
+
+Many workshops, not one. The kit was built around the four round-table sheets; now each workshop is an agenda of exercises, and every part of the kit follows it. Round tables come out exactly as before (checked by the golden test: every page, PDF and slide unchanged).
+
+### Added
+- **Workshops and exercises** (`formats/`): an exercise is one sheet or card (its question and boxes, laid out in rows); a workshop is an agenda of exercises with timings and add-ons, what its page holds and how each part is checked (`output.json`), its own rules (`rules.py`), its page views (`views.js`, optional `views.css`) and how to write it (`recipe.md`). The settings pick one (`workshop`) and can add folders of formats (`formats`). `build/formats.py` reads them.
+- **Retro**, the first new workshop: How did it go? (went well, got in the way), What could we try? (a "How might we" question and ideas with dot votes), What we'll do (actions with who and by when). Private to the team, so names are allowed and sheets don't say "No names, please".
+- **Sheets, fill-in pages and slides drawn from an exercise's boxes**: text, list, ranked, tally, row, list+votes and name. Slides for a workshop come from its agenda: a welcome with the plan, how it works, one slide per question with its own timer, the sheet's boxes, a progress rail and facilitator notes, and a thank-you. Round tables keep their hand-made sheets and slides.
+- **Box positions beside every sheet** (`sheet-<code>-A1.layout.json`), so tests and tools can find any box in a photo.
+- `ingest.py brief`: each workshop's sheets, boxes, ids and file shape for the readers, generated from its exercises. `RAW_FORMAT.md` now holds only the rules every workshop shares; round tables' shaping rules are in its `recipe.md`.
+- `tools/new_event.py`: list the workshops, and set up an event's settings from yours.
+- `tests/hw/make_format_test.py` and `score_format.py`: synthetic handwriting photos and scoring for any workshop, from an answer bank.
+- Print kit: SVG logos made of nested groups and transforms now print where they should, and `brand.logo.keep_colours` keeps each shape's own colour on paper.
+
+### Changed
+- `verify`, the review page, the review app and `apply_review` follow the workshop's page paths instead of naming round tables' sections. Private workshops allow names (personal details are warnings there).
+- Editing a word-for-word line in the review app now updates its transcription wherever it was written (a quote written on Sheet 2 used to keep its old raw text, so `verify` then failed it).
+- A challenge can no longer have the id `challenges`, which the page's address for the challenge list would have hidden.
+- The golden test covers four settings (default, CAN, a branded test with a two-colour logo, and retro).
+
 ## 1.1.0 (20 November 2026)
 
 ### Added

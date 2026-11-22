@@ -1,0 +1,248 @@
+{
+ "_note": "Answer bank for make_format_test.py --workshop retro: three invented teams (no real people or companies). Each item's text is what the reader should produce; raw is what's written when it differs (a struck word, say). Traps: strike (index of a word in raw to cross out), scribble (index of a word to half-scribble: correct or flagged), ink (faint, biro, blue...), sticky (written on a sticky note). Votes are dots drawn in the idea's strip; who/when on actions are copied exactly.",
+ "teams": {
+  "1": {
+   "hand": {
+    "fonts": [
+     "kalam",
+     "patrick"
+    ],
+    "ink": "black",
+    "pen": "marker",
+    "size": 15
+   },
+   "shot": {},
+   "S1": {
+    "well": [
+     {
+      "text": "Pairing on the payment form saved days"
+     },
+     {
+      "text": "Screen reader testing in week one",
+      "raw": "Screen reader testing early in week one",
+      "strike": 3
+     },
+     {
+      "text": "Stand-ups stayed short"
+     },
+     {
+      "text": "Design system tokens just worked"
+     }
+    ],
+    "pain": [
+     {
+      "text": "Sandbox down for two days"
+     },
+     {
+      "text": "Saved cards spec changed mid sprint"
+     },
+     {
+      "text": "Too many Wednesday meetings",
+      "scribble": 2
+     }
+    ]
+   },
+   "S2": {
+    "question": {
+     "text": "How might we keep testing when a sandbox goes down?"
+    },
+    "ideas": [
+     {
+      "text": "Record a mock of the payment API",
+      "votes": 7
+     },
+     {
+      "text": "Uptime alerts from the provider",
+      "votes": 2
+     },
+     {
+      "text": "Screen reader check in definition of done",
+      "votes": 5
+     },
+     {
+      "text": "Shared test card list",
+      "votes": 0
+     },
+     {
+      "text": "Rotate who runs demos",
+      "votes": 1
+     }
+    ]
+   },
+   "S3": {
+    "actions": [
+     {
+      "what": "Record a mock of the payment API",
+      "who": "Sam",
+      "when": "End of sprint 15"
+     },
+     {
+      "what": "Add screen reader check to DoD",
+      "who": "Priya",
+      "when": "Next Monday"
+     }
+    ]
+   }
+  },
+  "2": {
+   "hand": {
+    "fonts": [
+     "indie",
+     "architect"
+    ],
+    "ink": "blue",
+    "pen": "marker",
+    "size": 14
+   },
+   "shot": {
+    "keystone": 0.06,
+    "light": 0.9
+   },
+   "S1": {
+    "well": [
+     {
+      "text": "New component library on checkout"
+     },
+     {
+      "text": "Clear owner for every ticket"
+     },
+     {
+      "text": "Fast feedback from support team",
+      "ink": "faint"
+     }
+    ],
+    "pain": [
+     {
+      "text": "Flaky end to end tests"
+     },
+     {
+      "text": "Release freeze caught us out"
+     },
+     {
+      "text": "Waiting on legal for the cookie banner",
+      "sticky": true
+     }
+    ]
+   },
+   "S2": {
+    "question": {
+     "text": "How might we stop flaky tests blocking releases?"
+    },
+    "ideas": [
+     {
+      "text": "Quarantine flaky tests automatically",
+      "votes": 6
+     },
+     {
+      "text": "Fix one flaky test every day",
+      "votes": 3
+     },
+     {
+      "text": "Run e2e tests overnight only",
+      "votes": 1
+     },
+     {
+      "text": "Ask legal earlier in the sprint",
+      "votes": 4
+     }
+    ]
+   },
+   "S3": {
+    "actions": [
+     {
+      "what": "Quarantine job for flaky tests",
+      "who": "Alex",
+      "when": "Friday 11 Dec"
+     },
+     {
+      "what": "Invite legal to sprint planning",
+      "who": "Jo",
+      "when": "Next planning"
+     },
+     {
+      "what": "Fix one flaky test a day",
+      "who": "",
+      "when": "From Monday"
+     }
+    ]
+   }
+  },
+  "3": {
+   "hand": {
+    "fonts": [
+     "shadows",
+     "gochi"
+    ],
+    "ink": "black",
+    "pen": "marker",
+    "size": 16
+   },
+   "shot": {
+    "light": 0.8,
+    "shadow": 0.3,
+    "keystone": 0.05
+   },
+   "S1": {
+    "well": [
+     {
+      "text": "Retro actions from last time got done"
+     },
+     {
+      "text": "Good handover between time zones"
+     }
+    ],
+    "pain": [
+     {
+      "text": "Analytics events missing on Android"
+     },
+     {
+      "text": "Crash on older iPhones in review",
+      "raw": "Crash on old older iPhones in review",
+      "strike": 2
+     },
+     {
+      "text": "Nobody owned the release notes"
+     }
+    ]
+   },
+   "S2": {
+    "question": {
+     "text": "How might we catch analytics gaps before release?"
+    },
+    "ideas": [
+     {
+      "text": "Analytics checklist in every PR",
+      "votes": 5
+     },
+     {
+      "text": "Test on the oldest supported phone",
+      "votes": 4
+     },
+     {
+      "text": "Rotate release notes owner",
+      "votes": 3
+     }
+    ]
+   },
+   "S3": {
+    "actions": [
+     {
+      "what": "Add analytics checklist to PR template",
+      "who": "Mei",
+      "when": "This week"
+     },
+     {
+      "what": "Buy an old iPhone for testing",
+      "who": "Dan",
+      "when": "Before sprint 16"
+     },
+     {
+      "what": "Release notes rota",
+      "who": "Mei",
+      "when": "1 Jan"
+     }
+    ]
+   }
+  }
+ }
+}

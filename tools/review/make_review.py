@@ -397,6 +397,19 @@ for ch in EXTRA.get("checks", []):
     add("check", key, f"{place_of(src)} · {src}", [src], raw=[f"{src}: {raw_text(src)}"], notes=[ch["note"]],
         sheet=sheet_of(src), **picture(key, [src], raw_text(src), card=src.startswith(CARDS)))
 
+# a reader's own judgement calls with no [?word] left on the page (a scribbled word read as crossed out, say):
+# without a screen of their own nobody would look at them, so each becomes a check
+covered = {s_ for it in items for s_ in it["src"]}
+for src, entries in sorted(unclear.items()):
+    if not src or src in covered or src not in raw:
+        continue
+    key = "check-" + re.sub(r"\W+", "-", src)
+    notes = [u.get("note") or u.get("what") or u.get("reason") or "" for u in entries]
+    add("check", key, f"{place_of(src)} · {src}", [src], raw=[f"{src}: {raw_text(src)}"],
+        notes=["The reader made a call here; check it against the photo."] + [n for n in notes if n],
+        sheet=sheet_of(src), **picture(key, [src], raw_text(src), card=src.startswith(CARDS)))
+    covered.add(src)
+
 # calls only a reviewer can make: {"key", "src": [raw ids, may be empty], "text", "options": [two to four answers]}
 for cl in EXTRA.get("calls", []):
     srcs = cl.get("src") or []

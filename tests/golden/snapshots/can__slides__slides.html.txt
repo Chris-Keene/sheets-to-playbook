@@ -104,6 +104,7 @@ CAN
  The CAN Community Playbook goes live soon after today. Share it with anyone who couldn’t be here.
  Join CAN on LinkedInlinkedin.com/groups/12499821
  example.org/can-playbook
+ Built with sheets-to-playbook by Chris Keene
  The end of the 5 minutes for share-back and close (minute 60): what happens next, and thank you. Leave this slide up so people can scan the QR code.
  Afterwards, allow about 30 minutes to photograph every sheet and collect the card halves left on the tables.
 --- slide 11
