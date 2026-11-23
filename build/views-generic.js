@@ -6,7 +6,7 @@
        ranked   items by votes, most first ({"path", "votes": "votes", "questions": "<path of How might we lines>"})
        cards    rows as cards: a title field, labelled parts and ticks ({"path", "title_field", "fields": [[key, label]],
                 "ticks": {"key", "label", "labels": {value: label}}, "sort": {"field", "order": [values]}})
-       scale    a 1 to N score per area ({"path", "area", "score", "note", "max": 5, "low", "high"})
+       scale    a 1 to N score per area ({"path", "area", "score", "note", "max": 5, "low", "high", "bands": [a name per score]})
        quotes   lines in quotation marks ({"path"})
        list     one list ({"path"})
 
@@ -75,11 +75,15 @@
         items.map(function(x){
           var s = parseInt(x[sec.score || "score"], 10), ok = s >= 1 && s <= max;
           var meter = '<span class="meter" aria-hidden="true">' + range(max).map(function(i){ return '<i' + (ok && i <= s ? ' class="on"' : "") + '></i>'; }).join("") + '</span>';
-          return '<tr><th scope="row">' + esc(x[sec.area || "area"] || "") + teamTag(x) + '</th><td>' + meter +
-            '<span class="score">' + (ok ? s + ' of ' + max : '<span class="muted">Not scored</span>') + '</span></td><td>' +
+          // a name like "Page/Feature Development" may break after its slash on a narrow screen, never mid-word
+          var name = esc(x[sec.area || "area"] || "").replace(/\//g, "/<wbr>");
+          return '<tr><th scope="row">' + name + teamTag(x) + '</th><td>' + meter +
+            '<span class="score">' + (ok ? s + ' of ' + max : '<span class="muted">Not scored</span>') + '</span>' +
+            (ok && sec.bands && sec.bands[s - 1] ? '<span class="band">' + esc(sec.bands[s - 1]) + '</span>' : "") + '</td><td>' +
             (x[sec.note || "note"] ? esc(x[sec.note || "note"]) : '<span class="muted">Not given</span>') + srcTag(x) + '</td></tr>';
         }).join("") + '</tbody></table>' +
-        (sec.low ? '<p class="scale-key">1 is ' + esc(sec.low) + '; ' + max + ' is ' + esc(sec.high) + '.</p>' : "");
+        (sec.bands ? '<p class="scale-key">' + (sec.key_intro ? esc(sec.key_intro) + ' ' : "") + sec.bands.map(function(b, i){ return (i + 1) + ' ' + esc(b); }).join(", ") + '.</p>'
+          : sec.low ? '<p class="scale-key">1 is ' + esc(sec.low) + '; ' + max + ' is ' + esc(sec.high) + '.</p>' : "");
     },
     quotes: function(sec){
       var items = itemsAt(sec.path);
