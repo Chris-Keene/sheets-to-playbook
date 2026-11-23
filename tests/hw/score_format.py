@@ -47,7 +47,7 @@ def main():
     ap.add_argument("truth")
     a = ap.parse_args()
     run, truth = Path(a.run), json.loads(Path(a.truth).read_text())
-    cfg = config.load(str(ROOT / "tests" / "golden" / f"{truth['workshop']}.config.json"))
+    cfg = config.load(truth.get("config") or str(ROOT / "tests" / "golden" / f"{truth['workshop']}.config.json"))
     W = formats.load(cfg, truth["workshop"])
     tally = {"right": 0, "flagged": 0, "silent": 0, "missing": 0, "extra": 0}
     silent, flagged_list, extras, struck = [], [], [], []
@@ -115,6 +115,17 @@ def main():
                         else:
                             tally["silent"] += 1
                             silent.append(f"{where} {i + 1}: {g.get('votes')} votes, but the sheet has {w.get('votes', 0)}")
+                    if b.get("ticks"):
+                        tk = b["ticks"]["key"]
+                        norm_t = lambda v: ",".join(sorted(v)) if isinstance(v, list) else str(v or "")
+                        if norm_t(w.get(tk)) == norm_t(g.get(tk)):
+                            tally["right"] += 1
+                        elif g.get("id") in unclear_ids:
+                            tally["flagged"] += 1
+                            flagged_list.append(f"{where} {i + 1}: {tk} {g.get(tk)!r} (answer {w.get(tk)!r})")
+                        else:
+                            tally["silent"] += 1
+                            silent.append(f"{where} {i + 1}: {tk} {g.get(tk)!r}, but the sheet has {w.get(tk)!r}")
                     if b["type"] == "row":
                         for fld in b.get("fields", []):
                             k = fld["key"]

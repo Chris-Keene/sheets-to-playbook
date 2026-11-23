@@ -1,0 +1,209 @@
+{
+ "_note": "Answer bank for make_format_test.py business-change: two invented tables, no real people or organisations. Field values can carry traps like answers elsewhere: {\"text\", \"raw\", \"strike\"}.",
+ "teams": {
+  "1": {
+   "hand": {
+    "fonts": [
+     "kalam",
+     "architect"
+    ],
+    "ink": "black",
+    "pen": "marker",
+    "size": 13
+   },
+   "shot": {},
+   "S1": {
+    "impacts": [
+     {
+      "change": "Tickets move to the new system",
+      "whom": "Support agents",
+      "need": "Practice on real tickets"
+     },
+     {
+      "change": "New help form for customers",
+      "whom": "Customers",
+      "need": {
+       "text": "A clear notice",
+       "raw": "A big clear notice",
+       "strike": 1
+      }
+     },
+     {
+      "change": "Reports from new dashboards",
+      "whom": "Team leads",
+      "need": "Same numbers as today"
+     }
+    ]
+   },
+   "S2": {
+    "people": [
+     {
+      "person": "Head of support",
+      "role": "Signs off go-live",
+      "need": "Proof reports match",
+      "influence": "high"
+     },
+     {
+      "person": "Support agents",
+      "role": "Use it every day",
+      "need": "Training first",
+      "influence": "medium"
+     },
+     {
+      "person": "IT",
+      "role": "Runs the migration",
+      "need": "Frozen backlog",
+      "influence": "high"
+     },
+     {
+      "person": "Finance",
+      "role": "Pays the licence",
+      "need": "Monthly costs",
+      "influence": "low"
+     }
+    ]
+   },
+   "S3": {
+    "areas": [
+     {
+      "because": "Agreed and funded",
+      "score": "4"
+     },
+     {
+      "because": "Nothing sent yet",
+      "score": "2"
+     },
+     {
+      "because": "No training planned",
+      "score": "1"
+     },
+     {
+      "because": "Workflows half done",
+      "score": "3"
+     },
+     {}
+    ]
+   },
+   "S4": {
+    "risks": [
+     {
+      "risk": "Reports don't match",
+      "mitigation": "Run both for a month",
+      "likelihood": "high"
+     },
+     {
+      "risk": "Agents use old inbox",
+      "mitigation": "Make it read only",
+      "likelihood": "medium"
+     }
+    ]
+   },
+   "S5": {
+    "actions": [
+     {
+      "what": "Plan training on real tickets",
+      "who": "Priya",
+      "when": "18 January"
+     },
+     {
+      "what": "Draft customer notice",
+      "who": "Marc",
+      "when": "Friday"
+     }
+    ]
+   }
+  },
+  "2": {
+   "hand": {
+    "fonts": [
+     "patrick",
+     "indie"
+    ],
+    "ink": "blue",
+    "pen": "marker",
+    "size": 13
+   },
+   "shot": {
+    "keystone": 0.05,
+    "light": 0.88
+   },
+   "S1": {
+    "impacts": [
+     {
+      "change": "Old email address closes",
+      "whom": "Customers",
+      "need": "A month of forwarding"
+     },
+     {
+      "change": "Night shift loses chat",
+      "whom": "Night agents",
+      "need": {
+       "text": "Phone cover overnight",
+       "ink": "faint"
+      }
+     }
+    ]
+   },
+   "S2": {
+    "people": [
+     {
+      "person": "Night team lead",
+      "role": "Rota",
+      "need": "Cover plan",
+      "influence": "medium"
+     },
+     {
+      "person": "Customers",
+      "role": "",
+      "need": "Notice in advance",
+      "influence": "low"
+     }
+    ]
+   },
+   "S3": {
+    "areas": [
+     {
+      "because": "Sponsor keen",
+      "score": "5"
+     },
+     {
+      "because": "Plan drafted",
+      "score": "3"
+     },
+     {},
+     {
+      "because": "Tested in sandbox",
+      "score": "4"
+     },
+     {
+      "because": "Floor walkers booked",
+      "score": "3"
+     }
+    ]
+   },
+   "S4": {
+    "risks": [
+     {
+      "risk": "Go-live on a busy Monday",
+      "mitigation": "Move to a Wednesday",
+      "likelihood": "medium"
+     }
+    ]
+   },
+   "S5": {
+    "actions": [
+     {
+      "what": "Book phone cover for nights",
+      "who": "Sam",
+      "when": "Next week"
+     },
+     {
+      "what": "Move go-live to Wednesday",
+      "who": "",
+      "when": "Before planning"
+     }
+    ]
+   }
+  }
+ }
+}

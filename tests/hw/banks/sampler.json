@@ -1,0 +1,153 @@
+{
+ "_note": "Answer bank for make_format_test.py sampler (tests/hw/sampler.config.json): two invented teams.",
+ "teams": {
+  "1": {
+   "hand": {
+    "fonts": [
+     "gochi",
+     "shadows"
+    ],
+    "ink": "black",
+    "pen": "marker",
+    "size": 15
+   },
+   "shot": {},
+   "S1": {
+    "current": [
+     {
+      "text": "Agency audit once a year"
+     },
+     {
+      "text": "Devs check contrast by hand"
+     },
+     {
+      "text": "Bugs logged in a spreadsheet",
+      "raw": "Bugs logged in a big spreadsheet",
+      "strike": 4
+     }
+    ],
+    "pains": [
+     {
+      "text": "Findings arrive after release"
+     },
+     {
+      "text": "Nobody owns the fixes"
+     },
+     {
+      "text": "No time in sprints",
+      "sticky": true
+     }
+    ],
+    "top": [
+     {
+      "text": "Catch issues before release"
+     },
+     {
+      "text": "Clear owner for fixes"
+     },
+     {
+      "text": "Time in every sprint"
+     }
+    ]
+   },
+   "S2": {
+    "now": [
+     {
+      "text": "Pick an owner per team"
+     },
+     {
+      "text": "Add checks to the pipeline"
+     }
+    ],
+    "next": [
+     {
+      "text": "Training for designers"
+     }
+    ],
+    "later": [
+     {
+      "text": "Mobile apps too"
+     }
+    ]
+   },
+   "S3": {
+    "criteria": [
+     {
+      "measure": "Issues caught before release",
+      "target": "80%",
+      "owner": "QA lead"
+     },
+     {
+      "measure": "Fix time for critical issues",
+      "target": "Under 2 weeks",
+      "owner": "Dev manager"
+     }
+    ]
+   }
+  },
+  "2": {
+   "hand": {
+    "fonts": [
+     "kalam",
+     "patrick"
+    ],
+    "ink": "blue",
+    "pen": "marker",
+    "size": 15
+   },
+   "shot": {
+    "light": 0.85,
+    "keystone": 0.05
+   },
+   "S1": {
+    "current": [
+     {
+      "text": "Screen reader checks before big launches"
+     }
+    ],
+    "pains": [
+     {
+      "text": "Old components fail checks"
+     },
+     {
+      "text": "Testing waits until the end",
+      "scribble": 1
+     }
+    ],
+    "top": [
+     {
+      "text": "Fix the old components"
+     },
+     {
+      "text": "Test earlier"
+     }
+    ]
+   },
+   "S2": {
+    "now": [
+     {
+      "text": "Fix the date picker"
+     }
+    ],
+    "next": [
+     {
+      "text": "Retire old buttons"
+     },
+     {
+      "text": "Design review checklist"
+     }
+    ],
+    "later": []
+   },
+   "S3": {
+    "criteria": [
+     {
+      "measure": "Components passing checks",
+      "target": "All core ones",
+      "owner": "Design system team"
+     }
+    ]
+   }
+  }
+ }
+}

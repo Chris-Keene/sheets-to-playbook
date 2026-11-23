@@ -1,0 +1,19 @@
+{
+ "_note": "For tests/hw/make_format_test.py: the exercise sampler (tests/hw/formats).",
+ "workshop": "sampler",
+ "formats": [
+  "formats"
+ ],
+ "org": {
+  "short": "",
+  "name": "",
+  "forum": "workshop",
+  "team": "the team",
+  "about": "",
+  "join": null
+ },
+ "playbook": {
+  "name": "Workshop Notes",
+  "url": ""
+ }
+}

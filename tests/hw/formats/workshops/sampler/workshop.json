@@ -1,0 +1,30 @@
+{
+ "id": "sampler",
+ "name": "Exercise sampler",
+ "description": "Test only: the exercises no other public workshop uses, so the handwriting test can read them.",
+ "group": "team",
+ "privacy": "private",
+ "noun": "notes",
+ "plural": true,
+ "agenda": [
+  {
+   "exercise": "pains",
+   "minutes": 15
+  },
+  {
+   "exercise": "now-next-later",
+   "minutes": 10
+  },
+  {
+   "exercise": "success-criteria",
+   "minutes": 10
+  }
+ ],
+ "addons": [],
+ "pages": [
+  [
+   "overview",
+   "Notes"
+  ]
+ ]
+}

@@ -79,7 +79,7 @@ def write_item(sheet, it, wr, x, y, w, rng, team_truth, log, key, dash=True):
     yy, boxes = sheet.write(("- " if dash else "") + shown, wr, x, y, w, line_gap=1.28 * mh.SIZE_BOOST)
     words = boxes[1:] if dash and boxes else boxes
     if "strike" in it and words:
-        sheet.strike(words[it["strike"]][1], wr.ink)
+        strike_word(sheet, words[it["strike"]][1], wr.ink)
         team_truth.setdefault("struck", []).append([it["text"], shown.split(" ")[it["strike"]]])
         log.append(f"{key}: word crossed out in '{shown}' (must be left out)")
     if "scribble" in it and words:
@@ -89,6 +89,22 @@ def write_item(sheet, it, wr, x, y, w, rng, team_truth, log, key, dash=True):
     if it.get("ink") in ("faint", "pencil"):
         log.append(f"{key}: written in {it['ink']} '{it['text']}'")
     return yy + 5
+
+
+def strike_word(sheet, box, ink):
+    """Cross a word out through the middle of its letters. The word's box runs from the top of its tallest letter to
+    the bottom of its lowest, so its midpoint can sit on the letter tops ("big"), where a heavy marker hides the line:
+    find the band of rows with the most ink instead, and strike through that, as a person would."""
+    x0, y0, x1, y1 = [int(v) for v in box]
+    region = np.asarray(sheet.img.crop((x0, y0, x1, y1)).convert("L"), dtype=np.float32)
+    ink_rows = (255 - region).sum(axis=1)
+    if ink_rows.max() > 0:
+        rows = np.where(ink_rows >= 0.5 * ink_rows.max())[0]
+        ym = y0 + (rows.min() + rows.max()) / 2
+    else:
+        ym = (y0 + y1) / 2
+    d = ImageDraw.Draw(sheet.img)
+    d.line([(x0 - 8, ym + 4), ((x0 + x1) / 2, ym - 2), (x1 + 8, ym + 3)], fill=mh.INKS[ink] + (255,), width=11)
 
 
 def dots(sheet, n, x_mm, y_mm, w_mm, h_mm, rng):
@@ -138,6 +154,34 @@ def fill_sheet(base, exercise, zones, bank, hand, team, rng, log):
                 # the dots go after the printed "Votes", as people put stickers in the space beside it
                 dots(sheet, it.get("votes", 0), z["x"] + 31, z["votes_from"], z["w"] - 35, z["y"] + z["h"] - z["votes_from"], rng)
             truth[key] = [{"text": it["text"], "votes": it.get("votes", 0)} for it in mine]
+        elif b["type"] == "row" and any(z.get("cols") for z in zs):
+            # a table: write each column, tick the chosen box, and every printed row is in the answer even if blank
+            rows = sorted((z for z in zs if z["n"]), key=lambda z: z["n"])
+            fields, tk = b.get("fields", []), b.get("ticks")
+            printed = bool(b.get("rows"))
+            mine = list(mine) + [{}] * (len(rows) - len(mine)) if printed else mine
+            out = []
+            for z, it in zip(rows, mine):
+                for j, col in enumerate(z["cols"]):
+                    if printed and col["key"] == fields[0]["key"]:
+                        continue
+                    val = it.get(col["key"])
+                    if val:
+                        item = val if isinstance(val, dict) else {"text": val}
+                        write_item(sheet, item, wrs[j % len(wrs)], col["x"] + 2, z["write_from"] + 14, col["w"] - 6, rng, tt, log,
+                                   f"{exercise['code']}.{key}", dash=False)
+                if tk and it.get(tk["key"]):
+                    for v in (it[tk["key"]] if isinstance(it[tk["key"]], list) else [it[tk["key"]]]):
+                        box = next(t for t in z["ticks"] if t["value"] == v)
+                        sheet.tick(box["x"], box["y"], "tick", hand.get("ink", "black"))
+                entry = {f["key"]: (it.get(f["key"]) or {}).get("text", "") if isinstance(it.get(f["key"]), dict) else it.get(f["key"], "") for f in fields}
+                if printed:
+                    entry[fields[0]["key"]] = z["printed"]
+                if tk:
+                    entry[tk["key"]] = it.get(tk["key"], "" if tk.get("single") else [])
+                if printed or any(entry.get(f["key"]) for f in fields):
+                    out.append(entry)
+            truth[key] = out
         elif b["type"] == "row":
             rows = sorted((z for z in zs if z["n"]), key=lambda z: z["n"])
             fields = b.get("fields", [])
@@ -148,11 +192,19 @@ def fill_sheet(base, exercise, zones, bank, hand, team, rng, log):
                 inner = z["w"] - 28 - 12 * (len(fields) - 1)
                 for j, (f, share) in enumerate(zip(fields, shares)):
                     pw = inner * share / sum(shares)
-                    if it.get(f["key"]):
-                        write_item(sheet, {"text": it[f["key"]]}, wrs[j % len(wrs)], px, z["write_from"] + 28, pw - 6, rng, tt, log,
+                    val = it.get(f["key"])
+                    if val:
+                        item = val if isinstance(val, dict) else {"text": val}
+                        write_item(sheet, item, wrs[j % len(wrs)], px, z["write_from"] + 28, pw - 6, rng, tt, log,
                                    f"{exercise['code']}.{key}", dash=False)
                     px += pw + 12
-                out.append({f["key"]: it.get(f["key"], "") for f in fields})
+                entry = {}
+                for f in fields:
+                    v = it.get(f["key"], "")
+                    entry[f["key"]] = v.get("text", "") if isinstance(v, dict) else v
+                if b.get("ticks"):
+                    entry[b["ticks"]["key"]] = it.get(b["ticks"]["key"], "" if b["ticks"].get("single") else [])
+                out.append(entry)
             truth[key] = out
     return sheet, truth, tt
 
@@ -179,7 +231,7 @@ def main():
         for e in W.per_group():
             bases[e["code"]] = base_image(paper / f"sheet-{e['code']}-A1.pdf")
             layouts[e["code"]] = json.loads((paper / f"sheet-{e['code']}-A1.layout.json").read_text())["zones"]
-    truth = {"workshop": W.id, "teams": {}, "photos": {}}
+    truth = {"workshop": W.id, "config": str(cfg_file.resolve()), "teams": {}, "photos": {}}
     shots, log = [], []
     for t, spec in bank["teams"].items():
         team = int(t)

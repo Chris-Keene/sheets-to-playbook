@@ -12,8 +12,13 @@ Many workshops, not one. The kit was built around the four round-table sheets; n
 - **Sheets, fill-in pages and slides drawn from an exercise's boxes**: text, list, ranked, tally, row, list+votes and name. Slides for a workshop come from its agenda: a welcome with the plan, how it works, one slide per question with its own timer, the sheet's boxes, a progress rail and facilitator notes, and a thank-you. Round tables keep their hand-made sheets and slides.
 - **Box positions beside every sheet** (`sheet-<code>-A1.layout.json`), so tests and tools can find any box in a photo.
 - `ingest.py brief`: each workshop's sheets, boxes, ids and file shape for the readers, generated from its exercises. `RAW_FORMAT.md` now holds only the rules every workshop shares; round tables' shaping rules are in its `recipe.md`.
+- **A generic notes page** (`build/views-generic.js`) for any workshop without its own views: laid out from its `output.json` (lists side by side, ideas ranked by votes, cards with labelled parts and ticks, 1 to 5 score tables, quotes, lists), with header links to its sections and a "How it was made" page from the agenda.
+- **Seven more exercises**: pains (how it works today, what gets in the way, top three), now-next-later, risks, stakeholders, success-criteria, scale and impact. Row boxes can be one table with printed row labels (a scale's areas) and single-choice ticks. An agenda can reword an exercise's boxes and slide.
+- **Three more workshops**: ideation, pre-mortem and business-change, each with an example, a template and a recipe.
+- Checks any workshop can declare: a sum that must match the sheets (dot votes), fields copied exactly (who, by when, a score, a likelihood), what a final page must have. `ingest.py shape` prints an empty session for a workshop.
+- A workshop names what it makes ("these notes", "this recap"), so the download button and the no-JavaScript message say so.
 - `tools/new_event.py`: list the workshops, and set up an event's settings from yours.
-- `tests/hw/make_format_test.py` and `score_format.py`: synthetic handwriting photos and scoring for any workshop, from an answer bank.
+- `tests/hw/make_format_test.py` and `score_format.py`: synthetic handwriting photos and scoring for any workshop, from an answer bank. Banks for retro, business change and a sampler of the other new exercises. First rounds: retro 69 answers (68 right, 1 flagged), business change 90 (90 right), sampler 30 (29 right, 1 flagged); no silent errors in any.
 - Print kit: SVG logos made of nested groups and transforms now print where they should, and `brand.logo.keep_colours` keeps each shape's own colour on paper.
 
 ### Changed
