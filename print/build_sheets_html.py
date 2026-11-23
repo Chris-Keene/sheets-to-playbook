@@ -83,6 +83,16 @@ input[type=text],input[type=number]{font:inherit;color:var(--ink);border:0;borde
 .idea textarea{min-height:96px}
 .idea .votes{display:flex;gap:8px;align-items:baseline;font-size:.85rem;color:var(--hint);border-top:1px solid var(--rule);padding-top:4px}
 .idea .votes input{width:4em}
+.table-box .trow{border:0;border-top:1.5px solid var(--rule);margin:0;padding:8px 0 4px;min-width:0}
+.table-box .trow legend{font-weight:600;padding:0;float:left;width:100%;margin-bottom:4px}
+.table-box .tcells{clear:both;display:grid;gap:8px 12px;grid-template-columns:1fr}
+@media (min-width:720px){.table-box .tcells{grid-template-columns:repeat(auto-fit,minmax(9rem,1fr))}}
+.table-box .cell{display:flex;flex-direction:column;gap:2px;font-size:.85rem;color:var(--hint);font-weight:500}
+.table-box .cell textarea{min-height:56px}
+.table-box .ticks{border:0;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center}
+.table-box .ticks legend{font-size:.85rem;color:var(--hint);font-weight:500;padding:0;margin-bottom:2px;width:100%}
+.table-box .ticks label{display:flex;gap:4px;align-items:center;font-size:.95rem}
+.table-box .ticks input{width:20px;height:20px;accent-color:var(--accent)}
 /* a wordmark standing in for a logo file is measured roughly, so let its last letter show rather than clip */
 svg.logo{overflow:visible;max-width:100%}
 .foot{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;justify-content:space-between;font-size:.85rem;color:var(--hint);margin-top:4px}
@@ -297,6 +307,24 @@ def box_html(b, tint=False):
                 if b.get("text_line") else "")
         return (f'<section class="zone{" tint" if tint else ""}" aria-labelledby="{zid}-h">{head}'
                 f'<div class="tally" role="group" aria-labelledby="{zid}-h"{described}>{tally}</div>{line}</section>')
+    if kind == "row" and b.get("layout") == "table":
+        # one fieldset per row, laid out as a table on a wide screen: printed rows (a scale's areas) are its legend
+        printed = b.get("rows") or []
+        t = b.get("ticks")
+        title = b.get("title", label).replace(" {n}", "")
+        rows = ""
+        for i in range(1, (len(printed) or b.get("count", 4)) + 1):
+            name = printed[i - 1] if printed else label.replace("{n}", str(i))
+            cells = "".join(f'<label class="cell"><span>{e(f["label"])}</span><textarea id="{zid}{i}-{f["key"]}" rows="2"></textarea></label>'
+                            for f in b.get("fields", []) if not (printed and f is b["fields"][0]))
+            marks = ""
+            if t:
+                kind_ = "radio" if t.get("single") else "checkbox"
+                opts = "".join(f'<label><input type="{kind_}" name="{zid}{i}-{t["key"]}" value="{e(o[0] if isinstance(o, list) else o)}"> {e(o[1] if isinstance(o, list) else o)}</label>'
+                               for o in t["options"])
+                marks = f'<fieldset class="ticks"><legend>{e(t.get("label", "").rstrip(":"))}</legend>{opts}</fieldset>'
+            rows += f'<fieldset class="trow"><legend>{e(name)}</legend><div class="tcells">{cells}{marks}</div></fieldset>'
+        return f'<section class="zone table-box{" tint" if tint else ""}" aria-labelledby="{zid}-h"{described}><h2 id="{zid}-h">{e(title)}</h2>{hint_html}{rows}</section>'
     if kind == "row":
         out = ""
         for i in range(1, b.get("count", 3) + 1):

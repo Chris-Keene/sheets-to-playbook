@@ -1,0 +1,46 @@
+{
+ "_note": "An example pre-mortem, invented to show the page: no real team.",
+ "meta": {
+  "status": "example",
+  "edition": "Example",
+  "title": "New help centre: pre-mortem",
+  "series": "Pre-mortem Notes",
+  "event": "the help centre kick-off",
+  "date": "Monday 7 December 2026",
+  "tables": 1
+ },
+ "risks": [
+  {
+   "risk": "Support articles weren’t ready for launch.",
+   "mitigation": "Start writing the top twenty articles now.",
+   "likelihood": "high"
+  },
+  {
+   "risk": "Search returned nothing useful.",
+   "mitigation": "Test search with real questions from tickets.",
+   "likelihood": "medium"
+  },
+  {
+   "risk": "Nobody owned keeping articles up to date.",
+   "mitigation": "Name an owner for each section.",
+   "likelihood": "high"
+  },
+  {
+   "risk": "The design failed accessibility checks late.",
+   "mitigation": "Check each template as it’s built.",
+   "likelihood": "low"
+  }
+ ],
+ "actions": [
+  {
+   "what": "Draft the top twenty articles.",
+   "who": "Lee",
+   "when": "15 January"
+  },
+  {
+   "what": "Collect fifty real questions from tickets for search testing.",
+   "who": "Sam",
+   "when": "Next Friday"
+  }
+ ]
+}

@@ -1,0 +1,14 @@
+{
+ "_note": "The shape of a pre-mortem session.json (also: ingest.py shape).",
+ "meta": {
+  "status": "template",
+  "edition": "Template",
+  "title": "Pre-mortem",
+  "series": "Pre-mortem Notes",
+  "event": "",
+  "date": "",
+  "tables": 3
+ },
+ "risks": [],
+ "actions": []
+}

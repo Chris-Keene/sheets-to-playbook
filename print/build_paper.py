@@ -321,9 +321,61 @@ def sheet_generic(k, e, optional):
     return p
 
 
+def draw_table(p, k, b, x, y, w, h, tint=False):
+    """A row box as one table: column labels, then numbered rows with rules between them and the ticks in a column
+    on the right. Used when a box has many rows ("layout": "table"), like stakeholders or a maturity scale. A box's
+    "rows" are printed into its first column (the scale's areas), so people only score and explain them."""
+    ty = zone(p, k, x, y, w, h, b.get("title", b.get("label", "")).replace(" {n}", ""), b.get("hint"), tint=tint, box=b["id"])
+    fields, t = b.get("fields", []), b.get("ticks")
+    printed = b.get("rows") or []
+    n = len(printed) or b.get("count", 4)
+    num_w = 12
+    opts = [o[1] if isinstance(o, list) else o for o in (t or {}).get("options", [])]
+    tick_w = (sum(p.text_width(o, 22, "Regular") for o in opts) + len(opts) * (9 + 3 + 9) + 4) if t else 0
+    inner = w - 28 - num_w - tick_w - 12 * len(fields)
+    shares = [f.get("share", 1) for f in fields]
+    cols, cx = [], x + 14 + num_w
+    for f, share in zip(fields, shares):
+        cw = inner * share / sum(shares)
+        cols.append((f, cx, cw))
+        cx += cw + 12
+    head_y = ty + 6
+    for f, fx, fw in cols:
+        p.text("art", f["label"], fx, head_y, 24, "Medium", HINT)
+    if t:
+        p.text("art", t.get("label", "").rstrip(":"), cx, head_y, 24, "Medium", HINT)
+    top, bottom = head_y + 8, y + h - 12
+    rh = (bottom - top) / n
+    for i in range(n):
+        ry = top + i * rh
+        p.line("art", x + 14, ry, x + w - 14, ry, stroke=RULE, width=0.4)
+        # light dividers between the columns, so writing stays in its column
+        for _f, fx, _fw in cols[1:]:
+            p.line("art", fx - 6, ry + 4, fx - 6, ry + rh - 4, stroke=RULE, width=0.3)
+        if t:
+            p.line("art", cx - 6, ry + 4, cx - 6, ry + rh - 4, stroke=RULE, width=0.3)
+        p.text("art", f"{i + 1}.", x + 14, ry + 12, 24, "SemiBold", HINT)
+        if printed:
+            p.para("art", printed[i], cols[0][1], ry + 12, 28, cols[0][2], "SemiBold", BLACK, leading=1.15)
+        ticks = []
+        if t:
+            tx, cy = cx, ry + rh / 2 + 4
+            for (o, lab) in ((o if isinstance(o, list) else [o, o]) for o in t["options"]):
+                ticks.append({"value": o, "x": round(tx, 2), "y": round(cy - 9, 2), "size": 9})
+                tx = checkbox(p, tx, cy, 9, lab, 22) + 9
+        p.zones.append({"box": b["id"], "n": i + 1, "title": f"{b.get('label', '').replace('{n}', str(i + 1))}",
+                        "x": round(x + 14, 2), "y": round(ry, 2), "w": round(w - 28, 2), "h": round(rh, 2),
+                        "write_from": round(ry + 12, 2), "printed": printed[i] if printed else None,
+                        "cols": [{"key": f["key"], "x": round(fx, 2), "w": round(fw, 2)} for f, fx, fw in cols], "ticks": ticks})
+    p.line("art", x + 14, bottom, x + w - 14, bottom, stroke=RULE, width=0.4)
+
+
 def draw_box(p, k, b, x, y, w, h, tint=False):
     kind = b["type"]
     label, hint = b.get("label", ""), b.get("hint")
+    if kind == "row" and b.get("layout") == "table":
+        draw_table(p, k, b, x, y, w, h, tint)
+        return
     if kind == "row":
         n = b.get("count", 3)
         gap = 18

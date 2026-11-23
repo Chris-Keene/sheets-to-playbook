@@ -1,0 +1,83 @@
+## text
+--- slide 1
+Workshop Notes
+ Workshop
+ Welcome to the session. Great to have you here!
+ Minutes 0 to 5: the welcome, up to Question 1.
+ The session at a glance (70 minutes), in minutes from the start:
+ 0 to 5: welcome5 to 20: Question 1, Who does this change affect? (15 minutes)20 to 35: Question 2, Who needs to be involved? (15 minutes)35 to 45: Question 3, How ready are we? (10 minutes)45 to 55: Question 4, What could go wrong? (10 minutes)55 to 65: Question 5, What we'll do (10 minutes)65 to 70: what happens next, and close
+ Afterwards, allow 10 minutes or so to photograph every sheet.
+--- slide 2
+How it works
+ From your sheets to the Workshop Notes
+ Talk and writeEach table fills in a sheet for each question. Anyone can speak; one person writes.
+ We photograph the sheetsSheets only, never people. Nothing is recorded.
+ AI reads, people checkAI reads every sheet. People check each line against the photos before anything goes out.
+ The Workshop Notes arrivesSoon after today. We’ll send it round.
+ The last of the welcome: Question 1 starts at minute 5.
+ Thick black markers only, so the photos are readable.
+--- slide 3
+Question 1·, Sheet 1
+ 15:00Start timer
+ Who does this change affect?
+ What changesFor whomWhat they'll need
+ Question 1For each change: what changes, for whom, and what they'll need to make it work.
+ Who does this change affect?Who needs to be involved?How ready are we?What could go wrong?What we'll do
+ Minutes 5 to 20. Read the question out in full. 15 minutes.
+ Think about the people who lose something, not just the ones who gain.
+--- slide 4
+Question 2·, Sheet 2
+ 15:00Start timer
+ Who needs to be involved?
+ WhoTheir part in itWhat they need from this
+ Question 2List the people and teams this touches: who they are, their part in it, what they need, and how much say they have.
+ Who does this change affect?Who needs to be involved?How ready are we?What could go wrong?What we'll do
+ Minutes 20 to 35. Read the question out in full. 15 minutes.
+ Roles are fine instead of names.Don't forget the people who can say no.
+--- slide 5
+Question 3·, Sheet 3
+ 10:00Start timer
+ How ready are we?
+ AreaWhy this score
+ Question 3Agree a score for each area, and say why in a few words.
+ Who does this change affect?Who needs to be involved?How ready are we?What could go wrong?What we'll do
+ Minutes 35 to 45. Read the question out in full. 10 minutes.
+ Agree one score per row: if the table can't agree, write both scores and talk about the difference.The why matters more than the number.
+--- slide 6
+Question 4·, Sheet 4
+ 10:00Start timer
+ What could go wrong?
+ What could go wrongWhat we'd do about it
+ Question 4One risk per row: what could go wrong, what you'd do about it, and how likely it is.
+ Who does this change affect?Who needs to be involved?How ready are we?What could go wrong?What we'll do
+ Minutes 45 to 55. Read the question out in full. 10 minutes.
+ Specific beats general: “the test team is moved to another project”, not “resourcing”.
+--- slide 7
+Question 5·, Sheet 5
+ 10:00Start timer
+ What we'll do
+ What we'll doWhoBy when
+ Question 5Pick the ideas you'll actually do. Every action needs a who and a by when.
+ Who does this change affect?Who needs to be involved?How ready are we?What could go wrong?What we'll do
+ Minutes 55 to 65. Read the question out in full. 10 minutes.
+ Fewer, owned actions beat a long list. Two or three is plenty.“Who” is one person, even when a group helps.
+--- slide 8
+Workshop Notes
+ Thank you
+ We’ll send the Workshop Notes round soon after today.
+ Built with sheets-to-playbook by Chris Keene
+ Minutes 65 to 70: what happens next, and thank you.
+ Afterwards, photograph every sheet before anyone takes them down.
+--- slide 9
+
+## accessibility tree
+heading[1] "Workshop slides"
+main
+toolbar "Slide controls"
+region "Welcome"
+button "Previous"
+button "Next"
+button "Notes"
+button "Full screen"
+image "Workshop Notes"
+heading[2] "Workshop"

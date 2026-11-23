@@ -361,7 +361,7 @@ section[aria-labelledby="kit-after"] > p + p{margin-top:12px}
   </div>
 </header>
 <main id="main" tabindex="-1">
-  <noscript><div class="wrap section"><p>This playbook needs JavaScript to display. Please turn it on, or ask the organisers for a copy.</p></div></noscript>
+  <noscript><div class="wrap section"><p><!--NOUN_NEEDS--> JavaScript to display. Please turn it on, or ask the organisers for a copy.</p></div></noscript>
 </main>
 <footer class="site-foot">
   <div class="wrap" id="foot"></div>
@@ -620,7 +620,7 @@ section[aria-labelledby="kit-after"] > p + p{margin-top:12px}
   }).join("");
   // the "Built with" line from the settings (already HTML); an older session's own meta.credit if the settings' is off
   var CREDIT = D.credit_html || (M.credit ? esc(M.credit) : "");
-  var SAVE = canSave ? '<button type="button" class="save-link" data-save>Download this playbook</button>' : "";
+  var SAVE = canSave ? '<button type="button" class="save-link" data-save>Download ' + esc(D.this_noun || "this playbook") + '</button>' : "";
   var FILE_NAME = D.file_name || "playbook.html";
   document.getElementById("foot").innerHTML =
     (supporters ? '<div class="supporters"><p>Supported by</p><ul>' + supporters + '</ul></div>' : "") +

@@ -1,0 +1,40 @@
+{
+ "id": "ideation",
+ "name": "Ideation",
+ "description": "An ideas session in 40 minutes: turn a problem into a “How might we” question, fill a wall of ideas, dot-vote them, then pick actions with an owner and a date.",
+ "group": "team",
+ "privacy": "private",
+ "agenda": [
+  {
+   "exercise": "ideas-votes",
+   "minutes": 25,
+   "boxes": {
+    "ideas": {
+     "count": 12,
+     "columns": 4
+    }
+   }
+  },
+  {
+   "exercise": "actions",
+   "minutes": 10
+  }
+ ],
+ "addons": [],
+ "pages": [
+  [
+   "overview",
+   "Notes"
+  ],
+  [
+   "actions",
+   "Actions"
+  ],
+  [
+   "about",
+   "How it was made"
+  ]
+ ],
+ "noun": "notes",
+ "plural": true
+}

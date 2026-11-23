@@ -1,0 +1,16 @@
+{
+ "_note": "For tests/golden.py: the pre-mortem workshop in the default look.",
+ "workshop": "pre-mortem",
+ "org": {
+  "short": "",
+  "name": "",
+  "forum": "workshop",
+  "team": "the team",
+  "about": "",
+  "join": null
+ },
+ "playbook": {
+  "name": "Workshop Notes",
+  "url": ""
+ }
+}

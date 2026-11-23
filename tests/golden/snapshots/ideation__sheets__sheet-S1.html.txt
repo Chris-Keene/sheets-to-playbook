@@ -1,0 +1,105 @@
+## text
+Sheet 1 of the paper kit. Type into it on screen, or print it on A4. From the Workshop Notes kit · Print-ready PDF.
+
+Question 1
+
+What could we try?
+Team
+How might we…
+
+Pick one thing that got in the way, and turn it into a question.
+
+Ideas
+
+One idea per box. Then everyone puts three dots on the ideas they'd back.
+
+Idea 1
+Votes
+Idea 2
+Votes
+Idea 3
+Votes
+Idea 4
+Votes
+Idea 5
+Votes
+Idea 6
+Votes
+Idea 7
+Votes
+Idea 8
+Votes
+Idea 9
+Votes
+Idea 10
+Votes
+Idea 11
+Votes
+Idea 12
+Votes
+Workshop Notes
+All of this goes into the Workshop Notes.
+S1 · Team
+
+## accessibility tree
+note
+main
+heading[1] "What could we try?"
+LabelText
+textbox "Team"
+region "How might we…"
+region "Ideas"
+sectionfooter
+link "Print-ready PDF"
+heading[2] "How might we…"
+textbox "How might we…"
+heading[2] "Ideas"
+LabelText
+textbox "Idea 1"
+LabelText
+LabelText
+textbox "Idea 2"
+LabelText
+LabelText
+textbox "Idea 3"
+LabelText
+LabelText
+textbox "Idea 4"
+LabelText
+LabelText
+textbox "Idea 5"
+LabelText
+LabelText
+textbox "Idea 6"
+LabelText
+LabelText
+textbox "Idea 7"
+LabelText
+LabelText
+textbox "Idea 8"
+LabelText
+LabelText
+textbox "Idea 9"
+LabelText
+LabelText
+textbox "Idea 10"
+LabelText
+LabelText
+textbox "Idea 11"
+LabelText
+LabelText
+textbox "Idea 12"
+LabelText
+image "Workshop Notes"
+spinbutton "Idea 1: votes"
+spinbutton "Idea 2: votes"
+spinbutton "Idea 3: votes"
+spinbutton "Idea 4: votes"
+spinbutton "Idea 5: votes"
+spinbutton "Idea 6: votes"
+spinbutton "Idea 7: votes"
+spinbutton "Idea 8: votes"
+spinbutton "Idea 9: votes"
+spinbutton "Idea 10: votes"
+spinbutton "Idea 11: votes"
+spinbutton "Idea 12: votes"

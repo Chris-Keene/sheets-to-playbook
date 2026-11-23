@@ -1,0 +1,43 @@
+{
+ "id": "pre-mortem",
+ "name": "Pre-mortem",
+ "description": "Thirty minutes before a project starts: imagine it has failed, list what went wrong and how likely it is, then agree what to do about the biggest risks.",
+ "group": "team",
+ "privacy": "private",
+ "agenda": [
+  {
+   "exercise": "risks",
+   "minutes": 20,
+   "title": "Imagine it failed. What went wrong?",
+   "slide": {
+    "prompt": "It’s six months from now and the project has failed. One reason per row: what went wrong, what we’d do about it, how likely it is.",
+    "notes": [
+     "Say it as if it has already happened: “the launch slipped because…”. It gets more honest answers than “what might go wrong?”.",
+     "Write first, talk second: two minutes of quiet writing before anyone shares."
+    ]
+   }
+  },
+  {
+   "exercise": "actions",
+   "minutes": 10,
+   "title": "What we'll do about it"
+  }
+ ],
+ "addons": [],
+ "pages": [
+  [
+   "overview",
+   "Notes"
+  ],
+  [
+   "actions",
+   "Actions"
+  ],
+  [
+   "about",
+   "How it was made"
+  ]
+ ],
+ "noun": "notes",
+ "plural": true
+}

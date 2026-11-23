@@ -1,0 +1,16 @@
+{
+ "_note": "For tests/golden.py: the business-change workshop in the default look.",
+ "workshop": "business-change",
+ "org": {
+  "short": "",
+  "name": "",
+  "forum": "workshop",
+  "team": "the team",
+  "about": "",
+  "join": null
+ },
+ "playbook": {
+  "name": "Workshop Notes",
+  "url": ""
+ }
+}

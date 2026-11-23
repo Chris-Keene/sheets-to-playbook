@@ -1,0 +1,103 @@
+{
+ "_note": "What the ideation notes hold, and how ingest.py verify checks each part (policies: see round-tables/output.json; sum: a number that must equal the sheets'; match: fields copied exactly). page: the generic page's layout (build/views-generic.js).",
+ "paths": [
+  {
+   "path": "questions[]",
+   "label": "question {n}",
+   "section": "How might we",
+   "policy": "verbatim",
+   "min": 0.86,
+   "review": {
+    "fields": [
+     "text"
+    ],
+    "key": "question-{src}"
+   }
+  },
+  {
+   "path": "ideas[]",
+   "label": "idea {n}",
+   "section": "Ideas",
+   "policy": "trace",
+   "sum": "votes",
+   "review": {
+    "fields": [
+     "text"
+    ],
+    "key": "idea-{src}"
+   }
+  },
+  {
+   "path": "actions[]",
+   "label": "action {n}",
+   "section": "Actions",
+   "policy": "trace",
+   "match": [
+    "who",
+    "when"
+   ],
+   "review": {
+    "fields": [
+     "what",
+     "who",
+     "when"
+    ],
+    "key": "action-{src}"
+   }
+  }
+ ],
+ "review_order": [
+  "questions[]",
+  "ideas[]",
+  "actions[]"
+ ],
+ "not_on_page": [],
+ "roles": {},
+ "required_when_final": [
+  "ideas"
+ ],
+ "page": {
+  "counts": [
+   [
+    "ideas",
+    "idea"
+   ],
+   [
+    "actions",
+    "action"
+   ]
+  ],
+  "sections": [
+   {
+    "id": "ideas",
+    "type": "ranked",
+    "title": "What could we try?",
+    "path": "ideas",
+    "votes": "votes",
+    "questions": "questions",
+    "intro": "Every idea, with the most dot votes first.",
+    "from": "From the ideas sheet: the “How might we” question, then every idea box and its dots."
+   },
+   {
+    "id": "actions",
+    "type": "cards",
+    "title": "What we’ll do",
+    "path": "actions",
+    "title_field": "what",
+    "fields": [
+     [
+      "who",
+      "Who"
+     ],
+     [
+      "when",
+      "By when"
+     ]
+    ],
+    "nav": true,
+    "intro": "Each action with who and by when, as written on the sheet.",
+    "from": "From the actions sheet: what we’ll do, who and by when."
+   }
+  ]
+ }
+}

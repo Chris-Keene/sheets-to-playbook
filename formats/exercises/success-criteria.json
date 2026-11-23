@@ -1,0 +1,51 @@
+{
+ "id": "success-criteria",
+ "title": "How will we know it worked?",
+ "boxes": [
+  {
+   "id": "criteria",
+   "type": "row",
+   "key": "criteria",
+   "stem": "criterion",
+   "count": 4,
+   "label": "Measure {n}",
+   "text_field": "measure",
+   "fields": [
+    {
+     "key": "measure",
+     "label": "What we'll measure",
+     "share": 3
+    },
+    {
+     "key": "target",
+     "label": "Target",
+     "share": 2
+    },
+    {
+     "key": "owner",
+     "label": "Who checks",
+     "share": 1
+    }
+   ]
+  }
+ ],
+ "print": {
+  "rows": [
+   {
+    "height": "grow",
+    "cells": [
+     {
+      "box": "criteria"
+     }
+    ]
+   }
+  ]
+ },
+ "slide": {
+  "prompt": "What would make this a success? A measure, a target and who checks it.",
+  "notes": [
+   "A good target is a number or a yes or no.",
+   "If nobody can check it, it isn't a measure yet."
+  ]
+ }
+}

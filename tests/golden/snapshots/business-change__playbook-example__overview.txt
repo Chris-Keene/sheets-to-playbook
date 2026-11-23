@@ -1,0 +1,255 @@
+## text
+Skip to content
+Change
+Notes
+Notes
+Actions
+How it was made
+
+Example, not from the session
+
+CHANGE NOTES
+
+Moving support to the new ticketing system
+
+What 2 tables wrote down at the ticketing change workshop, Wednesday 9 December 2026.
+
+3 changes
+3 people and teams
+2 risks
+2 actions
+What changes, and for whom
+Tickets move to the new system on 1 February.
+For whom
+Support agents
+What they’ll need
+Two weeks of practice on real tickets.
+Table 1
+Customers get a new help form.
+For whom
+Customers
+What they’ll need
+A clear notice and the old email still working for a month.
+Table 2
+Weekly reports come from the new dashboards.
+For whom
+Team leads
+What they’ll need
+The same numbers they use today.
+Table 1
+Who needs to be involved
+Head of support
+Their part in it
+Signs off go-live
+What they need from this
+Proof the reports match
+Influence
+High
+Table 1
+IT
+Their part in it
+Runs the migration
+What they need from this
+A frozen ticket backlog for the weekend
+Influence
+High
+Table 2
+Support agents
+Their part in it
+Use it every day
+What they need from this
+Training before go-live
+Influence
+Medium
+Tables 1 and 2
+How ready are we?
+How ready are we?, scored 1 to 5 (1 is not started, 5 is ready to go)
+Area	Score	Why this score
+Leadership backing Table 1
+4 of 5	Agreed and funded.
+Communication Table 1
+2 of 5	Nothing sent to customers yet.
+Skills and training Table 1
+1 of 5	No training planned.
+Tools and process Table 1
+3 of 5	System set up, workflows half done.
+Support after go-live Table 1
+2 of 5	No floor walkers yet.
+
+1 is not started; 5 is ready to go.
+
+What could go wrong
+Reports don’t match the old numbers.
+What we’d do about it
+Run both side by side for a month.
+How likely
+High
+Table 1
+Agents fall back to the old inbox.
+What we’d do about it
+Switch the old inbox to read-only.
+How likely
+Medium
+Table 2
+What we’ll do
+
+Each action with who and by when, as written on the sheet.
+
+Plan two weeks of training on real tickets.
+Who
+Priya
+By when
+Before 18 January
+Table 1
+Draft the customer notice.
+Who
+Marc
+By when
+Friday
+Table 2
+
+Change Notes: Moving support to the new ticketing system · Example
+
+Download these notes ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+link "Change Notes"
+navigation "Playbook"
+region "Moving support to the new ticketing system"
+region "What changes, and for whom"
+region "Who needs to be involved"
+region "How ready are we?"
+region "What could go wrong"
+region "What we’ll do"
+list
+heading[1] "Moving support to the new ticketing system"
+list "In these notes"
+heading[2] "What changes, and for whom"
+list
+heading[2] "Who needs to be involved"
+list
+heading[2] "How ready are we?"
+table "How ready are we?, scored 1 to 5 (1 is not started, 5 is ready to go)"
+heading[2] "What could go wrong"
+list
+heading[2] "What we’ll do"
+list
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+caption
+rowgroup
+row
+row
+row
+row
+row
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download these notes"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Notes"
+link "Actions"
+link "How it was made"
+heading[3] "Tickets move to the new system on 1 February."
+DescriptionList
+heading[3] "Customers get a new help form."
+DescriptionList
+heading[3] "Weekly reports come from the new dashboards."
+DescriptionList
+heading[3] "Head of support"
+DescriptionList
+list
+heading[3] "IT"
+DescriptionList
+list
+heading[3] "Support agents"
+DescriptionList
+list
+row
+rowheader "Leadership backing Table 1"
+cell "4 of 5"
+cell "Agreed and funded."
+rowheader "Communication Table 1"
+cell "2 of 5"
+cell "Nothing sent to customers yet."
+rowheader "Skills and training Table 1"
+cell "1 of 5"
+cell "No training planned."
+rowheader "Tools and process Table 1"
+cell "3 of 5"
+cell "System set up, workflows half done."
+rowheader "Support after go-live Table 1"
+cell "2 of 5"
+cell "No floor walkers yet."
+heading[3] "Reports don’t match the old numbers."
+DescriptionList
+list
+heading[3] "Agents fall back to the old inbox."
+DescriptionList
+list
+heading[3] "Plan two weeks of training on real tickets."
+DescriptionList
+heading[3] "Draft the customer notice."
+DescriptionList
+term "For whom"
+definition
+term "What they’ll need"
+definition
+term "For whom"
+definition
+term "What they’ll need"
+definition
+term "For whom"
+definition
+term "What they’ll need"
+definition
+term "Their part in it"
+definition
+term "What they need from this"
+definition
+listitem[2]
+term "Their part in it"
+definition
+term "What they need from this"
+definition
+listitem[2]
+term "Their part in it"
+definition
+term "What they need from this"
+definition
+listitem[2]
+columnheader "Area"
+columnheader "Score"
+columnheader "Why this score"
+term "What we’d do about it"
+definition
+listitem[2]
+term "What we’d do about it"
+definition
+listitem[2]
+term "Who"
+definition
+term "By when"
+definition
+term "Who"
+definition
+term "By when"
+definition

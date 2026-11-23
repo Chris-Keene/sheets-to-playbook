@@ -77,6 +77,12 @@ class Workshop:
         """(sheet code, key) for boxes that hold one item with an id (like "the one we're tackling")."""
         return [(e["code"], b["key"]) for e in self.per_group() for b in e["boxes"] if b["type"] == "text" and b.get("stem")]
 
+    def text_field(self, code, key):
+        """The field an item from this box keeps its main words in: "text", or a row box's own (try-now: "action")."""
+        e = self.by_code(code)
+        b = next((b for b in (e or {}).get("boxes", []) if b["key"] == key), None)
+        return (b or {}).get("text_field", "text")
+
     def text_fields(self):
         """The fields an item's words can be in: "text", plus a row box's main field ("action" on the try-now sheet)."""
         out = ["text"]
@@ -200,12 +206,50 @@ class Workshop:
         return self._rules or None
 
     def views_js(self):
+        """The workshop's own views, or the generic ones laid out from output.json's "page"."""
         f = self.folder / "views.js"
-        return f.read_text() if f.exists() else ""
+        return (f if f.exists() else ROOT / "build" / "views-generic.js").read_text()
 
     def views_css(self):
         f = self.folder / "views.css"
-        return f.read_text() if f.exists() else ""
+        if f.exists():
+            return f.read_text()
+        return (ROOT / "build" / "views-generic.css").read_text() if not (self.folder / "views.js").exists() else ""
+
+    def agenda_summary(self):
+        """The agenda for the page's "How it was made": each question's title and its boxes' labels."""
+        return [{"title": e["title"], "boxes": [b.get("label", "").replace("{n}", "").strip() for b in e["boxes"]]}
+                for e in self.exercises[:len(self.data.get("agenda", []))]]
+
+
+def generic_check(data, W):
+    """Structure every workshop's page needs, for a workshop without its own rules.check: a known status, the number
+    of groups, a list at every path output.json names, whole numbers where it sums, and what a final page must have."""
+    problems = []
+    meta = data.get("meta") or {}
+    if meta.get("status") not in ("example", "template", "draft", "final"):
+        problems.append(f"meta.status must be example, template, draft or final, not {meta.get('status')!r}")
+    n = meta.get("tables")
+    if not isinstance(n, int) or n < 1:
+        problems.append(f"meta.tables must be how many {W.group}s there were (a number, at least 1)")
+    for spec in W.output.get("paths", []):
+        top = spec["path"].split("[]", 1)[0]
+        if not isinstance(data.get(top, []), list):
+            problems.append(f"{top} must be a list")
+            continue
+        if spec.get("sum") and "[]." not in spec["path"]:
+            for i, x in enumerate(data.get(top, []), 1):
+                v = x.get(spec["sum"], 0) if isinstance(x, dict) else 0
+                if not isinstance(v, int) or v < 0:
+                    problems.append(f"{spec['label'].format(n=i)}: {spec['sum']} must be a whole number, 0 or more, not {v!r}")
+    if meta.get("status") == "final":
+        for top in W.output.get("required_when_final", []):
+            if not data.get(top):
+                problems.append(f"final: no {top}")
+    for k in meta.get("table_names") or {}:
+        if isinstance(n, int) and not (str(k).isdigit() and 1 <= int(k) <= n):
+            problems.append(f"meta.table_names: {k!r} isn't a {W.group} number from 1 to {n}")
+    return problems
 
 
 def search_path(cfg=None):
@@ -243,7 +287,12 @@ def load(cfg=None, workshop=None):
             e.setdefault("code", f"S{i}")
             e.setdefault("short", f"Sheet {i}")
             e.setdefault("label", f"Question {i}")
-        e = dict(e, **{k: v for k, v in item.items() if k not in ("exercise",)})   # the agenda can override labels, minutes...
+        e = dict(e, **{k: v for k, v in item.items() if k not in ("exercise", "boxes", "slide")})   # labels, minutes...
+        # the agenda can reword an exercise for its own workshop: a box's label, hint or reading notes, the slide
+        for b in e.get("boxes", []):
+            b.update((item.get("boxes") or {}).get(b["id"], {}))
+        if item.get("slide"):
+            e["slide"] = dict(e.get("slide") or {}, **item["slide"])
         exercises.append(e)
     return Workshop(data, folder, exercises)
 

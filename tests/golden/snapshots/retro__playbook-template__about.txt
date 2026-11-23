@@ -26,7 +26,7 @@ Every line here traces back to a sheet: nothing was added, and quotes and questi
 
 Retro Notes: Our retro · Template
 
-Download this playbook ·
+Download these notes ·
 Built with sheets-to-playbook by Chris Keene
 
 ## accessibility tree
@@ -51,7 +51,7 @@ listitem[1]
 listitem[1]
 listitem[1]
 listitem[1]
-button "Download this playbook"
+button "Download these notes"
 link "Built with sheets-to-playbook by Chris Keene"
 link "Notes"
 link "Actions"

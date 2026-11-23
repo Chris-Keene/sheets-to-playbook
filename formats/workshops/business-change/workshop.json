@@ -1,0 +1,60 @@
+{
+ "id": "business-change",
+ "name": "Business change",
+ "description": "An hour to plan a change people will feel: what changes and for whom, who needs to be involved, how ready we are, what could go wrong, and what we'll do.",
+ "group": "table",
+ "privacy": "private",
+ "agenda": [
+  {
+   "exercise": "impact",
+   "minutes": 15
+  },
+  {
+   "exercise": "stakeholders",
+   "minutes": 15
+  },
+  {
+   "exercise": "scale",
+   "minutes": 10,
+   "title": "How ready are we?",
+   "boxes": {
+    "areas": {
+     "rows": [
+      "Leadership backing",
+      "Communication",
+      "Skills and training",
+      "Tools and process",
+      "Support after go-live"
+     ],
+     "title": "Score each area",
+     "hint": "1 is not started, 5 is ready to go."
+    }
+   }
+  },
+  {
+   "exercise": "risks",
+   "minutes": 10
+  },
+  {
+   "exercise": "actions",
+   "minutes": 10
+  }
+ ],
+ "addons": [],
+ "pages": [
+  [
+   "overview",
+   "Notes"
+  ],
+  [
+   "actions",
+   "Actions"
+  ],
+  [
+   "about",
+   "How it was made"
+  ]
+ ],
+ "noun": "notes",
+ "plural": true
+}

@@ -1,0 +1,55 @@
+{
+ "id": "now-next-later",
+ "title": "What comes first?",
+ "boxes": [
+  {
+   "id": "now",
+   "type": "list",
+   "key": "now",
+   "stem": "now",
+   "label": "Now",
+   "hint": "Start this quarter."
+  },
+  {
+   "id": "next",
+   "type": "list",
+   "key": "next",
+   "stem": "next",
+   "label": "Next",
+   "hint": "Once those are moving."
+  },
+  {
+   "id": "later",
+   "type": "list",
+   "key": "later",
+   "stem": "later",
+   "label": "Later",
+   "hint": "Worth doing, not yet."
+  }
+ ],
+ "print": {
+  "rows": [
+   {
+    "height": "grow",
+    "cells": [
+     {
+      "box": "now"
+     },
+     {
+      "box": "next"
+     },
+     {
+      "box": "later"
+     }
+    ]
+   }
+  ]
+ },
+ "slide": {
+  "prompt": "Sort what you'd do into three columns. Be ruthless about Now.",
+  "notes": [
+   "Now should fit in the time you actually have.",
+   "If everything is Now, ask what you'd drop if you had to."
+  ]
+ }
+}

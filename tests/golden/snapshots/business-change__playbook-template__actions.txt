@@ -1,0 +1,83 @@
+## text
+Skip to content
+Template.
+Dashed boxes show where content from the session goes and which sheet it comes from.
+Change
+Notes
+Notes
+Actions
+How it was made
+
+CHANGE NOTES
+
+Business change
+
+What 3 tables wrote down.
+
+What changes, and for whom
+TO FILL
+What changes, and for whom
+From the first sheet: what changes, for whom, and what they’ll need.
+Who needs to be involved
+TO FILL
+Who needs to be involved
+From the people sheet.
+How ready are we?
+TO FILL
+How ready are we?
+From the readiness sheet: a score for each area, and why.
+What could go wrong
+TO FILL
+What could go wrong
+From the risks sheet.
+What we’ll do
+
+Each action with who and by when, as written on the sheet.
+
+TO FILL
+What we’ll do
+From the actions sheet: what we’ll do, who and by when.
+
+Change Notes: Business change · Template
+
+Download these notes ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+note
+link "Change Notes"
+navigation "Playbook"
+region "Business change"
+region "What changes, and for whom"
+region "Who needs to be involved"
+region "How ready are we?"
+region "What could go wrong"
+region "What we’ll do"
+strong
+list
+heading[1] "Business change"
+heading[2] "What changes, and for whom"
+list
+heading[2] "Who needs to be involved"
+list
+heading[2] "How ready are we?"
+heading[2] "What could go wrong"
+list
+heading[2] "What we’ll do"
+list
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download these notes"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Notes"
+link "Actions"
+link "How it was made"

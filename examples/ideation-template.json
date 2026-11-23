@@ -1,0 +1,15 @@
+{
+ "_note": "The shape of a ideation session.json (also: ingest.py shape).",
+ "meta": {
+  "status": "template",
+  "edition": "Template",
+  "title": "Ideation",
+  "series": "Ideas Notes",
+  "event": "",
+  "date": "",
+  "tables": 3
+ },
+ "questions": [],
+ "ideas": [],
+ "actions": []
+}

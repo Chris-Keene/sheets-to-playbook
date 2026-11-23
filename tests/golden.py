@@ -34,6 +34,9 @@ CONFIGS = {
     "can": "examples/can/playbook.config.json",
     "brand": "tests/golden/brand.config.json",
     "retro": "tests/golden/retro.config.json",
+    "ideation": "tests/golden/ideation.config.json",
+    "pre-mortem": "tests/golden/pre-mortem.config.json",
+    "business-change": "tests/golden/business-change.config.json",
 }
 SESSIONS = {   # the session files each workshop's playbook is built from
     "round-tables": {
@@ -46,6 +49,8 @@ SESSIONS = {   # the session files each workshop's playbook is built from
         "template": "examples/retro-template.json",
     },
 }
+for _w in ("ideation", "pre-mortem", "business-change"):
+    SESSIONS[_w] = {"example": f"examples/{_w}-example.json", "template": f"examples/{_w}-template.json"}
 PAGES = ["overview", "commitments", "about", "kit"]   # the playbook's fixed views; challenge pages are added per session
 BUILD_OUTPUTS = ["print/out", "slides/out"]
 PIXEL_TOLERANCE = 0.002   # share of pixels allowed to differ (anti-aliasing noise), per picture

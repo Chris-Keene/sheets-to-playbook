@@ -1,0 +1,61 @@
+{
+ "id": "pains",
+ "title": "Where are we now?",
+ "boxes": [
+  {
+   "id": "current",
+   "type": "list",
+   "key": "current",
+   "stem": "current",
+   "label": "How it works today",
+   "hint": "Tools, teams and process: what actually happens now?"
+  },
+  {
+   "id": "pains",
+   "type": "list",
+   "key": "pains",
+   "stem": "pain",
+   "label": "What gets in the way",
+   "hint": "Where it's slow, painful, risky or expensive."
+  },
+  {
+   "id": "top",
+   "type": "ranked",
+   "key": "top",
+   "stem": "top",
+   "count": 3,
+   "label": "Our top three",
+   "hint": "The pains that matter most, most important first."
+  }
+ ],
+ "print": {
+  "rows": [
+   {
+    "height": "grow",
+    "cells": [
+     {
+      "box": "current"
+     },
+     {
+      "box": "pains"
+     }
+    ]
+   },
+   {
+    "height": 158,
+    "cells": [
+     {
+      "box": "top"
+     }
+    ]
+   }
+  ]
+ },
+ "slide": {
+  "prompt": "Describe how it works today, list what gets in the way, then agree your top three.",
+  "notes": [
+   "Push for specifics: which tool, which team, which step.",
+   "The top three should be pains, not solutions."
+  ]
+ }
+}

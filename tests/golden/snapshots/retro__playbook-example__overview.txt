@@ -69,7 +69,7 @@ The Mobile team
 
 Retro Notes: Checkout redesign: sprint 14 retro · Example
 
-Download this playbook ·
+Download these notes ·
 Built with sheets-to-playbook by Chris Keene
 
 ## accessibility tree
@@ -120,7 +120,7 @@ listitem[1]
 listitem[1]
 listitem[1]
 listitem[1]
-button "Download this playbook"
+button "Download these notes"
 link "Built with sheets-to-playbook by Chris Keene"
 link "Notes"
 link "Actions"

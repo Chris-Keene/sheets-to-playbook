@@ -1,0 +1,105 @@
+## text
+Skip to content
+Ideas
+Notes
+Notes
+Actions
+How it was made
+
+Example, not from the session
+
+IDEAS NOTES
+
+Making onboarding less of a slog
+
+What 2 teams wrote down at the onboarding ideas session, Tuesday 8 December 2026.
+
+5 ideas
+2 actions
+What could we try?
+
+Every idea, with the most dot votes first.
+
+How might we get new starters doing real work in their first week? The Blue team
+How might we stop new starters drowning in accounts and passwords? The Green team
+8 votes
+A starter task picked before day one. The Blue team
+6 votes
+One login checklist, owned by one person. The Green team
+5 votes
+A buddy for the first month. The Blue team and the Green team
+4 votes
+A map of who to ask about what. The Green team
+2 votes
+Record the welcome talk instead of repeating it. The Blue team
+What we’ll do
+
+Each action with who and by when, as written on the sheet.
+
+Pick a starter task for the next two hires.
+Who
+Ana
+By when
+Before 4 January
+The Blue team
+Write the one login checklist.
+Who
+Tom
+By when
+End of December
+The Green team
+
+Ideas Notes: Making onboarding less of a slog · Example
+
+Download these notes ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+link "Ideas Notes"
+navigation "Playbook"
+region "Making onboarding less of a slog"
+region "What could we try?"
+region "What we’ll do"
+list
+heading[1] "Making onboarding less of a slog"
+list "In these notes"
+heading[2] "What could we try?"
+list
+list
+heading[2] "What we’ll do"
+list
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download these notes"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Notes"
+link "Actions"
+link "How it was made"
+heading[3] "Pick a starter task for the next two hires."
+DescriptionList
+heading[3] "Write the one login checklist."
+DescriptionList
+term "Who"
+definition
+term "By when"
+definition
+term "Who"
+definition
+term "By when"
+definition

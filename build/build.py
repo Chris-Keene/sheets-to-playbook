@@ -97,6 +97,11 @@ def _logo_file(f, label, cls="", recolour=False):
     return svg.replace("<svg", "<svg" + attrs + ' focusable="false"' + c, 1)
 
 
+def this_noun(W):
+    """The workshop's word for what it makes, with this or these: workshop.json "noun" (and "plural")."""
+    return ("these " if W.data.get("plural") else "this ") + W.data.get("noun", "playbook")
+
+
 def nav_html(W):
     """The header's links, from the workshop's pages ([id, label], in order)."""
     import html as h
@@ -220,7 +225,7 @@ def check(data, W=None):
     """Catch the mistakes a hand-edit or an AI pass is most likely to make: the workshop's own rules (rules.py)."""
     W = W or formats.load(config.load())
     rules = W.rules()
-    problems = rules.check(data) if rules and hasattr(rules, "check") else []
+    problems = rules.check(data) if rules and hasattr(rules, "check") else formats.generic_check(data, W)
     if problems:
         sys.exit("Data problems:\n  " + "\n  ".join(problems))
 
@@ -275,6 +280,9 @@ def build_playbook(data_path, out, cfg):
     data["sheet_names"] = W.sheet_names()          # for the draft's source tags ("T07 · Sheet 2")
     data["card_prefixes"] = list(W.card_prefixes())
     data["group"] = W.group
+    data["page"] = W.output.get("page")            # the generic views' layout (workshops without their own views.js)
+    data["agenda"] = W.agenda_summary()
+    data["this_noun"] = this_noun(W)                # what the page calls itself: "this playbook", "these notes", "this recap"
     data["file_name"] = (cfg["playbook"].get("file_name") or slug(data["meta"]["series"])).removesuffix(".html") + ".html"
     hero = data["meta"].get("hero") or {}
     if hero.get("file"):
@@ -294,6 +302,7 @@ def build_playbook(data_path, out, cfg):
     html = html.replace("/*VIEWS*/", W.views_js().rstrip(), 1)
     html = html.replace("/*VIEWS_CSS*/", W.views_css().rstrip(), 1)
     html = html.replace("<!--NAV-->", nav_html(W), 1)
+    html = html.replace("<!--NOUN_NEEDS-->", this_noun(W)[:1].upper() + this_noun(W)[1:] + (" need" if W.data.get("plural") else " needs"), 1)
     html = themed(html, cfg)
     if cfg["playbook"].get("searchable") and data["meta"].get("status") == "final":
         # search engines may list it: only a final playbook, and only when the settings say so (commitment cards

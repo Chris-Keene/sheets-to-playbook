@@ -1,0 +1,72 @@
+{
+ "id": "stakeholders",
+ "title": "Who needs to be involved?",
+ "boxes": [
+  {
+   "id": "people",
+   "type": "row",
+   "layout": "table",
+   "key": "people",
+   "stem": "person",
+   "count": 6,
+   "label": "Person {n}",
+   "title": "People and teams",
+   "text_field": "person",
+   "fields": [
+    {
+     "key": "person",
+     "label": "Who",
+     "share": 2
+    },
+    {
+     "key": "role",
+     "label": "Their part in it",
+     "share": 2
+    },
+    {
+     "key": "need",
+     "label": "What they need from this",
+     "share": 3
+    }
+   ],
+   "ticks": {
+    "key": "influence",
+    "label": "Influence:",
+    "single": true,
+    "options": [
+     [
+      "low",
+      "Low"
+     ],
+     [
+      "medium",
+      "Medium"
+     ],
+     [
+      "high",
+      "High"
+     ]
+    ]
+   }
+  }
+ ],
+ "print": {
+  "rows": [
+   {
+    "height": "grow",
+    "cells": [
+     {
+      "box": "people"
+     }
+    ]
+   }
+  ]
+ },
+ "slide": {
+  "prompt": "List the people and teams this touches: who they are, their part in it, what they need, and how much say they have.",
+  "notes": [
+   "Roles are fine instead of names.",
+   "Don't forget the people who can say no."
+  ]
+ }
+}

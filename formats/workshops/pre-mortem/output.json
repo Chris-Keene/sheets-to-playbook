@@ -1,0 +1,114 @@
+{
+ "_note": "What the pre-mortem notes hold, and how ingest.py verify checks each part (policies: see round-tables/output.json; sum: a number that must equal the sheets'; match: fields copied exactly). page: the generic page's layout (build/views-generic.js).",
+ "paths": [
+  {
+   "path": "risks[]",
+   "label": "risk {n}",
+   "section": "Risks",
+   "policy": "trace",
+   "match": [
+    "likelihood"
+   ],
+   "review": {
+    "fields": [
+     "risk",
+     "mitigation"
+    ],
+    "key": "risk-{src}"
+   }
+  },
+  {
+   "path": "actions[]",
+   "label": "action {n}",
+   "section": "Actions",
+   "policy": "trace",
+   "match": [
+    "who",
+    "when"
+   ],
+   "review": {
+    "fields": [
+     "what",
+     "who",
+     "when"
+    ],
+    "key": "action-{src}"
+   }
+  }
+ ],
+ "review_order": [
+  "risks[]",
+  "actions[]"
+ ],
+ "not_on_page": [],
+ "roles": {},
+ "required_when_final": [
+  "risks"
+ ],
+ "page": {
+  "counts": [
+   [
+    "risks",
+    "risk"
+   ],
+   [
+    "actions",
+    "action"
+   ]
+  ],
+  "sections": [
+   {
+    "id": "risks",
+    "type": "cards",
+    "title": "What could go wrong",
+    "path": "risks",
+    "title_field": "risk",
+    "fields": [
+     [
+      "mitigation",
+      "What we’d do about it"
+     ]
+    ],
+    "ticks": {
+     "key": "likelihood",
+     "label": "How likely",
+     "labels": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+     }
+    },
+    "sort": {
+     "field": "likelihood",
+     "order": [
+      "high",
+      "medium",
+      "low"
+     ]
+    },
+    "intro": "Every risk the team named, the most likely first.",
+    "from": "From the risks sheet: what went wrong, what we’d do about it, how likely it is."
+   },
+   {
+    "id": "actions",
+    "type": "cards",
+    "title": "What we’ll do about it",
+    "path": "actions",
+    "title_field": "what",
+    "fields": [
+     [
+      "who",
+      "Who"
+     ],
+     [
+      "when",
+      "By when"
+     ]
+    ],
+    "nav": true,
+    "intro": "Each action with who and by when, as written on the sheet.",
+    "from": "From the actions sheet: what we’ll do, who and by when."
+   }
+  ]
+ }
+}

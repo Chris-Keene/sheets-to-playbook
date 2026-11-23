@@ -1,0 +1,64 @@
+## text
+Skip to content
+Template.
+Dashed boxes show where content from the session goes and which sheet it comes from.
+Pre-mortem
+Notes
+Notes
+Actions
+How it was made
+
+PRE-MORTEM NOTES
+
+Pre-mortem
+
+What 3 teams wrote down.
+
+What could go wrong
+
+Every risk the team named, the most likely first.
+
+TO FILL
+What could go wrong
+From the risks sheet: what went wrong, what we’d do about it, how likely it is.
+What we’ll do about it
+
+Each action with who and by when, as written on the sheet.
+
+TO FILL
+What we’ll do about it
+From the actions sheet: what we’ll do, who and by when.
+
+Pre-mortem Notes: Pre-mortem · Template
+
+Download these notes ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+note
+link "Pre-mortem Notes"
+navigation "Playbook"
+region "Pre-mortem"
+region "What could go wrong"
+region "What we’ll do about it"
+strong
+list
+heading[1] "Pre-mortem"
+heading[2] "What could go wrong"
+list
+heading[2] "What we’ll do about it"
+list
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download these notes"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Notes"
+link "Actions"
+link "How it was made"

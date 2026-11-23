@@ -1,0 +1,34 @@
+/* Any workshop's notes (build/views-generic.js): lists side by side, ranked ideas, cards, scale tables */
+.lists{display:grid;gap:24px;grid-template-columns:1fr}
+@media (min-width:720px){.lists.cols-2{grid-template-columns:1fr 1fr}.lists.cols-3{grid-template-columns:repeat(3,1fr)}.lists.cols-4{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1000px){.lists.cols-4{grid-template-columns:repeat(4,1fr)}}
+.lists h3{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.lists h3 svg{width:20px;height:20px;flex:none}
+.lists .ok svg{color:var(--good)}
+.lists .no svg{color:var(--bad)}
+.lists ul,.plain-list{list-style:none;display:grid;gap:12px}
+.lists li,.plain-list li{padding-left:22px;position:relative}
+.lists li::before,.plain-list li::before{content:"";position:absolute;left:4px;top:.7em;width:7px;height:7px;border-radius:50%;background:var(--muted)}
+.lists.cols-3 > div,.lists.cols-4 > div{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:var(--radius);padding:14px 16px}
+.hmw{list-style:none;display:grid;gap:10px;max-width:44rem;margin-bottom:24px}
+.hmw li{padding:14px 18px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);font-size:1.0625rem}
+.hmw q{quotes:"\201C" "\201D"}
+.ideas-ranked{list-style:none;display:grid;gap:10px;max-width:44rem}
+.ideas-ranked li{display:flex;gap:14px;align-items:baseline;padding:12px 16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.ideas-ranked .votes{flex:none;min-width:5.5em;font-size:.875rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.ideas-ranked .votes b{font-size:1.25rem;color:var(--accent);font-weight:700}
+.team-tag{display:inline-block;margin-left:6px;font-size:.8125rem;font-weight:600;color:var(--muted)}
+.action .team-tag{margin-left:0;margin-top:4px}
+.action .marks{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px}
+.action .marks-label{font-size:.875rem;font-weight:600;color:var(--muted)}
+.steps-list{display:grid;gap:10px;padding-left:1.4em;max-width:44rem}
+table.scale{width:100%;max-width:56rem;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+table.scale th,table.scale td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line)}
+table.scale thead th{font-size:.875rem;color:var(--muted);font-weight:600}
+table.scale tbody th{font-weight:600}
+table.scale .meter{display:inline-flex;gap:4px;vertical-align:middle;margin-right:10px}
+table.scale .meter i{width:14px;height:14px;border-radius:3px;border:1.5px solid var(--accent)}
+table.scale .meter i.on{background:var(--accent)}
+table.scale .score{font-variant-numeric:tabular-nums;white-space:nowrap}
+.scale-key{margin-top:10px;font-size:.9375rem;color:var(--muted)}
+@media (max-width:600px){table.scale .meter{display:none}}

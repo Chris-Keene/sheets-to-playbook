@@ -9,6 +9,7 @@ the sheets-to-playbook skill (.claude/skills/sheets-to-playbook/SKILL.md) and in
     python3 ingest/ingest.py transcribe                   # Whisper, locally, on any voice notes (optional)
     python3 ingest/ingest.py status                       # coverage and blur, once labels.json exists
     python3 ingest/ingest.py brief [--table 7]            # the workshop's sheets, ids and file shape, for the readers
+    python3 ingest/ingest.py shape [--out session.json]   # an empty session.json for the workshop's page
     python3 ingest/ingest.py verify [--links]             # raw files + session.json: traceability, verbatim quotes, gaps, names
     python3 ingest/ingest.py review                       # review.html: every line next to its photos
     python3 ingest/ingest.py draft                        # the draft playbook, in the run folder
@@ -412,11 +413,11 @@ def raw_items(run, W=None):
         prefix = f"T{t:02d}."
         for sheet, key in W.raw_lists():
             for it in (d.get(sheet) or {}).get(key, []) or []:
-                add_item(items, problems, f.name, it, prefix, f"{sheet}.{key}", id_re, text_fields)
+                add_item(items, problems, f.name, it, prefix, f"{sheet}.{key}", id_re, (W.text_field(sheet, key),))
         for sheet, key in W.raw_singles():
             one = (d.get(sheet) or {}).get(key)
             if one:
-                add_item(items, problems, f.name, one, prefix, f"{sheet}.{key}", id_re, text_fields)
+                add_item(items, problems, f.name, one, prefix, f"{sheet}.{key}", id_re, (W.text_field(sheet, key),))
     for raw_file, key, prefix in W.card_sources():
         c = load(run / "raw" / raw_file)
         if c:
@@ -432,10 +433,11 @@ def add_item(items, problems, fname, it, prefix, kind, id_re, text_fields=("text
         return
     if iid in items:
         problems.append(f"{fname}: duplicate id {iid}")
-    text = next((it.get(f) for f in text_fields if it.get(f)), "")
-    if not text.strip():
+    # the box's own main field first (each box names it), then any other text field as a fallback
+    text = next((it.get(f) for f in tuple(text_fields) + ("text",) if it.get(f)), "")
+    if not str(text).strip():
         problems.append(f"{fname}: {iid} has no text")
-    items[iid] = dict(it, _kind=kind, _file=fname)
+    items[iid] = dict(it, _kind=kind, _file=fname, _text=text)
 
 
 def norm(s):
@@ -507,7 +509,7 @@ def verify(args):
             if need_src and not ids:
                 (errors if status_ == "final" else warnings).append(f"{where}: no src, so it can't be traced to a sheet")
             if verbatim and ids:
-                pool = [next((items[i].get(f) for f in W.text_fields() if items[i].get(f)), "") for i in ids if i in items]
+                pool = [items[i].get("_text", "") for i in ids if i in items]
                 pool += [items[i].get("excerpt", "") for i in ids if i in items]
                 pool += [transcripts.get(a, "") for a in transcripts]
                 best = max((similar(verbatim, p) for p in pool if p), default=0)
@@ -524,6 +526,22 @@ def verify(args):
             need = policy != "optional" and not (plain and spec.get("strings_ok"))
             verbatim = x.get(spec.get("field", "text")) if policy == "verbatim" and not plain else None
             walk(where, {} if plain else x, need_src=need, verbatim=verbatim, min_ratio=spec.get("min", 0.86))
+
+        # numbers and parts the page must copy exactly from the sheets: a sum of dot votes, a who and a by when
+        for spec, where, _owner, x in page_items(data, W):
+            if not isinstance(x, dict) or not (spec.get("sum") or spec.get("match")):
+                continue
+            found = [items[s] for s in srcs(x) if s in items]
+            if not found:
+                continue
+            if spec.get("sum"):
+                f = spec["sum"]
+                written = sum(int(it.get(f) or 0) for it in found if str(it.get(f) or 0).isdigit())
+                if (x.get(f) or 0) != written:
+                    errors.append(f"{where}: {x.get(f, 0)} {f} on the page, but the sheet{'s' if len(found) > 1 else ''} show{'' if len(found) > 1 else 's'} {written}")
+            for f in spec.get("match", []):
+                if x.get(f) not in (None, "") and similar(str(x[f]), str(found[0].get(f, ""))) < 0.8:
+                    errors.append(f"{where}: {f} \"{x[f]}\" isn't what the sheet says (\"{found[0].get(f, '')}\")")
 
         # the checks particular to this workshop (round tables: themes match Sheet 1, one page per table, card names)
         rules = W.rules()
@@ -742,7 +760,16 @@ def brief_text(W, table=7):
                 parts.append("Fields: " + ", ".join(f"`{f['key']}` ({f['label']})" for f in b["fields"]) + ".")
             if b.get("ticks"):
                 tk = b["ticks"]
-                parts.append(f"Ticks under \u201c{tk.get('label', '').rstrip(':')}\u201d go in `{tk['key']}`: " + ", ".join(f"`{o[0]}` ({o[1]})" if isinstance(o, list) else f"`{o}`" for o in tk["options"]) + ".")
+                opts = ", ".join(f"`{o[0]}` ({o[1]})" if isinstance(o, list) else f"`{o}`" for o in tk["options"])
+                if tk.get("single"):
+                    parts.append(f"Under \u201c{tk.get('label', '').rstrip(':')}\u201d each row ticks one box: its value goes in `{tk['key']}` as text ({opts}), or \"\" if none is ticked. Two ticks in one row: record both as \"2/3\" and add it to `unclear`.")
+                else:
+                    parts.append(f"Ticks under \u201c{tk.get('label', '').rstrip(':')}\u201d go in `{tk['key']}`: {opts}.")
+            if b.get("rows"):
+                first = b["fields"][0]
+                parts.append(f"The rows are printed ({'; '.join(b['rows'])}): every printed row gets an item, in order, with its printed words in `{first['key']}`, even if the rest of the row is blank.")
+            elif b.get("layout") == "table":
+                parts.append("The rows are numbered on the sheet: one item per row that has anything written in it, in that order.")
             if b.get("reader"):
                 parts.append(b["reader"])
             line = "- " + " ".join(parts)
@@ -760,7 +787,10 @@ def brief_text(W, table=7):
                 row = {"id": sid + "1"}
                 row.update({f["key"]: "..." for f in b.get("fields", [])})
                 if b.get("ticks"):
-                    row[b["ticks"]["key"]] = [b["ticks"]["options"][0][0] if isinstance(b["ticks"]["options"][0], list) else b["ticks"]["options"][0]]
+                    first = b["ticks"]["options"][0][0] if isinstance(b["ticks"]["options"][0], list) else b["ticks"]["options"][0]
+                    row[b["ticks"]["key"]] = first if b["ticks"].get("single") else [first]
+                if b.get("rows"):
+                    row[b["fields"][0]["key"]] = b["rows"][0]
                 section[b["key"]] = [row]
             elif b["type"] == "tally":
                 tally = {"tally": {o: 0 for o in b.get("options", [])[:2]}}
@@ -785,6 +815,24 @@ def brief_text(W, table=7):
 
 def brief(args):
     print(brief_text(workshop(args), args.table))
+
+
+def shape_of(W):
+    """An empty session.json for the workshop: meta, and an empty list for every part of its page."""
+    data = {"meta": {"status": "template", "edition": "Template", "title": "", "series": "", "event": "", "date": "",
+                     "tables": 3}}
+    for spec in W.output.get("paths", []):
+        data.setdefault(spec["path"].split("[]", 1)[0], [])
+    return data
+
+
+def shape(args):
+    text = json.dumps(shape_of(workshop(args)), indent=1, ensure_ascii=False) + "\n"
+    if args.out:
+        Path(args.out).write_text(text)
+        print(f"wrote {args.out}")
+    else:
+        print(text, end="")
 
 
 # ---------------------------------------------------------------- publish
@@ -826,6 +874,7 @@ def main():
     p.add_argument("--jobs", type=int, default=3); p.add_argument("--force", action="store_true"); p.set_defaults(fn=transcribe)
     p = sub.add_parser("status", help="coverage and blur per table, once labels.json is written", description="Coverage and blur per table, once labels.json is written."); p.add_argument("--run", help="run folder (default: runs/latest)"); p.add_argument("--tables", type=int, default=12, help="how many tables to expect (default 12)"); p.add_argument("--config", help="settings file (default: playbook.config.json)"); p.set_defaults(fn=status)
     p = sub.add_parser("brief", help="the workshop's sheets, ids and file shape, for the readers", description="Print the workshop's sheets, boxes, ids and the raw file's shape, generated from its format files. Give it to each reader with RAW_FORMAT.md."); p.add_argument("--table", type=int, default=7, help="the table number the examples use (default 7)"); p.add_argument("--config", help="settings file (default: playbook.config.json)"); p.set_defaults(fn=brief)
+    p = sub.add_parser("shape", help="an empty session.json for the workshop, to write the page into", description="Print (or --out) an empty session.json for the workshop: meta and an empty list for every part of its page."); p.add_argument("--out"); p.add_argument("--config", help="settings file (default: playbook.config.json)"); p.set_defaults(fn=shape)
     p = sub.add_parser("verify", help="check the raw files and session.json: traceability, verbatim quotes, gaps, names", description="Check the raw files and session.json: traceability, verbatim quotes, gaps, names."); p.add_argument("--run", help="run folder (default: runs/latest)"); p.add_argument("--data"); p.add_argument("--links", action="store_true")
     p.add_argument("--config", help="settings file (default: playbook.config.json)"); p.set_defaults(fn=verify)
     p = sub.add_parser("review", help="build review.html: every line next to its photos", description="Build review.html: every line next to its photos."); p.add_argument("--run", help="run folder (default: runs/latest)"); p.add_argument("--config", help="settings file (default: playbook.config.json)"); p.set_defaults(fn=review)

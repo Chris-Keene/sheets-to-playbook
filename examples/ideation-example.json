@@ -1,0 +1,86 @@
+{
+ "_note": "An example ideation session, invented to show the page: no real team.",
+ "meta": {
+  "status": "example",
+  "edition": "Example",
+  "title": "Making onboarding less of a slog",
+  "series": "Ideas Notes",
+  "event": "the onboarding ideas session",
+  "date": "Tuesday 8 December 2026",
+  "tables": 2,
+  "table_names": {
+   "1": "Blue",
+   "2": "Green"
+  }
+ },
+ "questions": [
+  {
+   "text": "How might we get new starters doing real work in their first week?",
+   "tables": [
+    1
+   ]
+  },
+  {
+   "text": "How might we stop new starters drowning in accounts and passwords?",
+   "tables": [
+    2
+   ]
+  }
+ ],
+ "ideas": [
+  {
+   "text": "A starter task picked before day one.",
+   "votes": 8,
+   "tables": [
+    1
+   ]
+  },
+  {
+   "text": "One login checklist, owned by one person.",
+   "votes": 6,
+   "tables": [
+    2
+   ]
+  },
+  {
+   "text": "A buddy for the first month.",
+   "votes": 5,
+   "tables": [
+    1,
+    2
+   ]
+  },
+  {
+   "text": "Record the welcome talk instead of repeating it.",
+   "votes": 2,
+   "tables": [
+    1
+   ]
+  },
+  {
+   "text": "A map of who to ask about what.",
+   "votes": 4,
+   "tables": [
+    2
+   ]
+  }
+ ],
+ "actions": [
+  {
+   "what": "Pick a starter task for the next two hires.",
+   "who": "Ana",
+   "when": "Before 4 January",
+   "tables": [
+    1
+   ]
+  },
+  {
+   "what": "Write the one login checklist.",
+   "who": "Tom",
+   "when": "End of December",
+   "tables": [
+    2
+   ]
+  }
+ ]
+}

@@ -1,0 +1,78 @@
+{
+ "id": "scale",
+ "title": "Where are we today?",
+ "boxes": [
+  {
+   "id": "areas",
+   "type": "row",
+   "layout": "table",
+   "key": "areas",
+   "stem": "area",
+   "count": 6,
+   "label": "Area {n}",
+   "title": "Score each area",
+   "text_field": "area",
+   "hint": "1 is not started, 5 is fully in place.",
+   "fields": [
+    {
+     "key": "area",
+     "label": "Area",
+     "share": 2
+    },
+    {
+     "key": "because",
+     "label": "Why this score",
+     "share": 4
+    }
+   ],
+   "ticks": {
+    "key": "score",
+    "label": "Score:",
+    "single": true,
+    "options": [
+     [
+      "1",
+      "1"
+     ],
+     [
+      "2",
+      "2"
+     ],
+     [
+      "3",
+      "3"
+     ],
+     [
+      "4",
+      "4"
+     ],
+     [
+      "5",
+      "5"
+     ]
+    ]
+   },
+   "low": "not started",
+   "high": "fully in place"
+  }
+ ],
+ "print": {
+  "rows": [
+   {
+    "height": "grow",
+    "cells": [
+     {
+      "box": "areas"
+     }
+    ]
+   }
+  ]
+ },
+ "slide": {
+  "prompt": "Agree a score for each area, and say why in a few words.",
+  "notes": [
+   "Agree one score per row: if the table can't agree, write both scores and talk about the difference.",
+   "The why matters more than the number."
+  ]
+ }
+}

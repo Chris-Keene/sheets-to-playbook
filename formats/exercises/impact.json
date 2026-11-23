@@ -1,0 +1,50 @@
+{
+ "id": "impact",
+ "title": "Who does this change affect?",
+ "boxes": [
+  {
+   "id": "impacts",
+   "type": "row",
+   "key": "impacts",
+   "stem": "impact",
+   "count": 4,
+   "label": "Change {n}",
+   "text_field": "change",
+   "fields": [
+    {
+     "key": "change",
+     "label": "What changes",
+     "share": 3
+    },
+    {
+     "key": "whom",
+     "label": "For whom",
+     "share": 2
+    },
+    {
+     "key": "need",
+     "label": "What they'll need",
+     "share": 3
+    }
+   ]
+  }
+ ],
+ "print": {
+  "rows": [
+   {
+    "height": "grow",
+    "cells": [
+     {
+      "box": "impacts"
+     }
+    ]
+   }
+  ]
+ },
+ "slide": {
+  "prompt": "For each change: what changes, for whom, and what they'll need to make it work.",
+  "notes": [
+   "Think about the people who lose something, not just the ones who gain."
+  ]
+ }
+}

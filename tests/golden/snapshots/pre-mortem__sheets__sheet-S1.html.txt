@@ -1,0 +1,113 @@
+## text
+Sheet 1 of the paper kit. Type into it on screen, or print it on A4. From the Workshop Notes kit · Print-ready PDF.
+
+Question 1
+
+Imagine it failed. What went wrong?
+Team
+Risks
+Risk 1
+What could go wrong
+What we'd do about it
+How likely
+Low
+Medium
+High
+Risk 2
+What could go wrong
+What we'd do about it
+How likely
+Low
+Medium
+High
+Risk 3
+What could go wrong
+What we'd do about it
+How likely
+Low
+Medium
+High
+Risk 4
+What could go wrong
+What we'd do about it
+How likely
+Low
+Medium
+High
+Risk 5
+What could go wrong
+What we'd do about it
+How likely
+Low
+Medium
+High
+Workshop Notes
+All of this goes into the Workshop Notes.
+S1 · Team
+
+## accessibility tree
+note
+main
+heading[1] "Imagine it failed. What went wrong?"
+LabelText
+textbox "Team"
+region "Risks"
+sectionfooter
+link "Print-ready PDF"
+heading[2] "Risks"
+group "Risk 1"
+group "Risk 2"
+group "Risk 3"
+group "Risk 4"
+group "Risk 5"
+image "Workshop Notes"
+Legend
+LabelText
+LabelText
+group "How likely"
+Legend
+LabelText
+LabelText
+group "How likely"
+Legend
+LabelText
+LabelText
+group "How likely"
+Legend
+LabelText
+LabelText
+group "How likely"
+Legend
+LabelText
+LabelText
+group "How likely"
+textbox "What could go wrong"
+textbox "What we'd do about it"
+Legend
+radio "Low"
+radio "Medium"
+radio "High"
+textbox "What could go wrong"
+textbox "What we'd do about it"
+Legend
+radio "Low"
+radio "Medium"
+radio "High"
+textbox "What could go wrong"
+textbox "What we'd do about it"
+Legend
+radio "Low"
+radio "Medium"
+radio "High"
+textbox "What could go wrong"
+textbox "What we'd do about it"
+Legend
+radio "Low"
+radio "Medium"
+radio "High"
+textbox "What could go wrong"
+textbox "What we'd do about it"
+Legend
+radio "Low"
+radio "Medium"
+radio "High"

@@ -1,0 +1,146 @@
+{
+ "_note": "An example business change session, invented to show the page: no real organisation.",
+ "meta": {
+  "status": "example",
+  "edition": "Example",
+  "title": "Moving support to the new ticketing system",
+  "series": "Change Notes",
+  "event": "the ticketing change workshop",
+  "date": "Wednesday 9 December 2026",
+  "tables": 2
+ },
+ "impacts": [
+  {
+   "change": "Tickets move to the new system on 1 February.",
+   "whom": "Support agents",
+   "need": "Two weeks of practice on real tickets.",
+   "tables": [
+    1
+   ]
+  },
+  {
+   "change": "Customers get a new help form.",
+   "whom": "Customers",
+   "need": "A clear notice and the old email still working for a month.",
+   "tables": [
+    2
+   ]
+  },
+  {
+   "change": "Weekly reports come from the new dashboards.",
+   "whom": "Team leads",
+   "need": "The same numbers they use today.",
+   "tables": [
+    1
+   ]
+  }
+ ],
+ "people": [
+  {
+   "person": "Support agents",
+   "role": "Use it every day",
+   "need": "Training before go-live",
+   "influence": "medium",
+   "tables": [
+    1,
+    2
+   ]
+  },
+  {
+   "person": "Head of support",
+   "role": "Signs off go-live",
+   "need": "Proof the reports match",
+   "influence": "high",
+   "tables": [
+    1
+   ]
+  },
+  {
+   "person": "IT",
+   "role": "Runs the migration",
+   "need": "A frozen ticket backlog for the weekend",
+   "influence": "high",
+   "tables": [
+    2
+   ]
+  }
+ ],
+ "readiness": [
+  {
+   "area": "Leadership backing",
+   "score": 4,
+   "because": "Agreed and funded.",
+   "tables": [
+    1
+   ]
+  },
+  {
+   "area": "Communication",
+   "score": 2,
+   "because": "Nothing sent to customers yet.",
+   "tables": [
+    1
+   ]
+  },
+  {
+   "area": "Skills and training",
+   "score": 1,
+   "because": "No training planned.",
+   "tables": [
+    1
+   ]
+  },
+  {
+   "area": "Tools and process",
+   "score": 3,
+   "because": "System set up, workflows half done.",
+   "tables": [
+    1
+   ]
+  },
+  {
+   "area": "Support after go-live",
+   "score": 2,
+   "because": "No floor walkers yet.",
+   "tables": [
+    1
+   ]
+  }
+ ],
+ "risks": [
+  {
+   "risk": "Reports don’t match the old numbers.",
+   "mitigation": "Run both side by side for a month.",
+   "likelihood": "high",
+   "tables": [
+    1
+   ]
+  },
+  {
+   "risk": "Agents fall back to the old inbox.",
+   "mitigation": "Switch the old inbox to read-only.",
+   "likelihood": "medium",
+   "tables": [
+    2
+   ]
+  }
+ ],
+ "actions": [
+  {
+   "what": "Plan two weeks of training on real tickets.",
+   "who": "Priya",
+   "when": "Before 18 January",
+   "tables": [
+    1
+   ]
+  },
+  {
+   "what": "Draft the customer notice.",
+   "who": "Marc",
+   "when": "Friday",
+   "tables": [
+    2
+   ]
+  }
+ ]
+}

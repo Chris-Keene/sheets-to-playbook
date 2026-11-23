@@ -1,0 +1,68 @@
+## text
+Sheet 1 of the paper kit. Type into it on screen, or print it on A4. From the Workshop Notes kit · Print-ready PDF.
+
+Question 1
+
+Who does this change affect?
+Table
+Change 1
+What changes
+For whom
+What they'll need
+Change 2
+What changes
+For whom
+What they'll need
+Change 3
+What changes
+For whom
+What they'll need
+Change 4
+What changes
+For whom
+What they'll need
+Workshop Notes
+All of this goes into the Workshop Notes.
+S1 · Table
+
+## accessibility tree
+note
+main
+heading[1] "Who does this change affect?"
+LabelText
+textbox "Table"
+region "Change 1"
+region "Change 2"
+region "Change 3"
+region "Change 4"
+sectionfooter
+link "Print-ready PDF"
+heading[2] "Change 1"
+LabelText
+textbox "What changes"
+LabelText
+textbox "For whom"
+LabelText
+textbox "What they'll need"
+heading[2] "Change 2"
+LabelText
+textbox "What changes"
+LabelText
+textbox "For whom"
+LabelText
+textbox "What they'll need"
+heading[2] "Change 3"
+LabelText
+textbox "What changes"
+LabelText
+textbox "For whom"
+LabelText
+textbox "What they'll need"
+heading[2] "Change 4"
+LabelText
+textbox "What changes"
+LabelText
+textbox "For whom"
+LabelText
+textbox "What they'll need"
+image "Workshop Notes"

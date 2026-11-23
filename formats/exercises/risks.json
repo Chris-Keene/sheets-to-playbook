@@ -1,0 +1,66 @@
+{
+ "id": "risks",
+ "title": "What could go wrong?",
+ "boxes": [
+  {
+   "id": "risks",
+   "type": "row",
+   "layout": "table",
+   "key": "risks",
+   "stem": "risk",
+   "count": 5,
+   "label": "Risk {n}",
+   "title": "Risks",
+   "text_field": "risk",
+   "fields": [
+    {
+     "key": "risk",
+     "label": "What could go wrong",
+     "share": 3
+    },
+    {
+     "key": "mitigation",
+     "label": "What we'd do about it",
+     "share": 3
+    }
+   ],
+   "ticks": {
+    "key": "likelihood",
+    "label": "How likely:",
+    "single": true,
+    "options": [
+     [
+      "low",
+      "Low"
+     ],
+     [
+      "medium",
+      "Medium"
+     ],
+     [
+      "high",
+      "High"
+     ]
+    ]
+   }
+  }
+ ],
+ "print": {
+  "rows": [
+   {
+    "height": "grow",
+    "cells": [
+     {
+      "box": "risks"
+     }
+    ]
+   }
+  ]
+ },
+ "slide": {
+  "prompt": "One risk per row: what could go wrong, what you'd do about it, and how likely it is.",
+  "notes": [
+   "Specific beats general: “the test team is moved to another project”, not “resourcing”."
+  ]
+ }
+}

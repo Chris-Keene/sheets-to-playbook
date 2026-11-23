@@ -1,0 +1,56 @@
+## text
+--- slide 1
+Workshop Notes
+ Workshop
+ Welcome to the session. Great to have you here!
+ Minutes 0 to 5: the welcome, up to Question 1.
+ The session at a glance (40 minutes), in minutes from the start:
+ 0 to 5: welcome5 to 25: Question 1, Imagine it failed. What went wrong? (20 minutes)25 to 35: Question 2, What we'll do about it (10 minutes)35 to 40: what happens next, and close
+ Afterwards, allow 10 minutes or so to photograph every sheet.
+--- slide 2
+How it works
+ From your sheets to the Workshop Notes
+ Talk and writeEach team fills in a sheet for each question. Anyone can speak; one person writes.
+ We photograph the sheetsSheets only, never people. Nothing is recorded.
+ AI reads, people checkAI reads every sheet. People check each line against the photos before anything goes out.
+ The Workshop Notes arrivesSoon after today. We’ll send it round.
+ The last of the welcome: Question 1 starts at minute 5.
+ Thick black markers only, so the photos are readable.
+--- slide 3
+Question 1·, Sheet 1
+ 20:00Start timer
+ Imagine it failed. What went wrong?
+ What could go wrongWhat we'd do about it
+ Question 1It’s six months from now and the project has failed. One reason per row: what went wrong, what we’d do about it, how likely it is.
+ Imagine it failed. What went wrong?What we'll do about it
+ Minutes 5 to 25. Read the question out in full. 20 minutes.
+ Say it as if it has already happened: “the launch slipped because…”. It gets more honest answers than “what might go wrong?”.Write first, talk second: two minutes of quiet writing before anyone shares.
+--- slide 4
+Question 2·, Sheet 2
+ 10:00Start timer
+ What we'll do about it
+ What we'll doWhoBy when
+ Question 2Pick the ideas you'll actually do. Every action needs a who and a by when.
+ Imagine it failed. What went wrong?What we'll do about it
+ Minutes 25 to 35. Read the question out in full. 10 minutes.
+ Fewer, owned actions beat a long list. Two or three is plenty.“Who” is one person, even when a group helps.
+--- slide 5
+Workshop Notes
+ Thank you
+ We’ll send the Workshop Notes round soon after today.
+ Built with sheets-to-playbook by Chris Keene
+ Minutes 35 to 40: what happens next, and thank you.
+ Afterwards, photograph every sheet before anyone takes them down.
+--- slide 6
+
+## accessibility tree
+heading[1] "Workshop slides"
+main
+toolbar "Slide controls"
+region "Welcome"
+button "Previous"
+button "Next"
+button "Notes"
+button "Full screen"
+image "Workshop Notes"
+heading[2] "Workshop"

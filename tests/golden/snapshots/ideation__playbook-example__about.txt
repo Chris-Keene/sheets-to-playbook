@@ -1,0 +1,56 @@
+## text
+How it was made, Ideas Notes
+
+Skip to content
+Ideas
+Notes
+Notes
+Actions
+How it was made
+
+Example, not from the session
+
+HOW IT WAS MADE
+
+How these notes were made
+
+Each team wrote on 2 paper sheets during the session. Afterwards the sheets were photographed, the handwriting was read with the help of AI, and a person checked every uncertain word against the photos.
+
+2 questions
+What could we try? How might we…, Ideas.
+What we'll do Action.
+Nothing added
+
+Every line here traces back to a sheet: nothing was added, and anything quoted is word for word. Numbers, like votes or scores, are what was written on the paper. If a word couldn’t be read for certain, a person checked it against the photo.
+
+Ideas Notes: Making onboarding less of a slog · Example
+
+Download these notes ·
+Built with sheets-to-playbook by Chris Keene
+
+## accessibility tree
+link "Skip to content"
+banner
+main
+contentinfo
+link "Ideas Notes"
+navigation "Playbook"
+heading[1] "How these notes were made"
+region "2 questions"
+region "Nothing added"
+list
+heading[2] "2 questions"
+list
+heading[2] "Nothing added"
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+listitem[1]
+button "Download these notes"
+link "Built with sheets-to-playbook by Chris Keene"
+link "Notes"
+link "Actions"
+link "How it was made"
+ListMarker "1."
+ListMarker "2."

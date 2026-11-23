@@ -1,0 +1,121 @@
+## text
+Sheet 3 of the paper kit. Type into it on screen, or print it on A4. From the Workshop Notes kit · Print-ready PDF.
+
+Question 3
+
+How ready are we?
+Table
+Score each area
+
+1 is not started, 5 is ready to go.
+
+Leadership backing
+Why this score
+Score
+1
+2
+3
+4
+5
+Communication
+Why this score
+Score
+1
+2
+3
+4
+5
+Skills and training
+Why this score
+Score
+1
+2
+3
+4
+5
+Tools and process
+Why this score
+Score
+1
+2
+3
+4
+5
+Support after go-live
+Why this score
+Score
+1
+2
+3
+4
+5
+Workshop Notes
+All of this goes into the Workshop Notes.
+S3 · Table
+
+## accessibility tree
+note
+main
+heading[1] "How ready are we?"
+LabelText
+textbox "Table"
+region "Score each area"
+sectionfooter
+link "Print-ready PDF"
+heading[2] "Score each area"
+group "Leadership backing"
+group "Communication"
+group "Skills and training"
+group "Tools and process"
+group "Support after go-live"
+image "Workshop Notes"
+Legend
+LabelText
+group "Score"
+Legend
+LabelText
+group "Score"
+Legend
+LabelText
+group "Score"
+Legend
+LabelText
+group "Score"
+Legend
+LabelText
+group "Score"
+textbox "Why this score"
+Legend
+radio "1"
+radio "2"
+radio "3"
+radio "4"
+radio "5"
+textbox "Why this score"
+Legend
+radio "1"
+radio "2"
+radio "3"
+radio "4"
+radio "5"
+textbox "Why this score"
+Legend
+radio "1"
+radio "2"
+radio "3"
+radio "4"
+radio "5"
+textbox "Why this score"
+Legend
+radio "1"
+radio "2"
+radio "3"
+radio "4"
+radio "5"
+textbox "Why this score"
+Legend
+radio "1"
+radio "2"
+radio "3"
+radio "4"
+radio "5"

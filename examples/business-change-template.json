@@ -1,0 +1,17 @@
+{
+ "_note": "The shape of a business change session.json (also: ingest.py shape).",
+ "meta": {
+  "status": "template",
+  "edition": "Template",
+  "title": "Business change",
+  "series": "Change Notes",
+  "event": "",
+  "date": "",
+  "tables": 3
+ },
+ "impacts": [],
+ "people": [],
+ "readiness": [],
+ "risks": [],
+ "actions": []
+}

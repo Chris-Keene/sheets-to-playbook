@@ -1,0 +1,240 @@
+{
+ "_note": "What the business change notes hold, and how ingest.py verify checks each part (policies: see round-tables/output.json; sum: a number that must equal the sheets'; match: fields copied exactly). page: the generic page's layout (build/views-generic.js).",
+ "paths": [
+  {
+   "path": "impacts[]",
+   "label": "change {n}",
+   "section": "What changes",
+   "policy": "trace",
+   "review": {
+    "fields": [
+     "change",
+     "whom",
+     "need"
+    ],
+    "key": "impact-{src}"
+   }
+  },
+  {
+   "path": "people[]",
+   "label": "person {n}",
+   "section": "People",
+   "policy": "trace",
+   "match": [
+    "influence"
+   ],
+   "review": {
+    "fields": [
+     "person",
+     "role",
+     "need"
+    ],
+    "key": "person-{src}"
+   }
+  },
+  {
+   "path": "readiness[]",
+   "label": "readiness {n}",
+   "section": "Readiness",
+   "policy": "trace",
+   "match": [
+    "score"
+   ],
+   "review": {
+    "fields": [
+     "because"
+    ],
+    "key": "ready-{src}"
+   }
+  },
+  {
+   "path": "risks[]",
+   "label": "risk {n}",
+   "section": "Risks",
+   "policy": "trace",
+   "match": [
+    "likelihood"
+   ],
+   "review": {
+    "fields": [
+     "risk",
+     "mitigation"
+    ],
+    "key": "risk-{src}"
+   }
+  },
+  {
+   "path": "actions[]",
+   "label": "action {n}",
+   "section": "Actions",
+   "policy": "trace",
+   "match": [
+    "who",
+    "when"
+   ],
+   "review": {
+    "fields": [
+     "what",
+     "who",
+     "when"
+    ],
+    "key": "action-{src}"
+   }
+  }
+ ],
+ "review_order": [
+  "impacts[]",
+  "people[]",
+  "readiness[]",
+  "risks[]",
+  "actions[]"
+ ],
+ "not_on_page": [],
+ "roles": {},
+ "required_when_final": [
+  "impacts",
+  "actions"
+ ],
+ "page": {
+  "counts": [
+   [
+    "impacts",
+    "change"
+   ],
+   [
+    "people",
+    "person or team",
+    "people and teams"
+   ],
+   [
+    "risks",
+    "risk"
+   ],
+   [
+    "actions",
+    "action"
+   ]
+  ],
+  "sections": [
+   {
+    "id": "changes",
+    "type": "cards",
+    "title": "What changes, and for whom",
+    "path": "impacts",
+    "title_field": "change",
+    "fields": [
+     [
+      "whom",
+      "For whom"
+     ],
+     [
+      "need",
+      "What they’ll need"
+     ]
+    ],
+    "from": "From the first sheet: what changes, for whom, and what they’ll need."
+   },
+   {
+    "id": "people",
+    "type": "cards",
+    "title": "Who needs to be involved",
+    "path": "people",
+    "title_field": "person",
+    "fields": [
+     [
+      "role",
+      "Their part in it"
+     ],
+     [
+      "need",
+      "What they need from this"
+     ]
+    ],
+    "ticks": {
+     "key": "influence",
+     "label": "Influence",
+     "labels": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+     }
+    },
+    "sort": {
+     "field": "influence",
+     "order": [
+      "high",
+      "medium",
+      "low"
+     ]
+    },
+    "from": "From the people sheet."
+   },
+   {
+    "id": "readiness",
+    "type": "scale",
+    "title": "How ready are we?",
+    "path": "readiness",
+    "area": "area",
+    "score": "score",
+    "note": "because",
+    "max": 5,
+    "low": "not started",
+    "high": "ready to go",
+    "area_label": "Area",
+    "note_label": "Why this score",
+    "from": "From the readiness sheet: a score for each area, and why."
+   },
+   {
+    "id": "risks",
+    "type": "cards",
+    "title": "What could go wrong",
+    "path": "risks",
+    "title_field": "risk",
+    "fields": [
+     [
+      "mitigation",
+      "What we’d do about it"
+     ]
+    ],
+    "ticks": {
+     "key": "likelihood",
+     "label": "How likely",
+     "labels": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+     }
+    },
+    "sort": {
+     "field": "likelihood",
+     "order": [
+      "high",
+      "medium",
+      "low"
+     ]
+    },
+    "from": "From the risks sheet."
+   },
+   {
+    "id": "actions",
+    "type": "cards",
+    "title": "What we’ll do",
+    "path": "actions",
+    "title_field": "what",
+    "fields": [
+     [
+      "who",
+      "Who"
+     ],
+     [
+      "when",
+      "By when"
+     ]
+    ],
+    "nav": true,
+    "intro": "Each action with who and by when, as written on the sheet.",
+    "from": "From the actions sheet: what we’ll do, who and by when."
+   }
+  ]
+ }
+}

@@ -1,0 +1,149 @@
+## text
+Sheet 2 of the paper kit. Type into it on screen, or print it on A4. From the Workshop Notes kit · Print-ready PDF.
+
+Question 2
+
+Who needs to be involved?
+Table
+People and teams
+Person 1
+Who
+Their part in it
+What they need from this
+Influence
+Low
+Medium
+High
+Person 2
+Who
+Their part in it
+What they need from this
+Influence
+Low
+Medium
+High
+Person 3
+Who
+Their part in it
+What they need from this
+Influence
+Low
+Medium
+High
+Person 4
+Who
+Their part in it
+What they need from this
+Influence
+Low
+Medium
+High
+Person 5
+Who
+Their part in it
+What they need from this
+Influence
+Low
+Medium
+High
+Person 6
+Who
+Their part in it
+What they need from this
+Influence
+Low
+Medium
+High
+Workshop Notes
+All of this goes into the Workshop Notes.
+S2 · Table
+
+## accessibility tree
+note
+main
+heading[1] "Who needs to be involved?"
+LabelText
+textbox "Table"
+region "People and teams"
+sectionfooter
+link "Print-ready PDF"
+heading[2] "People and teams"
+group "Person 1"
+group "Person 2"
+group "Person 3"
+group "Person 4"
+group "Person 5"
+group "Person 6"
+image "Workshop Notes"
+Legend
+LabelText
+LabelText
+LabelText
+group "Influence"
+Legend
+LabelText
+LabelText
+LabelText
+group "Influence"
+Legend
+LabelText
+LabelText
+LabelText
+group "Influence"
+Legend
+LabelText
+LabelText
+LabelText
+group "Influence"
+Legend
+LabelText
+LabelText
+LabelText
+group "Influence"
+Legend
+LabelText
+LabelText
+LabelText
+group "Influence"
+textbox "Who"
+textbox "Their part in it"
+textbox "What they need from this"
+Legend
+radio "Low"
+radio "Medium"
+radio "High"
+textbox "Who"
+textbox "Their part in it"
+textbox "What they need from this"
+Legend
+radio "Low"
+radio "Medium"
+radio "High"
+textbox "Who"
+textbox "Their part in it"
+textbox "What they need from this"
+Legend
+radio "Low"
+radio "Medium"
+radio "High"
+textbox "Who"
+textbox "Their part in it"
+textbox "What they need from this"
+Legend
+radio "Low"
+radio "Medium"
+radio "High"
+textbox "Who"
+textbox "Their part in it"
+textbox "What they need from this"
+Legend
+radio "Low"
+radio "Medium"
+radio "High"
+textbox "Who"
+textbox "Their part in it"
+textbox "What they need from this"
+Legend
+radio "Low"
+radio "Medium"
+radio "High"
