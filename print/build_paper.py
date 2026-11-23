@@ -66,7 +66,7 @@ def kit_settings(cfg, qr_url, W=None):
     ink = lambda name, hexval: tuple(exact[name]) if exact.get(name) else config.hex_to_cmyk(hexval)
     k = SimpleNamespace(warnings=[])
     k.accent = ink("accent", acc)                         # header band, circle, logo
-    k.highlight = ink("highlight", hi)                    # the commitment card
+    k.highlight = ink("highlight", hi)                    # the highlight colour (labels on the band)
     k.tint = config.hex_to_cmyk(config.mix(acc, "#ffffff", 0.93))   # pale fill for the optional boxes
     on_band = max(("#ffffff", "#000000"), key=lambda c: config.contrast(c, acc))
     k.on_band = config.hex_to_cmyk(on_band)
@@ -74,12 +74,13 @@ def kit_settings(cfg, qr_url, W=None):
     # text in the brand colour, darkened only if the accent is too light to read on white paper
     acc_text = readable(acc, "#ffffff")
     k.accent_text = k.accent if acc_text == acc else config.hex_to_cmyk(acc_text)
-    card_prompt = readable(acc, hi)
+    # the commitment card is white (print it on coloured card if you like), so its colours are chosen for white
+    card_prompt = readable(acc, "#ffffff")
     k.card_prompt = k.accent if card_prompt == acc else config.hex_to_cmyk(card_prompt)
     # the dashed box edges: a grey with a hint of the brand, at least 3:1 against both white and the tint
     k.dash = config.hex_to_cmyk(readable(config.mix(acc, "#808080", 0.55), config.mix(acc, "#ffffff", 0.93), 3.0))
     # the card's small print is black, unless the highlight is too dark for it (then no ink: the paper shows through)
-    k.card_ink = BLACK if config.contrast("#000000", hi) >= 4.5 else WHITE
+    k.card_ink = BLACK
     k.logo = config.logo_path(cfg, "secondary") or config.logo_path(cfg, "primary")
     # a logo in its own colours keeps them on paper too (each shape's fill, converted to CMYK); otherwise it's
     # printed in the accent colour
@@ -414,9 +415,10 @@ def commitment_card(k):
     p = Page(*A5L, BLEED)
     W, H = A5L
     half = W / 2
-    p.rect("art", -BLEED, -BLEED, W + 2 * BLEED, H + 2 * BLEED, fill=k.highlight)
-    # the perforation is a die line for the printer, never ink
+    # white, with no ink behind it: print it on whatever colour of card you like
+    # the perforation is a die line for the printer, never ink; the dashed guide shows where to tear without one
     p.line("perf", half, -BLEED, half, H + BLEED, spot="CSPerf", stroke=True, width=0.25)
+    p.line("art", half, 4, half, H - 4, stroke=RULE, width=0.3, dash=(2, 1.5))
     pad = 9
     prompt = "One thing I will try, adapt or explore is…"
     bottom = H - pad                     # both halves' bottom blocks end here, so they line up across the perforation

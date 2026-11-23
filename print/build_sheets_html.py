@@ -94,7 +94,7 @@ svg.logo{overflow:visible;max-width:100%}
 .foot .code span{display:inline-block;width:56px;border-bottom:1.5px solid var(--ink);margin-left:6px}
 @media (min-width:720px){.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:1fr 1fr 1fr}.s1-bottom{grid-template-columns:1fr 1fr}}
 /* commitment card: two halves, torn apart along the perforation */
-.card{display:grid;grid-template-columns:1fr;background:var(--highlight);color:var(--on-highlight);border-radius:6px;max-width:980px;margin:20px auto;box-shadow:0 1px 6px rgba(0,0,0,.12)}
+.card{display:grid;grid-template-columns:1fr;background:var(--paper);color:var(--ink);border-radius:6px;max-width:980px;margin:20px auto;box-shadow:0 1px 6px rgba(0,0,0,.12)}
 @media (min-width:720px){.card{grid-template-columns:1fr 1fr}.card .half + .half{border-left:2px dashed var(--card-accent)}}
 .card .half{padding:22px 24px;display:flex;flex-direction:column;gap:10px;min-width:0}
 .card .half + .half{border-top:2px dashed var(--card-accent)}
@@ -163,11 +163,10 @@ def colours(cfg):
         "--band": L["--band"],
         "--on-band": L["--on-band"],
         "--band-accent": L["--band-accent"],
-        "--highlight": L["--yellow"],
-        "--on-highlight": L["--on-yellow"],
-        "--card-accent": readable(L["--accent"], L["--yellow"]),
-        "--card-lines": readable("#7a6f80", L["--yellow"], 3),   # the card's own greys, darker than the sheet's to show on a highlight
-        "--card-rule": readable("#5d5363", L["--yellow"], 3),
+        # the commitment card is white (people can print it on coloured card), so its colours are chosen for white
+        "--card-accent": readable(L["--accent"], "#ffffff"),
+        "--card-lines": readable("#7a6f80", "#ffffff", 3),
+        "--card-rule": readable("#5d5363", "#ffffff", 3),
         "--hint": "#4d4655",
         "--rule": "#8a8291",
         "--focus": "#0b57d0",

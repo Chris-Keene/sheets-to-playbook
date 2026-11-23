@@ -20,6 +20,7 @@ Many workshops, not one. The kit was built around the four round-table sheets; n
 - `verify`, the review page, the review app and `apply_review` follow the workshop's page paths instead of naming round tables' sections. Private workshops allow names (personal details are warnings there).
 - Editing a word-for-word line in the review app now updates its transcription wherever it was written (a quote written on Sheet 2 used to keep its old raw text, so `verify` then failed it).
 - A challenge can no longer have the id `challenges`, which the page's address for the challenge list would have hidden.
+- **The commitment card is white** in print, in its fill-in page and on the slide that shows it, so you can print it on whatever colour of card you like. Its prompt and logo keep the brand colours; the print file adds a light dashed guide on the perforation, for printing without one.
 - The golden test covers four settings (default, CAN, a branded test with a two-colour logo, and retro).
 
 ## 1.1.0 (20 November 2026)
