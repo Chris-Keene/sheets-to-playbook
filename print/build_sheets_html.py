@@ -184,7 +184,7 @@ def colours(cfg):
 
 
 def settings(cfg, tables, W=None):
-    o, pb = cfg["org"], cfg["playbook"]
+    pb = cfg["playbook"]
     W = W or formats.load(cfg)
     url = (pb.get("url") or "").strip()
     if url and "://" not in url:
@@ -194,8 +194,8 @@ def settings(cfg, tables, W=None):
         cfg=cfg, tables=tables, name=pb["name"], url=url,
         address=(u.netloc + u.path).rstrip("/") if url else "",
         home=url.rstrip("/") + "/#kit" if url else "",
-        # the logo's accessible name: the organisation's full name, or whatever the wordmark says
-        label=f"{o['name']} ({o['short']})" if o["name"] and o["short"] else (o["name"] or o["short"] or pb["name"]),
+        # the logo's accessible name, as on the playbook (one name when the full and short names match)
+        label=playbook.brand_label(cfg),
         css=":root{color-scheme:light;" + "".join(f"{k}:{v};" for k, v in colours(cfg).items()) + "}",
         workshop=W, group=W.group.capitalize(), public=W.privacy == "public",
     )

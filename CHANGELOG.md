@@ -2,6 +2,11 @@
 
 Versions follow [SemVer](https://semver.org/): a new feature or changed behaviour bumps the minor version, a fix the patch.
 
+## 2.0.1 (27 November 2026)
+
+### Fixed
+- The fill-in sheets named the logo twice ("Acme (Acme)") when the organisation's full and short names are the same. They now use the playbook's rule: one name.
+
 ## 2.0.0 (27 November 2026)
 
 Many workshops, not one. The kit was built around the four round-table sheets; now each workshop is an agenda of exercises, and every part of the kit follows it. Round tables come out exactly as before (checked by the golden test: every page, PDF and slide unchanged).
