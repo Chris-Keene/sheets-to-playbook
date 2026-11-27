@@ -7,7 +7,7 @@
 Each page matches its printed sheet (same words, colours and layout), and every box is a labelled text box, so a page
 can be filled in on screen (an online table, a screen reader user) or printed on A4. The wording is copied from
 print/build_paper.py: change it there and here together. One self-contained file per sheet: fonts and logo inline.
-Names, colours, logo and the playbook's address come from the settings file. v1.1.0
+Names, colours, logo and the playbook's address come from the settings file. v2.0.0
 """
 import argparse, html, sys
 from pathlib import Path

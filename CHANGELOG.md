@@ -2,7 +2,7 @@
 
 Versions follow [SemVer](https://semver.org/): a new feature or changed behaviour bumps the minor version, a fix the patch.
 
-## 2.0.0 (unreleased)
+## 2.0.0 (27 November 2026)
 
 Many workshops, not one. The kit was built around the four round-table sheets; now each workshop is an agenda of exercises, and every part of the kit follows it. Round tables come out exactly as before (checked by the golden test: every page, PDF and slide unchanged).
 
@@ -12,7 +12,7 @@ Many workshops, not one. The kit was built around the four round-table sheets; n
 - **Sheets, fill-in pages and slides drawn from an exercise's boxes**: text, list, ranked, tally, row, list+votes and name. Slides for a workshop come from its agenda: a welcome with the plan, how it works, one slide per question with its own timer, the sheet's boxes, a progress rail and facilitator notes, and a thank-you. Round tables keep their hand-made sheets and slides.
 - **Box positions beside every sheet** (`sheet-<code>-A1.layout.json`), so tests and tools can find any box in a photo.
 - `ingest.py brief`: each workshop's sheets, boxes, ids and file shape for the readers, generated from its exercises. `RAW_FORMAT.md` now holds only the rules every workshop shares; round tables' shaping rules are in its `recipe.md`.
-- **A generic notes page** (`build/views-generic.js`) for any workshop without its own views: laid out from its `output.json` (lists side by side, ideas ranked by votes, cards with labelled parts and ticks, 1 to 5 score tables, quotes, lists), with header links to its sections and a "How it was made" page from the agenda.
+- **A generic notes page** (`build/views-generic.js`) for any workshop without its own views: laid out from its `output.json` (lists side by side, ideas ranked by votes, cards with labelled parts and ticks, 1 to 5 score tables that can name a band for each score, quotes, lists), with header links to its sections and a "How it was made" page from the agenda.
 - **Seven more exercises**: pains (how it works today, what gets in the way, top three), now-next-later, risks, stakeholders, success-criteria, scale and impact. Row boxes can be one table with printed row labels (a scale's areas) and single-choice ticks. An agenda can reword an exercise's boxes and slide.
 - **Three more workshops**: ideation, pre-mortem and business-change, each with an example, a template and a recipe.
 - Checks any workshop can declare: a sum that must match the sheets (dot votes), fields copied exactly (who, by when, a score, a likelihood), what a final page must have. `ingest.py shape` prints an empty session for a workshop.
@@ -26,7 +26,7 @@ Many workshops, not one. The kit was built around the four round-table sheets; n
 - Editing a word-for-word line in the review app now updates its transcription wherever it was written (a quote written on Sheet 2 used to keep its old raw text, so `verify` then failed it).
 - A challenge can no longer have the id `challenges`, which the page's address for the challenge list would have hidden.
 - **The commitment card is white** in print, in its fill-in page and on the slide that shows it, so you can print it on whatever colour of card you like. Its prompt and logo keep the brand colours; the print file adds a light dashed guide on the perforation, for printing without one.
-- The golden test covers four settings (default, CAN, a branded test with a two-colour logo, and retro).
+- The golden test covers seven settings: default, CAN, a branded test with a two-colour logo, retro, ideation, pre-mortem and business change.
 
 ## 1.1.0 (20 November 2026)
 
